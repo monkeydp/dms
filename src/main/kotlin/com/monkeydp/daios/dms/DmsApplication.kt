@@ -1,4 +1,4 @@
-package com.monkeydp.dms
+package com.monkeydp.daios.dms
 
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication

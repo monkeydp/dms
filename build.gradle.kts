@@ -7,7 +7,7 @@ plugins {
     kotlin("plugin.spring") version "1.2.71"
 }
 
-group = "com.monkeydp"
+group = "com.monkeydp.daios"
 version = "0.0.1-SNAPSHOT"
 java.sourceCompatibility = JavaVersion.VERSION_1_8
 
@@ -30,7 +30,7 @@ dependencies {
     developmentOnly("org.springframework.boot:spring-boot-devtools")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     // monkeydp
-    implementation("com.monkeydp:tools")
+    implementation("com.monkeydp.common:tools")
 }
 
 tasks.withType<KotlinCompile> {

@@ -1,4 +1,4 @@
-package com.monkeydp.dms.test
+package com.monkeydp.daios.dms.test
 
 import org.junit.Test
 import org.junit.runner.RunWith
