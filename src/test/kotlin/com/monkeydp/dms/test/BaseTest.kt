@@ -1,4 +1,4 @@
-package com.monkeydp.dms
+package com.monkeydp.dms.test
 
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -7,7 +7,7 @@ import org.springframework.test.context.junit4.SpringRunner
 
 @RunWith(SpringRunner::class)
 @SpringBootTest
-class DmsApplicationTests {
+abstract class BaseTest {
 
     @Test
     fun contextLoads() {
