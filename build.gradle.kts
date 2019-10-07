@@ -32,7 +32,7 @@ dependencies {
     implementation("org.jetbrains.kotlin:kotlin-reflect")
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
     // monkeydp
-    implementation("com.monkeydp.common:tools")
+    implementation("com.monkeydp:tools")
 }
 
 tasks.withType<KotlinCompile> {
