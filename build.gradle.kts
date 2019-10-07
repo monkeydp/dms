@@ -11,33 +11,33 @@ plugins {
 
 group = "com.monkeydp.daios"
 version = "0.0.1-SNAPSHOT"
-java.sourceCompatibility = JavaVersion.VERSION_1_8
 
-val developmentOnly by configurations.creating
-configurations {
-    runtimeClasspath {
-        extendsFrom(developmentOnly)
-    }
-    compileOnly {
-        extendsFrom(configurations.annotationProcessor.get())
-    }
-}
-
-dependencies {
+allprojects{
     // spring
-    implementation("org.springframework.boot:spring-boot-starter")
-    developmentOnly("org.springframework.boot:spring-boot-devtools")
-    testImplementation("org.springframework.boot:spring-boot-starter-test")
+    apply(plugin = "org.springframework.boot")
+    apply(plugin = "io.spring.dependency-management")
     // kotlin
-    implementation("org.jetbrains.kotlin:kotlin-reflect")
-    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
-    // monkeydp
-    implementation("com.monkeydp:tools")
+    apply(plugin ="org.jetbrains.kotlin.jvm")
+    apply(plugin ="org.jetbrains.kotlin.plugin.spring")
+
+    java.sourceCompatibility = JavaVersion.VERSION_1_8
+
+    dependencies {
+        // kotlin
+        implementation("org.jetbrains.kotlin:kotlin-reflect")
+        implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
+        // monkeydp
+        implementation("com.monkeydp:tools")
+    }
 }
 
-tasks.withType<KotlinCompile> {
-    kotlinOptions {
-        freeCompilerArgs = listOf("-Xjsr305=strict")
-        jvmTarget = "1.8"
+subprojects{
+    group = "com.monkeydp.daios.dms"
+
+    tasks.withType<KotlinCompile> {
+        kotlinOptions {
+            freeCompilerArgs = listOf("-Xjsr305=strict")
+            jvmTarget = "1.8"
+        }
     }
 }
