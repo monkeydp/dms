@@ -1,9 +1,6 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-    // spring
-    id("org.springframework.boot") version "2.1.9.RELEASE"
-    id("io.spring.dependency-management") version "1.0.8.RELEASE"
     // kotlin
     kotlin("jvm") version "1.2.71"
     kotlin("plugin.spring") version "1.2.71"
@@ -19,7 +16,7 @@ dependencies {
     // monkeydp
     implementation("com.monkeydp:tools")
     // junit
-    testImplementation("junit:junit")
+    testImplementation("junit:junit:4.12")
 }
 
 tasks.withType<KotlinCompile> {
