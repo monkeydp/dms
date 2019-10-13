@@ -33,5 +33,6 @@ out/
 
 ### DMS ###
 dm/*
+ignore/*
 
 !.gitkeep
