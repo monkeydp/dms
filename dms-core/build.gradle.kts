@@ -26,19 +26,31 @@ dependencies {
     // kotlin
     implementation("org.jetbrains.kotlin:kotlin-reflect")
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
-    // monkeydp
-    implementation("com.monkeydp:tools")
     // spring
     implementation("org.springframework.boot:spring-boot-starter")
+    implementation("org.springframework.boot:spring-boot-configuration-processor")
     developmentOnly("org.springframework.boot:spring-boot-devtools")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
+    // monkeydp
+    implementation("com.monkeydp:tools")
     // other modules
     implementation(project(":dms-sdk"))
+    // zip4j
+    implementation("net.lingala.zip4j:zip4j:2.2.1")
 }
 
 tasks.withType<KotlinCompile> {
     kotlinOptions {
         freeCompilerArgs = listOf("-Xjsr305=strict")
         jvmTarget = "1.8"
+    }
+}
+
+/**
+ * Auto expand gradle properties.
+ */
+tasks.withType<ProcessResources> {
+    filesMatching("application.yml") {
+        expand(project.properties)
     }
 }
