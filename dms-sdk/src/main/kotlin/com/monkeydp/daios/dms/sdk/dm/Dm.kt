@@ -1,4 +1,4 @@
-package com.monkeydp.daios.dms.sdk.bundle
+package com.monkeydp.daios.dms.sdk.dm
 
 /**
  * Datasource module

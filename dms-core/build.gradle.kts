@@ -35,7 +35,7 @@ dependencies {
     implementation("com.monkeydp:tools")
     // other modules
     implementation(project(":dms-sdk"))
-    // zip4j
+    // zip
     implementation("net.lingala.zip4j:zip4j:2.2.1")
 }
 

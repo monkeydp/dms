@@ -14,22 +14,36 @@ import java.io.FilenameFilter
  */
 class PreparedEventListener : ApplicationListener<ApplicationPreparedEvent> {
 
-    override fun onApplicationEvent(event: ApplicationPreparedEvent) {
-        val env = event.applicationContext.environment
-        unzipAllModules(env)
+    companion object {
+        lateinit var moduleDir: File
+            private set
     }
 
-    private fun unzipAllModules(env: ConfigurableEnvironment) {
+    override fun onApplicationEvent(event: ApplicationPreparedEvent) {
+        init(event)
+        unzipAllModules()
+    }
+
+    private fun init(event: ApplicationPreparedEvent) {
+        val env = event.applicationContext.environment
+        initModuleDir(env)
+    }
+
+    private fun initModuleDir(env: ConfigurableEnvironment) {
         val moduleDirPath: String = env.getProperty("dms.module.dir-path")!!
+        moduleDir = File(moduleDirPath)
+    }
+
+    private fun unzipAllModules() {
         val moduleZipRegex = "^dm-.+.zip$".toRegex()
-        val modulePaths: Array<File> = FileUtil.listFiles(moduleDirPath,
+        val moduleZips: Array<File> = FileUtil.listFiles(moduleDir,
                 FilenameFilter { _, filename ->
                     filename.matches(moduleZipRegex)
                 }
         )
-        modulePaths.forEach { file ->
+        moduleZips.forEach { file ->
             val zipFile = ZipFile(file)
-            zipFile.extractAll(moduleDirPath)
+            zipFile.extractAll(moduleDir.absolutePath)
         }
     }
 }

@@ -1,2 +1,3 @@
 org.springframework.context.ApplicationListener=\
-  com.monkeydp.daios.dms.boot.PreparedEventListener
+  com.monkeydp.daios.dms.boot.PreparedEventListener,\
+  com.monkeydp.daios.dms.boot.StartedEventListener
