@@ -6,6 +6,7 @@ import org.springframework.boot.context.event.ApplicationPreparedEvent
 import org.springframework.context.ApplicationListener
 import org.springframework.core.env.ConfigurableEnvironment
 import java.io.File
+import java.io.FilenameFilter
 
 /**
  * @author iPotato
@@ -20,7 +21,12 @@ class PreparedEventListener : ApplicationListener<ApplicationPreparedEvent> {
 
     private fun unzipAllModules(env: ConfigurableEnvironment) {
         val moduleDirPath: String = env.getProperty("dms.module.dir-path")!!
-        val modulePaths: Array<File> = FileUtil.listFiles(moduleDirPath, "^dm-.+.zip$")
+        val moduleZipRegex = "^dm-.+.zip$".toRegex()
+        val modulePaths: Array<File> = FileUtil.listFiles(moduleDirPath,
+                FilenameFilter { _, filename ->
+                    filename.matches(moduleZipRegex)
+                }
+        )
         modulePaths.forEach { file ->
             val zipFile = ZipFile(file)
             zipFile.extractAll(moduleDirPath)
