@@ -1,5 +1,6 @@
 package com.monkeydp.daios.dms.boot
 
+import com.monkeydp.daios.dms.boot.BootContext.Module
 import com.monkeydp.tools.util.FileUtil
 import net.lingala.zip4j.ZipFile
 import org.springframework.boot.context.event.ApplicationPreparedEvent
@@ -14,11 +15,6 @@ import java.io.FilenameFilter
  */
 class PreparedEventListener : ApplicationListener<ApplicationPreparedEvent> {
 
-    companion object {
-        lateinit var moduleDir: File
-            private set
-    }
-
     override fun onApplicationEvent(event: ApplicationPreparedEvent) {
         init(event)
         unzipAllModules()
@@ -30,20 +26,19 @@ class PreparedEventListener : ApplicationListener<ApplicationPreparedEvent> {
     }
 
     private fun initModuleDir(env: ConfigurableEnvironment) {
-        val moduleDirPath: String = env.getProperty("dms.module.dir-path")!!
-        moduleDir = File(moduleDirPath)
+        val moduleDirPath: String = env.getProperty(Module.dirPropertyName)!!
+        Module.dir = File(moduleDirPath)
     }
 
     private fun unzipAllModules() {
-        val moduleZipRegex = "^dm-.+.zip$".toRegex()
-        val moduleZips: Array<File> = FileUtil.listFiles(moduleDir,
+        val moduleZips: Array<File> = FileUtil.listFiles(Module.dir,
                 FilenameFilter { _, filename ->
-                    filename.matches(moduleZipRegex)
+                    filename.matches(Module.zipFilenameRegex)
                 }
         )
         moduleZips.forEach { file ->
             val zipFile = ZipFile(file)
-            zipFile.extractAll(moduleDir.absolutePath)
+            zipFile.extractAll(Module.dir.absolutePath)
         }
     }
 }

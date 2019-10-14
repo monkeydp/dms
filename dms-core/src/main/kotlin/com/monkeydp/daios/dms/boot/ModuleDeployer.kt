@@ -1,5 +1,6 @@
 package com.monkeydp.daios.dms.boot
 
+import com.monkeydp.daios.dms.boot.BootContext.Module
 import com.monkeydp.daios.dms.sdk.dm.DmMetadata
 import com.monkeydp.tools.util.FileUtil
 import com.monkeydp.tools.util.YamlUtil
@@ -14,13 +15,10 @@ import java.io.FilenameFilter
 @Component
 class ModuleDeployer {
 
-    val configFilename = "module.yml"
-
     fun deployAllModules() {
-        val moduleRegex = "^dm-.+".toRegex()
-        val modules: Array<File> = FileUtil.listFiles(PreparedEventListener.moduleDir,
+        val modules: Array<File> = FileUtil.listFiles(Module.dir,
                 FilenameFilter { _, filename ->
-                    filename.matches(moduleRegex)
+                    filename.matches(Module.filenameRegex)
                 }
         )
         modules.forEach { module ->
@@ -33,7 +31,7 @@ class ModuleDeployer {
      * Deploy module like dm-mysql
      */
     private fun deployModule(module: File) {
-        val configFile = File(module, configFilename)
+        val configFile = File(module, Module.configFilename)
         val dmMetadata = YamlUtil.loadAs(configFile, DmMetadata::class.java)
         val dmClassname = dmMetadata.dmClassname
 
