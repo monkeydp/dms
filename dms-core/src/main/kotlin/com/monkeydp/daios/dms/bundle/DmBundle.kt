@@ -1,6 +1,7 @@
 package com.monkeydp.daios.dms.bundle
 
 import com.monkeydp.daios.dms.sdk.connection.ConnectionFactory
+import com.monkeydp.daios.dms.sdk.datasource.Datasource
 import com.monkeydp.daios.dms.sdk.dm.Dm
 import com.monkeydp.tools.util.ClassUtil
 import java.io.File
@@ -51,5 +52,9 @@ class DmBundle(private val deployDir: File, private val dmClassname: String) {
 
     private class BundleClassLoader(urls: Array<URL>, parent: ClassLoader) : URLClassLoader(urls, parent) {
 
+    }
+
+    fun datasource(): Datasource {
+        return dm.datasource()
     }
 }

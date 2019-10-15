@@ -1,5 +1,7 @@
 package com.monkeydp.daios.dms.sdk.dm
 
+import com.monkeydp.daios.dms.sdk.datasource.Datasource
+
 /**
  * Datasource module
  *
@@ -8,10 +10,11 @@ package com.monkeydp.daios.dms.sdk.dm
  */
 interface Dm {
 
+    fun datasource(): Datasource
     fun implClassNames(): ImplClassNames
 
     /**
-     * Implementation class names of all sdk contract
+     * Implementation class names of all sdk required contract
      */
     interface ImplClassNames {
         fun connectionFactory(): String?
