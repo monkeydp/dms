@@ -27,18 +27,18 @@ class PreparedEventListener : ApplicationListener<ApplicationPreparedEvent> {
 
     private fun initModuleDir(env: ConfigurableEnvironment) {
         val moduleDirPath: String = env.getProperty(Module.dirPropertyName)!!
-        Module.dir = File(moduleDirPath)
+        Module.parentDir = File(moduleDirPath)
     }
 
     private fun unzipAllModules() {
-        val moduleZips: Array<File> = FileUtil.listFiles(Module.dir,
+        val moduleZips: Array<File> = FileUtil.listFiles(Module.parentDir,
                 FilenameFilter { _, filename ->
                     filename.matches(Module.zipFilenameRegex)
                 }
         )
         moduleZips.forEach { file ->
             val zipFile = ZipFile(file)
-            zipFile.extractAll(Module.dir.absolutePath)
+            zipFile.extractAll(Module.parentDir.absolutePath)
         }
     }
 }

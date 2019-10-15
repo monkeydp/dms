@@ -8,8 +8,8 @@ import java.io.File
  */
 final object BootContext {
     object Module {
-        const val dirPropertyName = "dms.module.dir-path"
-        lateinit var dir: File
+        const val dirPropertyName = "dms.module.parent-dirpath"
+        lateinit var parentDir: File
         const val configFilename = "module.yml"
         val filenameRegex = "^dm-.+".toRegex()
         val zipFilenameRegex = "^dm-.+.zip$".toRegex()

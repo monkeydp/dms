@@ -1,6 +1,7 @@
 package com.monkeydp.daios.dms.boot
 
 import com.monkeydp.daios.dms.boot.BootContext.Module
+import com.monkeydp.daios.dms.bundle.DmBundle
 import com.monkeydp.daios.dms.sdk.dm.DmMetadata
 import com.monkeydp.tools.util.FileUtil
 import com.monkeydp.tools.util.YamlUtil
@@ -16,24 +17,24 @@ import java.io.FilenameFilter
 class ModuleDeployer {
 
     fun deployAllModules() {
-        val modules: Array<File> = FileUtil.listFiles(Module.dir,
+        val moduleDirs: Array<File> = FileUtil.listFiles(Module.parentDir,
                 FilenameFilter { _, filename ->
                     filename.matches(Module.filenameRegex)
                 }
         )
-        modules.forEach { module ->
-            if (module.isDirectory)
-                deployModule(module)
+        moduleDirs.forEach { moduleDir ->
+            if (moduleDir.isDirectory)
+                deployModule(moduleDir)
         }
     }
 
     /**
      * Deploy module like dm-mysql
      */
-    private fun deployModule(module: File) {
-        val configFile = File(module, Module.configFilename)
+    private fun deployModule(moduleDir: File) {
+        val configFile = File(moduleDir, Module.configFilename)
         val dmMetadata = YamlUtil.loadAs(configFile, DmMetadata::class.java)
         val dmClassname = dmMetadata.dmClassname
-
+        val dmBundle = DmBundle(moduleDir, dmClassname)
     }
 }
