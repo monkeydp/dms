@@ -1,8 +1,15 @@
 package com.monkeydp.daios.dms.boot
 
+import com.monkeydp.daios.dms.boot.BootContext.Module.dmDirs
+import com.monkeydp.daios.dms.boot.BootContext.Module.dmParentDir
+import com.monkeydp.daios.dms.boot.BootContext.Module.modulesDir
+import com.monkeydp.tools.exception.inner.StdInnerException
+import com.monkeydp.tools.util.FileUtil
 import com.monkeydp.tools.util.StringUtil
+import com.monkeydp.tools.util.SystemUtil
 import org.springframework.core.env.ConfigurableEnvironment
 import java.io.File
+import java.io.FileFilter
 
 /**
  * @author iPotato
@@ -11,10 +18,19 @@ import java.io.File
 final object BootContext {
 
     lateinit var rootDir: File
+    lateinit var gradlewPath: String
 
     object Module {
         lateinit var dmParentDir: File
         lateinit var modulesDir: File
+
+        lateinit var dmDirs: List<File>
+        /**
+         * Module zips are not in local project
+         */
+        lateinit var outsideModuleZips: List<File>
+        lateinit var moduleDirs: List<File>
+
         const val configFilename = "module.yml"
         val dmRegex = "^dm-.+".toRegex()
         val dmZipRegex = "^dm-.+.zip$".toRegex()
@@ -29,15 +45,18 @@ final object BootContext {
         private val prefix = "dms"
 
         companion object PropertyName {
-            private const val rootDir = "rootDir"
+            private const val rootDirpath = "rootDir"
             private const val dmParentDirpath = "module.dm-parent-dirpath"
             private const val modulesPath = "module.modules-path"
         }
 
         init {
-            BootContext.rootDir = File(getProperty(rootDir))
-            Module.dmParentDir = File(getProperty(dmParentDirpath))
-            Module.modulesDir = File(getProperty(modulesPath))
+            rootDir = File(getProperty(rootDirpath))
+            dmParentDir = File(getProperty(dmParentDirpath))
+            modulesDir = File(getProperty(modulesPath))
+
+            gradlewPath = initGradlewPath()
+            dmDirs = initDmDirs()
         }
 
         private fun getProperty(propertyName: String): String {
@@ -53,6 +72,31 @@ final object BootContext {
                         .append(".")
             builder.append(propertyName)
             return builder.toString()
+        }
+
+        private fun initGradlewPath(): String {
+            val gradlewFilename =
+                    when {
+                        SystemUtil.IS_OS_WINDOWS -> "gradlew.bat"
+                        SystemUtil.IS_OS_UNIX -> "gradlew"
+                        else -> throw StdInnerException(
+                                String.format("Unknown system %s", SystemUtil.OS_NAME)
+                        )
+                    }
+
+            return StringBuilder()
+                    .append(rootDir.absolutePath)
+                    .append("/")
+                    .append(gradlewFilename)
+                    .toString()
+        }
+
+        private fun initDmDirs(): List<File> {
+            return FileUtil.listFiles(dmParentDir,
+                    FileFilter { file ->
+                        file.isDirectory && file.name.matches(Module.dmRegex)
+                    }
+            ).toList()
         }
     }
 }
