@@ -21,9 +21,9 @@ class ModuleDeployer {
     private lateinit var moduleRegistry: ModuleRegistry
 
     fun deployAllModules() {
-        val moduleDirs: Array<File> = FileUtil.listFiles(Module.parentDir,
+        val moduleDirs: Array<File> = FileUtil.listFiles(Module.modulesDir,
                 FilenameFilter { _, filename ->
-                    filename.matches(Module.filenameRegex)
+                    filename.matches(Module.dmRegex)
                 }
         )
         moduleDirs.forEach { moduleDir ->
