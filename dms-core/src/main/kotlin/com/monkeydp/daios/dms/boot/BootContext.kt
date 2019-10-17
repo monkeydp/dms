@@ -1,5 +1,6 @@
 package com.monkeydp.daios.dms.boot
 
+import com.monkeydp.tools.util.StringUtil
 import org.springframework.core.env.ConfigurableEnvironment
 import java.io.File
 
@@ -8,6 +9,8 @@ import java.io.File
  * @date 2019/10/14
  */
 final object BootContext {
+
+    lateinit var rootDir: File
 
     object Module {
         lateinit var dmParentDir: File
@@ -21,14 +24,35 @@ final object BootContext {
         ContextInitializer(env)
     }
 
-    private final class ContextInitializer(env: ConfigurableEnvironment) {
+    private final class ContextInitializer(private val env: ConfigurableEnvironment) {
 
-        private val dmPathPropertyName = "dms.module.dm-parent-dirpath"
-        private val modulesPathPropertyName = "dms.module.modules-path"
+        private val prefix = "dms"
+
+        companion object PropertyName {
+            private const val rootDir = "rootDir"
+            private const val dmParentDirpath = "module.dm-parent-dirpath"
+            private const val modulesPath = "module.modules-path"
+        }
 
         init {
-            Module.dmParentDir = File(env.getProperty(dmPathPropertyName)!!)
-            Module.modulesDir = File(env.getProperty(modulesPathPropertyName)!!)
+            BootContext.rootDir = File(getProperty(rootDir))
+            Module.dmParentDir = File(getProperty(dmParentDirpath))
+            Module.modulesDir = File(getProperty(modulesPath))
+        }
+
+        private fun getProperty(propertyName: String): String {
+            return env.getProperty(
+                    fullPropertyName(propertyName)
+            )!!
+        }
+
+        private fun fullPropertyName(propertyName: String): String {
+            val builder = StringBuilder()
+            if (!StringUtil.isEmpty(prefix))
+                builder.append(prefix)
+                        .append(".")
+            builder.append(propertyName)
+            return builder.toString()
         }
     }
 }

@@ -1,4 +1,5 @@
 dms:
+  rootDir: ${rootDir}
   module:
     dm-parent-dirpath: ${rootDir}/dm
     modules-path: ${rootDir}/ignore/modules

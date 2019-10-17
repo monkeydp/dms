@@ -37,6 +37,8 @@ dependencies {
     implementation(project(":dms-sdk"))
     // zip
     implementation("net.lingala.zip4j:zip4j:2.2.1")
+    // command line
+    implementation("org.apache.commons:commons-exec:1.3")
 }
 
 tasks.withType<KotlinCompile> {
