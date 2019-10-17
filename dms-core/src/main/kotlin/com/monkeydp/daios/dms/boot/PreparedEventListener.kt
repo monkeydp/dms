@@ -1,6 +1,9 @@
 package com.monkeydp.daios.dms.boot
 
-import com.monkeydp.daios.dms.boot.BootContext.Module
+import com.monkeydp.daios.dms.boot.BootContext.Module.dmParentDir
+import com.monkeydp.daios.dms.boot.BootContext.Module.dmRegex
+import com.monkeydp.daios.dms.boot.BootContext.Module.dmZipRegex
+import com.monkeydp.daios.dms.boot.BootContext.Module.modulesDir
 import com.monkeydp.tools.exception.inner.StdInnerException
 import com.monkeydp.tools.util.FileUtil
 import net.lingala.zip4j.ZipFile
@@ -25,17 +28,24 @@ class PreparedEventListener : ApplicationListener<ApplicationPreparedEvent> {
     }
 
     private fun unzipAllModules() {
+        initModulesDir()
         val moduleZips: List<File> = moduleZips()
         moduleZips.forEach { file ->
             val zipFile = ZipFile(file)
-            zipFile.extractAll(Module.modulesDir.absolutePath)
+            zipFile.extractAll(modulesDir.absolutePath)
         }
     }
 
+    private fun initModulesDir() {
+        if (modulesDir.exists())
+            modulesDir.deleteRecursively()
+        modulesDir.mkdir()
+    }
+
     private fun moduleZips(): List<File> {
-        val dmDirs = FileUtil.listFiles(Module.dmParentDir,
+        val dmDirs = FileUtil.listFiles(dmParentDir,
                 FilenameFilter { _, filename ->
-                    filename.matches(Module.dmRegex)
+                    filename.matches(dmRegex)
                 }
         )
 
@@ -44,7 +54,7 @@ class PreparedEventListener : ApplicationListener<ApplicationPreparedEvent> {
             val distributionsDir = File(dmDir, "/build/distributions")
             val files = FileUtil.listFiles(distributionsDir,
                     FilenameFilter { _, filename ->
-                        filename.matches(Module.dmZipRegex)
+                        filename.matches(dmZipRegex)
                     }
             )
             if (files.isEmpty())
