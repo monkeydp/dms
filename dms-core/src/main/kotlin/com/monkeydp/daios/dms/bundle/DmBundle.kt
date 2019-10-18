@@ -3,6 +3,8 @@ package com.monkeydp.daios.dms.bundle
 import com.monkeydp.daios.dms.sdk.connection.ConnectionFactory
 import com.monkeydp.daios.dms.sdk.datasource.Datasource
 import com.monkeydp.daios.dms.sdk.dm.Dm
+import com.monkeydp.daios.dms.sdk.dm.Dm.DbDef
+import com.monkeydp.daios.dms.sdk.dm.Dm.DbVersion
 import com.monkeydp.tools.util.ClassUtil
 import java.io.File
 import java.net.URL
@@ -20,16 +22,23 @@ class DmBundle(private val deployDir: File, private val dmClassname: String) {
 
     private val classLoader: BundleClassLoader
     private val dm: Dm
-    private val impls = Impls()
+    val impls: Impls
 
-    private class Impls {
+    /**
+     * DbVersion.id → DbDef
+     * @see DbVersion
+     */
+    private val dbDefMap: Map<String, DbDef>
+
+    object Impls {
         lateinit var connectionFactory: ConnectionFactory
     }
 
     init {
         classLoader = initBundleClassLoader()
         dm = initDm()
-        initAllImplClasses()
+        impls = initAllImplClasses()
+        dbDefMap = dm.dbDefs.map { it.version.id to it }.toMap()
     }
 
     val datasource: Datasource = dm.datasource
@@ -46,10 +55,11 @@ class DmBundle(private val deployDir: File, private val dmClassname: String) {
     }
 
     @Suppress("UNCHECKED_CAST")
-    private fun initAllImplClasses() {
+    private fun initAllImplClasses(): Impls {
         val implClassNames = dm.implClassNames
         val connectionFactoryClass = classLoader.loadClass(implClassNames.connectionFactory) as Class<ConnectionFactory>
-        impls.connectionFactory = ClassUtil.newInstance(connectionFactoryClass)
+        Impls.connectionFactory = ClassUtil.newInstance(connectionFactoryClass)
+        return Impls
     }
 
     private class BundleClassLoader(urls: Array<URL>, parent: ClassLoader) : URLClassLoader(urls, parent) {
