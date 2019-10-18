@@ -10,13 +10,25 @@ import com.monkeydp.daios.dms.sdk.datasource.Datasource
  */
 interface Dm {
 
-    fun datasource(): Datasource
-    fun implClassNames(): ImplClassNames
+    val datasource: Datasource
+    val dbDefs: List<DbDef>
+    val implClassNames: ImplClassNames
 
     /**
      * Implementation class names of all sdk required contract
      */
     interface ImplClassNames {
-        fun connectionFactory(): String?
+        val connectionFactory: String?
     }
+
+    /**
+     * Database definition
+     */
+    interface DbDef {
+        val version: DbVersion
+        val driver: DbDriver
+    }
+
+    class DbVersion(val id: String, val name: String)
+    class DbDriver(val id: String, val name: String)
 }

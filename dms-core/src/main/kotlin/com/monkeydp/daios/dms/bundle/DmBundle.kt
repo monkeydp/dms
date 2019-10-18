@@ -32,6 +32,8 @@ class DmBundle(private val deployDir: File, private val dmClassname: String) {
         initAllImplClasses()
     }
 
+    val datasource: Datasource = dm.datasource
+
     private fun initBundleClassLoader(): BundleClassLoader {
         val urls = arrayOf<URL>(File(deployDir, classesDirname).toURI().toURL())
         return BundleClassLoader(urls, Thread.currentThread().contextClassLoader)
@@ -45,16 +47,12 @@ class DmBundle(private val deployDir: File, private val dmClassname: String) {
 
     @Suppress("UNCHECKED_CAST")
     private fun initAllImplClasses() {
-        val implClassNames = dm.implClassNames()
-        val connectionFactoryClass = classLoader.loadClass(implClassNames.connectionFactory()) as Class<ConnectionFactory>
+        val implClassNames = dm.implClassNames
+        val connectionFactoryClass = classLoader.loadClass(implClassNames.connectionFactory) as Class<ConnectionFactory>
         impls.connectionFactory = ClassUtil.newInstance(connectionFactoryClass)
     }
 
     private class BundleClassLoader(urls: Array<URL>, parent: ClassLoader) : URLClassLoader(urls, parent) {
 
-    }
-
-    fun datasource(): Datasource {
-        return dm.datasource()
     }
 }

@@ -14,10 +14,10 @@ class ModuleRegistry {
     val dmBundleMap: MutableMap<Datasource, DmBundle> = mutableMapOf()
 
     fun registerModule(dmBundle: DmBundle) {
-        dmBundleMap[dmBundle.datasource()] = dmBundle
+        dmBundleMap[dmBundle.datasource] = dmBundle
     }
 
-    fun findModule(datasource: Datasource): DmBundle {
+    fun getDmBundle(datasource: Datasource): DmBundle {
         return dmBundleMap.get(datasource)!!
     }
 }
