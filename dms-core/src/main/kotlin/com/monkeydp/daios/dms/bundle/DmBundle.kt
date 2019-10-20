@@ -6,7 +6,9 @@ import com.monkeydp.daios.dms.sdk.dm.Dm
 import com.monkeydp.daios.dms.sdk.dm.Dm.DbDef
 import com.monkeydp.daios.dms.sdk.dm.Dm.DbVersion
 import com.monkeydp.tools.util.ClassUtil
+import com.monkeydp.tools.util.FileUtil
 import java.io.File
+import java.io.FileFilter
 import java.net.URL
 import java.net.URLClassLoader
 
@@ -17,7 +19,8 @@ import java.net.URLClassLoader
 class DmBundle(private val deployDir: File, private val dmClassname: String) {
 
     companion object {
-        private const val classesDirname = "classes"
+        private const val classesPath = "classes"
+        private const val commonLibsPath = "libs/common"
     }
 
     private val classLoader: BundleClassLoader
@@ -44,8 +47,18 @@ class DmBundle(private val deployDir: File, private val dmClassname: String) {
     val datasource: Datasource = dm.datasource
 
     private fun initBundleClassLoader(): BundleClassLoader {
-        val urls = arrayOf<URL>(File(deployDir, classesDirname).toURI().toURL())
+        val classesUrl = File(deployDir, classesPath).toURI().toURL()
+        val commonLibsUrls = commonLibsUrls()
+        val urls = arrayOf<URL>(classesUrl, *commonLibsUrls)
         return BundleClassLoader(urls, Thread.currentThread().contextClassLoader)
+    }
+
+    private fun commonLibsUrls(): Array<URL> {
+        val commonLibsDir = File(deployDir, commonLibsPath)
+        val jars = FileUtil.listFiles(commonLibsDir, FileFilter { file ->
+            file.isFile && file.endsWith(".jar")
+        })
+        return jars.map { it.toURI().toURL() }.toTypedArray()
     }
 
     private fun initDm(): Dm {
