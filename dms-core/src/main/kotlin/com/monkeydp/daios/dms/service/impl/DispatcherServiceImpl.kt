@@ -18,7 +18,9 @@ class DispatcherServiceImpl : DispatcherService {
 
     override fun getConnection(profile: ConnectionProfile): ConnectionWrapper {
         val dmBundle = moduleRegistry.getDmBundle(profile.datasource)
+        dmBundle.setSpecificClassLoader(profile.dbVersionId)
         val connection = dmBundle.impls.connectionFactory.getConnection(profile)
+        dmBundle.removeSpecificClassLoader()
         return ConnectionWrapper(connection)
     }
 }

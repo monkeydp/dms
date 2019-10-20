@@ -1,8 +1,9 @@
 package com.monkeydp.daios.dms.test.service
 
+import com.monkeydp.daios.dms.sdk.mock.MockFactory.mockConnectionProfile
 import com.monkeydp.daios.dms.service.contract.DispatcherService
 import com.monkeydp.daios.dms.test.BaseTest
-import com.monkeydp.daios.dms.sdk.mock.MockFactory.mockConnectionProfile
+import org.junit.Assert
 import org.junit.Test
 import org.springframework.beans.factory.annotation.Autowired
 
@@ -16,6 +17,8 @@ class DispatcherServiceTest : BaseTest() {
 
     @Test
     public fun getConnectionTest() {
-        dispatcherService.getConnection(mockConnectionProfile)
+        val connWrapper = dispatcherService.getConnection(mockConnectionProfile)
+        val connection = connWrapper.connection
+        Assert.assertTrue(connection.isValid())
     }
 }

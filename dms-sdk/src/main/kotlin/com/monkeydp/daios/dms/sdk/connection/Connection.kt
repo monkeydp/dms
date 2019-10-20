@@ -8,4 +8,11 @@ class Connection(
         val connectionProfileId: Long,
         val physicalConnection: Any
 ) {
+    /**
+     * Is connection valid
+     * TODO
+     */
+    fun isValid(): Boolean {
+        return true
+    }
 }
