@@ -1,6 +1,7 @@
 package com.monkeydp.daios.dms.sdk.connection
 
 import com.monkeydp.daios.dms.sdk.datasource.Datasource
+import com.monkeydp.daios.dms.sdk.dm.Dm.DbDriver
 import com.monkeydp.daios.dms.sdk.dm.Dm.DbVersion
 
 /**
@@ -13,5 +14,9 @@ data class ConnectionProfile(
         /**
          * @see DbVersion
          */
-        val dbVersionId: String
+        val dbVersionId: String,
+        /**
+         * @see DbDriver
+         */
+        val dbDriverName: String
 )
