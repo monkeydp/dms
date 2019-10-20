@@ -3,6 +3,7 @@ package com.monkeydp.daios.dms.sdk.connection
 import com.monkeydp.daios.dms.sdk.datasource.Datasource
 import com.monkeydp.daios.dms.sdk.dm.Dm.DbDriver
 import com.monkeydp.daios.dms.sdk.dm.Dm.DbVersion
+import com.monkeydp.daios.dms.sdk.useful.UserInput
 
 /**
  * @author iPotato
@@ -18,5 +19,6 @@ data class ConnectionProfile(
         /**
          * @see DbDriver
          */
-        val dbDriverName: String
+        val dbDriverName: String,
+        val userInput: UserInput
 )
