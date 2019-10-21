@@ -18,7 +18,7 @@ class ConnectionServiceTest : BaseTest() {
 
     @Test
     public fun connectionTest() {
-        val wrapper = connectionService.connectionWrapper(mockConnectionProfile)
+        val wrapper = connectionService.getConnectionWrapper(mockConnectionProfile)
         val connection = wrapper.connection
 
         Assert.assertTrue(connection.isValid())

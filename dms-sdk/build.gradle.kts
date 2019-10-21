@@ -15,6 +15,10 @@ dependencies {
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
     // monkeydp
     implementation("com.monkeydp:tools")
+    // jackson
+    implementation("com.fasterxml.jackson.core:jackson-annotations:2.9.0")
+    // swagger
+    implementation("io.swagger:swagger-annotations:1.5.20")
     // junit
     testImplementation("junit:junit:4.12")
 }

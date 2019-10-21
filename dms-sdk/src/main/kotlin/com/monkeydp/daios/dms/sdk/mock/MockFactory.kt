@@ -11,12 +11,8 @@ import com.monkeydp.tools.util.RandomUtil
  */
 object MockFactory {
 
-    private fun randomId(): Long {
-        return RandomUtil.randomInt(1, 1000).toLong()
-    }
-
     private val mockMysql57Cp = ConnectionProfile(
-            id = randomId(),
+            id = RandomUtil.randomId(),
             datasource = MYSQL,
             dbVersionId = "5.7",
             dbDriverName = "com.mysql.jdbc.Driver",
@@ -29,7 +25,7 @@ object MockFactory {
     )
 
     private val mockMysql80Cp = ConnectionProfile(
-            id = randomId(),
+            id = RandomUtil.randomId(),
             datasource = MYSQL,
             dbVersionId = "8.0",
             dbDriverName = "com.mysql.cj.jdbc.Driver",

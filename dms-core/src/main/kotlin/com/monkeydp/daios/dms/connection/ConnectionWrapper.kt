@@ -15,6 +15,6 @@ class ConnectionWrapper(val connection: Connection) {
 
     init {
         // TODO auto increment id
-        id = RandomUtil.randomInt(1, 1000).toLong()
+        id = RandomUtil.randomId()
     }
 }

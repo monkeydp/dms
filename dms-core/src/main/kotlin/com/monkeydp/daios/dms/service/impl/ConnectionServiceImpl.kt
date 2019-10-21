@@ -13,13 +13,24 @@ import org.springframework.stereotype.Service
  */
 @Service
 internal class ConnectionServiceImpl : ConnectionService {
+
     @Autowired
     lateinit var moduleRegistry: ModuleRegistry
 
-    override fun connectionWrapper(profile: ConnectionProfile): ConnectionWrapper {
+    /**
+     * ConnectionProfile.id → ConnectionProfile
+     */
+    private val cpMap: Map<Long, ConnectionProfile> = mutableMapOf()
+
+    override fun createConnectionProfile(profile: ConnectionProfile): Long {
+        // TODO
+        return 10L
+    }
+
+    override fun getConnectionWrapper(profile: ConnectionProfile): ConnectionWrapper {
         val dmBundle = moduleRegistry.getDmBundle(profile.datasource)
         dmBundle.setSpecificClassLoader(profile.dbVersionId)
-        val connection = dmBundle.impls.connectionFactory.connection(profile)
+        val connection = dmBundle.impls.connectionFactory.getConnection(profile)
         dmBundle.removeSpecificClassLoader()
         return ConnectionWrapper(connection)
     }

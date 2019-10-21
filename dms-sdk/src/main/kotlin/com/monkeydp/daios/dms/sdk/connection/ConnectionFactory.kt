@@ -6,7 +6,7 @@ package com.monkeydp.daios.dms.sdk.connection
  */
 interface ConnectionFactory {
     /**
-     * Create a connection
+     * Get a connection
      */
-    fun connection(profile: ConnectionProfile): Connection
+    fun getConnection(profile: ConnectionProfile): Connection
 }
