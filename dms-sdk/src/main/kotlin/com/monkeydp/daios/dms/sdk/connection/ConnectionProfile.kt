@@ -28,7 +28,7 @@ data class ConnectionProfile(
          */
         @JsonIgnore
         @ApiModelProperty(hidden = true)
-        val dbDriverName: String,
+        var dbDriverName: String = "",
         @ApiModelProperty(value = "parameters entered by the user", required = true, example = """{
             "connectionName": "MySQL 5.7",
             "host": "127.0.0.1",

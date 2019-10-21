@@ -43,6 +43,8 @@ dependencies {
     // swagger
     implementation("io.springfox:springfox-swagger2:2.9.2")
     implementation("com.github.xiaoymin:swagger-bootstrap-ui:1.9.6")
+    // jackson kotlin
+    implementation("com.fasterxml.jackson.module:jackson-module-kotlin:2.9.7")
 }
 
 tasks.withType<KotlinCompile> {
