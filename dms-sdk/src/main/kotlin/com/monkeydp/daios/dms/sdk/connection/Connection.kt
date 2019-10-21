@@ -6,13 +6,18 @@ package com.monkeydp.daios.dms.sdk.connection
  */
 class Connection(
         val connectionProfileId: Long,
-        val physicalConnection: Any
+        private val logicConnection: LogicConnection
 ) {
-    /**
-     * Is connection valid
-     * TODO
-     */
-    fun isValid(): Boolean {
-        return true
+
+    fun isValid(timeout: Int = 10): Boolean {
+        return logicConnection.isValid(timeout)
+    }
+
+    fun close() {
+        logicConnection.close()
+    }
+
+    fun isClosed(): Boolean {
+        return logicConnection.isClosed()
     }
 }

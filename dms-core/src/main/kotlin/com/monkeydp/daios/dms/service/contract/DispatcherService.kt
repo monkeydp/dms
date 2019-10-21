@@ -8,5 +8,5 @@ import com.monkeydp.daios.dms.sdk.connection.ConnectionProfile
  * @date 2019/10/18
  */
 interface DispatcherService {
-    fun getConnection(profile: ConnectionProfile): ConnectionWrapper
+    fun connectionWrapper(profile: ConnectionProfile): ConnectionWrapper
 }

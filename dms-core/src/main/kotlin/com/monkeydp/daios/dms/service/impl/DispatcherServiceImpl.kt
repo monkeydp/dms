@@ -16,10 +16,10 @@ class DispatcherServiceImpl : DispatcherService {
     @Autowired
     lateinit var moduleRegistry: ModuleRegistry
 
-    override fun getConnection(profile: ConnectionProfile): ConnectionWrapper {
+    override fun connectionWrapper(profile: ConnectionProfile): ConnectionWrapper {
         val dmBundle = moduleRegistry.getDmBundle(profile.datasource)
         dmBundle.setSpecificClassLoader(profile.dbVersionId)
-        val connection = dmBundle.impls.connectionFactory.getConnection(profile)
+        val connection = dmBundle.impls.connectionFactory.connection(profile)
         dmBundle.removeSpecificClassLoader()
         return ConnectionWrapper(connection)
     }

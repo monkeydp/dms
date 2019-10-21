@@ -8,5 +8,5 @@ interface ConnectionFactory {
     /**
      * Create a connection
      */
-    fun getConnection(profile: ConnectionProfile): Connection
+    fun connection(profile: ConnectionProfile): Connection
 }

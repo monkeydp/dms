@@ -12,13 +12,20 @@ import org.springframework.beans.factory.annotation.Autowired
  * @date 2019/10/18
  */
 class DispatcherServiceTest : BaseTest() {
+
     @Autowired
     private lateinit var dispatcherService: DispatcherService
 
     @Test
-    public fun getConnectionTest() {
-        val connWrapper = dispatcherService.getConnection(mockConnectionProfile)
-        val connection = connWrapper.connection
+    public fun connectionTest() {
+        val wrapper = dispatcherService.connectionWrapper(mockConnectionProfile)
+        val connection = wrapper.connection
+
         Assert.assertTrue(connection.isValid())
+        Assert.assertFalse(connection.isClosed())
+
+        connection.close()
+        Assert.assertFalse(connection.isValid())
+        Assert.assertTrue(connection.isClosed())
     }
 }
