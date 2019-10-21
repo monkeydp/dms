@@ -23,7 +23,7 @@ class SwaggerConfig {
         return Docket(DocumentationType.SWAGGER_2)
                 .apiInfo(apiInfo)
                 .select()
-                .apis(RequestHandlerSelectors.basePackage("com.monkeydp.daios.dms.controller"))
+                .apis(RequestHandlerSelectors.basePackage("com.monkeydp.daios.dms"))
                 .paths(PathSelectors.any())
                 .build()
     }

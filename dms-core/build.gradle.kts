@@ -42,7 +42,7 @@ dependencies {
     implementation("org.apache.commons:commons-exec:1.3")
     // swagger
     implementation("io.springfox:springfox-swagger2:2.9.2")
-    implementation("io.springfox:springfox-swagger-ui:2.9.2")
+    implementation("com.github.xiaoymin:swagger-bootstrap-ui:1.9.6")
 }
 
 tasks.withType<KotlinCompile> {

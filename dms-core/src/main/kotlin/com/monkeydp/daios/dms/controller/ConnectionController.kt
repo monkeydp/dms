@@ -3,9 +3,9 @@ package com.monkeydp.daios.dms.controller
 import com.monkeydp.daios.dms.sdk.connection.ConnectionProfile
 import com.monkeydp.daios.dms.sdk.mock.MockFactory
 import com.monkeydp.daios.dms.service.contract.ConnectionService
-import io.swagger.annotations.Api
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.bind.annotation.PostMapping
+import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 
@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController
 @RestController
 @RequestMapping("connection")
 class ConnectionController {
+
     @Autowired
     lateinit var connectionService: ConnectionService
 
@@ -23,8 +24,8 @@ class ConnectionController {
      * @see ConnectionProfile
      * @return ConnectionProfile.id
      */
-    @PostMapping("create-connection")
-    fun createConnection(cp: ConnectionProfile): Long {
+    @PostMapping("create-cp")
+    fun createCp(@RequestBody cp: ConnectionProfile): Long {
         return connectionService.createConnectionProfile(cp)
     }
 
