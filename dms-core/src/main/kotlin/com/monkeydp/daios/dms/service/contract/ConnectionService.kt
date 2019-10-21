@@ -7,6 +7,6 @@ import com.monkeydp.daios.dms.sdk.connection.ConnectionProfile
  * @author iPotato
  * @date 2019/10/18
  */
-interface DispatcherService {
+interface ConnectionService {
     fun connectionWrapper(profile: ConnectionProfile): ConnectionWrapper
 }

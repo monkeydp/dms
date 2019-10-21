@@ -3,7 +3,7 @@ package com.monkeydp.daios.dms.service.impl
 import com.monkeydp.daios.dms.boot.ModuleRegistry
 import com.monkeydp.daios.dms.connection.ConnectionWrapper
 import com.monkeydp.daios.dms.sdk.connection.ConnectionProfile
-import com.monkeydp.daios.dms.service.contract.DispatcherService
+import com.monkeydp.daios.dms.service.contract.ConnectionService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 
@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service
  * @date 2019/10/18
  */
 @Service
-class DispatcherServiceImpl : DispatcherService {
+internal class ConnectionServiceImpl : ConnectionService {
     @Autowired
     lateinit var moduleRegistry: ModuleRegistry
 
