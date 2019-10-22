@@ -7,28 +7,36 @@ import com.monkeydp.daios.dms.sdk.dm.Dm.DbVersion
 import com.monkeydp.daios.dms.sdk.useful.UserInput
 import io.swagger.annotations.ApiModel
 import io.swagger.annotations.ApiModelProperty
+import javax.persistence.*
 
 /**
  * @author iPotato
  * @date 2019/10/6
  */
+@Entity
 @ApiModel
 data class ConnectionProfile(
+        @Id
+        @GeneratedValue
         @JsonIgnore
         val id: Long,
+        @Column
         @ApiModelProperty(required = true, example = "MYSQL")
         val datasource: Datasource,
         /**
          * @see DbVersion
          */
+        @Column
         @ApiModelProperty(value = "database version id", required = true, example = "5.7")
         val dbVersionId: String,
         /**
          * @see DbDriver
          */
+        @Column
         @JsonIgnore
         @ApiModelProperty(hidden = true)
         var dbDriverName: String = "",
+        @Column
         @ApiModelProperty(value = "parameters entered by the user", required = true, example = """{
             "connectionName": "MySQL 5.7",
             "host": "127.0.0.1",

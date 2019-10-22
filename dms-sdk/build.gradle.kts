@@ -19,6 +19,8 @@ dependencies {
     implementation("com.fasterxml.jackson.core:jackson-annotations:2.9.0")
     // swagger
     implementation("io.swagger:swagger-annotations:1.5.20")
+    // persistence api
+    implementation("javax.persistence:javax.persistence-api:2.2")
     // junit
     testImplementation("junit:junit:4.12")
 }

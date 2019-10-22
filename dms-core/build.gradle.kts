@@ -30,6 +30,7 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter")
     implementation("org.springframework.boot:spring-boot-configuration-processor")
     implementation("org.springframework.boot:spring-boot-starter-web")
+    implementation("org.springframework.boot:spring-boot-starter-data-jpa")
     developmentOnly("org.springframework.boot:spring-boot-devtools")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     // monkeydp
@@ -45,6 +46,8 @@ dependencies {
     implementation("com.github.xiaoymin:swagger-bootstrap-ui:1.9.6")
     // jackson kotlin
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin:2.9.7")
+    // h2db
+    runtimeOnly("com.h2database:h2")
 }
 
 tasks.withType<KotlinCompile> {
