@@ -16,27 +16,32 @@ import javax.persistence.*
 @Entity
 @ApiModel
 data class ConnectionProfile(
+
         @Id
         @GeneratedValue
         @JsonIgnore
         val id: Long,
-        @Column
+
+        @Column(nullable = false)
         @ApiModelProperty(required = true, example = "MYSQL")
         val datasource: Datasource,
         /**
          * @see DbVersion
          */
-        @Column
+        @Column(nullable = false)
         @ApiModelProperty(value = "database version id", required = true, example = "5.7")
         val dbVersionId: String,
+
         /**
          * @see DbDriver
          */
-        @Column
+        @Column(nullable = false)
         @JsonIgnore
         @ApiModelProperty(hidden = true)
         var dbDriverName: String = "",
-        @Column
+
+        @Column(nullable = false)
+        @Convert(converter = UserInput.StringConverter::class)
         @ApiModelProperty(value = "parameters entered by the user", required = true, example = """{
             "connectionName": "MySQL 5.7",
             "host": "127.0.0.1",

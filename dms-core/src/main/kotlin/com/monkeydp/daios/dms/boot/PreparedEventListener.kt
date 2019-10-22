@@ -36,7 +36,7 @@ class PreparedEventListener : ApplicationListener<ApplicationPreparedEvent> {
     private fun zipAllModules() {
         val executor = DefaultExecutor()
         dmDirs.forEach { dmDir ->
-            val line = String.format("%s -p %s disZip", gradlewPath, dmDir)
+            val line = "$gradlewPath -p $dmDir disZip"
             val cmdLine = CommandLine.parse(line)
             executor.execute(cmdLine)
         }
@@ -66,10 +66,10 @@ class PreparedEventListener : ApplicationListener<ApplicationPreparedEvent> {
                     }
             )
             if (files.isEmpty())
-                throw StdInnerException(String.format("Cannot find dm zip in %s!", distributionsDir))
+                throw StdInnerException("Cannot find dm zip in $distributionsDir!")
 
             if (files.size > 1)
-                throw StdInnerException(String.format("More than one dm zip was found in %s", distributionsDir))
+                throw StdInnerException("More than one dm zip was found in $distributionsDir!")
 
             val zip = files.get(0)
             moduleZips.add(zip)

@@ -2,6 +2,7 @@ package com.monkeydp.daios.dms.sdk.useful
 
 import com.monkeydp.tools.util.JsonUtil
 import org.jetbrains.annotations.TestOnly
+import javax.persistence.AttributeConverter
 
 /**
  * Parameters entered by the user
@@ -16,7 +17,12 @@ class UserInput() : HashMap<String, Any>() {
         this.putAll(map)
     }
 
-    fun <T> convertTo(clazz: Class<T>): T {
-        return JsonUtil.convertTo(this, clazz)
+    inline fun <reified T> convertTo(): T {
+        return JsonUtil.convertTo<T>(this)
+    }
+
+    class StringConverter : AttributeConverter<UserInput, String> {
+        override fun convertToDatabaseColumn(attribute: UserInput): String = JsonUtil.toString(attribute)
+        override fun convertToEntityAttribute(dbData: String): UserInput = JsonUtil.toObject<UserInput>(dbData)
     }
 }

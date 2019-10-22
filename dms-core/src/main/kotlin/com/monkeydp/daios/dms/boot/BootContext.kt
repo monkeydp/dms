@@ -79,9 +79,7 @@ final object BootContext {
                     when {
                         SystemUtil.IS_OS_WINDOWS -> "gradlew.bat"
                         SystemUtil.IS_OS_UNIX -> "gradlew"
-                        else -> throw StdInnerException(
-                                String.format("Unknown system %s", SystemUtil.OS_NAME)
-                        )
+                        else -> throw StdInnerException("Unknown system ${SystemUtil.OS_NAME}")
                     }
 
             return StringBuilder()

@@ -1,3 +1,4 @@
+import org.gradle.api.JavaVersion.VERSION_1_8
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
@@ -10,7 +11,7 @@ plugins {
 }
 
 group = "com.monkeydp.daios.dms"
-java.sourceCompatibility = JavaVersion.VERSION_1_8
+java.sourceCompatibility = VERSION_1_8
 
 val developmentOnly by configurations.creating
 configurations {
@@ -53,7 +54,7 @@ dependencies {
 tasks.withType<KotlinCompile> {
     kotlinOptions {
         freeCompilerArgs = listOf("-Xjsr305=strict")
-        jvmTarget = "1.8"
+        jvmTarget = VERSION_1_8.toString()
     }
 }
 
