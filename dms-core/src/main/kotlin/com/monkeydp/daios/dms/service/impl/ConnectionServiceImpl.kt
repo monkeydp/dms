@@ -3,7 +3,7 @@ package com.monkeydp.daios.dms.service.impl
 import com.monkeydp.daios.dms.boot.ModuleRegistry
 import com.monkeydp.daios.dms.connection.ConnectionWrapper
 import com.monkeydp.daios.dms.curd.service.contract.ConnectionProfileService
-import com.monkeydp.daios.dms.sdk.connection.ConnectionProfile
+import com.monkeydp.daios.dms.sdk.model.ConnectionProfile
 import com.monkeydp.daios.dms.service.contract.ConnectionService
 import com.monkeydp.tools.exception.inner.StdInnerException
 import com.monkeydp.tools.util.StringUtil

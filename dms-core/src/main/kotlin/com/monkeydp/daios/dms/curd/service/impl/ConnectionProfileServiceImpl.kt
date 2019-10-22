@@ -2,7 +2,7 @@ package com.monkeydp.daios.dms.curd.service.impl
 
 import com.monkeydp.daios.dms.curd.repository.ConnectionProfileRepo
 import com.monkeydp.daios.dms.curd.service.contract.ConnectionProfileService
-import com.monkeydp.daios.dms.sdk.connection.ConnectionProfile
+import com.monkeydp.daios.dms.sdk.model.ConnectionProfile
 import org.springframework.stereotype.Service
 
 /**

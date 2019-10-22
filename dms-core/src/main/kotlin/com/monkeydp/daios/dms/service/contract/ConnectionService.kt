@@ -1,7 +1,7 @@
 package com.monkeydp.daios.dms.service.contract
 
 import com.monkeydp.daios.dms.connection.ConnectionWrapper
-import com.monkeydp.daios.dms.sdk.connection.ConnectionProfile
+import com.monkeydp.daios.dms.sdk.model.ConnectionProfile
 
 /**
  * @author iPotato

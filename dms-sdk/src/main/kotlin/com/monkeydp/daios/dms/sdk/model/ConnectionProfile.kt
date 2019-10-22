@@ -1,4 +1,4 @@
-package com.monkeydp.daios.dms.sdk.connection
+package com.monkeydp.daios.dms.sdk.model
 
 import com.fasterxml.jackson.annotation.JsonIgnore
 import com.monkeydp.daios.dms.sdk.datasource.Datasource
