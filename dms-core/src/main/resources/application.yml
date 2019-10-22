@@ -3,7 +3,7 @@ spring:
     restart:
       enabled: false
 dms:
-  rootDir: ${rootDir}
+  root-dir: ${rootDir}
   module:
-    dm-parent-dirpath: ${rootDir}/dm
-    modules-path: ${rootDir}/ignore/modules
+    dm-parent-dir: \${dms.root-dir}/dm
+    modules-dir: \${dms.root-dir}/ignore/modules

@@ -14,6 +14,5 @@ class DmsConfig {
     val module: Module = Module()
 
     class Module {
-        lateinit var dirPath: String
     }
 }

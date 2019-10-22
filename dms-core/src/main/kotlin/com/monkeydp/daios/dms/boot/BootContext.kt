@@ -45,15 +45,15 @@ final object BootContext {
         private val prefix = "dms"
 
         companion object PropertyName {
-            private const val rootDirpath = "rootDir"
-            private const val dmParentDirpath = "module.dm-parent-dirpath"
-            private const val modulesPath = "module.modules-path"
+            private const val rootDirpath = "root-dir"
+            private const val dmParentDirpath = "module.dm-parent-dir"
+            private const val modulesDirPath = "module.modules-dir"
         }
 
         init {
             rootDir = File(getProperty(rootDirpath))
             dmParentDir = File(getProperty(dmParentDirpath))
-            modulesDir = File(getProperty(modulesPath))
+            modulesDir = File(getProperty(modulesDirPath))
 
             gradlewPath = initGradlewPath()
             dmDirs = initDmDirs()
