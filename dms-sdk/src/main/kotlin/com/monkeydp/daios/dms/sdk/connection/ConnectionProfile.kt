@@ -1,14 +1,18 @@
 package com.monkeydp.daios.dms.sdk.connection
 
 import com.fasterxml.jackson.annotation.JsonIgnore
-import com.monkeydp.daios.dms.sdk.contract.AbstractModel
 import com.monkeydp.daios.dms.sdk.datasource.Datasource
 import com.monkeydp.daios.dms.sdk.dm.Dm.DbDriver
 import com.monkeydp.daios.dms.sdk.dm.Dm.DbVersion
+import com.monkeydp.daios.dms.sdk.model.AbstractModel
 import com.monkeydp.daios.dms.sdk.useful.UserInput
 import io.swagger.annotations.ApiModel
 import io.swagger.annotations.ApiModelProperty
-import javax.persistence.*
+import javax.persistence.Column
+import javax.persistence.Convert
+import javax.persistence.Entity
+import javax.persistence.EnumType.STRING
+import javax.persistence.Enumerated
 
 /**
  * @author iPotato
@@ -17,12 +21,8 @@ import javax.persistence.*
 @Entity
 @ApiModel
 data class ConnectionProfile(
-        @Id
-        @GeneratedValue
-        @JsonIgnore
-        override val id: Long,
-
         @Column(nullable = false)
+        @Enumerated(STRING)
         @ApiModelProperty(required = true, example = "MYSQL")
         val datasource: Datasource,
         /**
@@ -54,4 +54,4 @@ data class ConnectionProfile(
                 }"""
         )
         val userInput: UserInput
-) : AbstractModel(id)
+) : AbstractModel()

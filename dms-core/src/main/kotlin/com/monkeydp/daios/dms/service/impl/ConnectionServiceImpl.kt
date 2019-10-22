@@ -2,8 +2,11 @@ package com.monkeydp.daios.dms.service.impl
 
 import com.monkeydp.daios.dms.boot.ModuleRegistry
 import com.monkeydp.daios.dms.connection.ConnectionWrapper
+import com.monkeydp.daios.dms.curd.service.contract.ConnectionProfileService
 import com.monkeydp.daios.dms.sdk.connection.ConnectionProfile
 import com.monkeydp.daios.dms.service.contract.ConnectionService
+import com.monkeydp.tools.exception.inner.StdInnerException
+import com.monkeydp.tools.util.StringUtil
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 
@@ -15,22 +18,35 @@ import org.springframework.stereotype.Service
 internal class ConnectionServiceImpl : ConnectionService {
 
     @Autowired
-    lateinit var moduleRegistry: ModuleRegistry
+    private lateinit var moduleRegistry: ModuleRegistry
+    @Autowired
+    private lateinit var cpService: ConnectionProfileService
 
     /**
      * ConnectionProfile.id → ConnectionProfile
      */
     private val cpMap: Map<Long, ConnectionProfile> = mutableMapOf()
 
-    override fun createConnectionProfile(profile: ConnectionProfile): Long {
-        // TODO
-        return 10L
+    private fun getDmBundle(cp: ConnectionProfile) = moduleRegistry.getDmBundle(cp.datasource)
+
+    override fun createConnectionProfile(cp: ConnectionProfile): Long {
+        fullCp(cp)
+        val savedCp = cpService.save(cp)
+        return savedCp.id
     }
 
-    override fun getConnectionWrapper(profile: ConnectionProfile): ConnectionWrapper {
-        val dmBundle = moduleRegistry.getDmBundle(profile.datasource)
-        dmBundle.setSpecificClassLoader(profile.dbVersionId)
-        val connection = dmBundle.impls.connectionFactory.getConnection(profile)
+    private fun fullCp(cp: ConnectionProfile) {
+        val dmBundle = getDmBundle(cp)
+        val dbDriverName = dmBundle.getDbDriverName(cp.dbVersionId)
+        if (StringUtil.isEmpty(dbDriverName))
+            throw StdInnerException("Cannot found db driver name!")
+        cp.dbDriverName = dbDriverName!!
+    }
+
+    override fun getConnectionWrapper(cp: ConnectionProfile): ConnectionWrapper {
+        val dmBundle = getDmBundle(cp)
+        dmBundle.setSpecificClassLoader(cp.dbVersionId)
+        val connection = dmBundle.impls.connectionFactory.getConnection(cp)
         dmBundle.removeSpecificClassLoader()
         return ConnectionWrapper(connection)
     }

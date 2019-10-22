@@ -1,4 +1,4 @@
-package com.monkeydp.daios.dms.sdk.contract
+package com.monkeydp.daios.dms.sdk.model
 
 import javax.persistence.GeneratedValue
 import javax.persistence.Id
@@ -9,8 +9,8 @@ import javax.persistence.MappedSuperclass
  * @date 2019/10/22
  */
 @MappedSuperclass
-abstract class AbstractModel(
-        @Id
-        @GeneratedValue
-        open val id: Long
-)
+abstract class AbstractModel {
+    @Id
+    @GeneratedValue
+    val id: Long = -1
+}

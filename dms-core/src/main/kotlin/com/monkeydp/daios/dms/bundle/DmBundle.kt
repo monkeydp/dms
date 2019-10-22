@@ -95,6 +95,8 @@ class DmBundle(private val deployDir: File, private val dmClassname: String) {
         return Impls
     }
 
+    fun getDbDriverName(dbVersionId: String) = dbDefMap[dbVersionId]?.driver?.name
+
     /**
      * @see DbVersion
      */

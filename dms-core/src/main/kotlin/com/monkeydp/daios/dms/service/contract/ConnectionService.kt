@@ -12,11 +12,11 @@ interface ConnectionService {
     /**
      * Create a ConnectionProfile
      */
-    fun createConnectionProfile(profile: ConnectionProfile): Long
+    fun createConnectionProfile(cp: ConnectionProfile): Long
 
     /**
      * Get a ConnectionWrapper
      * @see ConnectionWrapper
      */
-    fun getConnectionWrapper(profile: ConnectionProfile): ConnectionWrapper
+    fun getConnectionWrapper(cp: ConnectionProfile): ConnectionWrapper
 }

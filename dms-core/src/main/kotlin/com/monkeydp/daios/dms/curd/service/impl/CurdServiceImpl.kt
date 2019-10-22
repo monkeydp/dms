@@ -2,7 +2,7 @@ package com.monkeydp.daios.dms.curd.service.impl
 
 import com.monkeydp.daios.dms.curd.repository.CurdRepo
 import com.monkeydp.daios.dms.curd.service.contract.CurdService
-import com.monkeydp.daios.dms.sdk.contract.AbstractModel
+import com.monkeydp.daios.dms.sdk.model.AbstractModel
 import org.springframework.beans.factory.annotation.Autowired
 
 /**
@@ -14,7 +14,7 @@ internal abstract class CurdServiceImpl<M : AbstractModel, R : CurdRepo<M>> : Cu
     @Autowired
     private lateinit var repo: R
 
-    override fun save(model: M) {
-        repo.save(model)
+    override fun save(model: M): M {
+        return repo.save(model)
     }
 }
