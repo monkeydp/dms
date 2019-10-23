@@ -1,6 +1,5 @@
-package com.monkeydp.daios.dms.sdk.mock
+package com.monkeydp.daios.dms.sdk.example
 
-import com.monkeydp.daios.dms.sdk.entity.Example
 import com.monkeydp.daios.dms.sdk.faker
 
 /**
@@ -9,7 +8,7 @@ import com.monkeydp.daios.dms.sdk.faker
  */
 object ExampleMocker {
 
-    val examples = listOf<Example>(mock(), mock())
+    val examples = mutableListOf<Example>(mock(), mock())
 
     fun mock() = Example(
             name = faker.name().fullName(),

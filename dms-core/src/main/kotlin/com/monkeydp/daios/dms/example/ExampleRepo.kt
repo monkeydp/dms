@@ -1,6 +1,7 @@
-package com.monkeydp.daios.dms.curd.repository
+package com.monkeydp.daios.dms.example
 
-import com.monkeydp.daios.dms.sdk.entity.Example
+import com.monkeydp.daios.dms.curd.repository.CurdRepo
+import com.monkeydp.daios.dms.sdk.example.Example
 import org.springframework.stereotype.Repository
 
 /**

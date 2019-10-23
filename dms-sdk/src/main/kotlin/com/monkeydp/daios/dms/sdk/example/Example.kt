@@ -1,5 +1,6 @@
-package com.monkeydp.daios.dms.sdk.entity
+package com.monkeydp.daios.dms.sdk.example
 
+import com.monkeydp.daios.dms.sdk.entity.AbstractEntity
 import com.monkeydp.tools.util.RandomUtil
 import org.jetbrains.annotations.TestOnly
 import javax.persistence.Column

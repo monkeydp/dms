@@ -1,7 +1,7 @@
 package com.monkeydp.daios.dms.example
 
-import com.monkeydp.daios.dms.curd.service.contract.ExampleService
-import com.monkeydp.daios.dms.sdk.mock.ExampleMocker
+import com.monkeydp.daios.dms.sdk.example.Example
+import com.monkeydp.daios.dms.sdk.example.ExampleMocker.examples
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.CommandLineRunner
 import org.springframework.stereotype.Component
@@ -16,6 +16,12 @@ class ExampleInserter : CommandLineRunner {
     private lateinit var service: ExampleService
 
     override fun run(vararg args: String?) {
-        ExampleMocker.examples.forEach { example -> service.save(example) }
+        val savedExample = mutableListOf<Example>()
+        examples.forEach { example ->
+            val saved = service.save(example)
+            savedExample.add(saved)
+        }
+        examples.clear()
+        examples.addAll(savedExample)
     }
 }
