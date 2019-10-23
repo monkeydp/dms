@@ -1,6 +1,6 @@
 package com.monkeydp.daios.dms.controller
 
-import com.monkeydp.daios.dms.sdk.model.ConnectionProfile
+import com.monkeydp.daios.dms.sdk.entity.ConnectionProfile
 import com.monkeydp.daios.dms.sdk.mock.MockFactory
 import com.monkeydp.daios.dms.service.contract.ConnectionService
 import org.springframework.beans.factory.annotation.Autowired

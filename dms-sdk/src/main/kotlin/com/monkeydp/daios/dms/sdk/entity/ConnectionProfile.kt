@@ -1,10 +1,9 @@
-package com.monkeydp.daios.dms.sdk.model
+package com.monkeydp.daios.dms.sdk.entity
 
 import com.fasterxml.jackson.annotation.JsonIgnore
 import com.monkeydp.daios.dms.sdk.datasource.Datasource
 import com.monkeydp.daios.dms.sdk.dm.Dm.DbDriver
 import com.monkeydp.daios.dms.sdk.dm.Dm.DbVersion
-import com.monkeydp.daios.dms.sdk.model.AbstractModel
 import com.monkeydp.daios.dms.sdk.useful.UserInput
 import io.swagger.annotations.ApiModel
 import io.swagger.annotations.ApiModelProperty
@@ -54,4 +53,4 @@ data class ConnectionProfile(
                 }"""
         )
         val userInput: UserInput
-) : AbstractModel()
+) : AbstractEntity()

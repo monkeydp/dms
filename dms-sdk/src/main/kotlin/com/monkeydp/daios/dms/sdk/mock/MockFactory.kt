@@ -1,6 +1,6 @@
 package com.monkeydp.daios.dms.sdk.mock
 
-import com.monkeydp.daios.dms.sdk.model.ConnectionProfile
+import com.monkeydp.daios.dms.sdk.entity.ConnectionProfile
 import com.monkeydp.daios.dms.sdk.datasource.Datasource.MYSQL
 import com.monkeydp.daios.dms.sdk.useful.UserInput
 

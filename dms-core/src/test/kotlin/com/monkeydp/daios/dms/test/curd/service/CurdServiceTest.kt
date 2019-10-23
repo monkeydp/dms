@@ -1,8 +1,7 @@
 package com.monkeydp.daios.dms.test.curd.service
 
 import com.monkeydp.daios.dms.curd.service.contract.ExampleService
-import com.monkeydp.daios.dms.sdk.model.ExampleModel
-import com.monkeydp.daios.dms.sdk.model.ExampleModel.ExampleModelStatus.ENABLED
+import com.monkeydp.daios.dms.sdk.mock.ExampleMocker
 import com.monkeydp.daios.dms.test.BaseTest
 import org.junit.Assert
 import org.junit.Test
@@ -17,14 +16,15 @@ class CurdServiceTest : BaseTest() {
     @Autowired
     private lateinit var service: ExampleService
 
-    private val mockExampleModel = ExampleModel(
-            name = "iPotato",
-            status = ENABLED
-    )
-
     @Test
     fun saveTest() {
-        val savedModel = service.save(mockExampleModel)
-        Assert.assertTrue(savedModel.id > 0)
+        val entity = service.save(ExampleMocker.mock())
+        Assert.assertTrue(entity.id > 0)
+    }
+
+    @Test
+    fun findAllTest() {
+        val examples = service.findAll()
+        Assert.assertEquals(examples, ExampleMocker.examples)
     }
 }

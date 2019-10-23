@@ -1,6 +1,6 @@
 package com.monkeydp.daios.dms.curd.repository
 
-import com.monkeydp.daios.dms.sdk.model.ConnectionProfile
+import com.monkeydp.daios.dms.sdk.entity.ConnectionProfile
 import org.springframework.stereotype.Repository
 
 /**

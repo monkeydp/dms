@@ -1,6 +1,6 @@
 package com.monkeydp.daios.dms.sdk.connection
 
-import com.monkeydp.daios.dms.sdk.model.ConnectionProfile
+import com.monkeydp.daios.dms.sdk.entity.ConnectionProfile
 
 /**
  * @author iPotato

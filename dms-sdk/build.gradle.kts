@@ -20,6 +20,8 @@ dependencies {
     implementation("io.swagger:swagger-annotations:1.5.20")
     // persistence api
     implementation("javax.persistence:javax.persistence-api:2.2")
+    // faker
+    implementation("com.github.javafaker:javafaker:1.0.1")
     // junit
     testImplementation("junit:junit:4.12")
 }
