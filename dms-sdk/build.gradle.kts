@@ -12,9 +12,6 @@ group = "com.monkeydp.daios.dms"
 java.sourceCompatibility = JavaVersion.VERSION_1_8
 
 dependencies {
-    // kotlin
-    implementation("org.jetbrains.kotlin:kotlin-reflect")
-    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
     // monkeydp
     api("com.monkeydp:tools:+")
     // jackson
