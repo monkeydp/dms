@@ -16,7 +16,7 @@ dependencies {
     implementation("org.jetbrains.kotlin:kotlin-reflect")
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
     // monkeydp
-    implementation("com.monkeydp:tools")
+    api("com.monkeydp:tools:+")
     // jackson
     implementation("com.fasterxml.jackson.core:jackson-annotations:2.9.0")
     // swagger

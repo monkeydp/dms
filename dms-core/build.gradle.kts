@@ -26,9 +26,6 @@ configurations {
 }
 
 dependencies {
-    // kotlin
-    implementation("org.jetbrains.kotlin:kotlin-reflect")
-    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
     // spring
     implementation("org.springframework.boot:spring-boot-starter")
     implementation("org.springframework.boot:spring-boot-configuration-processor")
@@ -36,10 +33,8 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-data-jpa")
     developmentOnly("org.springframework.boot:spring-boot-devtools")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
-    // monkeydp
-    implementation("com.monkeydp:tools")
     // other modules
-    implementation(project(":dms-sdk"))
+    api(project(":dms-sdk"))
     // zip
     implementation("net.lingala.zip4j:zip4j:2.2.1")
     // command line
