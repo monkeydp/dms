@@ -29,7 +29,7 @@ class DmBundle(private val deployDir: File, private val dmClassname: String) {
     val impls: Impls
 
     /**
-     * DbVersion.id → DbDef
+     * @key DbVersion.id
      * @see DbVersion
      */
     private val dbDefMap: Map<String, DbDef>
@@ -110,7 +110,7 @@ class DmBundle(private val deployDir: File, private val dmClassname: String) {
 
     private class BundleClassLoader(urls: Array<URL>, parent: ClassLoader) : URLClassLoader(urls, parent) {
         /**
-         * DbVersion.id → SpecificClassLoader
+         * @key DbVersion.id
          * @see DbVersion
          */
         lateinit var specificClassLoaders: Map<String, SpecificClassLoader>

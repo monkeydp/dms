@@ -1,7 +1,6 @@
 package com.monkeydp.daios.dms.controller
 
 import com.monkeydp.daios.dms.sdk.entity.ConnectionProfile
-import com.monkeydp.daios.dms.sdk.mock.MockFactory
 import com.monkeydp.daios.dms.service.contract.ConnectionService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.bind.annotation.PostMapping
@@ -25,16 +24,13 @@ class ConnectionController {
      * @return ConnectionProfile.id
      */
     @PostMapping("create-cp")
-    fun createCp(@RequestBody cp: ConnectionProfile): Long {
-        return connectionService.createConnectionProfile(cp)
-    }
+    fun createCp(@RequestBody cp: ConnectionProfile) = connectionService.saveConnectionProfile(cp)
 
     /**
      * @see ConnectionProfile
      */
     @PostMapping("open-connection")
     fun openConnection(cpId: Long) {
-        // TODO
-        connectionService.getConnectionWrapper(MockFactory.mockConnectionProfile)
+        connectionService.openConnection(cpId)
     }
 }

@@ -37,7 +37,7 @@ data class ConnectionProfile(
         @Column(nullable = false)
         @JsonIgnore
         @ApiModelProperty(hidden = true)
-        var dbDriverName: String = "",
+        val dbDriverName: String = "",
 
         @Column(nullable = false, length = 1024)
         @Convert(converter = UserInput.StringConverter::class)

@@ -10,13 +10,13 @@ import com.monkeydp.daios.dms.sdk.entity.ConnectionProfile
 interface ConnectionService {
 
     /**
-     * Create a ConnectionProfile
+     * Save a cp
      */
-    fun createConnectionProfile(cp: ConnectionProfile): Long
+    fun saveConnectionProfile(cp: ConnectionProfile): ConnectionProfile
 
     /**
-     * Get a ConnectionWrapper
-     * @see ConnectionWrapper
+     * Open a connection
+     * @see ConnectionProfile
      */
-    fun getConnectionWrapper(cp: ConnectionProfile): ConnectionWrapper
+    fun openConnection(cpId: Long): ConnectionWrapper
 }
