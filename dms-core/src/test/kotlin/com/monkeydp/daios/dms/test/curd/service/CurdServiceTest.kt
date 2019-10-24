@@ -18,8 +18,8 @@ class CurdServiceTest : BaseTest() {
 
     @Test
     fun saveTest() {
-        val entity = service.save(ExampleMocker.mock())
-        Assert.assertTrue(entity.id > ExampleMocker.examples.size)
+        val example = service.save(ExampleMocker.mock())
+        Assert.assertTrue(example.id > ExampleMocker.examples.size)
     }
 
     @Test
@@ -37,31 +37,19 @@ class CurdServiceTest : BaseTest() {
         }
     }
 
-    @Test
+    @Test(expected = NoSuchElementException::class)
     fun deleteTest() {
         val example = service.save(ExampleMocker.mock())
         val id = example.id
-        service.findById(id)
         service.delete(example)
-        try {
-            service.findById(id)
-        } catch (e: NoSuchElementException) {
-            return
-        }
-        Assert.assertTrue(false)
+        service.findById(id)
     }
 
-    @Test
+    @Test(expected = NoSuchElementException::class)
     fun deleteByIdTest() {
         val example = service.save(ExampleMocker.mock())
         val id = example.id
-        service.findById(id)
         service.deleteById(id)
-        try {
-            service.findById(id)
-        } catch (e: NoSuchElementException) {
-            return
-        }
-        Assert.assertTrue(false)
+        service.findById(id)
     }
 }
