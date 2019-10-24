@@ -10,22 +10,27 @@ import com.monkeydp.daios.dms.sdk.entity.ConnectionProfile
 interface ConnectionService {
     
     /**
-     * Save a cp
+     * Save a connection profile
      */
-    fun saveConnectionProfile(cp: ConnectionProfile): ConnectionProfile
+    fun saveCp(cp: ConnectionProfile): ConnectionProfile
     
     /**
      * Open a connection
      */
-    fun openConnection(cpId: Long): ConnectionWrapper
+    fun openConn(cpId: Long): ConnectionWrapper
     
     /**
      * Close a connection
      */
-    fun closeConnection(cpId: Long)
+    fun closeConn(cpId: Long)
     
     /**
      * Test a connection
      */
-    fun testConnection(cpId: Long)
+    fun testConn(cpId: Long)
+    
+    /**
+     * Test a connection
+     */
+    fun testConn(cp: ConnectionProfile)
 }

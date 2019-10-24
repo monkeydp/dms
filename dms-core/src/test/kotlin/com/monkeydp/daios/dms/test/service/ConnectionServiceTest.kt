@@ -12,20 +12,37 @@ import org.springframework.beans.factory.annotation.Autowired
  * @date 2019/10/18
  */
 class ConnectionServiceTest : BaseTest() {
-
+    
     @Autowired
-    private lateinit var connectionService: ConnectionService
-
+    private lateinit var service: ConnectionService
+    
+    
     @Test
-    public fun connectionTest() {
-        val wrapper = connectionService.openConnection(testCp().id)
+    public fun saveCpTest() {
+        val cp = service.saveCp(testCp())
+        Assert.assertTrue(cp.isValid())
+    }
+    
+    /**
+     * test for following method
+     * @see ConnectionService.openConn
+     * @see ConnectionService.closeConn
+     */
+    @Test
+    public fun connTest() {
+        val wrapper = service.openConn(testCp().id)
         val connection = wrapper.connection
-
+        
         Assert.assertTrue(connection.isValid())
         Assert.assertFalse(connection.isClosed())
-
-        connection.close()
+        
+        service.closeConn(testCp().id)
         Assert.assertFalse(connection.isValid())
         Assert.assertTrue(connection.isClosed())
+    }
+    
+    @Test
+    public fun testConnTest() {
+        service.testConn(testCp().id)
     }
 }

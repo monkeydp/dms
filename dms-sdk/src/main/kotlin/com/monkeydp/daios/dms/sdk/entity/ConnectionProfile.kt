@@ -6,8 +6,11 @@ import com.monkeydp.daios.dms.sdk.datasource.Datasource.DsVersion
 import com.monkeydp.daios.dms.sdk.useful.UserInput
 import io.swagger.annotations.ApiModel
 import io.swagger.annotations.ApiModelProperty
-import javax.persistence.*
+import javax.persistence.Column
+import javax.persistence.Convert
+import javax.persistence.Entity
 import javax.persistence.EnumType.STRING
+import javax.persistence.Enumerated
 
 /**
  * @author iPotato
@@ -50,4 +53,6 @@ data class ConnectionProfile(
                 }"""
         )
         val userInput: UserInput
-) : AbstractEntity(id)
+) : AbstractEntity(id) {
+        fun isValid() = id > 0 && dsDriverClassname.isNotBlank()
+}

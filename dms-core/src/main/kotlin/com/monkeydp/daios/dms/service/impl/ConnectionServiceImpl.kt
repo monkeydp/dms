@@ -26,7 +26,7 @@ internal class ConnectionServiceImpl : ConnectionService {
     
     private fun getDmBundle(cp: ConnectionProfile) = moduleRegistry.getDmBundle(cp.datasource)
     
-    override fun saveConnectionProfile(cp: ConnectionProfile) = cpService.save(fullCp(cp))
+    override fun saveCp(cp: ConnectionProfile) = cpService.save(fullCp(cp))
     
     private fun fullCp(cp: ConnectionProfile): ConnectionProfile {
         val dmBundle = getDmBundle(cp)
@@ -34,7 +34,7 @@ internal class ConnectionServiceImpl : ConnectionService {
         return cp.copy(dsDriverClassname = driverClassname)
     }
     
-    override fun openConnection(cpId: Long): ConnectionWrapper {
+    override fun openConn(cpId: Long): ConnectionWrapper {
         val cp = cpService.findById(cpId)
         val cw = getConnectionWrapper(cp)
         manager.activateCp(cp)
@@ -50,12 +50,15 @@ internal class ConnectionServiceImpl : ConnectionService {
         return ConnectionWrapper(connection)
     }
     
-    override fun closeConnection(cpId: Long) = manager.inactivateUserCw(cpId, true)
+    override fun closeConn(cpId: Long) = manager.inactivateUserCw(cpId, true)
     
-    override fun testConnection(cpId: Long) {
+    override fun testConn(cpId: Long) {
         val cp = cpService.findById(cpId)
+        testConn(cp)
+    }
+    
+    override fun testConn(cp: ConnectionProfile) {
         val cw = getConnectionWrapper(cp)
-        // TODO
         cw.use { if (!cw.connection.isValid()) ierror("Test connection fail, please check connection profile: $cp") }
     }
 }

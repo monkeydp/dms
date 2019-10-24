@@ -21,20 +21,20 @@ class ConnectionController {
     lateinit var service: ConnectionService
     
     @PostMapping("save-cp")
-    fun saveCp(@RequestBody cp: ConnectionProfile) = service.saveConnectionProfile(cp)
+    fun saveCp(@RequestBody cp: ConnectionProfile) = service.saveCp(cp)
     
     @PostMapping("open-conn")
     fun openConn(@RequestBody @ApiParam(example = "1") cpId: Long) {
-        service.openConnection(cpId)
+        service.openConn(cpId)
     }
     
     @PostMapping("close-conn")
     fun closeConn(@RequestBody @ApiParam(example = "1") cpId: Long) {
-        service.closeConnection(cpId)
+        service.closeConn(cpId)
     }
     
     @PostMapping("test-conn")
     fun testConn(@RequestBody @ApiParam(example = "1") cpId: Long) {
-        service.testConnection(cpId)
+        service.testConn(cpId)
     }
 }

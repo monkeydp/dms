@@ -11,16 +11,16 @@ import javax.persistence.AttributeConverter
  * @date 2019/10/20
  */
 class UserInput() : HashMap<String, Any>() {
-
+    
     @TestOnly
     internal constructor(map: Map<String, Any>) : this() {
         this.putAll(map)
     }
-
+    
     inline fun <reified T> convertTo(): T {
         return JsonUtil.convertTo<T>(this)
     }
-
+    
     class StringConverter : AttributeConverter<UserInput, String> {
         override fun convertToDatabaseColumn(attribute: UserInput): String = JsonUtil.toString(attribute)
         override fun convertToEntityAttribute(dbData: String): UserInput = JsonUtil.toObject<UserInput>(dbData)
