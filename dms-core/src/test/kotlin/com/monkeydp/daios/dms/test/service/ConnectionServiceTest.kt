@@ -1,6 +1,6 @@
 package com.monkeydp.daios.dms.test.service
 
-import com.monkeydp.daios.dms.sdk.mock.MockFactory.mockConnectionProfile
+import com.monkeydp.daios.dms.sdk.connection.ConnectionProfileMocker.testCp
 import com.monkeydp.daios.dms.service.contract.ConnectionService
 import com.monkeydp.daios.dms.test.BaseTest
 import org.junit.Assert
@@ -18,7 +18,7 @@ class ConnectionServiceTest : BaseTest() {
 
     @Test
     public fun connectionTest() {
-        val wrapper = connectionService.getConnectionWrapper(mockConnectionProfile)
+        val wrapper = connectionService.openConnection(testCp().id)
         val connection = wrapper.connection
 
         Assert.assertTrue(connection.isValid())

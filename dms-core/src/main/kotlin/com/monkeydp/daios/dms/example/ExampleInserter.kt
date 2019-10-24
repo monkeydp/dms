@@ -16,12 +16,12 @@ class ExampleInserter : CommandLineRunner {
     private lateinit var service: ExampleService
 
     override fun run(vararg args: String?) {
-        val savedExample = mutableListOf<Example>()
+        val saveds = mutableListOf<Example>()
         examples.forEach { example ->
             val saved = service.save(example)
-            savedExample.add(saved)
+            saveds.add(saved)
         }
         examples.clear()
-        examples.addAll(savedExample)
+        examples.addAll(saveds)
     }
 }

@@ -19,18 +19,14 @@ class ConnectionController {
     @Autowired
     lateinit var connectionService: ConnectionService
 
-    /**
-     * @see ConnectionProfile
-     * @return ConnectionProfile.id
-     */
-    @PostMapping("create-cp")
-    fun createCp(@RequestBody cp: ConnectionProfile) = connectionService.saveConnectionProfile(cp)
+    @PostMapping("save-cp")
+    fun saveCp(@RequestBody cp: ConnectionProfile) = connectionService.saveConnectionProfile(cp)
 
     /**
      * @see ConnectionProfile
      */
-    @PostMapping("open-connection")
-    fun openConnection(cpId: Long) {
+    @PostMapping("open-conn")
+    fun openConn(cpId: Long) {
         connectionService.openConnection(cpId)
     }
 }

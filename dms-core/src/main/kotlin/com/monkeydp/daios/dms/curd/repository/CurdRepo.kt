@@ -7,4 +7,4 @@ import org.springframework.data.jpa.repository.JpaRepository
  * @author iPotato
  * @date 2019/10/22
  */
-interface CurdRepo<M : AbstractEntity> : JpaRepository<M, Long>
+interface CurdRepo<E : AbstractEntity> : JpaRepository<E, Long>

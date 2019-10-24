@@ -1,6 +1,7 @@
 package com.monkeydp.daios.dms.sdk.dm
 
 import com.monkeydp.daios.dms.sdk.datasource.Datasource
+import com.monkeydp.daios.dms.sdk.datasource.Datasource.DsVersion
 
 /**
  * Datasource module
@@ -11,7 +12,7 @@ import com.monkeydp.daios.dms.sdk.datasource.Datasource
 interface Dm {
 
     val datasource: Datasource
-    val dbDefs: List<DbDef>
+    val dsDefs: List<DsDef>
     val implClassNames: ImplClassNames
 
     /**
@@ -22,13 +23,12 @@ interface Dm {
     }
 
     /**
-     * Database definition
+     * Datasource definition
      */
-    interface DbDef {
-        val version: DbVersion
-        val driver: DbDriver
+    interface DsDef {
+        val version: DsVersion
+        val driver: DsDriver
     }
 
-    class DbVersion(val id: String, val name: String)
-    class DbDriver(val id: String, val name: String)
+    class DsDriver(val id: String, val classname: String)
 }

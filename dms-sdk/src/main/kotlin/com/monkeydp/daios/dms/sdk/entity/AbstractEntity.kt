@@ -9,8 +9,12 @@ import javax.persistence.MappedSuperclass
  * @date 2019/10/22
  */
 @MappedSuperclass
-abstract class AbstractEntity {
-    @Id
-    @GeneratedValue
-    val id: Long = -1
+abstract class AbstractEntity(
+        @Id
+        @GeneratedValue
+        open val id: Long = INVALID_ID
+) {
+    protected companion object {
+        const val INVALID_ID = -1L
+    }
 }

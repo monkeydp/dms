@@ -14,12 +14,13 @@ import javax.persistence.Enumerated
  */
 @Entity
 data class Example @TestOnly constructor(
+        override val id: Long = INVALID_ID,
         @Column(nullable = false)
         val name: String,
         @Column(nullable = false)
         @Enumerated(STRING)
         val status: Status
-) : AbstractEntity() {
+) : AbstractEntity(id) {
 
     enum class Status {
         ENABLED,

@@ -2,16 +2,12 @@ package com.monkeydp.daios.dms.sdk.entity
 
 import com.fasterxml.jackson.annotation.JsonIgnore
 import com.monkeydp.daios.dms.sdk.datasource.Datasource
-import com.monkeydp.daios.dms.sdk.dm.Dm.DbDriver
-import com.monkeydp.daios.dms.sdk.dm.Dm.DbVersion
+import com.monkeydp.daios.dms.sdk.datasource.Datasource.DsVersion
 import com.monkeydp.daios.dms.sdk.useful.UserInput
 import io.swagger.annotations.ApiModel
 import io.swagger.annotations.ApiModelProperty
-import javax.persistence.Column
-import javax.persistence.Convert
-import javax.persistence.Entity
+import javax.persistence.*
 import javax.persistence.EnumType.STRING
-import javax.persistence.Enumerated
 
 /**
  * @author iPotato
@@ -20,24 +16,25 @@ import javax.persistence.Enumerated
 @Entity
 @ApiModel
 data class ConnectionProfile(
+        override val id: Long = INVALID_ID,
+
         @Column(nullable = false)
         @Enumerated(STRING)
         @ApiModelProperty(required = true, example = "MYSQL")
         val datasource: Datasource,
-        /**
-         * @see DbVersion
-         */
+
         @Column(nullable = false)
-        @ApiModelProperty(value = "database version id", required = true, example = "5.7")
-        val dbVersionId: String,
+        @Enumerated(STRING)
+        @ApiModelProperty(value = "datasource version", required = true, example = "MYSQL_5_7")
+        val dsVersion: DsVersion,
 
         /**
-         * @see DbDriver
+         * @see DsDriver
          */
         @Column(nullable = false)
         @JsonIgnore
         @ApiModelProperty(hidden = true)
-        val dbDriverName: String = "",
+        val dsDriverClassname: String = "",
 
         @Column(nullable = false, length = 1024)
         @Convert(converter = UserInput.StringConverter::class)
@@ -53,4 +50,4 @@ data class ConnectionProfile(
                 }"""
         )
         val userInput: UserInput
-) : AbstractEntity()
+) : AbstractEntity(id)

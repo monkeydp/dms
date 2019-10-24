@@ -2,9 +2,9 @@ package com.monkeydp.daios.dms.bundle
 
 import com.monkeydp.daios.dms.sdk.connection.ConnectionFactory
 import com.monkeydp.daios.dms.sdk.datasource.Datasource
+import com.monkeydp.daios.dms.sdk.datasource.Datasource.DsVersion
 import com.monkeydp.daios.dms.sdk.dm.Dm
-import com.monkeydp.daios.dms.sdk.dm.Dm.DbDef
-import com.monkeydp.daios.dms.sdk.dm.Dm.DbVersion
+import com.monkeydp.daios.dms.sdk.dm.Dm.DsDef
 import com.monkeydp.tools.util.ClassUtil
 import com.monkeydp.tools.util.FileUtil
 import java.io.File
@@ -28,11 +28,7 @@ class DmBundle(private val deployDir: File, private val dmClassname: String) {
     private val dm: Dm
     val impls: Impls
 
-    /**
-     * @key DbVersion.id
-     * @see DbVersion
-     */
-    private val dbDefMap: Map<String, DbDef>
+    private val dsDefMap: Map<DsVersion, DsDef>
 
     object Impls {
         lateinit var connectionFactory: ConnectionFactory
@@ -42,7 +38,7 @@ class DmBundle(private val deployDir: File, private val dmClassname: String) {
         bundleClassLoader = initBundleClassLoader()
         dm = initDm()
         impls = initAllImplClasses()
-        dbDefMap = dm.dbDefs.map { it.version.id to it }.toMap()
+        dsDefMap = dm.dsDefs.map { it.version to it }.toMap()
         bundleClassLoader.specificClassLoaders = initSpecificClassLoaderMap()
     }
 
@@ -63,18 +59,18 @@ class DmBundle(private val deployDir: File, private val dmClassname: String) {
         return jars.map { it.toURI().toURL() }.toTypedArray()
     }
 
-    private fun initSpecificClassLoaderMap(): Map<String, SpecificClassLoader> {
-        val map = mutableMapOf<String, SpecificClassLoader>()
-        dbDefMap.forEach { (dbVersionId, _) ->
-            val specificLibsUrls = specificLibsUrls(dbVersionId)
+    private fun initSpecificClassLoaderMap(): Map<DsVersion, SpecificClassLoader> {
+        val map = mutableMapOf<DsVersion, SpecificClassLoader>()
+        dsDefMap.forEach { (dsVersion, _) ->
+            val specificLibsUrls = specificLibsUrls(dsVersion)
             val loader = SpecificClassLoader(specificLibsUrls, bundleClassLoader)
-            map[dbVersionId] = loader
+            map[dsVersion] = loader
         }
         return map
     }
 
-    private fun specificLibsUrls(dbVersionId: String): Array<URL> {
-        val libsDir = File(deployDir, "$specificLibsPath/$dbVersionId")
+    private fun specificLibsUrls(dsVersion: DsVersion): Array<URL> {
+        val libsDir = File(deployDir, "$specificLibsPath/${dsVersion.id}")
         val jars = FileUtil.listFiles(libsDir, FileFilter { file ->
             file.isFile && file.name.endsWith(".jar")
         })
@@ -95,13 +91,10 @@ class DmBundle(private val deployDir: File, private val dmClassname: String) {
         return Impls
     }
 
-    fun getDbDriverName(dbVersionId: String) = dbDefMap[dbVersionId]?.driver?.name
+    fun getDsDriverClassname(dsVersion: DsVersion) = dsDefMap[dsVersion]?.driver?.classname!!
 
-    /**
-     * @see DbVersion
-     */
-    fun setSpecificClassLoader(dbVersionId: String) {
-        bundleClassLoader.setSpecificClassLoader(dbVersionId)
+    fun setSpecificClassLoader(dsVersion: DsVersion) {
+        bundleClassLoader.setSpecificClassLoader(dsVersion)
     }
 
     fun removeSpecificClassLoader() {
@@ -109,11 +102,8 @@ class DmBundle(private val deployDir: File, private val dmClassname: String) {
     }
 
     private class BundleClassLoader(urls: Array<URL>, parent: ClassLoader) : URLClassLoader(urls, parent) {
-        /**
-         * @key DbVersion.id
-         * @see DbVersion
-         */
-        lateinit var specificClassLoaders: Map<String, SpecificClassLoader>
+
+        lateinit var specificClassLoaders: Map<DsVersion, SpecificClassLoader>
         /**
          * Remember to remove the class loader after you set it,
          * otherwise it may cause a memory leak problem
@@ -129,11 +119,8 @@ class DmBundle(private val deployDir: File, private val dmClassname: String) {
             }
         }
 
-        /**
-         * @see DbVersion
-         */
-        fun setSpecificClassLoader(dbVersionId: String) {
-            sclThreadLocal.set(specificClassLoaders[dbVersionId])
+        fun setSpecificClassLoader(dsVersion: DsVersion) {
+            sclThreadLocal.set(specificClassLoaders[dsVersion])
         }
 
         fun removeSpecificClassLoader() {
