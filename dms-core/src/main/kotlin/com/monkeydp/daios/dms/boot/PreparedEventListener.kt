@@ -5,7 +5,7 @@ import com.monkeydp.daios.dms.boot.BootContext.Module.moduleDirs
 import com.monkeydp.daios.dms.boot.BootContext.Module.modulesDir
 import com.monkeydp.daios.dms.boot.BootContext.Module.outsideModuleZips
 import com.monkeydp.daios.dms.boot.BootContext.gradlewPath
-import com.monkeydp.tools.exception.inner.StdInnerException
+import com.monkeydp.tools.ierror
 import com.monkeydp.tools.util.FileUtil
 import net.lingala.zip4j.ZipFile
 import org.apache.commons.exec.CommandLine
@@ -21,9 +21,9 @@ import java.io.FileFilter
  * @date 2019/10/8
  */
 class PreparedEventListener : ApplicationListener<ApplicationPreparedEvent> {
-
+    
     private lateinit var env: ConfigurableEnvironment
-
+    
     override fun onApplicationEvent(event: ApplicationPreparedEvent) {
         env = event.applicationContext.environment
         BootContext.init(env)
@@ -32,7 +32,7 @@ class PreparedEventListener : ApplicationListener<ApplicationPreparedEvent> {
         extractAllModules2Local()
         moduleDirs = initModuleDirs()
     }
-
+    
     private fun zipAllModules() {
         val executor = DefaultExecutor()
         dmDirs.forEach { dmDir ->
@@ -41,7 +41,7 @@ class PreparedEventListener : ApplicationListener<ApplicationPreparedEvent> {
             executor.execute(cmdLine)
         }
     }
-
+    
     private fun extractAllModules2Local() {
         emptyModulesDir()
         outsideModuleZips.forEach { file ->
@@ -49,13 +49,13 @@ class PreparedEventListener : ApplicationListener<ApplicationPreparedEvent> {
             zipFile.extractAll(modulesDir.absolutePath)
         }
     }
-
+    
     private fun emptyModulesDir() {
         if (modulesDir.exists())
             modulesDir.deleteRecursively()
         modulesDir.mkdir()
     }
-
+    
     private fun initOutsideModuleZips(): List<File> {
         val moduleZips = mutableListOf<File>()
         dmDirs.forEach { dmDir ->
@@ -65,23 +65,22 @@ class PreparedEventListener : ApplicationListener<ApplicationPreparedEvent> {
                         file.isFile && file.name.matches(BootContext.Module.dmZipRegex)
                     }
             )
-            if (files.isEmpty())
-                throw StdInnerException("Cannot find dm zip in $distributionsDir!")
-
-            if (files.size > 1)
-                throw StdInnerException("More than one dm zip was found in $distributionsDir!")
-
+            if (files.isEmpty()) ierror("Cannot find dm zip in $distributionsDir!")
+    
+            if (files.size > 1) ierror("More than one dm zip was found in $distributionsDir!")
+            
             val zip = files.get(0)
             moduleZips.add(zip)
         }
         return moduleZips.toList()
     }
-
+    
     private fun initModuleDirs(): List<File> {
         return FileUtil.listFiles(modulesDir,
                 FileFilter { file ->
                     file.isDirectory && file.name.matches(BootContext.Module.dmRegex)
                 }
-        ).toList()
+        )
+                .toList()
     }
 }

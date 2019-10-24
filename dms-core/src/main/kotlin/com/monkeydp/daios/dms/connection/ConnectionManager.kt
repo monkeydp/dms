@@ -1,7 +1,6 @@
 package com.monkeydp.daios.dms.connection
 
 import com.monkeydp.daios.dms.sdk.entity.ConnectionProfile
-import com.monkeydp.tools.exception.inner.StdInnerException
 import com.monkeydp.tools.ierror
 import org.springframework.stereotype.Component
 
@@ -32,8 +31,7 @@ class ConnectionManager {
     @Synchronized
     fun activateConn(cw: ConnectionWrapper): ConnectionManager {
         val cpw = activeCpwMap[cw.cpId]!!
-        if (cw.belongsToUser() && cpw.hasActiveUserConn)
-            throw StdInnerException("Active user connection is already exist!")
+        if (cw.belongsToUser() && cpw.hasActiveUserConn) ierror("Active user connection is already exist!")
         cpw.activeCwMap.putIfAbsent(cw.connId, cw)
         return this
     }
@@ -56,7 +54,7 @@ class ConnectionManager {
         val activeCwMap = mutableMapOf<Long, ConnectionWrapper>()
         
         fun getActiveUserCw(): ConnectionWrapper {
-            if (!hasActiveUserConn) ierror("Active user connection not exist!")
+            if (!hasActiveUserConn) ierror("Active user connection is not exist!")
             return activeCwMap[activeUserConnId]!!
         }
     }
