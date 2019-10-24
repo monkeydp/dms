@@ -1,10 +1,12 @@
 package com.monkeydp.daios.dms.connection
 
 import com.monkeydp.daios.dms.sdk.entity.ConnectionProfile
+import com.monkeydp.tools.exception.inner.AbstractInnerException
 import com.monkeydp.tools.ierror
 import org.springframework.stereotype.Component
 
 /**
+ * TODO consider concurrency
  * @author iPotato
  * @date 2019/10/24
  */
@@ -28,17 +30,58 @@ class ConnectionManager {
         return this
     }
     
-    fun activateConn(cw: ConnectionWrapper): ConnectionManager {
-        val cpw = activeCpwMap[cw.cpId]!!
-        cpw.activateConn(cw)
+    fun activateCw(cw: ConnectionWrapper): ConnectionManager {
+        val cpw = getActiveCpw(cw.cpId)
+        cpw.activateCw(cw)
         return this
     }
     
-    fun getActiveCp(cpId: Long) = activeCpwMap[cpId]!!.cp
+    private fun getActiveCpw(cpId: Long) = activeCpwMap[cpId] ?: throw ActiveConnectionProfileNotFoundException(cpId)
     
-    fun getActiveCw(cpId: Long, connId: Long) = activeCpwMap[cpId]!!.getActiveCw(connId)
+    private fun getActiveCpw(cpId: Long, ignoreNotFound: Boolean): ConnectionProfileWrapper? {
+        return if (!ignoreNotFound) getActiveCpw(cpId)
+        else activeCpwMap[cpId]
+    }
     
-    fun getActiveUserCw(cpId: Long): ConnectionWrapper = activeCpwMap[cpId]!!.getActiveUserCw()
+    fun getActiveCp(cpId: Long) = getActiveCpw(cpId).cp
+    
+    fun getActiveCp(cpId: Long, ignoreNotFound: Boolean): ConnectionProfile? {
+        return if (!ignoreNotFound) getActiveCp(cpId)
+        else getActiveCpw(cpId, ignoreNotFound)?.cp
+    }
+    
+    fun getActiveCw(cpId: Long, connId: Long) = getActiveCpw(cpId).getActiveCw(connId)
+    
+    fun getActiveCw(cpId: Long, connId: Long, ignoreNotFound: Boolean): ConnectionWrapper? {
+        return if (!ignoreNotFound) getActiveCw(cpId, connId)
+        else getActiveCpw(cpId, ignoreNotFound)?.getActiveCw(connId, ignoreNotFound)
+    }
+    
+    fun getActiveUserCw(cpId: Long) = getActiveCpw(cpId).getActiveUserCw()
+    
+    fun getActiveUserCw(cpId: Long, ignoreNotFound: Boolean): ConnectionWrapper? {
+        return if (!ignoreNotFound) getActiveUserCw(cpId)
+        else getActiveCpw(cpId, ignoreNotFound)?.getActiveUserCw(ignoreNotFound)
+    }
+    
+    fun inactivateCp(cpId: Long) {
+        inactivateCpw(cpId)
+    }
+    
+    fun inactivateAllCp() {
+        inactivateAllCpw()
+    }
+    
+    private fun inactivateCpw(cpId: Long) {
+        val activeCpw = getActiveCpw(cpId, true) ?: return
+        activeCpw.inactivateAllCw()
+        activeCpwMap.remove(activeCpw.cpId)
+    }
+    
+    private fun inactivateAllCpw() {
+        activeCpwMap.forEach { it.value.inactivateAllCw() }
+        activeCpwMap.clear()
+    }
     
     private class ConnectionProfileWrapper(val cp: ConnectionProfile) {
         
@@ -60,24 +103,58 @@ class ConnectionManager {
          */
         private val activeCwMap = mutableMapOf<Long, ConnectionWrapper>()
     
+        fun activateCw(cw: ConnectionWrapper) {
+            if (cw.belongsToUser()) activateUserCw(cw)
+            else activeOtherCw(cw)
+        }
+    
         @Synchronized
-        fun activateConn(cw: ConnectionWrapper) {
-            if (cw.belongsToUser()) {
-                if (hasActiveUserConn) ierror("Active user connection is already exist!")
-                activeUserConnId = cw.connId
-            }
+        private fun activateUserCw(cw: ConnectionWrapper) {
+            if (!cw.belongsToUser()) ierror("Connection must belongs to user!")
+            if (hasActiveUserConn) ierror("Active user connection is already exist!")
+            activeUserConnId = cw.connId
             activeCwMap.putIfAbsent(cw.connId, cw)
         }
     
-        fun getActiveCw(connId: Long): ConnectionWrapper {
-            val activeCw = activeCwMap[connId]
-            if (activeCw == null) ierror("The active connection corresponding to id ${connId} does not exist")
-            return activeCwMap[connId]!!
+        private fun activeOtherCw(cw: ConnectionWrapper) {
+            if (cw.belongsToUser()) ierror("Connection must not belongs to user!")
+            activeCwMap.putIfAbsent(cw.connId, cw)
+        }
+    
+        fun getActiveCw(connId: Long) = activeCwMap[connId] ?: throw ActiveConnectionNotFoundException(connId)
+    
+        fun getActiveCw(connId: Long, ignoreNotFound: Boolean): ConnectionWrapper? {
+            return if (!ignoreNotFound) getActiveCw(connId)
+            else activeCwMap[connId]
         }
         
         fun getActiveUserCw(): ConnectionWrapper {
             if (!hasActiveUserConn) ierror("Active user connection is not exist!")
             return getActiveCw(activeUserConnId)
         }
+    
+        fun getActiveUserCw(ignoreNotFound: Boolean): ConnectionWrapper? {
+            return if (!ignoreNotFound) getActiveUserCw()
+            else getActiveCw(activeUserConnId, ignoreNotFound)
+        }
+    
+        fun inactivateCw(connId: Long) {
+            var activeCw = getActiveCw(connId, true) ?: return
+            activeCw.connection.close()
+            activeCwMap.remove(connId)
+        }
+    
+        fun inactivateAllCw() {
+            activeCwMap.forEach { it.value.connection.close() }
+            activeCwMap.clear()
+        }
+    
+        class ActiveConnectionNotFoundException : AbstractInnerException {
+            constructor(connId: Long) : super("The active connection corresponding to id ${connId} not found")
+        }
+    }
+    
+    class ActiveConnectionProfileNotFoundException : AbstractInnerException {
+        constructor(cpId: Long) : super("The active connection profile corresponding to id ${cpId} not found")
     }
 }

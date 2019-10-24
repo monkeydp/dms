@@ -37,7 +37,7 @@ internal class ConnectionServiceImpl : ConnectionService {
         val cp = cpService.findById(cpId)
         val cw = getConnectionWrapper(cp)
         manager.activateCp(cp)
-                .activateConn(cw)
+                .activateCw(cw)
         return cw
     }
     
