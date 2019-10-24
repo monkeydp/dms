@@ -9,13 +9,18 @@ import com.monkeydp.tools.util.RandomUtil
  * @author iPotato
  * @date 2019/10/18
  */
-class ConnectionWrapper(val connection: Connection) {
+class ConnectionWrapper(val connection: Connection) : AutoCloseable {
+    
     // TODO auto increment id
     val connId = RandomUtil.randomId()
     
     val cpId = connection.cpId
     
     val belongsTo: BelongsTo = USER
+    
+    override fun close() {
+        connection.close()
+    }
     
     fun belongsToUser() = belongsTo == USER
     fun belongsToTask() = belongsTo == TASK

@@ -83,6 +83,21 @@ class ConnectionManager {
         activeCpwMap.clear()
     }
     
+    fun inactivateCw(cpId: Long, connId: Long) {
+        val activeCpw = getActiveCpw(cpId, true) ?: return
+        activeCpw.inactivateCw(connId)
+    }
+    
+    fun inactivateUserCw(cpId: Long, ignoreNotFound: Boolean) {
+        val activeCpw = getActiveCpw(cpId, ignoreNotFound) ?: return
+        activeCpw.inactivateUserCw(activeCpw.getActiveUserCw(ignoreNotFound))
+    }
+    
+    fun inactivateAllCw(cpId: Long) {
+        val activeCpw = getActiveCpw(cpId, true) ?: return
+        activeCpw.inactivateAllCw()
+    }
+    
     private class ConnectionProfileWrapper(val cp: ConnectionProfile) {
         
         val cpId: Long = cp.id
@@ -92,7 +107,7 @@ class ConnectionManager {
         }
     
         private var hasActiveUserConn = false
-        private var activeUserConnId = INVALID_CONN_ID
+        private var activeUserConnId: Long = INVALID_CONN_ID
             set(value) {
                 hasActiveUserConn = value != INVALID_CONN_ID
                 field = value
@@ -103,6 +118,14 @@ class ConnectionManager {
          */
         private val activeCwMap = mutableMapOf<Long, ConnectionWrapper>()
     
+        private fun checkBelongsToUser(cw: ConnectionWrapper) {
+            if (!cw.belongsToUser()) ierror("Connection must belongs to user!")
+        }
+    
+        private fun checkNotBelongsToUser(cw: ConnectionWrapper) {
+            if (cw.belongsToUser()) ierror("Connection must not belongs to user!")
+        }
+        
         fun activateCw(cw: ConnectionWrapper) {
             if (cw.belongsToUser()) activateUserCw(cw)
             else activeOtherCw(cw)
@@ -110,14 +133,14 @@ class ConnectionManager {
     
         @Synchronized
         private fun activateUserCw(cw: ConnectionWrapper) {
-            if (!cw.belongsToUser()) ierror("Connection must belongs to user!")
+            checkBelongsToUser(cw)
             if (hasActiveUserConn) ierror("Active user connection is already exist!")
             activeUserConnId = cw.connId
             activeCwMap.putIfAbsent(cw.connId, cw)
         }
     
         private fun activeOtherCw(cw: ConnectionWrapper) {
-            if (cw.belongsToUser()) ierror("Connection must not belongs to user!")
+            checkNotBelongsToUser(cw)
             activeCwMap.putIfAbsent(cw.connId, cw)
         }
     
@@ -140,19 +163,47 @@ class ConnectionManager {
     
         fun inactivateCw(connId: Long) {
             var activeCw = getActiveCw(connId, true) ?: return
-            activeCw.connection.close()
-            activeCwMap.remove(connId)
+            inactivateCw(activeCw)
         }
     
+        fun inactivateCw(cw: ConnectionWrapper) {
+            if (cw.belongsToUser()) inactivateUserCw(cw)
+            else inactivateOtherCw(cw)
+        }
+    
+        fun inactivateUserCw(cw: ConnectionWrapper? = getActiveUserCw()) {
+            if (cw == null) return
+            checkBelongsToUser(cw)
+            innerInactivateCw(cw)
+            resetActiveUserConnId()
+        }
+    
+        fun inactivateOtherCw(cw: ConnectionWrapper) {
+            checkNotBelongsToUser(cw)
+            innerInactivateCw(cw)
+        }
+    
+        private fun innerInactivateCw(cw: ConnectionWrapper) {
+            cw.connection.close()
+            activeCwMap.remove(cw.connId)
+        }
+        
         fun inactivateAllCw() {
             activeCwMap.forEach { it.value.connection.close() }
             activeCwMap.clear()
+            resetActiveUserConnId()
         }
+    
+        private fun resetActiveUserConnId() {
+            activeUserConnId = INVALID_CONN_ID
+        }
+    
     
         class ActiveConnectionNotFoundException : AbstractInnerException {
             constructor(connId: Long) : super("The active connection corresponding to id ${connId} not found")
         }
     }
+    
     
     class ActiveConnectionProfileNotFoundException : AbstractInnerException {
         constructor(cpId: Long) : super("The active connection profile corresponding to id ${cpId} not found")

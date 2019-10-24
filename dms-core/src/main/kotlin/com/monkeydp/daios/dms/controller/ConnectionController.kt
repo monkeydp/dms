@@ -2,6 +2,7 @@ package com.monkeydp.daios.dms.controller
 
 import com.monkeydp.daios.dms.sdk.entity.ConnectionProfile
 import com.monkeydp.daios.dms.service.contract.ConnectionService
+import io.swagger.annotations.ApiParam
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
@@ -15,18 +16,25 @@ import org.springframework.web.bind.annotation.RestController
 @RestController
 @RequestMapping("connection")
 class ConnectionController {
-
+    
     @Autowired
-    lateinit var connectionService: ConnectionService
-
+    lateinit var service: ConnectionService
+    
     @PostMapping("save-cp")
-    fun saveCp(@RequestBody cp: ConnectionProfile) = connectionService.saveConnectionProfile(cp)
-
-    /**
-     * @see ConnectionProfile
-     */
+    fun saveCp(@RequestBody cp: ConnectionProfile) = service.saveConnectionProfile(cp)
+    
     @PostMapping("open-conn")
-    fun openConn(cpId: Long) {
-        connectionService.openConnection(cpId)
+    fun openConn(@RequestBody @ApiParam(example = "1") cpId: Long) {
+        service.openConnection(cpId)
+    }
+    
+    @PostMapping("close-conn")
+    fun closeConn(@RequestBody @ApiParam(example = "1") cpId: Long) {
+        service.closeConnection(cpId)
+    }
+    
+    @PostMapping("test-conn")
+    fun testConn(@RequestBody @ApiParam(example = "1") cpId: Long) {
+        service.testConnection(cpId)
     }
 }

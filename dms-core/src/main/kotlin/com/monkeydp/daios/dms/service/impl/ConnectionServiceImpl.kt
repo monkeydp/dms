@@ -6,6 +6,7 @@ import com.monkeydp.daios.dms.connection.ConnectionWrapper
 import com.monkeydp.daios.dms.curd.service.contract.ConnectionProfileService
 import com.monkeydp.daios.dms.sdk.entity.ConnectionProfile
 import com.monkeydp.daios.dms.service.contract.ConnectionService
+import com.monkeydp.tools.ierror
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 
@@ -47,5 +48,14 @@ internal class ConnectionServiceImpl : ConnectionService {
         val connection = dmBundle.impls.connectionFactory.getConnection(cp)
         dmBundle.removeSpecificClassLoader()
         return ConnectionWrapper(connection)
+    }
+    
+    override fun closeConnection(cpId: Long) = manager.inactivateUserCw(cpId, true)
+    
+    override fun testConnection(cpId: Long) {
+        val cp = cpService.findById(cpId)
+        val cw = getConnectionWrapper(cp)
+        // TODO
+        cw.use { if (!cw.connection.isValid()) ierror("Test connection fail, please check connection profile: $cp") }
     }
 }

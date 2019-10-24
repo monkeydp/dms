@@ -5,9 +5,6 @@ package com.monkeydp.daios.dms.sdk.connection
  * @date 2019/10/6
  */
 class Connection(
-        /**
-         * @see ConnectionProfile
-         */
         val cpId: Long,
         private val logicConnection: LogicConnection
 ) {

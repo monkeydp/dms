@@ -8,15 +8,24 @@ import com.monkeydp.daios.dms.sdk.entity.ConnectionProfile
  * @date 2019/10/18
  */
 interface ConnectionService {
-
+    
     /**
      * Save a cp
      */
     fun saveConnectionProfile(cp: ConnectionProfile): ConnectionProfile
-
+    
     /**
      * Open a connection
-     * @see ConnectionProfile
      */
     fun openConnection(cpId: Long): ConnectionWrapper
+    
+    /**
+     * Close a connection
+     */
+    fun closeConnection(cpId: Long)
+    
+    /**
+     * Test a connection
+     */
+    fun testConnection(cpId: Long)
 }
