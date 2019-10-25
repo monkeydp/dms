@@ -12,10 +12,10 @@ import javax.persistence.Convert
  * @date 2019/10/20
  */
 @Convert(converter = UserInput.StringConverter::class)
-class UserInput() : HashMap<String, Any>() {
+class UserInput() : HashMap<String, String>() {
     
     @TestOnly
-    internal constructor(map: Map<String, Any>) : this() {
+    internal constructor(map: Map<String, String>) : this() {
         this.putAll(map)
     }
     
