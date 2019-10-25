@@ -1,8 +1,51 @@
 # DMS
 
-Data Management Service
+- DMS: Datasource Management Service
+- DM: Datasource Module
 
 
+## Description
+
+This project is a datasource management service of **Cloud Database** based on sdk development
+
+Following datasource would be developed as an example:
+- mysql (5.7, 8.0)
+- sqlserver
+- redis
+- mongodb
+
+
+## Project Progress
+
+- Base Function (OK)
+    - auto package dm zip to dms when dms start up
+    - dynamic load libs and drivers from diff dm
+- Connection Manager (OK)
+    - open/close/test connection
+    - manager active connection
+- Metadata Loader (Doing...)
+    - navigate
+    - menu
+    - form
+- Command Executor
+    - sql
+    - redis script
+    - mongodb scrip
+- More...
+
+
+## Directory structure
+
+```
+dms
+ ├─ dm              // which dm you want to develop, add to this dir by `git clone`
+ |   └─ dm-mysql    // git clone https://github.com/monkeydp/dm-mysql
+ ├─ dms-core        // dynamic call dm impl when request comming
+ ├─ dms-sdk         // dm development base on dms-sdk
+ └─ tools           // git submodule update --init 
+```
+
+ 
 ## Api
 
 access http://127.0.0.1:8080/doc.html
@@ -11,6 +54,7 @@ access http://127.0.0.1:8080/doc.html
 ## Database
 
 access http://127.0.0.1:8080/h2-console
+
 
 ## Abbreviation
 
