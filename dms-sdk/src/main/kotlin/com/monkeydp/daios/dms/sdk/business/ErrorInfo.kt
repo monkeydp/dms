@@ -11,9 +11,6 @@ enum class ErrorInfo(
     
     ERR("-1", "错误");
     
-    override val asEnum: ErrorInfo
-        get() = this
-    
     companion object {
         val instance = this
     }

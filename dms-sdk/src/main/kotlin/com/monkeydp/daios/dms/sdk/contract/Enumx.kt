@@ -6,5 +6,6 @@ package com.monkeydp.daios.dms.sdk.contract
  */
 interface Enumx<E>
         where E : Enumx<E>, E : Enum<E> {
-    val asEnum: E
+    @Suppress("UNCHECKED_CAST")
+    fun asEnum() = this as Enum<E>
 }

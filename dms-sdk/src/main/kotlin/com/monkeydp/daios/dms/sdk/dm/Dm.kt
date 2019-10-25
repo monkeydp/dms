@@ -10,18 +10,27 @@ import com.monkeydp.daios.dms.sdk.datasource.Datasource.DsVersion
  * @date 2019/10/8
  */
 interface Dm {
-
+    
     val datasource: Datasource
     val dsDefs: List<DsDef>
-    val implClassNames: ImplClassNames
-
+    val implClassnames: ImplClassnames
+    val implEnumClassnames: ImplEnumClassnames
+    
     /**
-     * Implementation class names of all sdk required contract
+     * Implementation classnames of all sdk required contract
      */
-    interface ImplClassNames {
-        val connectionFactory: String?
+    interface ImplClassnames {
+        val connectionFactory: String
     }
-
+    
+    /**
+     * Implementation enum classnames
+     */
+    interface ImplEnumClassnames {
+        val actionType: String
+        val targetType: String
+    }
+    
     /**
      * Datasource definition
      */
@@ -29,6 +38,6 @@ interface Dm {
         val version: DsVersion
         val driver: DsDriver
     }
-
+    
     class DsDriver(val id: String, val classname: String)
 }
