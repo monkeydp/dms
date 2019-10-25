@@ -1,6 +1,7 @@
 package com.monkeydp.daios.dms.sdk.example
 
 import com.monkeydp.daios.dms.sdk.entity.AbstractEntity
+import com.monkeydp.daios.dms.sdk.util.IdUtil
 import com.monkeydp.tools.util.RandomUtil
 import org.jetbrains.annotations.TestOnly
 import javax.persistence.Column
@@ -14,18 +15,18 @@ import javax.persistence.Enumerated
  */
 @Entity
 data class Example @TestOnly constructor(
-        override val id: Long = INVALID_ID,
+        override val id: Long = IdUtil.INVALID_ID,
         @Column(nullable = false)
         val name: String,
         @Column(nullable = false)
         @Enumerated(STRING)
         val status: Status
 ) : AbstractEntity(id) {
-
+    
     enum class Status {
         ENABLED,
         DISABLED;
-
+        
         companion object {
             fun random(): Status {
                 val values = values()

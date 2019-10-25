@@ -4,6 +4,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore
 import com.monkeydp.daios.dms.sdk.datasource.Datasource
 import com.monkeydp.daios.dms.sdk.datasource.Datasource.DsVersion
 import com.monkeydp.daios.dms.sdk.useful.UserInput
+import com.monkeydp.daios.dms.sdk.util.IdUtil
+import com.monkeydp.daios.dms.sdk.util.IdUtil.INVALID_ID
 import io.swagger.annotations.ApiModel
 import io.swagger.annotations.ApiModelProperty
 import javax.persistence.Column
@@ -54,5 +56,5 @@ data class ConnectionProfile(
         )
         val userInput: UserInput
 ) : AbstractEntity(id) {
-        fun isValid() = id > 0 && dsDriverClassname.isNotBlank()
+        fun isValid() = IdUtil.isValid(id) && dsDriverClassname.isNotBlank()
 }

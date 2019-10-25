@@ -1,5 +1,6 @@
 package com.monkeydp.daios.dms.sdk.entity
 
+import com.monkeydp.daios.dms.sdk.util.IdUtil
 import javax.persistence.GeneratedValue
 import javax.persistence.Id
 import javax.persistence.MappedSuperclass
@@ -12,9 +13,5 @@ import javax.persistence.MappedSuperclass
 abstract class AbstractEntity(
         @Id
         @GeneratedValue
-        open val id: Long = INVALID_ID
-) {
-    protected companion object {
-        const val INVALID_ID = -1L
-    }
-}
+        open val id: Long = IdUtil.INVALID_ID
+)
