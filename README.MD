@@ -4,6 +4,13 @@
 - DM: Datasource Module
 
 
+## Dependency
+
+- Kotlin 1.3.5
+- Springboot 2.1.9
+- Gradle 5.6.2
+
+
 ## Description
 
 This project is a datasource management service of **Cloud Database** based on sdk development
@@ -30,7 +37,7 @@ Following datasource would be developed as an example:
 - Command Executor
     - sql
     - redis script
-    - mongodb scrip
+    - mongodb script
 - More...
 
 
