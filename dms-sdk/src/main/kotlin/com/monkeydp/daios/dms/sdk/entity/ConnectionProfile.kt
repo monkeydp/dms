@@ -42,7 +42,6 @@ data class ConnectionProfile(
         val dsDriverClassname: String = "",
 
         @Column(nullable = false, length = 1024)
-        @Convert(converter = UserInput.StringConverter::class)
         @ApiModelProperty(
                 value = "parameters entered by the user",
                 required = true,
