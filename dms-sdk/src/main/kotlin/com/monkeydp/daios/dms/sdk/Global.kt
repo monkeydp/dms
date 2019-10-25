@@ -11,7 +11,7 @@ import com.monkeydp.daios.dms.sdk.datasource.exception.StdDatasourceException
  */
 val faker = Faker()
 
-fun dserror(cause: Throwable) {
+fun derror(cause: Throwable) {
     throw StdDatasourceException(cause)
 }
 
