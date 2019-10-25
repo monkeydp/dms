@@ -21,7 +21,13 @@ conn | Connection
 cp | Connection Profile
 cpw | Connection Profile Wrapper
 cw | Connection Wrapper
-&nbsp;| 
+&nbsp;|
 **# D** |
 db | Database
 ds | Datasource
+&nbsp;|
+**# E** |
+err | error
+&nbsp;|
+**# M** |
+msg | message
