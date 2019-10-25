@@ -76,6 +76,7 @@ cw | Connection Wrapper
 **# D** |
 db | Database
 ds | Datasource
+def | Definition
 &nbsp;|
 **# E** |
 err | error

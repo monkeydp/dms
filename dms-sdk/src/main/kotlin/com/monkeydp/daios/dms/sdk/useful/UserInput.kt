@@ -3,6 +3,7 @@ package com.monkeydp.daios.dms.sdk.useful
 import com.monkeydp.tools.util.JsonUtil
 import org.jetbrains.annotations.TestOnly
 import javax.persistence.AttributeConverter
+import javax.persistence.Convert
 
 /**
  * Parameters entered by the user
@@ -10,6 +11,7 @@ import javax.persistence.AttributeConverter
  * @author iPotato
  * @date 2019/10/20
  */
+@Convert(converter = UserInput.StringConverter::class)
 class UserInput() : HashMap<String, Any>() {
     
     @TestOnly
