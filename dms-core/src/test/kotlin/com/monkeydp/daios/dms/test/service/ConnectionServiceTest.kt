@@ -1,6 +1,6 @@
 package com.monkeydp.daios.dms.test.service
 
-import com.monkeydp.daios.dms.sdk.connection.ConnectionProfileMocker.testCp
+import com.monkeydp.daios.dms.sdk.connection.CpMocker.testCp
 import com.monkeydp.daios.dms.service.contract.ConnectionService
 import com.monkeydp.daios.dms.test.BaseTest
 import org.junit.Assert

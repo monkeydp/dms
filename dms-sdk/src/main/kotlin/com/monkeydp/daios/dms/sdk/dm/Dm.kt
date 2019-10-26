@@ -13,22 +13,35 @@ interface Dm {
     
     val datasource: Datasource
     val dsDefs: List<DsDef>
-    val implClassnames: ImplClassnames
-    val implEnumClassnames: ImplEnumClassnames
+    val impl: Impl
     
-    /**
-     * Implementation classnames of all sdk required contract
-     */
-    interface ImplClassnames {
-        val connectionFactory: String
-    }
-    
-    /**
-     * Implementation enum classnames
-     */
-    interface ImplEnumClassnames {
-        val actionType: String
-        val targetType: String
+    interface Impl {
+        
+        val apiClassnames: ApiClassnames
+        val enumClassnames: EnumClassnames
+        val dataClassnames: DataClassnames
+        
+        /**
+         * Implementation api classnames of all sdk required contract
+         */
+        interface ApiClassnames {
+            val connFactory: String
+        }
+        
+        /**
+         * Implementation enum classnames
+         */
+        interface EnumClassnames {
+            val actionType: String
+            val targetType: String
+        }
+        
+        /**
+         * Implementation data classnames
+         */
+        interface DataClassnames {
+            val cpForm: String
+        }
     }
     
     /**

@@ -5,7 +5,7 @@ import com.fasterxml.jackson.databind.DeserializationContext
 import com.fasterxml.jackson.databind.JsonDeserializer
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize
 import com.monkeydp.daios.dms.sdk.contract.Enumx
-import com.monkeydp.daios.dms.sdk.metadata.MetadataEnumContext
+import com.monkeydp.daios.dms.sdk.dm.ImplContext
 
 /**
  * @author iPotato
@@ -17,7 +17,7 @@ interface ActionType<E> : Enumx<E>
     
     class ActionTypeDeserializer : JsonDeserializer<ActionType<*>>() {
         override fun deserialize(p: JsonParser?, ctxt: DeserializationContext?): ActionType<*> {
-            return MetadataEnumContext.actionTypeMap.get(p?.getValueAsString())!!
+            return ImplContext.actionTypeMap.get(p?.getValueAsString())!!
         }
     }
 }

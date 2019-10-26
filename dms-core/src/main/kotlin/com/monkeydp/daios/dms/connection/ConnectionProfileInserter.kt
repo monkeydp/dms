@@ -1,8 +1,7 @@
 package com.monkeydp.daios.dms.connection
 
 import com.monkeydp.daios.dms.curd.service.contract.ConnectionProfileService
-import com.monkeydp.daios.dms.sdk.connection.ConnectionProfileMocker.cpMap
-import com.monkeydp.daios.dms.sdk.datasource.Datasource
+import com.monkeydp.daios.dms.sdk.connection.CpMocker.cpMap
 import com.monkeydp.daios.dms.sdk.datasource.Datasource.DsVersion
 import com.monkeydp.daios.dms.sdk.entity.ConnectionProfile
 import org.springframework.beans.factory.annotation.Autowired

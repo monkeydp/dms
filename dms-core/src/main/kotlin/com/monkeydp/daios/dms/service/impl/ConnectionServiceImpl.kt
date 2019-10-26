@@ -44,7 +44,7 @@ internal class ConnectionServiceImpl : ConnectionService {
     private fun getConnectionWrapper(cp: ConnectionProfile): ConnectionWrapper {
         val dmBundle = getDmBundle(cp)
         dmBundle.setSpecificClassLoader(cp.dsVersion)
-        val connection = dmBundle.impls.connectionFactory.getConnection(cp)
+        val connection = dmBundle.impls.connFactory.getConnection(cp)
         dmBundle.removeSpecificClassLoader()
         return ConnectionWrapper(connection)
     }

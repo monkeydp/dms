@@ -3,9 +3,12 @@ package com.monkeydp.daios.dms.sdk.entity
 import com.fasterxml.jackson.annotation.JsonIgnore
 import com.monkeydp.daios.dms.sdk.datasource.Datasource
 import com.monkeydp.daios.dms.sdk.datasource.Datasource.DsVersion
+import com.monkeydp.daios.dms.sdk.dm.ImplContext
+import com.monkeydp.daios.dms.sdk.metadata.form.CpForm
 import com.monkeydp.daios.dms.sdk.useful.UserInput
 import com.monkeydp.daios.dms.sdk.util.IdUtil
 import com.monkeydp.daios.dms.sdk.util.IdUtil.INVALID_ID
+import com.monkeydp.tools.util.ClassUtil
 import io.swagger.annotations.ApiModel
 import io.swagger.annotations.ApiModelProperty
 import javax.persistence.Column
@@ -42,6 +45,7 @@ data class ConnectionProfile(
         val dsDriverClassname: String = "",
 
         @Column(nullable = false, length = 1024)
+        @Convert(converter = UserInput.StringConverter::class)
         @ApiModelProperty(
                 value = "parameters entered by the user",
                 required = true,
@@ -55,5 +59,13 @@ data class ConnectionProfile(
         )
         val userInput: UserInput
 ) : AbstractEntity(id) {
-        fun isValid() = IdUtil.isValid(id) && dsDriverClassname.isNotBlank()
+    
+    val form: CpForm
+        @JsonIgnore
+        get() {
+            val cpFormClass = ImplContext.cpFormClassMap.get(datasource)!!
+            return ClassUtil.newInstance(cpFormClass, userInput)
+        }
+    
+    fun isValid() = IdUtil.isValid(id) && dsDriverClassname.isNotBlank()
 }

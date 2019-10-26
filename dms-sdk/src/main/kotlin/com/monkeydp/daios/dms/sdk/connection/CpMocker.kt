@@ -4,14 +4,16 @@ import com.monkeydp.daios.dms.sdk.datasource.Datasource.DsVersion
 import com.monkeydp.daios.dms.sdk.datasource.Datasource.DsVersion.MYSQL_5_7
 import com.monkeydp.daios.dms.sdk.datasource.Datasource.DsVersion.MYSQL_8_0
 import com.monkeydp.daios.dms.sdk.datasource.Datasource.MYSQL
+import com.monkeydp.daios.dms.sdk.dm.ImplContext
 import com.monkeydp.daios.dms.sdk.entity.ConnectionProfile
+import com.monkeydp.daios.dms.sdk.metadata.form.AbstractCpForm
 import com.monkeydp.daios.dms.sdk.useful.UserInput
 
 /**
  * @author iPotato
  * @date 2019/10/18
  */
-object ConnectionProfileMocker {
+object CpMocker {
 
     val mysql57Cp = ConnectionProfile(
             datasource = MYSQL,
