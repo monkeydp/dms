@@ -18,7 +18,7 @@ object ConnectionProfileMocker {
             dsVersion = MYSQL_5_7,
             dsDriverClassname = "com.mysql.jdbc.Driver",
             userInput = UserInput(mapOf(
-                    "connectionName" to "MySQL 5.7",
+                    "connName" to "MySQL 5.7",
                     "host" to "127.0.0.1",
                     "port" to "3306",
                     "username" to "root",
@@ -31,7 +31,7 @@ object ConnectionProfileMocker {
             dsVersion = MYSQL_8_0,
             dsDriverClassname = "com.mysql.cj.jdbc.Driver",
             userInput = UserInput(mapOf(
-                    "connectionName" to "MySQL 8.0",
+                    "connName" to "MySQL 8.0",
                     "host" to "127.0.0.1",
                     "port" to "3307",
                     "username" to "root",

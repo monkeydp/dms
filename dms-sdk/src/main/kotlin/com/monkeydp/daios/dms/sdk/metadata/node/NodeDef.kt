@@ -7,7 +7,6 @@ import com.monkeydp.daios.dms.sdk.metadata.instruction.target.Target
  * @date 2019/10/25
  */
 interface NodeDef {
-    val target: Target
-    val staticInfo: NodeInfo
+    val info: NodeInfo
     val children: List<NodeDef>
 }

@@ -46,7 +46,7 @@ data class ConnectionProfile(
                 value = "parameters entered by the user",
                 required = true,
                 example = """{
-                        "connectionName": "MySQL 5.7",
+                        "connName": "MySQL 5.7",
                         "host": "127.0.0.1",
                         "port": 3306,
                         "username": "root",

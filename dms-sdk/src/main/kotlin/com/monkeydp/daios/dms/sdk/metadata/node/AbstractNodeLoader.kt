@@ -4,5 +4,4 @@ package com.monkeydp.daios.dms.sdk.metadata.node
  * @author iPotato
  * @date 2019/10/25
  */
-abstract class AbstractNodeLoader {
-}
+abstract class AbstractNodeLoader : NodeLoader
