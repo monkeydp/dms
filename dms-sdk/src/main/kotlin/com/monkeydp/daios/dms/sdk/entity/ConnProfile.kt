@@ -7,7 +7,6 @@ import com.monkeydp.daios.dms.sdk.metadata.form.CpForm
 import com.monkeydp.daios.dms.sdk.useful.UserInput
 import com.monkeydp.daios.dms.sdk.util.IdUtil
 import com.monkeydp.daios.dms.sdk.util.IdUtil.INVALID_ID
-import com.monkeydp.tools.util.ClassUtil
 import io.swagger.annotations.ApiModel
 import io.swagger.annotations.ApiModelProperty
 import javax.persistence.Column
@@ -65,7 +64,7 @@ data class ConnProfile(
         @JsonIgnore
         get() {
             val cpFormClass = DmImplRegistry.getCpFormClass(datasource)
-            return ClassUtil.newInstance(cpFormClass, userInput)
+            return userInput.convertTo(cpFormClass)
         }
     
     @JsonIgnore

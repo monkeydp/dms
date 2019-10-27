@@ -19,9 +19,8 @@ class UserInput() : HashMap<String, String>() {
         FieldUtil.getFields(cpForm).forEach { this[it.name] = FieldUtil.getNotnullValue(cpForm, it) }
     }
     
-    inline fun <reified T> convertTo(): T {
-        return JsonUtil.convertTo<T>(this)
-    }
+    inline fun <reified T> convertTo() = JsonUtil.convertTo<T>(this)
+    fun <T> convertTo(clazz: Class<T>) = JsonUtil.convertTo<T>(this, clazz)
     
     class StringConverter : AttributeConverter<UserInput, String> {
         override fun convertToDatabaseColumn(attribute: UserInput): String = JsonUtil.toString(attribute)

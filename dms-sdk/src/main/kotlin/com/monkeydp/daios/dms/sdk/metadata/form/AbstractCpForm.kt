@@ -12,13 +12,4 @@ abstract class AbstractCpForm(
         override val port: String,
         override val username: String,
         override val password: String
-) : CpForm {
-    // TODO
-    constructor(userInput: UserInput) : this(
-            userInput.get("connName")!!,
-            userInput.get("host")!!,
-            userInput.get("port")!!,
-            userInput.get("username")!!,
-            userInput.get("password")!!
-    )
-}
+) : CpForm
