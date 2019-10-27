@@ -1,6 +1,6 @@
 package com.monkeydp.daios.dms.test.service
 
-import com.monkeydp.daios.dms.sdk.conn.CpMocker.testCp
+import com.monkeydp.daios.dms.dm.DmTestdataRegistry.testCp
 import com.monkeydp.daios.dms.service.contract.ConnService
 import com.monkeydp.daios.dms.test.BaseTest
 import org.junit.Assert
@@ -15,7 +15,6 @@ class ConnServiceTest : BaseTest() {
     
     @Autowired
     private lateinit var service: ConnService
-    
     
     @Test
     public fun saveCpTest() {

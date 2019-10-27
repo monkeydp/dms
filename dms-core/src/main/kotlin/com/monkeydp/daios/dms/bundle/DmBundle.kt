@@ -1,13 +1,14 @@
 package com.monkeydp.daios.dms.bundle
 
+import com.monkeydp.daios.dms.dm.DmTestdataRegistrar
 import com.monkeydp.daios.dms.sdk.conn.ConnFactory
 import com.monkeydp.daios.dms.sdk.datasource.Datasource
-import com.monkeydp.daios.dms.sdk.datasource.Datasource.DsVersion
+import com.monkeydp.daios.dms.sdk.datasource.DsVersion
 import com.monkeydp.daios.dms.sdk.dm.Dm
 import com.monkeydp.daios.dms.sdk.dm.Dm.DsDef
 import com.monkeydp.daios.dms.sdk.dm.Dm.Impl
 import com.monkeydp.daios.dms.sdk.dm.DmImplRegistrar
-import com.monkeydp.tools.util.ClassUtil
+import com.monkeydp.tools.util.FieldUtil
 import com.monkeydp.tools.util.FileUtil
 import java.io.File
 import java.io.FileFilter
@@ -32,7 +33,7 @@ class DmBundle(private val deployDir: File, private val dmClassname: String) {
     val datasource: Datasource
     val apis: Impl.Apis
     
-    private val dsDefMap: Map<DsVersion, DsDef>
+    private val dsDefMap: Map<DsVersion<*>, DsDef>
     
     object Impls {
         lateinit var connFactory: ConnFactory
@@ -45,6 +46,7 @@ class DmBundle(private val deployDir: File, private val dmClassname: String) {
         datasource = dm.datasource
         apis = impl.apis
         DmImplRegistrar.registerAll(impl, datasource)
+        DmTestdataRegistrar.registerAll(dm.testdata)
         dsDefMap = dm.dsDefs.map { it.version to it }.toMap()
         bundleClassLoader.specificClassLoaders = initSpecificClassLoaderMap()
     }
@@ -64,8 +66,8 @@ class DmBundle(private val deployDir: File, private val dmClassname: String) {
         return jars.map { it.toURI().toURL() }.toTypedArray()
     }
     
-    private fun initSpecificClassLoaderMap(): Map<DsVersion, SpecificClassLoader> {
-        val map = mutableMapOf<DsVersion, SpecificClassLoader>()
+    private fun initSpecificClassLoaderMap(): Map<DsVersion<*>, SpecificClassLoader> {
+        val map = mutableMapOf<DsVersion<*>, SpecificClassLoader>()
         dsDefMap.forEach { (dsVersion, _) ->
             val specificLibsUrls = specificLibsUrls(dsVersion)
             val loader = SpecificClassLoader(specificLibsUrls, bundleClassLoader)
@@ -74,7 +76,7 @@ class DmBundle(private val deployDir: File, private val dmClassname: String) {
         return map
     }
     
-    private fun specificLibsUrls(dsVersion: DsVersion): Array<URL> {
+    private fun specificLibsUrls(dsVersion: DsVersion<*>): Array<URL> {
         val libsDir = File(deployDir, "$specificLibsPath/${dsVersion.id}")
         val jars = FileUtil.listFiles(libsDir, FileFilter { file ->
             file.isFile && file.name.endsWith(".jar")
@@ -85,12 +87,12 @@ class DmBundle(private val deployDir: File, private val dmClassname: String) {
     private fun initDm(): Dm {
         @Suppress("UNCHECKED_CAST")
         val dmClass: Class<out Dm> = bundleClassLoader.loadClass(dmClassname) as Class<out Dm>
-        return ClassUtil.newInstance(dmClass)
+        return FieldUtil.getNotnullValue<Dm>(dmClass, FieldUtil.getField(dmClass, "instance"))
     }
     
-    fun getDsDriverClassname(dsVersion: DsVersion) = dsDefMap[dsVersion]?.driver?.classname!!
+    fun getDsDriverClassname(dsVersion: DsVersion<*>) = dsDefMap[dsVersion]?.driver?.classname!!
     
-    fun setSpecificClassLoader(dsVersion: DsVersion) {
+    fun setSpecificClassLoader(dsVersion: DsVersion<*>) {
         bundleClassLoader.setSpecificClassLoader(dsVersion)
     }
     
@@ -99,8 +101,8 @@ class DmBundle(private val deployDir: File, private val dmClassname: String) {
     }
     
     private class BundleClassLoader(urls: Array<URL>, parent: ClassLoader) : URLClassLoader(urls, parent) {
-        
-        lateinit var specificClassLoaders: Map<DsVersion, SpecificClassLoader>
+    
+        lateinit var specificClassLoaders: Map<DsVersion<*>, SpecificClassLoader>
         /**
          * Remember to remove the class loader after you set it,
          * otherwise it may cause a memory leak problem
@@ -115,8 +117,8 @@ class DmBundle(private val deployDir: File, private val dmClassname: String) {
                 loader?.loadClass(name)
             }
         }
-        
-        fun setSpecificClassLoader(dsVersion: DsVersion) {
+    
+        fun setSpecificClassLoader(dsVersion: DsVersion<*>) {
             sclThreadLocal.set(specificClassLoaders[dsVersion])
         }
         

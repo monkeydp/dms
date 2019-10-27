@@ -2,7 +2,8 @@ package com.monkeydp.daios.dms.sdk.dm
 
 import com.monkeydp.daios.dms.sdk.conn.ConnFactory
 import com.monkeydp.daios.dms.sdk.datasource.Datasource
-import com.monkeydp.daios.dms.sdk.datasource.Datasource.DsVersion
+import com.monkeydp.daios.dms.sdk.datasource.DsVersion
+import com.monkeydp.daios.dms.sdk.entity.ConnProfile
 import com.monkeydp.daios.dms.sdk.metadata.form.CpForm
 import com.monkeydp.daios.dms.sdk.metadata.instruction.action.ActionType
 import com.monkeydp.daios.dms.sdk.metadata.instruction.target.TargetType
@@ -15,9 +16,11 @@ import com.monkeydp.daios.dms.sdk.metadata.instruction.target.TargetType
  */
 interface Dm {
     
+    val instance: Dm
     val datasource: Datasource
     val dsDefs: List<DsDef>
     val impl: Impl
+    val testdata: Testdata
     
     interface Impl {
     
@@ -34,6 +37,7 @@ interface Dm {
         }
         
         interface EnumClasses {
+            val dsVersionClass: Class<out DsVersion<*>>
             val actionTypeClass: Class<out ActionType<*>>
             val targetTypeClass: Class<out TargetType<*>>
         }
@@ -43,9 +47,13 @@ interface Dm {
      * Datasource definition
      */
     interface DsDef {
-        val version: DsVersion
+        val version: DsVersion<*>
         val driver: DsDriver
     }
     
     class DsDriver(val id: String, val classname: String)
+    
+    interface Testdata {
+        val cps: List<ConnProfile>
+    }
 }

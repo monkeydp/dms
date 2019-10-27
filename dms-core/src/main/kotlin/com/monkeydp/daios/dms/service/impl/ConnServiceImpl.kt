@@ -30,7 +30,7 @@ internal class ConnServiceImpl : ConnService {
     
     private fun fullCp(cp: ConnProfile): ConnProfile {
         val dmBundle = getDmBundle(cp)
-        val driverClassname = dmBundle.getDsDriverClassname(cp.dsVersion)
+        val driverClassname = dmBundle.getDsDriverClassname(cp.getDsVersion())
         return cp.copy(dsDriverClassname = driverClassname)
     }
     
@@ -43,7 +43,7 @@ internal class ConnServiceImpl : ConnService {
     
     private fun getConnWrapper(cp: ConnProfile): ConnWrapper {
         val dmBundle = getDmBundle(cp)
-        dmBundle.setSpecificClassLoader(cp.dsVersion)
+        dmBundle.setSpecificClassLoader(cp.getDsVersion())
         val conn = dmBundle.apis.connFactory.getConn(cp)
         dmBundle.removeSpecificClassLoader()
         return ConnWrapper(conn)

@@ -1,8 +1,7 @@
 package com.monkeydp.daios.dms.conn
 
 import com.monkeydp.daios.dms.curd.service.contract.ConnProfileService
-import com.monkeydp.daios.dms.sdk.conn.CpMocker.cpMap
-import com.monkeydp.daios.dms.sdk.datasource.Datasource.DsVersion
+import com.monkeydp.daios.dms.dm.DmTestdataRegistry
 import com.monkeydp.daios.dms.sdk.entity.ConnProfile
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.CommandLineRunner
@@ -16,14 +15,15 @@ import org.springframework.stereotype.Component
 class ConnProfileInserter : CommandLineRunner {
     @Autowired
     private lateinit var service: ConnProfileService
-
+    
     override fun run(vararg args: String?) {
-        val savedMap = mutableMapOf<DsVersion, ConnProfile>()
-        cpMap.forEach { _, cp ->
+        val saveds = mutableListOf<ConnProfile>()
+        val cps = DmTestdataRegistry.cps
+        cps.forEach { cp ->
             val saved = service.save(cp)
-            savedMap.put(saved.dsVersion, saved)
+            saveds.add(saved)
         }
-        cpMap.clear()
-        cpMap.putAll(savedMap)
+        cps.clear()
+        cps.addAll(saveds)
     }
 }

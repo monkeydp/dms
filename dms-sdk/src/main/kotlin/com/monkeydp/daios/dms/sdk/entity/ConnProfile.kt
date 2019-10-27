@@ -2,7 +2,6 @@ package com.monkeydp.daios.dms.sdk.entity
 
 import com.fasterxml.jackson.annotation.JsonIgnore
 import com.monkeydp.daios.dms.sdk.datasource.Datasource
-import com.monkeydp.daios.dms.sdk.datasource.Datasource.DsVersion
 import com.monkeydp.daios.dms.sdk.dm.DmImplRegistry
 import com.monkeydp.daios.dms.sdk.metadata.form.CpForm
 import com.monkeydp.daios.dms.sdk.useful.UserInput
@@ -32,10 +31,9 @@ data class ConnProfile(
         val datasource: Datasource,
 
         @Column(nullable = false)
-        @Enumerated(STRING)
-        @ApiModelProperty(value = "datasource version", required = true, example = "MYSQL_5_7")
-        val dsVersion: DsVersion,
-
+        @ApiModelProperty(value = "datasource version id", required = true, example = "5.7")
+        val dsVersionId: String,
+        
         /**
          * @see DsDriver
          */
@@ -59,6 +57,9 @@ data class ConnProfile(
         )
         val userInput: UserInput
 ) : AbstractEntity(id) {
+    
+    @JsonIgnore
+    fun getDsVersion() = DmImplRegistry.getDsVersion(datasource, dsVersionId)
     
     val form: CpForm
         @JsonIgnore

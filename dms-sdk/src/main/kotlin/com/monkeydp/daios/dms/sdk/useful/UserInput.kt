@@ -1,5 +1,7 @@
 package com.monkeydp.daios.dms.sdk.useful
 
+import com.monkeydp.daios.dms.sdk.metadata.form.CpForm
+import com.monkeydp.tools.util.FieldUtil
 import com.monkeydp.tools.util.JsonUtil
 import org.jetbrains.annotations.TestOnly
 import javax.persistence.AttributeConverter
@@ -13,8 +15,8 @@ import javax.persistence.AttributeConverter
 class UserInput() : HashMap<String, String>() {
     
     @TestOnly
-    internal constructor(map: Map<String, String>) : this() {
-        this.putAll(map)
+    constructor(cpForm: CpForm) : this() {
+        FieldUtil.getFields(cpForm).forEach { this[it.name] = FieldUtil.getNotnullValue(cpForm, it) }
     }
     
     inline fun <reified T> convertTo(): T {
