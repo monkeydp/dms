@@ -13,19 +13,17 @@ import com.monkeydp.daios.dms.sdk.metadata.instruction.target.TargetType
 object DmImplRegistry {
     
     private val dsVersions = mutableListOf<DsVersion<*>>()
-    // TODO toList
-    internal val actionTypeMap = mutableMapOf<String, ActionType<*>>()
-    internal val targetTypeMap = mutableMapOf<String, TargetType<*>>()
+    private val actionTypes = mutableListOf<ActionType<*>>()
+    private val targetTypes = mutableListOf<TargetType<*>>()
     
-    internal val cpFormClassMap = mutableMapOf<Datasource, Class<out CpForm>>()
+    private val cpFormClassMap = mutableMapOf<Datasource, Class<out CpForm>>()
     
     internal fun registerEnum(enum: Enum<*>, datasource: Datasource? = null) {
-        val name = enum.name
-        datasource?.checkPrefix(name)
+        datasource?.checkPrefix(enum.name)
         when (enum) {
             is DsVersion<*>  -> dsVersions.add(enum)
-            is ActionType<*> -> actionTypeMap.putIfAbsent(name, enum)
-            is TargetType<*> -> targetTypeMap.putIfAbsent(name, enum)
+            is ActionType<*> -> actionTypes.add(enum)
+            is TargetType<*> -> targetTypes.add(enum)
         }
     }
     
@@ -36,4 +34,9 @@ object DmImplRegistry {
     
     fun getDsVersion(datasource: Datasource, dsVersionId: String) =
             dsVersions.first { it.datasource == datasource && it.id == dsVersionId }
+    
+    fun getActionType(enumName: String) = actionTypes.first { it.asEnum().name == enumName }
+    fun getTargetType(enumName: String) = targetTypes.first { it.asEnum().name == enumName }
+    
+    fun getCpFormClass(datasource: Datasource) = cpFormClassMap.get(datasource)!!
 }

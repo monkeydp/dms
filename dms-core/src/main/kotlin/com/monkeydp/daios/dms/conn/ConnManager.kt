@@ -26,6 +26,7 @@ class ConnManager {
     }
     
     fun activateCp(cp: ConnProfile): ConnManager {
+        if (activeCpwMap.contains(cp.id)) return this
         val cpw = ConnProfileWrapper(cp)
         activeCpwMap.putIfAbsent(cpw.cpId, cpw)
         return this
@@ -51,11 +52,13 @@ class ConnManager {
     
     fun getActiveCw(cpId: Long, connId: Long) = getActiveCw(cpId, connId, false)!!
     
-    fun getActiveCw(cpId: Long, connId: Long, ignoreNotFound: Boolean) = getActiveCpw(cpId, ignoreNotFound)?.getActiveCw(connId, ignoreNotFound)
+    fun getActiveCw(cpId: Long, connId: Long, ignoreNotFound: Boolean) =
+            getActiveCpw(cpId, ignoreNotFound)?.getActiveCw(connId, ignoreNotFound)
     
     fun getActiveUserCw(cpId: Long) = getActiveUserCw(cpId, false)!!
     
-    fun getActiveUserCw(cpId: Long, ignoreNotFound: Boolean) = getActiveCpw(cpId, ignoreNotFound)?.getActiveUserCw(ignoreNotFound)
+    fun getActiveUserCw(cpId: Long, ignoreNotFound: Boolean) =
+            getActiveCpw(cpId, ignoreNotFound)?.getActiveUserCw(ignoreNotFound)
     
     fun inactivateCp(cpId: Long) {
         inactivateCpw(cpId)
@@ -145,8 +148,10 @@ class ConnManager {
         fun getActiveUserCw() = getActiveUserCw(false)!!
         
         fun getActiveUserCw(ignoreNotFound: Boolean): ConnWrapper? {
-            if (!hasActiveUserConn() && !ignoreNotFound) ierror("Active user conn is not exist!")
-            return getActiveCw(activeUserConnId)
+            return if (!hasActiveUserConn()) {
+                if (!ignoreNotFound) ierror("Active user conn is not exist!")
+                null
+            } else getActiveCw(activeUserConnId, ignoreNotFound)
         }
     
         fun inactivateCw(connId: Long) {

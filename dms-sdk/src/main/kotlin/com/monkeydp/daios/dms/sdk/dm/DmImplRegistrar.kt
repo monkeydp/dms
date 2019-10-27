@@ -12,30 +12,31 @@ import com.monkeydp.tools.util.FieldUtil
  */
 object DmImplRegistrar {
     
+    private val globalEnumClasses = listOf<Class<out Enum<*>>>(
+            GlobalActionType::class.java,
+            GlobalTargetType::class.java
+    )
+    
     fun registerAll(impl: Impl, datasource: Datasource) {
-        registerAllClasses(impl.classes, datasource)
-        registerAllEnums(impl.enumClasses, datasource)
+        registerClasses(impl.classes, datasource)
+        registerEnums(impl.enumClasses, datasource)
     }
     
-    private fun registerAllClasses(implClasses: Impl.Classes, datasource: Datasource) {
+    private fun registerClasses(implClasses: Impl.Classes, datasource: Datasource) {
         val classes = FieldUtil.getNotnullValues<Class<*>>(implClasses)
         classes.forEach { clazz -> DmImplRegistry.registerClass(clazz, datasource) }
     }
     
-    private fun registerAllEnums(implEnumClasses: Impl.EnumClasses, datasource: Datasource) {
-        registerAllGlobalEnums()
-        registerAllLocalEnums(implEnumClasses, datasource)
+    private fun registerEnums(implEnumClasses: Impl.EnumClasses, datasource: Datasource) {
+        registerGlobalEnums(globalEnumClasses)
+        registerLocalEnums(implEnumClasses, datasource)
     }
     
-    private fun registerAllGlobalEnums() {
-        val enumClasses = listOf<Class<out Enum<*>>>(
-                GlobalActionType::class.java,
-                GlobalTargetType::class.java
-        )
+    private fun registerGlobalEnums(enumClasses: List<Class<out Enum<*>>>) {
         enumClasses.forEach { it.enumConstants.forEach { e -> DmImplRegistry.registerEnum(e) } }
     }
     
-    private fun registerAllLocalEnums(implEnumClasses: Impl.EnumClasses, datasource: Datasource) {
+    private fun registerLocalEnums(implEnumClasses: Impl.EnumClasses, datasource: Datasource) {
         @Suppress("UNCHECKED_CAST")
         val enumClasses = FieldUtil.getNotnullValues<Class<*>>(implEnumClasses) as List<Class<Enum<*>>>
         enumClasses.forEach { it.enumConstants.forEach { e -> DmImplRegistry.registerEnum(e, datasource) } }

@@ -64,7 +64,7 @@ data class ConnProfile(
     val form: CpForm
         @JsonIgnore
         get() {
-            val cpFormClass = DmImplRegistry.cpFormClassMap.get(datasource)!!
+            val cpFormClass = DmImplRegistry.getCpFormClass(datasource)
             return ClassUtil.newInstance(cpFormClass, userInput)
         }
     

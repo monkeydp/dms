@@ -35,7 +35,7 @@ internal class ConnServiceImpl : ConnService {
     }
     
     override fun openConn(cpId: Long): ConnWrapper {
-        val cp = cpService.findById(cpId)
+        val cp = manager.getActiveCp(cpId, true) ?: cpService.findById(cpId)
         val cw = getConnWrapper(cp)
         manager.activateCp(cp).activateCw(cw)
         return cw
