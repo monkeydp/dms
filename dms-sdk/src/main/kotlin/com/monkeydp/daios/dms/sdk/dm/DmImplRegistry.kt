@@ -9,26 +9,24 @@ import com.monkeydp.daios.dms.sdk.metadata.instruction.target.TargetType
  * @author iPotato
  * @date 2019/10/25
  */
-object ImplContext {
+internal object DmImplRegistry {
     
     val actionTypeMap = mutableMapOf<String, ActionType<*>>()
     val targetTypeMap = mutableMapOf<String, TargetType<*>>()
     
     val cpFormClassMap = mutableMapOf<Datasource, Class<out CpForm>>()
     
-    fun registerEnum(actionType: ActionType<*>, datasource: Datasource? = null) {
-        val name = actionType.asEnum().name
+    fun registerEnum(enum: Enum<*>, datasource: Datasource? = null) {
+        val name = enum.name
         datasource?.checkPrefix(name)
-        actionTypeMap.putIfAbsent(name, actionType)
+        when (enum) {
+            is ActionType<*> -> actionTypeMap.putIfAbsent(name, enum)
+            is TargetType<*> -> targetTypeMap.putIfAbsent(name, enum)
+        }
     }
     
-    fun registerEnum(targetType: TargetType<*>, datasource: Datasource? = null) {
-        val name = targetType.asEnum().name
-        datasource?.checkPrefix(name)
-        targetTypeMap.putIfAbsent(name, targetType)
-    }
-    
-    fun registerDataClass(cpFormClass: Class<out CpForm>, datasource: Datasource) {
-        cpFormClassMap.putIfAbsent(datasource, cpFormClass)
+    @Suppress("UNCHECKED_CAST")
+    fun registerClass(clazz: Class<*>, datasource: Datasource) {
+        if (CpForm::class.java.isAssignableFrom(clazz)) cpFormClassMap.putIfAbsent(datasource, clazz as Class<CpForm>)
     }
 }

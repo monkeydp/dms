@@ -5,10 +5,8 @@ import com.monkeydp.daios.dms.sdk.datasource.Datasource
 import com.monkeydp.daios.dms.sdk.datasource.Datasource.DsVersion
 import com.monkeydp.daios.dms.sdk.dm.Dm
 import com.monkeydp.daios.dms.sdk.dm.Dm.DsDef
-import com.monkeydp.daios.dms.sdk.dm.ImplContext.registerDataClass
-import com.monkeydp.daios.dms.sdk.dm.ImplContext.registerEnum
-import com.monkeydp.daios.dms.sdk.metadata.instruction.action.GlobalActionType
-import com.monkeydp.daios.dms.sdk.metadata.instruction.target.GlobalTargetType
+import com.monkeydp.daios.dms.sdk.dm.Dm.Impl
+import com.monkeydp.daios.dms.sdk.dm.DmImplRegistrar
 import com.monkeydp.tools.util.ClassUtil
 import com.monkeydp.tools.util.FileUtil
 import java.io.File
@@ -30,7 +28,9 @@ class DmBundle(private val deployDir: File, private val dmClassname: String) {
     
     private val bundleClassLoader: BundleClassLoader
     private val dm: Dm
-    val apis: Dm.Impl.Apis
+    private val impl: Impl
+    val datasource: Datasource
+    val apis: Impl.Apis
     
     private val dsDefMap: Map<DsVersion, DsDef>
     
@@ -41,14 +41,13 @@ class DmBundle(private val deployDir: File, private val dmClassname: String) {
     init {
         bundleClassLoader = initBundleClassLoader()
         dm = initDm()
-        apis = dm.impl.apis
-        registerAllEnums()
-        registerAllDataClass()
+        impl = dm.impl
+        datasource = dm.datasource
+        apis = impl.apis
+        DmImplRegistrar.registerAll(impl, datasource)
         dsDefMap = dm.dsDefs.map { it.version to it }.toMap()
         bundleClassLoader.specificClassLoaders = initSpecificClassLoaderMap()
     }
-    
-    val datasource: Datasource = dm.datasource
     
     private fun initBundleClassLoader(): BundleClassLoader {
         val classesUrl = File(deployDir, classesPath).toURI().toURL()
@@ -87,30 +86,6 @@ class DmBundle(private val deployDir: File, private val dmClassname: String) {
         @Suppress("UNCHECKED_CAST")
         val dmClass: Class<out Dm> = bundleClassLoader.loadClass(dmClassname) as Class<out Dm>
         return ClassUtil.newInstance(dmClass)
-    }
-    
-    private fun registerAllEnums() {
-        registerAllGlobalEnums()
-        registerAllLocalEnums()
-    }
-    
-    private fun registerAllGlobalEnums() {
-        GlobalActionType.values().forEach { registerEnum(it) }
-        GlobalTargetType.values().forEach { registerEnum(it) }
-    }
-    
-    @Suppress("UNCHECKED_CAST")
-    private fun registerAllLocalEnums() {
-        val classes = dm.impl.enumClasses
-        val datasource = dm.datasource
-        classes.actionTypeClass.enumConstants.forEach { registerEnum(it, datasource) }
-        classes.targetTypeClass.enumConstants.forEach { registerEnum(it, datasource) }
-    }
-    
-    @Suppress("UNCHECKED_CAST")
-    private fun registerAllDataClass() {
-        val classes = dm.impl.dataClasses
-        registerDataClass(classes.cpFormClass, dm.datasource)
     }
     
     fun getDsDriverClassname(dsVersion: DsVersion) = dsDefMap[dsVersion]?.driver?.classname!!

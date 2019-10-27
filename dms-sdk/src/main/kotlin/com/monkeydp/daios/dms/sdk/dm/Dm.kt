@@ -22,20 +22,20 @@ interface Dm {
     interface Impl {
     
         val apis: Apis
+        val classes: Classes
         val enumClasses: EnumClasses
-        val dataClasses: DataClasses
     
         interface Apis {
             val connFactory: ConnFactory
         }
     
+        interface Classes {
+            val cpFormClass: Class<out CpForm>
+        }
+        
         interface EnumClasses {
             val actionTypeClass: Class<out ActionType<*>>
             val targetTypeClass: Class<out TargetType<*>>
-        }
-    
-        interface DataClasses {
-            val cpFormClass: Class<out CpForm>
         }
     }
     

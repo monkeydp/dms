@@ -3,7 +3,7 @@ package com.monkeydp.daios.dms.sdk.entity
 import com.fasterxml.jackson.annotation.JsonIgnore
 import com.monkeydp.daios.dms.sdk.datasource.Datasource
 import com.monkeydp.daios.dms.sdk.datasource.Datasource.DsVersion
-import com.monkeydp.daios.dms.sdk.dm.ImplContext
+import com.monkeydp.daios.dms.sdk.dm.DmImplRegistry
 import com.monkeydp.daios.dms.sdk.metadata.form.CpForm
 import com.monkeydp.daios.dms.sdk.useful.UserInput
 import com.monkeydp.daios.dms.sdk.util.IdUtil
@@ -63,9 +63,10 @@ data class ConnProfile(
     val form: CpForm
         @JsonIgnore
         get() {
-            val cpFormClass = ImplContext.cpFormClassMap.get(datasource)!!
+            val cpFormClass = DmImplRegistry.cpFormClassMap.get(datasource)!!
             return ClassUtil.newInstance(cpFormClass, userInput)
         }
     
+    @JsonIgnore
     fun isValid() = IdUtil.isValid(id) && dsDriverClassname.isNotBlank()
 }
