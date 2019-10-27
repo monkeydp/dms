@@ -6,9 +6,9 @@ import org.junit.Test
  * @author iPotato
  * @date 2019/10/7
  */
-class MainTest {
+class SdkMainTest {
     @Test
     fun test() {
-
+    
     }
 }

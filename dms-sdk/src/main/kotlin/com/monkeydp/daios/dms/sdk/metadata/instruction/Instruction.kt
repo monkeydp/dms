@@ -1,9 +1,7 @@
 package com.monkeydp.daios.dms.sdk.metadata.instruction
 
 import com.monkeydp.daios.dms.sdk.metadata.instruction.action.Action
-import com.monkeydp.daios.dms.sdk.metadata.instruction.action.ActionType
 import com.monkeydp.daios.dms.sdk.metadata.instruction.target.Target
-import com.monkeydp.daios.dms.sdk.metadata.instruction.target.TargetType
 
 /**
  * Instruction = Action + Target
@@ -13,9 +11,9 @@ import com.monkeydp.daios.dms.sdk.metadata.instruction.target.TargetType
  */
 interface Instruction {
     
-    val action: Action
-    val target: Target
+    val action: Action<*>
+    val target: Target<*>
     
-    fun isInstruction(actionType: ActionType<*>, targetType: TargetType<*>) =
-            actionType == action.type && targetType == target.type
+    fun isInstruction(action: Action<*>, target: Target<*>) =
+            action == this.action && target == this.target
 }

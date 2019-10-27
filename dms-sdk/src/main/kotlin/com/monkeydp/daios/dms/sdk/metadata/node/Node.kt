@@ -1,7 +1,7 @@
 package com.monkeydp.daios.dms.sdk.metadata.node
 
+import com.monkeydp.daios.dms.sdk.metadata.icon.Icon
 import com.monkeydp.daios.dms.sdk.metadata.instruction.target.Target
-import javax.swing.Icon
 
 /**
  * @author iPotato
@@ -9,7 +9,7 @@ import javax.swing.Icon
  */
 interface Node {
     val def: NodeDef
-    val target: Target
+    val target: Target<*>
     val name: String
-    val icon: Icon
+    val icon: Icon<*>
 }

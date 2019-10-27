@@ -82,4 +82,6 @@ def | Definition
 err | error
 &nbsp;|
 **# M** |
+Instr | instruction
+**# M** |
 msg | message

@@ -1,6 +1,7 @@
-package com.monkeydp.daios.dms.sdk.metadata.node
+package com.monkeydp.daios.dms.sdk.metadata.node.impl
 
 import com.monkeydp.daios.dms.sdk.entity.ConnProfile
+import com.monkeydp.daios.dms.sdk.metadata.node.NodeDef
 
 /**
  * @author iPotato

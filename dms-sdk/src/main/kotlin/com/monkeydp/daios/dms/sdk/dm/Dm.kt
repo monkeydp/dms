@@ -5,8 +5,8 @@ import com.monkeydp.daios.dms.sdk.datasource.Datasource
 import com.monkeydp.daios.dms.sdk.datasource.DsVersion
 import com.monkeydp.daios.dms.sdk.entity.ConnProfile
 import com.monkeydp.daios.dms.sdk.metadata.form.CpForm
-import com.monkeydp.daios.dms.sdk.metadata.instruction.action.ActionType
-import com.monkeydp.daios.dms.sdk.metadata.instruction.target.TargetType
+import com.monkeydp.daios.dms.sdk.metadata.instruction.action.Action
+import com.monkeydp.daios.dms.sdk.metadata.instruction.target.Target
 
 /**
  * Datasource module
@@ -37,8 +37,8 @@ interface Dm {
         
         interface EnumClasses {
             val dsVersionClass: Class<out DsVersion<*>>
-            val actionTypeClass: Class<out ActionType<*>>
-            val targetTypeClass: Class<out TargetType<*>>
+            val actionClass: Class<out Action<*>>
+            val targetClass: Class<out Target<*>>
         }
     }
     
