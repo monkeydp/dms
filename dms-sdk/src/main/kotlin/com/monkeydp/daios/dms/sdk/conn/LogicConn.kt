@@ -1,29 +1,29 @@
-package com.monkeydp.daios.dms.sdk.connection
+package com.monkeydp.daios.dms.sdk.conn
 
 /**
  * @author iPotato
  * @date 2019/10/21
  */
-interface LogicConnection : AutoCloseable {
+interface LogicConn : AutoCloseable {
     
     /**
-     * Raw connection of database
+     * Raw conn of database
      */
-    val rawConnection: Any
+    val rawConn: Any
     
     /**
-     * Is connection valid
+     * Is conn valid
      * @param timeout second
      */
     fun isValid(timeout: Int): Boolean
     
     /**
-     * Close connection
+     * Close conn
      */
     override fun close()
     
     /**
-     * Is connection closed
+     * Is conn closed
      */
     fun isClosed(): Boolean
 }

@@ -1,7 +1,7 @@
 package com.monkeydp.daios.dms.test.service
 
-import com.monkeydp.daios.dms.sdk.connection.CpMocker.testCp
-import com.monkeydp.daios.dms.service.contract.ConnectionService
+import com.monkeydp.daios.dms.sdk.conn.CpMocker.testCp
+import com.monkeydp.daios.dms.service.contract.ConnService
 import com.monkeydp.daios.dms.test.BaseTest
 import org.junit.Assert
 import org.junit.Test
@@ -11,10 +11,10 @@ import org.springframework.beans.factory.annotation.Autowired
  * @author iPotato
  * @date 2019/10/18
  */
-class ConnectionServiceTest : BaseTest() {
+class ConnServiceTest : BaseTest() {
     
     @Autowired
-    private lateinit var service: ConnectionService
+    private lateinit var service: ConnService
     
     
     @Test
@@ -25,20 +25,20 @@ class ConnectionServiceTest : BaseTest() {
     
     /**
      * test for following method
-     * @see ConnectionService.openConn
-     * @see ConnectionService.closeConn
+     * @see ConnService.openConn
+     * @see ConnService.closeConn
      */
     @Test
     public fun connTest() {
-        val wrapper = service.openConn(testCp().id)
-        val connection = wrapper.connection
-        
-        Assert.assertTrue(connection.isValid())
-        Assert.assertFalse(connection.isClosed())
+        val cw = service.openConn(testCp().id)
+        val conn = cw.conn
+    
+        Assert.assertTrue(conn.isValid())
+        Assert.assertFalse(conn.isClosed())
         
         service.closeConn(testCp().id)
-        Assert.assertFalse(connection.isValid())
-        Assert.assertTrue(connection.isClosed())
+        Assert.assertFalse(conn.isValid())
+        Assert.assertTrue(conn.isClosed())
     }
     
     @Test

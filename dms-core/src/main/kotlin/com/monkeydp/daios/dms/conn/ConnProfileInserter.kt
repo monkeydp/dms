@@ -1,9 +1,9 @@
-package com.monkeydp.daios.dms.connection
+package com.monkeydp.daios.dms.conn
 
-import com.monkeydp.daios.dms.curd.service.contract.ConnectionProfileService
-import com.monkeydp.daios.dms.sdk.connection.CpMocker.cpMap
+import com.monkeydp.daios.dms.curd.service.contract.ConnProfileService
+import com.monkeydp.daios.dms.sdk.conn.CpMocker.cpMap
 import com.monkeydp.daios.dms.sdk.datasource.Datasource.DsVersion
-import com.monkeydp.daios.dms.sdk.entity.ConnectionProfile
+import com.monkeydp.daios.dms.sdk.entity.ConnProfile
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.CommandLineRunner
 import org.springframework.stereotype.Component
@@ -13,12 +13,12 @@ import org.springframework.stereotype.Component
  * @date 2019/10/24
  */
 @Component
-class ConnectionProfileInserter : CommandLineRunner {
+class ConnProfileInserter : CommandLineRunner {
     @Autowired
-    private lateinit var service: ConnectionProfileService
+    private lateinit var service: ConnProfileService
 
     override fun run(vararg args: String?) {
-        val savedMap = mutableMapOf<DsVersion, ConnectionProfile>()
+        val savedMap = mutableMapOf<DsVersion, ConnProfile>()
         cpMap.forEach { _, cp ->
             val saved = service.save(cp)
             savedMap.put(saved.dsVersion, saved)

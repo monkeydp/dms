@@ -1,7 +1,7 @@
 package com.monkeydp.daios.dms.sdk.metadata.node
 
 import com.fasterxml.jackson.annotation.JsonIgnore
-import com.monkeydp.daios.dms.sdk.connection.Connection
+import com.monkeydp.daios.dms.sdk.conn.Conn
 
 /**
  * @author iPotato
@@ -10,6 +10,6 @@ import com.monkeydp.daios.dms.sdk.connection.Connection
 data class NodeLoadContext(
         val cpId: Long,
         @JsonIgnore
-        var connection: Connection,
+        var conn: Conn,
         val nodePath: NodePath
 )

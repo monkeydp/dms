@@ -23,7 +23,7 @@ import javax.persistence.Enumerated
  */
 @Entity
 @ApiModel
-data class ConnectionProfile(
+data class ConnProfile(
         override val id: Long = INVALID_ID,
 
         @Column(nullable = false)

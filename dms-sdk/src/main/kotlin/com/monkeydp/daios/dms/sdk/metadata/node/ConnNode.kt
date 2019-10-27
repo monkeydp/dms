@@ -1,6 +1,6 @@
 package com.monkeydp.daios.dms.sdk.metadata.node
 
-import com.monkeydp.daios.dms.sdk.entity.ConnectionProfile
+import com.monkeydp.daios.dms.sdk.entity.ConnProfile
 
 /**
  * @author iPotato
@@ -8,7 +8,7 @@ import com.monkeydp.daios.dms.sdk.entity.ConnectionProfile
  */
 data class ConnNode(
         override val def: NodeDef,
-        val cp: ConnectionProfile
+        val cp: ConnProfile
 ) : AbstractNode(def) {
     override val name = cp.form.connName
 }

@@ -1,6 +1,6 @@
 package com.monkeydp.daios.dms.bundle
 
-import com.monkeydp.daios.dms.sdk.connection.ConnFactory
+import com.monkeydp.daios.dms.sdk.conn.ConnFactory
 import com.monkeydp.daios.dms.sdk.datasource.Datasource
 import com.monkeydp.daios.dms.sdk.datasource.Datasource.DsVersion
 import com.monkeydp.daios.dms.sdk.dm.Dm

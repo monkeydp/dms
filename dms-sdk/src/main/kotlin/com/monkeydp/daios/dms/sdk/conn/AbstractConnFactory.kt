@@ -1,4 +1,4 @@
-package com.monkeydp.daios.dms.sdk.connection
+package com.monkeydp.daios.dms.sdk.conn
 
 /**
  * @author iPotato
