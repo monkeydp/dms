@@ -1,7 +1,11 @@
 package com.monkeydp.daios.dms.sdk.dm
 
+import com.monkeydp.daios.dms.sdk.connection.ConnFactory
 import com.monkeydp.daios.dms.sdk.datasource.Datasource
 import com.monkeydp.daios.dms.sdk.datasource.Datasource.DsVersion
+import com.monkeydp.daios.dms.sdk.metadata.form.CpForm
+import com.monkeydp.daios.dms.sdk.metadata.instruction.action.ActionType
+import com.monkeydp.daios.dms.sdk.metadata.instruction.target.TargetType
 
 /**
  * Datasource module
@@ -16,31 +20,22 @@ interface Dm {
     val impl: Impl
     
     interface Impl {
-        
-        val apiClassnames: ApiClassnames
-        val enumClassnames: EnumClassnames
-        val dataClassnames: DataClassnames
-        
-        /**
-         * Implementation api classnames of all sdk required contract
-         */
-        interface ApiClassnames {
-            val connFactory: String
+    
+        val apis: Apis
+        val enumClasses: EnumClasses
+        val dataClasses: DataClasses
+    
+        interface Apis {
+            val connFactory: ConnFactory
         }
-        
-        /**
-         * Implementation enum classnames
-         */
-        interface EnumClassnames {
-            val actionType: String
-            val targetType: String
+    
+        interface EnumClasses {
+            val actionTypeClass: Class<out ActionType<*>>
+            val targetTypeClass: Class<out TargetType<*>>
         }
-        
-        /**
-         * Implementation data classnames
-         */
-        interface DataClassnames {
-            val cpForm: String
+    
+        interface DataClasses {
+            val cpFormClass: Class<out CpForm>
         }
     }
     
