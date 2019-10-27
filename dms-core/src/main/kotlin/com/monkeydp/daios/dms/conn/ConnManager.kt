@@ -2,6 +2,7 @@ package com.monkeydp.daios.dms.conn
 
 import com.monkeydp.daios.dms.sdk.entity.ConnProfile
 import com.monkeydp.daios.dms.sdk.util.IdUtil
+import com.monkeydp.daios.dms.sdk.util.IdUtil.INVALID_ID
 import com.monkeydp.tools.exception.inner.AbstractInnerException
 import com.monkeydp.tools.ierror
 import org.springframework.stereotype.Component
@@ -27,9 +28,18 @@ class ConnManager {
     
     fun activateCp(cp: ConnProfile): ConnManager {
         if (activeCpwMap.contains(cp.id)) return this
+        activateCpw(cp)
+        return this
+    }
+    
+    private fun activateCpw(cp: ConnProfile) {
         val cpw = ConnProfileWrapper(cp)
         activeCpwMap.putIfAbsent(cpw.cpId, cpw)
-        return this
+    }
+    
+    fun updateActiveCp(cp: ConnProfile) {
+        val cpw = getActiveCpw(cp.id, true) ?: return
+        activeCpwMap[cp.id] = cpw.copy(cp = cp)
     }
     
     fun activateCw(cw: ConnWrapper): ConnManager {
@@ -94,22 +104,17 @@ class ConnManager {
         activeCpw.inactivateAllCw()
     }
     
-    private class ConnProfileWrapper(val cp: ConnProfile) {
-        
+    private data class ConnProfileWrapper(
+            val cp: ConnProfile,
+            /**
+             * @see ConnWrapper.connId
+             */
+            private val activeCwMap: MutableMap<Long, ConnWrapper> = mutableMapOf(),
+            private var activeUserConnId: Long = INVALID_ID
+    ) {
         val cpId: Long = cp.id
-    
-        private companion object {
-            const val INVALID_CONN_ID = IdUtil.INVALID_ID
-        }
-    
-        private var activeUserConnId: Long = INVALID_CONN_ID
-    
-        fun hasActiveUserConn() = IdUtil.isValid(activeUserConnId)
         
-        /**
-         * @see ConnWrapper.connId
-         */
-        private val activeCwMap = mutableMapOf<Long, ConnWrapper>()
+        private fun hasActiveUserConn() = IdUtil.isValid(activeUserConnId)
         
         private fun checkBelongsToUser(cw: ConnWrapper) {
             if (!cw.belongsToUser()) ierror("Conn must belongs to user!")
@@ -123,7 +128,7 @@ class ConnManager {
             if (cw.belongsToUser()) activateUserCw(cw)
             else activeOtherCw(cw)
         }
-    
+        
         @Synchronized
         private fun activateUserCw(cw: ConnWrapper) {
             checkBelongsToUser(cw)
@@ -136,7 +141,7 @@ class ConnManager {
             checkNotBelongsToUser(cw)
             activeCwMap.putIfAbsent(cw.connId, cw)
         }
-    
+        
         fun getActiveCw(connId: Long) = getActiveCw(connId, false)!!
         
         fun getActiveCw(connId: Long, ignoreNotFound: Boolean): ConnWrapper? {
@@ -144,7 +149,7 @@ class ConnManager {
             if (cw == null && !ignoreNotFound) throw ActiveCwNotFoundException(connId)
             return cw
         }
-    
+        
         fun getActiveUserCw() = getActiveUserCw(false)!!
         
         fun getActiveUserCw(ignoreNotFound: Boolean): ConnWrapper? {
@@ -153,7 +158,7 @@ class ConnManager {
                 null
             } else getActiveCw(activeUserConnId, ignoreNotFound)
         }
-    
+        
         fun inactivateCw(connId: Long) {
             var activeCw = getActiveCw(connId, true) ?: return
             inactivateCw(activeCw)
@@ -186,11 +191,11 @@ class ConnManager {
             activeCwMap.clear()
             resetActiveUserConnId()
         }
-    
+        
         private fun resetActiveUserConnId() {
-            activeUserConnId = INVALID_CONN_ID
+            activeUserConnId = INVALID_ID
         }
-    
+        
         class ActiveCwNotFoundException : AbstractInnerException {
             constructor(connId: Long) : super("The active conn wrapper corresponding to connId ${connId} not found")
         }

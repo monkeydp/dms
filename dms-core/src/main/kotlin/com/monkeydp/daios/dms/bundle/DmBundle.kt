@@ -8,7 +8,6 @@ import com.monkeydp.daios.dms.sdk.dm.Dm
 import com.monkeydp.daios.dms.sdk.dm.Dm.DsDef
 import com.monkeydp.daios.dms.sdk.dm.Dm.Impl
 import com.monkeydp.daios.dms.sdk.dm.DmImplRegistrar
-import com.monkeydp.tools.util.FieldUtil
 import com.monkeydp.tools.util.FileUtil
 import java.io.File
 import java.io.FileFilter
@@ -87,7 +86,7 @@ class DmBundle(private val deployDir: File, private val dmClassname: String) {
     private fun initDm(): Dm {
         @Suppress("UNCHECKED_CAST")
         val dmClass: Class<out Dm> = bundleClassLoader.loadClass(dmClassname) as Class<out Dm>
-        return FieldUtil.getNotnullValue<Dm>(dmClass, FieldUtil.getField(dmClass, "instance"))
+        return dmClass.fields.first { it.name == "INSTANCE" }.get(dmClass) as Dm
     }
     
     fun getDsDriverClassname(dsVersion: DsVersion<*>) = dsDefMap[dsVersion]?.driver?.classname!!

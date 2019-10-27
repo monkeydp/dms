@@ -26,7 +26,12 @@ internal class ConnServiceImpl : ConnService {
     
     private fun getDmBundle(cp: ConnProfile) = moduleRegistry.getDmBundle(cp.datasource)
     
-    override fun saveCp(cp: ConnProfile) = cpService.save(fullCp(cp))
+    override fun saveCp(cp: ConnProfile): ConnProfile {
+        val saved = cpService.save(fullCp(cp))
+        // TODO should be delegated to listener
+        manager.updateActiveCp(saved)
+        return saved
+    }
     
     private fun fullCp(cp: ConnProfile): ConnProfile {
         val dmBundle = getDmBundle(cp)
@@ -35,11 +40,16 @@ internal class ConnServiceImpl : ConnService {
     }
     
     override fun openConn(cpId: Long): ConnWrapper {
-        val cp = manager.getActiveCp(cpId, true) ?: cpService.findById(cpId)
+        val activeUserCw = manager.getActiveUserCw(cpId, true)
+        if (activeUserCw != null) return activeUserCw
+    
+        val cp = getCp(cpId)
         val cw = getConnWrapper(cp)
         manager.activateCp(cp).activateCw(cw)
         return cw
     }
+    
+    private fun getCp(cpId: Long) = manager.getActiveCp(cpId, true) ?: cpService.findById(cpId)
     
     private fun getConnWrapper(cp: ConnProfile): ConnWrapper {
         val dmBundle = getDmBundle(cp)
@@ -52,7 +62,7 @@ internal class ConnServiceImpl : ConnService {
     override fun closeConn(cpId: Long) = manager.inactivateUserCw(cpId, true)
     
     override fun testConn(cpId: Long) {
-        val cp = cpService.findById(cpId)
+        val cp = getCp(cpId)
         testConn(cp)
     }
     

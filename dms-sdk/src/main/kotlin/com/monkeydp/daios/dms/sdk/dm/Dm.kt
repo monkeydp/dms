@@ -16,7 +16,6 @@ import com.monkeydp.daios.dms.sdk.metadata.instruction.target.TargetType
  */
 interface Dm {
     
-    val instance: Dm
     val datasource: Datasource
     val dsDefs: List<DsDef>
     val impl: Impl
