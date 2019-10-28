@@ -22,5 +22,5 @@ class ModuleRegistry {
     
     fun getDmBundle(cp: ConnProfile) = getDmBundle(cp.datasource)
     
-    fun getConnNodeDef(datasource: Datasource) = getDmBundle(datasource).connNodeDef
+    fun getConnNodeDef(datasource: Datasource) = getDmBundle(datasource).connNd
 }

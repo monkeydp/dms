@@ -13,8 +13,10 @@ enum class GlobalIcon(
     CONN_ICON("conn_icon", ""),
     DB_ICON("db_icon", ""),
     TABLE_ICON("table_icon", ""),
+    VIEW_ICON("view_icon", ""),
     
     GROUP_ICON("default_group_icon", ""),
     DB_GROUP_ICON("db_group_icon", ""),
-    TABLE_GROUP_ICON("group_icon", ""),
+    TABLE_GROUP_ICON("table_group_icon", ""),
+    VIEW_GROUP_ICON("view_group_icon", ""),
 }

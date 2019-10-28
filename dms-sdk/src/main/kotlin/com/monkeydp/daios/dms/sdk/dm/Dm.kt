@@ -6,9 +6,10 @@ import com.monkeydp.daios.dms.sdk.datasource.DsDriver
 import com.monkeydp.daios.dms.sdk.datasource.DsVersion
 import com.monkeydp.daios.dms.sdk.entity.ConnProfile
 import com.monkeydp.daios.dms.sdk.metadata.form.CpForm
+import com.monkeydp.daios.dms.sdk.metadata.icon.Icon
 import com.monkeydp.daios.dms.sdk.metadata.instruction.action.Action
 import com.monkeydp.daios.dms.sdk.metadata.instruction.target.Target
-import com.monkeydp.daios.dms.sdk.metadata.node.def.ConnNodeDef
+import com.monkeydp.daios.dms.sdk.metadata.node.def.ConnNd
 
 /**
  * Datasource module
@@ -19,7 +20,7 @@ import com.monkeydp.daios.dms.sdk.metadata.node.def.ConnNodeDef
 interface Dm {
     
     val datasource: Datasource
-    val connNodeDef: ConnNodeDef
+    val connNd: ConnNd
     val dsDefs: List<DsDef>
     val impl: Impl
     val testdata: Testdata
@@ -42,6 +43,7 @@ interface Dm {
             val dsVersionClass: Class<out DsVersion<*>>
             val actionClass: Class<out Action<*>>
             val targetClass: Class<out Target<*>>
+            val iconClass: Class<out Icon<*>>
         }
     }
     

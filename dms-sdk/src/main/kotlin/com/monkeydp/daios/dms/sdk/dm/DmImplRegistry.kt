@@ -3,6 +3,7 @@ package com.monkeydp.daios.dms.sdk.dm
 import com.monkeydp.daios.dms.sdk.datasource.Datasource
 import com.monkeydp.daios.dms.sdk.datasource.DsVersion
 import com.monkeydp.daios.dms.sdk.metadata.form.CpForm
+import com.monkeydp.daios.dms.sdk.metadata.icon.Icon
 import com.monkeydp.daios.dms.sdk.metadata.instruction.action.Action
 import com.monkeydp.daios.dms.sdk.metadata.instruction.target.Target
 
@@ -15,6 +16,7 @@ object DmImplRegistry {
     private val dsVersions = mutableListOf<DsVersion<*>>()
     private val actions = mutableListOf<Action<*>>()
     private val targets = mutableListOf<Target<*>>()
+    private val icons = mutableListOf<Icon<*>>()
     
     private val cpFormClassMap = mutableMapOf<Datasource, Class<out CpForm>>()
     
@@ -24,6 +26,7 @@ object DmImplRegistry {
             is DsVersion<*> -> dsVersions.add(enum)
             is Action<*>    -> actions.add(enum)
             is Target<*>    -> targets.add(enum)
+            is Icon<*>      -> icons.add(enum)
         }
     }
     
@@ -37,6 +40,7 @@ object DmImplRegistry {
     
     fun getAction(enumName: String) = actions.first { it.asEnum().name == enumName }
     fun getTarget(enumName: String) = targets.first { it.asEnum().name == enumName }
+    fun getIcon(enumName: String) = icons.first { it.asEnum().name == enumName }
     
     fun getCpFormClass(datasource: Datasource) = cpFormClassMap.get(datasource)!!
 }

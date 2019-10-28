@@ -67,6 +67,9 @@ access http://127.0.0.1:8080/h2-console
 
 abbreviation | original
 :--- | :---
+**# A** |
+abstr | Abstract
+&nbsp;|
 **# C** |
 conn | Connection
 cp | Connection Profile
@@ -81,7 +84,14 @@ def | Definition
 **# E** |
 err | error
 &nbsp;|
-**# M** |
+**# G** |
+gnd | Group Node Definition
+&nbsp;|
+**# I** |
 Instr | instruction
+&nbsp;|
 **# M** |
 msg | message
+&nbsp;|
+**# N** |
+nd | Node Definition

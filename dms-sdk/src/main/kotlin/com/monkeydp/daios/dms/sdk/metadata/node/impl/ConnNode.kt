@@ -2,7 +2,7 @@ package com.monkeydp.daios.dms.sdk.metadata.node.impl
 
 import com.fasterxml.jackson.annotation.JsonIgnore
 import com.monkeydp.daios.dms.sdk.entity.ConnProfile
-import com.monkeydp.daios.dms.sdk.metadata.node.NodeDef
+import com.monkeydp.daios.dms.sdk.metadata.node.def.NodeDef
 
 /**
  * @author iPotato

@@ -8,7 +8,7 @@ import com.monkeydp.daios.dms.sdk.dm.Dm
 import com.monkeydp.daios.dms.sdk.dm.Dm.DsDef
 import com.monkeydp.daios.dms.sdk.dm.Dm.Impl
 import com.monkeydp.daios.dms.sdk.dm.DmImplRegistrar
-import com.monkeydp.daios.dms.sdk.metadata.node.def.ConnNodeDef
+import com.monkeydp.daios.dms.sdk.metadata.node.def.ConnNd
 import com.monkeydp.tools.util.FileUtil
 import java.io.File
 import java.io.FileFilter
@@ -31,7 +31,7 @@ class DmBundle(private val deployDir: File, private val dmClassname: String) {
     private val dm: Dm
     private val impl: Impl
     val datasource: Datasource
-    val connNodeDef: ConnNodeDef
+    val connNd: ConnNd
     val apis: Impl.Apis
     
     private val dsDefMap: Map<DsVersion<*>, DsDef>
@@ -45,7 +45,7 @@ class DmBundle(private val deployDir: File, private val dmClassname: String) {
         dm = initDm()
         impl = dm.impl
         datasource = dm.datasource
-        connNodeDef = dm.connNodeDef
+        connNd = dm.connNd
         apis = impl.apis
         DmImplRegistrar.registerAll(impl, datasource)
         DmTestdataRegistrar.registerAll(dm.testdata)

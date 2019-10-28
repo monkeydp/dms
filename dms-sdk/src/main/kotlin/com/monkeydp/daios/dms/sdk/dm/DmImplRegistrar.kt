@@ -2,6 +2,7 @@ package com.monkeydp.daios.dms.sdk.dm
 
 import com.monkeydp.daios.dms.sdk.datasource.Datasource
 import com.monkeydp.daios.dms.sdk.dm.Dm.Impl
+import com.monkeydp.daios.dms.sdk.metadata.icon.GlobalIcon
 import com.monkeydp.daios.dms.sdk.metadata.instruction.action.GlobalAction
 import com.monkeydp.daios.dms.sdk.metadata.instruction.target.GlobalTarget
 import com.monkeydp.tools.util.FieldUtil
@@ -14,7 +15,8 @@ object DmImplRegistrar {
     
     private val globalEnumClasses = listOf<Class<out Enum<*>>>(
             GlobalAction::class.java,
-            GlobalTarget::class.java
+            GlobalTarget::class.java,
+            GlobalIcon::class.java
     )
     
     fun registerAll(impl: Impl, datasource: Datasource) {

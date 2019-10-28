@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore
 import com.monkeydp.daios.dms.sdk.metadata.icon.Icon
 import com.monkeydp.daios.dms.sdk.metadata.instruction.target.Target
 import com.monkeydp.daios.dms.sdk.metadata.node.Node
-import com.monkeydp.daios.dms.sdk.metadata.node.NodeDef
+import com.monkeydp.daios.dms.sdk.metadata.node.def.NodeDef
 
 /**
  * @author iPotato
