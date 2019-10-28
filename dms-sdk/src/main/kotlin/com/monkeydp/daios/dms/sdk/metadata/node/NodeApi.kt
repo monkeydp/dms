@@ -5,5 +5,5 @@ package com.monkeydp.daios.dms.sdk.metadata.node
  * @date 2019/10/25
  */
 interface NodeApi {
-    fun loadNodes(instr: NodeLoadInstr): List<Node>
+    fun loadNodes(context: NodeLoadContext): List<Node>
 }
