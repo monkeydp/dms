@@ -1,4 +1,4 @@
-package com.monkeydp.daios.dms.sdk.metadata.menu.api
+package com.monkeydp.daios.dms.sdk.metadata.menu
 
 import com.monkeydp.daios.dms.sdk.api.MenuApi
 

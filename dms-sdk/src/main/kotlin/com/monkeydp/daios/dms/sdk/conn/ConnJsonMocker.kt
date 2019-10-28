@@ -4,7 +4,7 @@ package com.monkeydp.daios.dms.sdk.conn
  * @author iPotato
  * @date 2019/10/28
  */
-object CpJsonMocker {
+object ConnJsonMocker {
     const val CP_ID = "1"
     const val CP_USER_INPUT =
             """{

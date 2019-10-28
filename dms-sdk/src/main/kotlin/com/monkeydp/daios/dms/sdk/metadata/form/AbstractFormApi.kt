@@ -1,4 +1,4 @@
-package com.monkeydp.daios.dms.sdk.metadata.form.api
+package com.monkeydp.daios.dms.sdk.metadata.form
 
 import com.monkeydp.daios.dms.sdk.api.FormApi
 

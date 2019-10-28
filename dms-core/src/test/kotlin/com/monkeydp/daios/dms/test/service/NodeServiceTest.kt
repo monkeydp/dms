@@ -16,7 +16,7 @@ class NodeServiceTest : AbstractServiceTest() {
     
     @Test
     fun loadConnNodesTest() {
-        val connNodes = service.getConnNodes()
+        val connNodes = service.loadConnNodes()
         Assert.assertTrue(connNodes.isNotEmpty())
     }
 }

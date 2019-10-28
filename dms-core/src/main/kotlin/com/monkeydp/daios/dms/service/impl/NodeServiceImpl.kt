@@ -3,7 +3,10 @@ package com.monkeydp.daios.dms.service.impl
 import com.monkeydp.daios.dms.boot.ModuleRegistry
 import com.monkeydp.daios.dms.component.UserSession
 import com.monkeydp.daios.dms.curd.service.contract.ConnProfileService
+import com.monkeydp.daios.dms.sdk.metadata.node.Node
+import com.monkeydp.daios.dms.sdk.metadata.node.NodeLoadContext
 import com.monkeydp.daios.dms.sdk.metadata.node.impl.ConnNode
+import com.monkeydp.daios.dms.service.contract.ConnService
 import com.monkeydp.daios.dms.service.contract.NodeService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
@@ -21,8 +24,10 @@ internal class NodeServiceImpl : NodeService {
     private lateinit var registry: ModuleRegistry
     @Autowired
     private lateinit var cpService: ConnProfileService
+    @Autowired
+    private lateinit var connService: ConnService
     
-    override fun getConnNodes(): List<ConnNode> {
+    override fun loadConnNodes(): List<ConnNode> {
         val userId = session.userId
         val cps = cpService.findAllByUserId(userId)
         val connNodes = mutableListOf<ConnNode>()
@@ -31,5 +36,14 @@ internal class NodeServiceImpl : NodeService {
             connNodes.add(ConnNode(def, cp))
         }
         return connNodes.toList()
+    }
+    
+    override fun loadSubNodes(ctx: NodeLoadContext): List<Node> {
+        val cpId = ctx.cpId
+        val cp = connService.findCp(cpId)
+        val conn = connService.findConn(cpId)
+        ctx.conn = conn
+        val dmBundle = registry.getDmBundle(cp)
+        return dmBundle.apis.nodeApi.loadNodes(ctx)
     }
 }

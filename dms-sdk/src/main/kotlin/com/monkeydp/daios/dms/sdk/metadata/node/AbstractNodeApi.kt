@@ -1,4 +1,4 @@
-package com.monkeydp.daios.dms.sdk.metadata.node.api
+package com.monkeydp.daios.dms.sdk.metadata.node
 
 import com.monkeydp.daios.dms.sdk.api.NodeApi
 
