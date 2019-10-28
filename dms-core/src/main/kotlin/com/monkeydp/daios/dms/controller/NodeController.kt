@@ -1,6 +1,6 @@
 package com.monkeydp.daios.dms.controller
 
-import com.monkeydp.daios.dms.sdk.metadata.node.NodeLoadContext
+import com.monkeydp.daios.dms.sdk.metadata.node.NodeLoadContextX
 import com.monkeydp.daios.dms.service.contract.NodeService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.bind.annotation.*
@@ -20,5 +20,5 @@ class NodeController {
     fun loadConnNodes() = service.loadConnNodes()
     
     @PostMapping("load-sub-nodes")
-    fun loadSubNodes(@RequestBody ctx: NodeLoadContext) = service.loadSubNodes(ctx)
+    fun loadSubNodes(@RequestBody ctx: NodeLoadContextX) = service.loadSubNodes(ctx)
 }

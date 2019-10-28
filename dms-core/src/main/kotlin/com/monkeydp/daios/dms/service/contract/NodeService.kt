@@ -1,7 +1,7 @@
 package com.monkeydp.daios.dms.service.contract
 
 import com.monkeydp.daios.dms.sdk.metadata.node.Node
-import com.monkeydp.daios.dms.sdk.metadata.node.NodeLoadContext
+import com.monkeydp.daios.dms.sdk.metadata.node.NodeLoadContextX
 import com.monkeydp.daios.dms.sdk.metadata.node.impl.ConnNode
 
 /**
@@ -10,5 +10,5 @@ import com.monkeydp.daios.dms.sdk.metadata.node.impl.ConnNode
  */
 interface NodeService {
     fun loadConnNodes(): List<ConnNode>
-    fun loadSubNodes(ctx: NodeLoadContext): List<Node>
+    fun loadSubNodes(ctx: NodeLoadContextX): List<Node>
 }

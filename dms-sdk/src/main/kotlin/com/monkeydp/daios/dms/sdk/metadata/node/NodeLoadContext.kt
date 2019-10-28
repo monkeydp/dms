@@ -1,34 +1,19 @@
 package com.monkeydp.daios.dms.sdk.metadata.node
 
 import com.monkeydp.daios.dms.sdk.conn.Conn
-import com.monkeydp.daios.dms.sdk.conn.ConnJsonMocker.CP_ID
-import com.monkeydp.daios.dms.sdk.metadata.node.NodeJsonMocker.NODE_INFO_PATH
-import com.monkeydp.daios.dms.sdk.util.IdUtil.INVALID_ID
-import com.monkeydp.tools.notNullSingleInit
-import io.swagger.annotations.ApiModel
-import io.swagger.annotations.ApiModelProperty
-import kotlin.properties.Delegates
 
 /**
  * @author iPotato
  * @date 2019/10/25
  */
-@ApiModel
 data class NodeLoadContext(
-        @ApiModelProperty(required = true, example = CP_ID)
-        val cpId: Long = INVALID_ID,
-        @ApiModelProperty(required = true, example = NODE_INFO_PATH)
+        var conn: Conn<*>,
         val path: NodeInfoPath
 ) {
-    var conn by Delegates.notNullSingleInit<Conn<*>>()
     val lastTarget
         get() = path.last().target
     
     companion object {
-        fun mock(conn: Conn<*>, path: NodeInfoPath): NodeLoadContext {
-            val ctx = NodeLoadContext(path = path)
-            ctx.conn = conn
-            return ctx
-        }
+        fun mock(conn: Conn<*>, path: NodeInfoPath) = NodeLoadContext(conn, path)
     }
 }

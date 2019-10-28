@@ -4,7 +4,7 @@ import com.monkeydp.daios.dms.boot.ModuleRegistry
 import com.monkeydp.daios.dms.component.UserSession
 import com.monkeydp.daios.dms.curd.service.contract.ConnProfileService
 import com.monkeydp.daios.dms.sdk.metadata.node.Node
-import com.monkeydp.daios.dms.sdk.metadata.node.NodeLoadContext
+import com.monkeydp.daios.dms.sdk.metadata.node.NodeLoadContextX
 import com.monkeydp.daios.dms.sdk.metadata.node.impl.ConnNode
 import com.monkeydp.daios.dms.service.contract.ConnService
 import com.monkeydp.daios.dms.service.contract.NodeService
@@ -38,12 +38,11 @@ internal class NodeServiceImpl : NodeService {
         return connNodes.toList()
     }
     
-    override fun loadSubNodes(ctx: NodeLoadContext): List<Node> {
+    override fun loadSubNodes(ctx: NodeLoadContextX): List<Node> {
         val cpId = ctx.cpId
         val cp = connService.findCp(cpId)
         val conn = connService.findConn(cpId)
-        ctx.conn = conn
         val dmBundle = registry.getDmBundle(cp)
-        return dmBundle.apis.nodeApi.loadNodes(ctx)
+        return dmBundle.apis.nodeApi.loadNodes(ctx.toInner(conn))
     }
 }
