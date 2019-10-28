@@ -8,5 +8,5 @@ import com.monkeydp.daios.dms.sdk.metadata.node.NodeLoadContext
  * @date 2019/10/25
  */
 interface NodeApi {
-    fun loadNodes(context: NodeLoadContext): List<Node>
+    fun loadNodes(ctx: NodeLoadContext): List<Node>
 }

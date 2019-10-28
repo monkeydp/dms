@@ -15,11 +15,13 @@ internal object DmTestdataRegistry {
     private const val testDsVersionId = "5.7"
     private val testDsVersion = DmImplRegistry.getDsVersion(testDs, testDsVersionId)
     
-    private val cpMap = mutableMapOf<DsVersion<*>, ConnProfile>()
     /**
-     * Don't access except Data Inserter
+     * Not in db
      */
     val cps = mutableListOf<ConnProfile>()
     
-    fun testCp() = cpMap[testDsVersion]!!
+    val savedCpMap = mutableMapOf<DsVersion<*>, ConnProfile>()
+    
+    val testCp
+        get() = savedCpMap[testDsVersion]!!
 }

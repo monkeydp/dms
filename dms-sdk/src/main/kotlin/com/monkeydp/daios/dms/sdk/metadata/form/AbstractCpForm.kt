@@ -1,6 +1,7 @@
 package com.monkeydp.daios.dms.sdk.metadata.form
 
 import com.monkeydp.daios.dms.sdk.useful.UserInput
+import com.monkeydp.tools.util.JsonUtil
 
 /**
  * @author iPotato
@@ -12,4 +13,6 @@ abstract class AbstractCpForm(
         override val port: String,
         override val username: String,
         override val password: String
-) : CpForm
+) : CpForm {
+    fun toUserInput() = JsonUtil.convertTo<UserInput>(this)
+}

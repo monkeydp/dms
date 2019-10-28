@@ -4,6 +4,9 @@ import com.fasterxml.jackson.annotation.JsonIgnore
 import com.monkeydp.daios.dms.sdk.datasource.Datasource
 import com.monkeydp.daios.dms.sdk.dm.DmImplRegistry
 import com.monkeydp.daios.dms.sdk.metadata.form.CpForm
+import com.monkeydp.daios.dms.sdk.conn.CpJsonMocker.CP_USER_INPUT
+import com.monkeydp.daios.dms.sdk.conn.CpJsonMocker.DATASOURCE
+import com.monkeydp.daios.dms.sdk.conn.CpJsonMocker.DS_VERSION_ID
 import com.monkeydp.daios.dms.sdk.useful.UserInput
 import io.swagger.annotations.ApiModel
 import io.swagger.annotations.ApiModelProperty
@@ -28,11 +31,11 @@ data class ConnProfile(
         
         @Column(nullable = false)
         @Enumerated(STRING)
-        @ApiModelProperty(required = true, example = "MYSQL")
+        @ApiModelProperty(required = true, example = DATASOURCE)
         val datasource: Datasource,
         
         @Column(nullable = false)
-        @ApiModelProperty(value = "datasource version id", required = true, example = "5.7")
+        @ApiModelProperty(value = "datasource version id", required = true, example = DS_VERSION_ID)
         val dsVersionId: String,
         
         /**
@@ -48,19 +51,15 @@ data class ConnProfile(
         @ApiModelProperty(
                 value = "parameters entered by the user",
                 required = true,
-                example = """{
-                        "connName": "MySQL 5.7",
-                        "host": "127.0.0.1",
-                        "port": 3306,
-                        "username": "root",
-                        "password": ""
-                }"""
+                example = CP_USER_INPUT
         )
         val userInput: UserInput
 ) : AbstractEntity(id) {
     
-    @JsonIgnore
-    fun getDsVersion() = DmImplRegistry.getDsVersion(datasource, dsVersionId)
+    val dsVersion
+        @JsonIgnore
+        get() = DmImplRegistry.getDsVersion(datasource, dsVersionId)
+    
     
     val form: CpForm
         @JsonIgnore
@@ -69,5 +68,6 @@ data class ConnProfile(
             return userInput.convertTo(cpFormClass)
         }
     
+    @JsonIgnore
     override fun isValid() = super.isValid() && dsDriverClassname.isNotBlank()
 }

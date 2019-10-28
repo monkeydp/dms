@@ -17,7 +17,7 @@ class ConnServiceTest : AbstractServiceTest() {
     
     @Test
     public fun saveCpTest() {
-        val cp = service.saveCp(testCp())
+        val cp = service.saveCp(testCp)
         Assert.assertTrue(cp.isValid())
     }
     
@@ -28,19 +28,19 @@ class ConnServiceTest : AbstractServiceTest() {
      */
     @Test
     public fun connTest() {
-        val cw = service.openConn(testCp().id)
+        val cw = service.openConn(testCp.id)
         val conn = cw.conn
     
         Assert.assertTrue(conn.isValid())
         Assert.assertFalse(conn.isClosed())
-        
-        service.closeConn(testCp().id)
+    
+        service.closeConn(testCp.id)
         Assert.assertFalse(conn.isValid())
         Assert.assertTrue(conn.isClosed())
     }
     
     @Test
     public fun testConnTest() {
-        service.testConn(testCp().id)
+        service.testConn(testCp.id)
     }
 }

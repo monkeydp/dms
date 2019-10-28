@@ -1,6 +1,7 @@
 package com.monkeydp.daios.dms.controller
 
 import com.monkeydp.daios.dms.sdk.entity.ConnProfile
+import com.monkeydp.daios.dms.sdk.conn.CpJsonMocker.CP_ID
 import com.monkeydp.daios.dms.service.contract.ConnService
 import io.swagger.annotations.ApiParam
 import org.springframework.beans.factory.annotation.Autowired
@@ -24,17 +25,17 @@ class ConnController {
     fun saveCp(@RequestBody cp: ConnProfile) = service.saveCp(cp)
     
     @PostMapping("open-conn")
-    fun openConn(@RequestBody @ApiParam(example = "1") cpId: Long) {
+    fun openConn(@RequestBody @ApiParam(example = CP_ID) cpId: Long) {
         service.openConn(cpId)
     }
     
     @PostMapping("close-conn")
-    fun closeConn(@RequestBody @ApiParam(example = "1") cpId: Long) {
+    fun closeConn(@RequestBody @ApiParam(example = CP_ID) cpId: Long) {
         service.closeConn(cpId)
     }
     
     @PostMapping("test-conn")
-    fun testConn(@RequestBody @ApiParam(example = "1") cpId: Long) {
+    fun testConn(@RequestBody @ApiParam(example = CP_ID) cpId: Long) {
         service.testConn(cpId)
     }
 }

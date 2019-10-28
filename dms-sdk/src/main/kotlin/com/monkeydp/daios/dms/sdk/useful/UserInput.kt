@@ -1,9 +1,6 @@
 package com.monkeydp.daios.dms.sdk.useful
 
-import com.monkeydp.daios.dms.sdk.metadata.form.CpForm
-import com.monkeydp.tools.util.FieldUtil
 import com.monkeydp.tools.util.JsonUtil
-import org.jetbrains.annotations.TestOnly
 import javax.persistence.AttributeConverter
 
 /**
@@ -13,11 +10,6 @@ import javax.persistence.AttributeConverter
  * @date 2019/10/20
  */
 class UserInput() : HashMap<String, String>() {
-    
-    @TestOnly
-    constructor(cpForm: CpForm) : this() {
-        FieldUtil.getFields(cpForm).forEach { this[it.name] = FieldUtil.getNotnullValue(cpForm, it) }
-    }
     
     inline fun <reified T> convertTo() = JsonUtil.convertTo<T>(this)
     fun <T> convertTo(clazz: Class<T>) = JsonUtil.convertTo<T>(this, clazz)
