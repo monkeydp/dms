@@ -116,14 +116,6 @@ class ConnManager {
         
         private fun hasActiveUserConn() = IdUtil.isValid(activeUserConnId)
         
-        private fun checkBelongsToUser(cw: ConnWrapper) {
-            if (!cw.belongsToUser()) ierror("Conn must belongs to user!")
-        }
-        
-        private fun checkNotBelongsToUser(cw: ConnWrapper) {
-            if (cw.belongsToUser()) ierror("Conn must not belongs to user!")
-        }
-        
         fun activateCw(cw: ConnWrapper) {
             if (cw.belongsToUser()) activateUserCw(cw)
             else activeOtherCw(cw)
@@ -131,14 +123,14 @@ class ConnManager {
         
         @Synchronized
         private fun activateUserCw(cw: ConnWrapper) {
-            checkBelongsToUser(cw)
+            cw.checkBelongsToUser()
             if (hasActiveUserConn()) ierror("Active user conn is already exist!")
             activeUserConnId = cw.connId
             activeCwMap.putIfAbsent(cw.connId, cw)
         }
         
         private fun activeOtherCw(cw: ConnWrapper) {
-            checkNotBelongsToUser(cw)
+            cw.checkNotBelongsToUser()
             activeCwMap.putIfAbsent(cw.connId, cw)
         }
         
@@ -171,13 +163,13 @@ class ConnManager {
         
         fun inactivateUserCw(cw: ConnWrapper? = getActiveUserCw()) {
             if (cw == null) return
-            checkBelongsToUser(cw)
+            cw.checkBelongsToUser()
             innerInactivateCw(cw)
             resetActiveUserConnId()
         }
         
         fun inactivateOtherCw(cw: ConnWrapper) {
-            checkNotBelongsToUser(cw)
+            cw.checkNotBelongsToUser()
             innerInactivateCw(cw)
         }
         

@@ -1,8 +1,9 @@
 package com.monkeydp.daios.dms.conn
 
-import com.monkeydp.daios.dms.conn.ConnWrapper.BelongsTo.TASK
-import com.monkeydp.daios.dms.conn.ConnWrapper.BelongsTo.USER
+import com.monkeydp.daios.dms.conn.BelongsTo.TASK
+import com.monkeydp.daios.dms.conn.BelongsTo.USER
 import com.monkeydp.daios.dms.sdk.conn.Conn
+import com.monkeydp.tools.ierror
 import com.monkeydp.tools.util.RandomUtil
 
 /**
@@ -23,14 +24,11 @@ class ConnWrapper(val conn: Conn, val belongsTo: BelongsTo = USER) : AutoCloseab
     fun belongsToUser() = belongsTo == USER
     fun belongsToTask() = belongsTo == TASK
     
-    enum class BelongsTo {
-        /**
-         * A user can only have one active conn
-         */
-        USER,
-        /**
-         * One user can have many tasks, every task corresponds to one active conn
-         */
-        TASK
+    fun checkBelongsToUser() {
+        if (!this.belongsToUser()) ierror("Conn must belongs to user!")
+    }
+    
+    fun checkNotBelongsToUser() {
+        if (this.belongsToUser()) ierror("Conn must not belongs to user!")
     }
 }

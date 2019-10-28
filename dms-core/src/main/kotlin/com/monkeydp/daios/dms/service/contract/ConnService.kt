@@ -1,8 +1,8 @@
 package com.monkeydp.daios.dms.service.contract
 
 import com.monkeydp.daios.dms.conn.ConnWrapper
-import com.monkeydp.daios.dms.conn.ConnWrapper.BelongsTo
-import com.monkeydp.daios.dms.conn.ConnWrapper.BelongsTo.USER
+import com.monkeydp.daios.dms.conn.BelongsTo
+import com.monkeydp.daios.dms.conn.BelongsTo.USER
 import com.monkeydp.daios.dms.sdk.entity.ConnProfile
 
 /**

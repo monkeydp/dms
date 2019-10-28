@@ -2,9 +2,9 @@ package com.monkeydp.daios.dms.service.impl
 
 import com.monkeydp.daios.dms.boot.ModuleRegistry
 import com.monkeydp.daios.dms.component.UserSession
+import com.monkeydp.daios.dms.conn.BelongsTo
 import com.monkeydp.daios.dms.conn.ConnManager
 import com.monkeydp.daios.dms.conn.ConnWrapper
-import com.monkeydp.daios.dms.conn.ConnWrapper.BelongsTo
 import com.monkeydp.daios.dms.curd.service.contract.ConnProfileService
 import com.monkeydp.daios.dms.sdk.conn.Conn
 import com.monkeydp.daios.dms.sdk.entity.ConnProfile
@@ -58,10 +58,7 @@ internal class ConnServiceImpl : ConnService {
         return innerOpenConn(cpId)
     }
     
-    private fun openOtherConn(cpId: Long, belongsTo: BelongsTo): ConnWrapper {
-        // TODO check
-        return innerOpenConn(cpId, belongsTo)
-    }
+    private fun openOtherConn(cpId: Long, belongsTo: BelongsTo) = innerOpenConn(cpId, belongsTo)
     
     private fun innerOpenConn(cpId: Long, belongsTo: BelongsTo = BelongsTo.USER): ConnWrapper {
         val cp = findCp(cpId)
