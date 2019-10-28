@@ -54,7 +54,7 @@ internal class ConnServiceImpl : ConnService {
     private fun getConnWrapper(cp: ConnProfile): ConnWrapper {
         val dmBundle = getDmBundle(cp)
         dmBundle.setSpecificClassLoader(cp.getDsVersion())
-        val conn = dmBundle.apis.connFactory.getConn(cp)
+        val conn = dmBundle.apis.connApi.getConn(cp)
         dmBundle.removeSpecificClassLoader()
         return ConnWrapper(conn)
     }

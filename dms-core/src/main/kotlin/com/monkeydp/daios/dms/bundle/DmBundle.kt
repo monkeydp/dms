@@ -1,7 +1,7 @@
 package com.monkeydp.daios.dms.bundle
 
 import com.monkeydp.daios.dms.dm.DmTestdataRegistrar
-import com.monkeydp.daios.dms.sdk.conn.ConnFactory
+import com.monkeydp.daios.dms.sdk.conn.ConnApi
 import com.monkeydp.daios.dms.sdk.datasource.Datasource
 import com.monkeydp.daios.dms.sdk.datasource.DsVersion
 import com.monkeydp.daios.dms.sdk.dm.Dm
@@ -35,7 +35,7 @@ class DmBundle(private val deployDir: File, private val dmClassname: String) {
     private val dsDefMap: Map<DsVersion<*>, DsDef>
     
     object Impls {
-        lateinit var connFactory: ConnFactory
+        lateinit var connApi: ConnApi
     }
     
     init {

@@ -1,6 +1,6 @@
 package com.monkeydp.daios.dms.sdk.dm
 
-import com.monkeydp.daios.dms.sdk.conn.ConnFactory
+import com.monkeydp.daios.dms.sdk.conn.ConnApi
 import com.monkeydp.daios.dms.sdk.datasource.Datasource
 import com.monkeydp.daios.dms.sdk.datasource.DsVersion
 import com.monkeydp.daios.dms.sdk.entity.ConnProfile
@@ -28,7 +28,7 @@ interface Dm {
         val enumClasses: EnumClasses
     
         interface Apis {
-            val connFactory: ConnFactory
+            val connApi: ConnApi
         }
     
         interface Classes {

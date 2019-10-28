@@ -3,11 +3,10 @@ package com.monkeydp.daios.dms.sdk.conn
 import com.monkeydp.daios.dms.sdk.entity.ConnProfile
 
 /**
- * Conn Factory
  * @author iPotato
  * @date 2019/10/6
  */
-interface ConnFactory {
+interface ConnApi {
     /**
      * Get a conn
      */
