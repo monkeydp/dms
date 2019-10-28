@@ -1,6 +1,6 @@
 package com.monkeydp.daios.dms.sdk.dm
 
-import com.monkeydp.daios.dms.sdk.conn.ConnApi
+import com.monkeydp.daios.dms.sdk.api.ConnApi
 import com.monkeydp.daios.dms.sdk.datasource.Datasource
 import com.monkeydp.daios.dms.sdk.datasource.DsDriver
 import com.monkeydp.daios.dms.sdk.datasource.DsVersion

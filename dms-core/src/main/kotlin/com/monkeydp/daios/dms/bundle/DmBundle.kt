@@ -1,7 +1,7 @@
 package com.monkeydp.daios.dms.bundle
 
 import com.monkeydp.daios.dms.dm.DmTestdataRegistrar
-import com.monkeydp.daios.dms.sdk.conn.ConnApi
+import com.monkeydp.daios.dms.sdk.api.ConnApi
 import com.monkeydp.daios.dms.sdk.datasource.Datasource
 import com.monkeydp.daios.dms.sdk.datasource.DsVersion
 import com.monkeydp.daios.dms.sdk.dm.Dm

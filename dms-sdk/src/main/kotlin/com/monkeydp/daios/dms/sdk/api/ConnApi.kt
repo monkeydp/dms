@@ -1,5 +1,6 @@
-package com.monkeydp.daios.dms.sdk.conn
+package com.monkeydp.daios.dms.sdk.api
 
+import com.monkeydp.daios.dms.sdk.conn.Conn
 import com.monkeydp.daios.dms.sdk.entity.ConnProfile
 
 /**
