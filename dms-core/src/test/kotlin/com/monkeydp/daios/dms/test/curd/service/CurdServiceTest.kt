@@ -2,7 +2,7 @@ package com.monkeydp.daios.dms.test.curd.service
 
 import com.monkeydp.daios.dms.example.ExampleService
 import com.monkeydp.daios.dms.sdk.example.ExampleMocker
-import com.monkeydp.daios.dms.test.BaseTest
+import com.monkeydp.daios.dms.test.AbstractTest
 import org.junit.Assert
 import org.junit.Test
 import org.springframework.beans.factory.annotation.Autowired
@@ -11,7 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired
  * @author iPotato
  * @date 2019/10/22
  */
-class CurdServiceTest : BaseTest() {
+class CurdServiceTest : AbstractTest() {
 
     @Autowired
     private lateinit var service: ExampleService

@@ -12,7 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired
 internal abstract class CurdServiceImpl<E : AbstractEntity, R : CurdRepo<E>> : CurdService<E> {
     @Suppress("SpringJavaInjectionPointsAutowiringInspection")
     @Autowired
-    private lateinit var repo: R
+    protected lateinit var repo: R
 
     override fun save(entity: E): E = repo.save(entity)
 

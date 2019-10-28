@@ -2,7 +2,6 @@ package com.monkeydp.daios.dms.test.service
 
 import com.monkeydp.daios.dms.dm.DmTestdataRegistry.testCp
 import com.monkeydp.daios.dms.service.contract.ConnService
-import com.monkeydp.daios.dms.test.BaseTest
 import org.junit.Assert
 import org.junit.Test
 import org.springframework.beans.factory.annotation.Autowired
@@ -11,7 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired
  * @author iPotato
  * @date 2019/10/18
  */
-class ConnServiceTest : BaseTest() {
+class ConnServiceTest : AbstractServiceTest() {
     
     @Autowired
     private lateinit var service: ConnService

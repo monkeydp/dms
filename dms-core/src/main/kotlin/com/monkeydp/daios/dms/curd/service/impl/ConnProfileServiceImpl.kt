@@ -12,4 +12,6 @@ import org.springframework.stereotype.Service
 @Service
 internal class ConnProfileServiceImpl :
         ConnProfileService,
-        CurdServiceImpl<ConnProfile, ConnProfileRepo>()
+        CurdServiceImpl<ConnProfile, ConnProfileRepo>() {
+    override fun findAllByUserId(userId: Long) = repo.findAllByUserId(userId)
+}

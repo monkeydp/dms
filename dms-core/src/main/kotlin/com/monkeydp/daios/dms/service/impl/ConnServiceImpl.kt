@@ -38,7 +38,7 @@ internal class ConnServiceImpl : ConnService {
         val dmBundle = registry.getDmBundle(cp)
         val driverClassname = dmBundle.getDriverClassname(cp.getDsVersion())
         return cp.copy(
-                userId = session.getUserId(),
+                userId = session.userId,
                 dsDriverClassname = driverClassname
         )
     }

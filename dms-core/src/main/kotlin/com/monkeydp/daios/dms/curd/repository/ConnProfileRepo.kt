@@ -8,4 +8,6 @@ import org.springframework.stereotype.Repository
  * @date 2019/10/22
  */
 @Repository
-interface ConnProfileRepo : CurdRepo<ConnProfile>
+interface ConnProfileRepo : CurdRepo<ConnProfile> {
+    fun findAllByUserId(userId: Long): List<ConnProfile>
+}

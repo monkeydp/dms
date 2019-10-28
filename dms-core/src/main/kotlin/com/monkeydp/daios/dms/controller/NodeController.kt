@@ -17,6 +17,6 @@ class NodeController {
     @Autowired
     private lateinit var service: NodeService
     
-    @GetMapping
-    fun loadConnNodes() = service.loadConnNodes()
+    @GetMapping("load-conn-nodes")
+    fun loadConnNodes() = service.getConnNodes()
 }

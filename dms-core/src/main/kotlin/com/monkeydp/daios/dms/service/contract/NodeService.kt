@@ -7,5 +7,5 @@ import com.monkeydp.daios.dms.sdk.metadata.node.impl.ConnNode
  * @date 2019/10/28
  */
 interface NodeService {
-    fun loadConnNodes(): List<ConnNode>
+    fun getConnNodes(): List<ConnNode>
 }

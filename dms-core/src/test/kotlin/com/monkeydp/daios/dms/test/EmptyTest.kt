@@ -6,7 +6,7 @@ import org.junit.Test
  * @author iPotato
  * @date 2019/10/6
  */
-class EmptyTest : BaseTest() {
+class EmptyTest : AbstractTest() {
     @Test
     fun test() {
 

@@ -1,5 +1,6 @@
 package com.monkeydp.daios.dms.sdk.metadata.node.impl
 
+import com.fasterxml.jackson.annotation.JsonIgnore
 import com.monkeydp.daios.dms.sdk.entity.ConnProfile
 import com.monkeydp.daios.dms.sdk.metadata.node.NodeDef
 
@@ -7,7 +8,8 @@ import com.monkeydp.daios.dms.sdk.metadata.node.NodeDef
  * @author iPotato
  * @date 2019/10/25
  */
-data class ConnNode(
+class ConnNode(
+        @JsonIgnore
         override val def: NodeDef,
         val cp: ConnProfile
 ) : AbstractNode(def) {
