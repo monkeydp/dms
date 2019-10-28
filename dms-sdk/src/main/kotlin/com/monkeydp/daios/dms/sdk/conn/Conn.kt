@@ -1,23 +1,36 @@
 package com.monkeydp.daios.dms.sdk.conn
 
+import com.monkeydp.daios.dms.sdk.entity.ConnProfile
+
 /**
  * @author iPotato
  * @date 2019/10/6
  */
-class Conn(
-        val cpId: Long,
-        private val logicConn: LogicConn
-) : AutoCloseable {
+interface Conn<C> : AutoCloseable {
     
-    fun isValid(timeout: Int = 10): Boolean {
-        return logicConn.isValid(timeout)
-    }
+    /**
+     * @see ConnProfile.id
+     */
+    val cpId: Long
     
-    override fun close() {
-        logicConn.close()
-    }
+    /**
+     * Raw conn of database
+     */
+    val rawConn: C
     
-    fun isClosed(): Boolean {
-        return logicConn.isClosed()
-    }
+    /**
+     * Is conn valid
+     * @param timeout second
+     */
+    fun isValid(timeout: Int = 10): Boolean
+    
+    /**
+     * Close conn
+     */
+    override fun close()
+    
+    /**
+     * Is conn closed
+     */
+    fun isClosed(): Boolean
 }

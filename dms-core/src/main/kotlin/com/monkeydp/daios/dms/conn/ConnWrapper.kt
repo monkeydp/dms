@@ -10,7 +10,7 @@ import com.monkeydp.tools.util.RandomUtil
  * @author iPotato
  * @date 2019/10/18
  */
-class ConnWrapper(val conn: Conn, val belongsTo: BelongsTo = USER) : AutoCloseable {
+class ConnWrapper(val conn: Conn<*>, private val belongsTo: BelongsTo = USER) : AutoCloseable {
     
     // TODO auto increment id
     val connId = RandomUtil.randomId()

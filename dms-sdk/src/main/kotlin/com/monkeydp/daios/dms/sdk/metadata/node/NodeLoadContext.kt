@@ -18,7 +18,17 @@ data class NodeLoadContext(
         @ApiModelProperty(required = true, example = CP_ID)
         val cpId: Long = INVALID_ID,
         @ApiModelProperty(required = true, example = NODE_INFO_PATH)
-        val infoPath: NodeInfoPath
+        val path: NodeInfoPath
 ) {
-    var conn by Delegates.notNullSingleInit<Conn>()
+    var conn by Delegates.notNullSingleInit<Conn<*>>()
+    val lastTarget
+        get() = path.last().target
+    
+    companion object {
+        fun mock(conn: Conn<*>, path: NodeInfoPath): NodeLoadContext {
+            val ctx = NodeLoadContext(path = path)
+            ctx.conn = conn
+            return ctx
+        }
+    }
 }

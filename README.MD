@@ -96,3 +96,4 @@ msg | message
 &nbsp;|
 **# N** |
 nd | node definition
+ni | node info

@@ -70,7 +70,7 @@ internal class ConnServiceImpl : ConnService {
     
     override fun findCp(cpId: Long) = manager.getActiveCp(cpId, true) ?: cpService.findById(cpId)
     
-    private fun getConn(cp: ConnProfile): Conn {
+    private fun getConn(cp: ConnProfile): Conn<*> {
         val dmBundle = registry.getDmBundle(cp)
         dmBundle.setSpecificClassLoader(cp.dsVersion)
         val conn = dmBundle.apis.connApi.getConn(cp)

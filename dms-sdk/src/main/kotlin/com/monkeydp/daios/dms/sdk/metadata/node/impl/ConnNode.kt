@@ -10,6 +10,4 @@ import com.monkeydp.daios.dms.sdk.metadata.node.def.NodeDef
 class ConnNode(
         def: NodeDef,
         val cp: ConnProfile
-) : AbstractNode(def) {
-    override val info = super.info.copy(name = cp.form.connName)
-}
+) : AbstractNode(def, cp.form.connName)

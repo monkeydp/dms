@@ -11,5 +11,5 @@ interface ConnApi {
     /**
      * Get a conn
      */
-    fun getConn(cp: ConnProfile): Conn
+    fun getConn(cp: ConnProfile): Conn<*>
 }

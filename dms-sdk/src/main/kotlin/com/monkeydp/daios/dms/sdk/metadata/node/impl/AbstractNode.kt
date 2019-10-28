@@ -10,7 +10,8 @@ import com.monkeydp.daios.dms.sdk.metadata.node.def.NodeDef
  */
 abstract class AbstractNode : Node {
     override val info: NodeInfo
-    constructor(def: NodeDef) {
-        info = def.info
+    
+    constructor(def: NodeDef, name: String = def.info.name) {
+        info = def.info.copy(name = name)
     }
 }
