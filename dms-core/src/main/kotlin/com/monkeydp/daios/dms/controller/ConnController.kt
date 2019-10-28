@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RestController
 class ConnController {
     
     @Autowired
-    lateinit var service: ConnService
+    private lateinit var service: ConnService
     
     @PostMapping("save-cp")
     fun saveCp(@RequestBody cp: ConnProfile) = service.saveCp(cp)

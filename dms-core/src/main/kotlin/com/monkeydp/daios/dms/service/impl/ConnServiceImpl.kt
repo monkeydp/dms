@@ -24,8 +24,6 @@ internal class ConnServiceImpl : ConnService {
     @Autowired
     private lateinit var manager: ConnManager
     
-    private fun getDmBundle(cp: ConnProfile) = moduleRegistry.getDmBundle(cp.datasource)
-    
     override fun saveCp(cp: ConnProfile): ConnProfile {
         val saved = cpService.save(fullCp(cp))
         // TODO should be delegated to listener
@@ -34,7 +32,7 @@ internal class ConnServiceImpl : ConnService {
     }
     
     private fun fullCp(cp: ConnProfile): ConnProfile {
-        val dmBundle = getDmBundle(cp)
+        val dmBundle = moduleRegistry.getDmBundle(cp)
         val driverClassname = dmBundle.getDsDriverClassname(cp.getDsVersion())
         return cp.copy(dsDriverClassname = driverClassname)
     }
@@ -52,7 +50,7 @@ internal class ConnServiceImpl : ConnService {
     private fun getCp(cpId: Long) = manager.getActiveCp(cpId, true) ?: cpService.findById(cpId)
     
     private fun getConnWrapper(cp: ConnProfile): ConnWrapper {
-        val dmBundle = getDmBundle(cp)
+        val dmBundle = moduleRegistry.getDmBundle(cp)
         dmBundle.setSpecificClassLoader(cp.getDsVersion())
         val conn = dmBundle.apis.connApi.getConn(cp)
         dmBundle.removeSpecificClassLoader()
