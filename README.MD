@@ -68,30 +68,31 @@ access http://127.0.0.1:8080/h2-console
 abbreviation | original
 :--- | :---
 **# A** |
-abstr | Abstract
+abstr | abstract
 &nbsp;|
 **# C** |
-conn | Connection
-cp | Connection Profile
-cpw | Connection Profile Wrapper
-cw | Connection Wrapper
+conn | connection
+ctx | context
+cp | connection profile
+cpw | connection profile wrapper
+cw | connection wrapper
 &nbsp;|
 **# D** |
-db | Database
-ds | Datasource
-def | Definition
+db | database
+ds | datasource
+def | definition
 &nbsp;|
 **# E** |
 err | error
 &nbsp;|
 **# G** |
-gnd | Group Node Definition
+gnd | group node definition
 &nbsp;|
 **# I** |
-Instr | instruction
+instr | instruction
 &nbsp;|
 **# M** |
 msg | message
 &nbsp;|
 **# N** |
-nd | Node Definition
+nd | node definition
