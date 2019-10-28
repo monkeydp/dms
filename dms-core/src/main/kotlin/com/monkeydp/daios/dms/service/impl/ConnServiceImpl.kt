@@ -1,6 +1,7 @@
 package com.monkeydp.daios.dms.service.impl
 
 import com.monkeydp.daios.dms.boot.ModuleRegistry
+import com.monkeydp.daios.dms.component.UserSession
 import com.monkeydp.daios.dms.conn.ConnManager
 import com.monkeydp.daios.dms.conn.ConnWrapper
 import com.monkeydp.daios.dms.curd.service.contract.ConnProfileService
@@ -18,7 +19,9 @@ import org.springframework.stereotype.Service
 internal class ConnServiceImpl : ConnService {
     
     @Autowired
-    private lateinit var moduleRegistry: ModuleRegistry
+    private lateinit var session: UserSession
+    @Autowired
+    private lateinit var registry: ModuleRegistry
     @Autowired
     private lateinit var cpService: ConnProfileService
     @Autowired
@@ -32,9 +35,12 @@ internal class ConnServiceImpl : ConnService {
     }
     
     private fun fullCp(cp: ConnProfile): ConnProfile {
-        val dmBundle = moduleRegistry.getDmBundle(cp)
-        val driverClassname = dmBundle.getDsDriverClassname(cp.getDsVersion())
-        return cp.copy(dsDriverClassname = driverClassname)
+        val dmBundle = registry.getDmBundle(cp)
+        val driverClassname = dmBundle.getDriverClassname(cp.getDsVersion())
+        return cp.copy(
+                userId = session.getUserId(),
+                dsDriverClassname = driverClassname
+        )
     }
     
     override fun openConn(cpId: Long): ConnWrapper {
@@ -50,7 +56,7 @@ internal class ConnServiceImpl : ConnService {
     private fun getCp(cpId: Long) = manager.getActiveCp(cpId, true) ?: cpService.findById(cpId)
     
     private fun getConnWrapper(cp: ConnProfile): ConnWrapper {
-        val dmBundle = moduleRegistry.getDmBundle(cp)
+        val dmBundle = registry.getDmBundle(cp)
         dmBundle.setSpecificClassLoader(cp.getDsVersion())
         val conn = dmBundle.apis.connApi.getConn(cp)
         dmBundle.removeSpecificClassLoader()

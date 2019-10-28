@@ -14,7 +14,7 @@ import org.springframework.stereotype.Service
 class NodeServiceImpl : NodeService {
     
     @Autowired
-    private lateinit var moduleRegistry: ModuleRegistry
+    private lateinit var registry: ModuleRegistry
     
     override fun loadConnNodes(): List<ConnNode> {
         // TODO

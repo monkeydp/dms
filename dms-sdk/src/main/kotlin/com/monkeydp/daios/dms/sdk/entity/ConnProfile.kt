@@ -5,8 +5,6 @@ import com.monkeydp.daios.dms.sdk.datasource.Datasource
 import com.monkeydp.daios.dms.sdk.dm.DmImplRegistry
 import com.monkeydp.daios.dms.sdk.metadata.form.CpForm
 import com.monkeydp.daios.dms.sdk.useful.UserInput
-import com.monkeydp.daios.dms.sdk.util.IdUtil
-import com.monkeydp.daios.dms.sdk.util.IdUtil.INVALID_ID
 import io.swagger.annotations.ApiModel
 import io.swagger.annotations.ApiModelProperty
 import javax.persistence.Column
@@ -23,12 +21,16 @@ import javax.persistence.Enumerated
 @ApiModel
 data class ConnProfile(
         override val id: Long = INVALID_ID,
-
+        
+        @JsonIgnore
+        @Column(nullable = false)
+        val userId: Long = User.mockUser.id,
+        
         @Column(nullable = false)
         @Enumerated(STRING)
         @ApiModelProperty(required = true, example = "MYSQL")
         val datasource: Datasource,
-
+        
         @Column(nullable = false)
         @ApiModelProperty(value = "datasource version id", required = true, example = "5.7")
         val dsVersionId: String,
@@ -40,7 +42,7 @@ data class ConnProfile(
         @JsonIgnore
         @ApiModelProperty(hidden = true)
         val dsDriverClassname: String = "",
-
+        
         @Column(nullable = false, length = 1024)
         @Convert(converter = UserInput.StringConverter::class)
         @ApiModelProperty(
@@ -67,6 +69,5 @@ data class ConnProfile(
             return userInput.convertTo(cpFormClass)
         }
     
-    @JsonIgnore
-    fun isValid() = IdUtil.isValid(id) && dsDriverClassname.isNotBlank()
+    override fun isValid() = super.isValid() && dsDriverClassname.isNotBlank()
 }

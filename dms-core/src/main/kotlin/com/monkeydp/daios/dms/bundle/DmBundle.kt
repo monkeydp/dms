@@ -92,7 +92,7 @@ class DmBundle(private val deployDir: File, private val dmClassname: String) {
         return dmClass.fields.first { it.name == "INSTANCE" }.get(dmClass) as Dm
     }
     
-    fun getDsDriverClassname(dsVersion: DsVersion<*>) = dsDefMap[dsVersion]?.driver?.classname!!
+    fun getDriverClassname(dsVersion: DsVersion<*>) = dsDefMap[dsVersion]?.driver?.classname!!
     
     fun setSpecificClassLoader(dsVersion: DsVersion<*>) {
         bundleClassLoader.setSpecificClassLoader(dsVersion)
