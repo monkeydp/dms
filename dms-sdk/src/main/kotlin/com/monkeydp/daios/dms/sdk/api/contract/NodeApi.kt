@@ -1,4 +1,4 @@
-package com.monkeydp.daios.dms.sdk.api
+package com.monkeydp.daios.dms.sdk.api.contract
 
 import com.monkeydp.daios.dms.sdk.metadata.node.Node
 import com.monkeydp.daios.dms.sdk.metadata.node.NodeLoadContext
