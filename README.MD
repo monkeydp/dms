@@ -100,3 +100,6 @@ ni | node info
 &nbsp;|
 **# N** |
 tpl | template
+&nbsp;|
+**# P** |
+prop | property
