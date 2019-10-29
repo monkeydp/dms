@@ -1,11 +1,9 @@
 package com.monkeydp.daios.dms.sdk.dm
 
+import com.monkeydp.daios.dms.sdk.contract.Enumx
 import com.monkeydp.daios.dms.sdk.datasource.Datasource
 import com.monkeydp.daios.dms.sdk.datasource.DsVersion
 import com.monkeydp.daios.dms.sdk.metadata.form.CpForm
-import com.monkeydp.daios.dms.sdk.metadata.icon.Icon
-import com.monkeydp.daios.dms.sdk.metadata.instruction.action.Action
-import com.monkeydp.daios.dms.sdk.metadata.instruction.target.Target
 import kotlin.reflect.KClass
 import kotlin.reflect.full.isSubclassOf
 
@@ -15,36 +13,40 @@ import kotlin.reflect.full.isSubclassOf
  */
 object DmImplRegistry {
     
-    private val dsVersions = mutableListOf<DsVersion<*>>()
-    private val actions = mutableListOf<Action<*>>()
-    private val targets = mutableListOf<Target<*>>()
-    private val icons = mutableListOf<Icon<*>>()
+    val enumListMap =
+            mutableMapOf<KClass<out Enumx<*>>, List<Enumx<*>>>()
     
     private val cpFormClassMap = mutableMapOf<Datasource, KClass<out CpForm>>()
     
-    internal fun registerEnum(enum: Enum<*>, datasource: Datasource? = null) {
-        datasource?.checkPrefix(enum.name)
-        when (enum) {
-            is DsVersion<*> -> dsVersions.add(enum)
-            is Action<*>    -> actions.add(enum)
-            is Target<*>    -> targets.add(enum)
-            is Icon<*>      -> icons.add(enum)
-        }
+    internal fun registerEnum(enum: Enumx<*>, datasource: Datasource? = null) {
+        val contract = Enumx.getContract(enum)
+        datasource?.checkPrefix(enum.asEnum().name)
+        val oldEnumList = enumListMap[contract]
+        val newEnumList = mutableListOf<Enumx<*>>(enum)
+        if (oldEnumList != null) newEnumList.addAll(oldEnumList)
+        enumListMap[contract] = newEnumList.toList()
     }
     
     @Suppress("UNCHECKED_CAST")
+    fun <E : Enumx<out E>> getEnumList(clazz: KClass<E>) =
+            enumListMap.getValue(Enumx.getContract(clazz)) as List<E>
+    
+    inline fun <reified E : Enumx<out E>> getEnum(enumName: String): E {
+        val enumList = getEnumList(E::class)
+        return enumList.first { it.asEnum().name == enumName }
+    }
+    
     internal fun registerClass(clazz: KClass<*>, datasource: Datasource) {
+        @Suppress("UNCHECKED_CAST")
         when {
             clazz.isSubclassOf(CpForm::class) -> cpFormClassMap.putIfAbsent(datasource, clazz as KClass<out CpForm>)
         }
     }
     
-    fun getDsVersion(datasource: Datasource, dsVersionId: String) =
-            dsVersions.first { it.datasource == datasource && it.id == dsVersionId }
-    
-    fun getAction(enumName: String) = actions.first { it.asEnum().name == enumName }
-    fun getTarget(enumName: String) = targets.first { it.asEnum().name == enumName }
-    fun getIcon(enumName: String) = icons.first { it.asEnum().name == enumName }
+    fun getDsVersion(datasource: Datasource, dsVersionId: String): DsVersion<*> {
+        val enumList = getEnumList(DsVersion::class)
+        return enumList.first { it.datasource == datasource && it.id == dsVersionId }
+    }
     
     fun getCpFormClass(datasource: Datasource) = cpFormClassMap.get(datasource)!!
 }

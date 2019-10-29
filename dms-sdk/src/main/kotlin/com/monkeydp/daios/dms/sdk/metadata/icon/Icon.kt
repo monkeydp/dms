@@ -30,7 +30,7 @@ interface Icon<E> : Enumx<E>
     class IconDeserializer : JsonDeserializer<Icon<*>>() {
         override fun deserialize(p: JsonParser?, ctxt: DeserializationContext?): Icon<*> {
             val name = p?.getValueAsString()!!
-            return DmImplRegistry.getIcon(name)
+            return DmImplRegistry.getEnum(name)
         }
     }
 }

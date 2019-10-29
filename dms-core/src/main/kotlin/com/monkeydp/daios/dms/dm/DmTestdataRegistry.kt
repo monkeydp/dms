@@ -1,6 +1,8 @@
 package com.monkeydp.daios.dms.dm
 
-import com.monkeydp.daios.dms.sdk.datasource.Datasource.MYSQL
+import com.monkeydp.daios.dms.sdk.conn.ConnJsonMocker.DATASOURCE
+import com.monkeydp.daios.dms.sdk.conn.ConnJsonMocker.DS_VERSION_ID
+import com.monkeydp.daios.dms.sdk.datasource.Datasource
 import com.monkeydp.daios.dms.sdk.datasource.DsVersion
 import com.monkeydp.daios.dms.sdk.dm.DmImplRegistry
 import com.monkeydp.daios.dms.sdk.entity.ConnProfile
@@ -11,17 +13,16 @@ import com.monkeydp.daios.dms.sdk.entity.ConnProfile
  */
 internal object DmTestdataRegistry {
     
-    private val testDs = MYSQL
-    private const val testDsVersionId = "5.7"
-    private val testDsVersion = DmImplRegistry.getDsVersion(testDs, testDsVersionId)
+    private val testDs = Datasource.valueOf(DATASOURCE)
+    private val testDsVersion = DmImplRegistry.getDsVersion(testDs, DS_VERSION_ID)
     
     /**
-     * Not in db
+     * Not in db, include all test cps of every dm
      */
     val cps = mutableListOf<ConnProfile>()
     
     val savedCpMap = mutableMapOf<DsVersion<*>, ConnProfile>()
     
     val testCp
-        get() = savedCpMap[testDsVersion]!!
+        get() = savedCpMap.getValue(testDsVersion)
 }

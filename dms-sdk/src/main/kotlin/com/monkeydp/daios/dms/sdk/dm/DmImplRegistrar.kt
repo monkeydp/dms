@@ -1,5 +1,6 @@
 package com.monkeydp.daios.dms.sdk.dm
 
+import com.monkeydp.daios.dms.sdk.contract.Enumx
 import com.monkeydp.daios.dms.sdk.datasource.Datasource
 import com.monkeydp.daios.dms.sdk.dm.Dm.Impl
 import com.monkeydp.daios.dms.sdk.metadata.icon.GlobalIcon
@@ -14,7 +15,7 @@ import kotlin.reflect.KClass
  */
 object DmImplRegistrar {
     
-    private val globalEnumClasses = listOf<KClass<out Enum<*>>>(
+    private val globalEnumClasses = listOf<KClass<out Enumx<*>>>(
             GlobalAction::class,
             GlobalTarget::class,
             GlobalIcon::class
@@ -35,13 +36,12 @@ object DmImplRegistrar {
         registerLocalEnums(implEnumClasses, datasource)
     }
     
-    private fun registerGlobalEnums(enumClasses: List<KClass<out Enum<*>>>) {
+    private fun registerGlobalEnums(enumClasses: List<KClass<out Enumx<*>>>) {
         enumClasses.forEach { it.java.enumConstants.forEach { e -> DmImplRegistry.registerEnum(e) } }
     }
     
     private fun registerLocalEnums(implEnumClasses: Impl.EnumClasses, datasource: Datasource) {
-        @Suppress("UNCHECKED_CAST")
-        val enumClasses = FieldUtil.getNotnullValues<Class<*>>(implEnumClasses) as List<KClass<Enum<*>>>
+        val enumClasses = FieldUtil.getNotnullValues<KClass<Enumx<*>>>(implEnumClasses)
         enumClasses.forEach { it.java.enumConstants.forEach { e -> DmImplRegistry.registerEnum(e, datasource) } }
     }
 }
