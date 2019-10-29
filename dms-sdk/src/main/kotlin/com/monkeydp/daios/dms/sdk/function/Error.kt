@@ -1,4 +1,4 @@
-package com.monkeydp.daios.dms.sdk
+package com.monkeydp.daios.dms.sdk.function
 
 import com.github.javafaker.Faker
 import com.monkeydp.daios.dms.sdk.business.BusinessInfo
@@ -9,8 +9,6 @@ import com.monkeydp.daios.dms.sdk.datasource.exception.StdDatasourceException
  * @author iPotato
  * @date 2019/10/23
  */
-val faker = Faker()
-
 fun derror(cause: Throwable) {
     throw StdDatasourceException(cause)
 }

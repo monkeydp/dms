@@ -27,7 +27,7 @@ object DmImplRegistrar {
     }
     
     private fun registerClasses(implClasses: Impl.Classes, datasource: Datasource) {
-        val classes = FieldUtil.getNotnullValues<KClass<*>>(implClasses)
+        val classes = FieldUtil.getNotnullValues<KClass<*>>(implClasses, true)
         classes.forEach { clazz -> DmImplRegistry.registerClass(clazz, datasource) }
     }
     
@@ -41,7 +41,7 @@ object DmImplRegistrar {
     }
     
     private fun registerLocalEnums(implEnumClasses: Impl.EnumClasses, datasource: Datasource) {
-        val enumClasses = FieldUtil.getNotnullValues<KClass<Enumx<*>>>(implEnumClasses)
+        val enumClasses = FieldUtil.getNotnullValues<KClass<Enumx<*>>>(implEnumClasses, true)
         enumClasses.forEach { it.java.enumConstants.forEach { e -> DmImplRegistry.registerEnum(e, datasource) } }
     }
 }
