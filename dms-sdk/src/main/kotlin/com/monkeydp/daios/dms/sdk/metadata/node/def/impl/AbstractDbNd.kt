@@ -9,6 +9,6 @@ import com.monkeydp.daios.dms.sdk.metadata.node.def.DbNd
  * @author iPotato
  * @date 2019/10/27
  */
-abstract class AbstractDbNd : DbNd, AbstractNd() {
-    override val info = NodeInfo(GlobalTarget.DB, "", GlobalIcon.DB_ICON)
+abstract class AbstractDbNd(name: String = "") : DbNd, AbstractNd() {
+    override val info = NodeInfo(GlobalTarget.DB, name, GlobalIcon.DB_ICON)
 }

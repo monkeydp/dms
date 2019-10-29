@@ -9,6 +9,6 @@ import com.monkeydp.daios.dms.sdk.metadata.node.def.ConnNd
  * @author iPotato
  * @date 2019/10/28
  */
-abstract class AbstractConnNd : ConnNd, AbstractNd() {
-    override val info = NodeInfo(GlobalTarget.CONN, "", GlobalIcon.CONN_ICON)
+abstract class AbstractConnNd(name: String = "") : ConnNd, AbstractNd() {
+    override val info = NodeInfo(GlobalTarget.CONN, name, GlobalIcon.CONN_ICON)
 }

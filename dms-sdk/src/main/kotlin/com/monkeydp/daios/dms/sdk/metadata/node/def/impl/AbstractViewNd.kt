@@ -8,6 +8,6 @@ import com.monkeydp.daios.dms.sdk.metadata.node.NodeInfo
  * @author iPotato
  * @date 2019/10/28
  */
-abstract class AbstractViewNd : AbstractNd() {
-    override val info = NodeInfo(GlobalTarget.VIEW, "", GlobalIcon.VIEW_ICON)
+abstract class AbstractViewNd(name: String = "") : AbstractNd() {
+    override val info = NodeInfo(GlobalTarget.VIEW, name, GlobalIcon.VIEW_ICON)
 }

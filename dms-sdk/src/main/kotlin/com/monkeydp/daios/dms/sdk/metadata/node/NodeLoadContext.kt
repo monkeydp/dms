@@ -10,9 +10,6 @@ data class NodeLoadContext(
         var conn: Conn<*>,
         val path: NodeInfoPath
 ) {
-    val lastTarget
-        get() = path.last().target
-    
     companion object {
         fun mock(conn: Conn<*>, path: NodeInfoPath) = NodeLoadContext(conn, path)
     }

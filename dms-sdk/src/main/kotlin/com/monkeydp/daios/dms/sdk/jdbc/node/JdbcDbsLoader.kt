@@ -1,6 +1,5 @@
 package com.monkeydp.daios.dms.sdk.jdbc.node
 
-import com.monkeydp.daios.dms.sdk.api.contract.node.DbNodeLoader
 import com.monkeydp.daios.dms.sdk.metadata.node.def.DbNd
 import com.monkeydp.daios.dms.sdk.metadata.node.impl.DbNode
 import java.sql.Connection
@@ -9,8 +8,8 @@ import java.sql.Connection
  * @author iPotato
  * @date 2019/10/29
  */
-class JdbcDbNodeLoader : DbNodeLoader {
-    override fun loadDbNodes(connection: Connection, def: DbNd, sql: String): List<DbNode> {
+object JdbcDbsLoader {
+    fun loadDbs(connection: Connection, def: DbNd, sql: String): List<DbNode> {
         val statement = connection.createStatement()
         val nodes = mutableListOf<DbNode>()
         statement.use {
