@@ -43,10 +43,10 @@ interface Dm {
         }
         
         interface EnumClasses {
-            val dsVersionClass: Class<out DsVersion<*>>
-            val actionClass: Class<out Action<*>>
-            val targetClass: Class<out Target<*>>
-            val iconClass: Class<out Icon<*>>
+            val dsVersionClass: KClass<out DsVersion<*>>
+            val actionClass: KClass<out Action<*>>
+            val targetClass: KClass<out Target<*>>
+            val iconClass: KClass<out Icon<*>>
         }
     }
     

@@ -14,10 +14,10 @@ import kotlin.reflect.KClass
  */
 object DmImplRegistrar {
     
-    private val globalEnumClasses = listOf<Class<out Enum<*>>>(
-            GlobalAction::class.java,
-            GlobalTarget::class.java,
-            GlobalIcon::class.java
+    private val globalEnumClasses = listOf<KClass<out Enum<*>>>(
+            GlobalAction::class,
+            GlobalTarget::class,
+            GlobalIcon::class
     )
     
     fun registerAll(impl: Impl, datasource: Datasource) {
@@ -35,13 +35,13 @@ object DmImplRegistrar {
         registerLocalEnums(implEnumClasses, datasource)
     }
     
-    private fun registerGlobalEnums(enumClasses: List<Class<out Enum<*>>>) {
-        enumClasses.forEach { it.enumConstants.forEach { e -> DmImplRegistry.registerEnum(e) } }
+    private fun registerGlobalEnums(enumClasses: List<KClass<out Enum<*>>>) {
+        enumClasses.forEach { it.java.enumConstants.forEach { e -> DmImplRegistry.registerEnum(e) } }
     }
     
     private fun registerLocalEnums(implEnumClasses: Impl.EnumClasses, datasource: Datasource) {
         @Suppress("UNCHECKED_CAST")
-        val enumClasses = FieldUtil.getNotnullValues<Class<*>>(implEnumClasses) as List<Class<Enum<*>>>
-        enumClasses.forEach { it.enumConstants.forEach { e -> DmImplRegistry.registerEnum(e, datasource) } }
+        val enumClasses = FieldUtil.getNotnullValues<Class<*>>(implEnumClasses) as List<KClass<Enum<*>>>
+        enumClasses.forEach { it.java.enumConstants.forEach { e -> DmImplRegistry.registerEnum(e, datasource) } }
     }
 }
