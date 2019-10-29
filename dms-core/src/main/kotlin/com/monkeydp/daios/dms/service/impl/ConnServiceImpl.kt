@@ -9,7 +9,8 @@ import com.monkeydp.daios.dms.curd.service.contract.ConnProfileService
 import com.monkeydp.daios.dms.sdk.conn.Conn
 import com.monkeydp.daios.dms.sdk.entity.ConnProfile
 import com.monkeydp.daios.dms.service.contract.ConnService
-import com.monkeydp.tools.ierror
+import com.monkeydp.tools.function.getLogger
+import com.monkeydp.tools.function.ierror
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 
@@ -19,6 +20,10 @@ import org.springframework.stereotype.Service
  */
 @Service
 internal class ConnServiceImpl : ConnService {
+    
+    companion object {
+        private val log = getLogger()
+    }
     
     @Autowired
     private lateinit var session: UserSession
@@ -54,7 +59,10 @@ internal class ConnServiceImpl : ConnService {
     
     private fun openUserConn(cpId: Long): ConnWrapper {
         val activeUserCw = manager.getActiveUserCw(cpId, true)
-        if (activeUserCw != null) return activeUserCw
+        if (activeUserCw != null) {
+            log.debug("Conn(id = ${activeUserCw.connId}) with cpId = $cpId is active ,return it directly.")
+            return activeUserCw
+        }
         return innerOpenConn(cpId)
     }
     

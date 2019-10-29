@@ -11,6 +11,7 @@ import com.monkeydp.daios.dms.sdk.metadata.icon.Icon
 import com.monkeydp.daios.dms.sdk.metadata.instruction.action.Action
 import com.monkeydp.daios.dms.sdk.metadata.instruction.target.Target
 import com.monkeydp.daios.dms.sdk.metadata.node.def.ConnNd
+import kotlin.reflect.KClass
 
 /**
  * Datasource module
@@ -38,7 +39,7 @@ interface Dm {
         }
     
         interface Classes {
-            val cpFormClass: Class<out CpForm>
+            val cpFormClass: KClass<out CpForm>
         }
         
         interface EnumClasses {

@@ -16,6 +16,10 @@ spring:
   h2:
     console:
       enabled: true
+logging:
+  level:
+    root: WARN
+    com.monkeydp: DEBUG
 dms:
   root-dir: ${rootDir}
   module:

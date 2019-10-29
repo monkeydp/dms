@@ -2,6 +2,7 @@ package com.monkeydp.daios.dms.sdk.useful
 
 import com.monkeydp.tools.util.JsonUtil
 import javax.persistence.AttributeConverter
+import kotlin.reflect.KClass
 
 /**
  * Parameters entered by the user
@@ -12,7 +13,7 @@ import javax.persistence.AttributeConverter
 class UserInput() : HashMap<String, String>() {
     
     inline fun <reified T> convertTo() = JsonUtil.convertTo<T>(this)
-    fun <T> convertTo(clazz: Class<T>) = JsonUtil.convertTo<T>(this, clazz)
+    fun <T : Any> convertTo(clazz: KClass<T>) = JsonUtil.convertTo<T>(this, clazz.java)
     
     class StringConverter : AttributeConverter<UserInput, String> {
         override fun convertToDatabaseColumn(attribute: UserInput): String = JsonUtil.toString(attribute)

@@ -5,7 +5,7 @@ import com.monkeydp.daios.dms.boot.BootContext.Module.moduleDirs
 import com.monkeydp.daios.dms.boot.BootContext.Module.modulesDir
 import com.monkeydp.daios.dms.boot.BootContext.Module.outsideModuleZips
 import com.monkeydp.daios.dms.boot.BootContext.gradlewPath
-import com.monkeydp.tools.ierror
+import com.monkeydp.tools.function.ierror
 import com.monkeydp.tools.util.FileUtil
 import net.lingala.zip4j.ZipFile
 import org.apache.commons.exec.CommandLine

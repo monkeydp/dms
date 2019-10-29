@@ -6,6 +6,7 @@ import com.monkeydp.daios.dms.sdk.metadata.icon.GlobalIcon
 import com.monkeydp.daios.dms.sdk.metadata.instruction.action.GlobalAction
 import com.monkeydp.daios.dms.sdk.metadata.instruction.target.GlobalTarget
 import com.monkeydp.tools.util.FieldUtil
+import kotlin.reflect.KClass
 
 /**
  * @author iPotato
@@ -25,7 +26,7 @@ object DmImplRegistrar {
     }
     
     private fun registerClasses(implClasses: Impl.Classes, datasource: Datasource) {
-        val classes = FieldUtil.getNotnullValues<Class<*>>(implClasses)
+        val classes = FieldUtil.getNotnullValues<KClass<*>>(implClasses)
         classes.forEach { clazz -> DmImplRegistry.registerClass(clazz, datasource) }
     }
     

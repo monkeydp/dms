@@ -1,6 +1,6 @@
 package com.monkeydp.daios.dms.sdk.datasource
 
-import com.monkeydp.tools.ierror
+import com.monkeydp.tools.function.ierror
 
 /**
  * @author iPotato

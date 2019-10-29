@@ -6,6 +6,8 @@ import com.monkeydp.daios.dms.sdk.metadata.form.CpForm
 import com.monkeydp.daios.dms.sdk.metadata.icon.Icon
 import com.monkeydp.daios.dms.sdk.metadata.instruction.action.Action
 import com.monkeydp.daios.dms.sdk.metadata.instruction.target.Target
+import kotlin.reflect.KClass
+import kotlin.reflect.full.isSubclassOf
 
 /**
  * @author iPotato
@@ -18,7 +20,7 @@ object DmImplRegistry {
     private val targets = mutableListOf<Target<*>>()
     private val icons = mutableListOf<Icon<*>>()
     
-    private val cpFormClassMap = mutableMapOf<Datasource, Class<out CpForm>>()
+    private val cpFormClassMap = mutableMapOf<Datasource, KClass<out CpForm>>()
     
     internal fun registerEnum(enum: Enum<*>, datasource: Datasource? = null) {
         datasource?.checkPrefix(enum.name)
@@ -31,8 +33,10 @@ object DmImplRegistry {
     }
     
     @Suppress("UNCHECKED_CAST")
-    internal fun registerClass(clazz: Class<*>, datasource: Datasource) {
-        if (CpForm::class.java.isAssignableFrom(clazz)) cpFormClassMap.putIfAbsent(datasource, clazz as Class<CpForm>)
+    internal fun registerClass(clazz: KClass<*>, datasource: Datasource) {
+        when {
+            clazz.isSubclassOf(CpForm::class) -> cpFormClassMap.putIfAbsent(datasource, clazz as KClass<out CpForm>)
+        }
     }
     
     fun getDsVersion(datasource: Datasource, dsVersionId: String) =

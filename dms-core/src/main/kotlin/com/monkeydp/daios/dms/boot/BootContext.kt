@@ -3,7 +3,7 @@ package com.monkeydp.daios.dms.boot
 import com.monkeydp.daios.dms.boot.BootContext.Module.dmDirs
 import com.monkeydp.daios.dms.boot.BootContext.Module.dmParentDir
 import com.monkeydp.daios.dms.boot.BootContext.Module.modulesDir
-import com.monkeydp.tools.ierror
+import com.monkeydp.tools.function.ierror
 import com.monkeydp.tools.util.FileUtil
 import com.monkeydp.tools.util.SystemUtil
 import org.springframework.core.env.ConfigurableEnvironment

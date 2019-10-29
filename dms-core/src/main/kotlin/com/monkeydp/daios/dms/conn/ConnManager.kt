@@ -4,7 +4,7 @@ import com.monkeydp.daios.dms.sdk.entity.ConnProfile
 import com.monkeydp.daios.dms.sdk.util.IdUtil
 import com.monkeydp.daios.dms.sdk.util.IdUtil.INVALID_ID
 import com.monkeydp.tools.exception.inner.AbstractInnerException
-import com.monkeydp.tools.ierror
+import com.monkeydp.tools.function.ierror
 import org.springframework.stereotype.Component
 
 /**
