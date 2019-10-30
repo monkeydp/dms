@@ -22,12 +22,12 @@ abstract class AbstractDm : Dm {
         fun defMap(): Map<String, NodeDef>
     }
     
-    override fun initialize(path: DmNewPath?) {
-        if (path != null) updatePath(path)
+    override fun initialize(config: DmNewConfig?) {
+        if (config != null) updateConfig(config)
         registerStaticComponents()
     }
     
-    protected abstract fun updatePath(path: DmNewPath)
+    protected abstract fun updateConfig(config: DmNewConfig)
     
     private fun registerStaticComponents() {
         log.info("Begin to register all dm static components!")

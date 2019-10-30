@@ -42,8 +42,8 @@ interface Icon<E> : Enumx<E>
     @JsonValue
     fun jsonValue(): Map<String, Any?> {
         val map = mutableMapOf<String, Any?>()
-        map[Enum<*>::name.name] = asEnum().name
         map.putAll(toPropMap())
+        map.remove(Enum<*>::ordinal.name)
         return map
     }
 }

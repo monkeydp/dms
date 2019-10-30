@@ -6,7 +6,7 @@ import com.monkeydp.daios.dms.sdk.datasource.DsVersion
 import com.monkeydp.daios.dms.sdk.dm.Dm
 import com.monkeydp.daios.dms.sdk.dm.Dm.DsDef
 import com.monkeydp.daios.dms.sdk.dm.Dm.Impl
-import com.monkeydp.daios.dms.sdk.dm.DmNewPath
+import com.monkeydp.daios.dms.sdk.dm.DmNewConfig
 import com.monkeydp.daios.dms.sdk.metadata.node.def.ConnNd
 import com.monkeydp.tools.ext.singletonInstanceX
 import com.monkeydp.tools.util.FileUtil
@@ -44,7 +44,7 @@ class DmBundle(private val deployDir: File, private val dmClassname: String) {
         bundleClassLoader = initBundleClassLoader()
         dm = loadDm()
         dm.initialize(
-                DmNewPath(deployDir.path, "${deployDir.path}/$classesPath", bundleClassLoader)
+                DmNewConfig(deployDir.path, "${deployDir.path}/$classesPath", bundleClassLoader)
         )
         impl = dm.impl
         datasource = dm.datasource

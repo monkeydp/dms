@@ -6,7 +6,7 @@ import com.monkeydp.tools.ext.toStdPath
  * @author iPotato
  * @date 2019/10/30
  */
-class DmNewPath(
+class DmNewConfig(
         deployedDirpath: String,
         classesDirpath: String,
         val classLoader: ClassLoader

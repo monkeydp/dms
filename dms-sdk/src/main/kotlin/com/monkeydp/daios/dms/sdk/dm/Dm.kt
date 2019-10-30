@@ -63,7 +63,7 @@ interface Dm {
     }
     
     /**
-     * @path null when called by dm, must notnull if called by dms!
+     * @config null when called by dm, must notnull if called by dms!
      */
-    fun initialize(path: DmNewPath? = null)
+    fun initialize(config: DmNewConfig? = null)
 }
