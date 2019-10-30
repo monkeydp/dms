@@ -7,8 +7,8 @@ import com.monkeydp.daios.dms.sdk.metadata.node.NodeInfo
  * @date 2019/10/25
  */
 interface NodeDef {
-    val structureName: String
+    val structName: String
     val info: NodeInfo
     val parent: NodeDef?
-    val children: List<NodeDef>
+    var children: List<NodeDef>
 }

@@ -11,7 +11,7 @@ import kotlin.properties.Delegates
  * @date 2019/10/27
  */
 abstract class AbstractNd : NodeDef {
-    override val structureName: String
+    override val structName: String
         get() {
             val classname = this.javaClass.simpleName
             if (classname == "abstract") return "<no name for abstract>"

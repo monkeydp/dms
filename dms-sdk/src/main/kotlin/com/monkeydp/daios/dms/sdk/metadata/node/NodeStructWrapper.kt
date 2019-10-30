@@ -6,6 +6,6 @@ import com.fasterxml.jackson.databind.JsonNode
  * @author iPotato
  * @date 2019/10/30
  */
-interface NodeStruct {
+interface NodeStructWrapper {
     val structure: JsonNode
 }

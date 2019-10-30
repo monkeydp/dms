@@ -1,6 +1,7 @@
 package com.monkeydp.daios.dms.sdk.dm
 
-import com.monkeydp.daios.dms.sdk.metadata.node.NodeStruct
+import com.fasterxml.jackson.databind.JsonNode
+import com.monkeydp.daios.dms.sdk.metadata.node.NodeStructWrapper
 import com.monkeydp.daios.dms.sdk.metadata.node.def.NodeDef
 import com.monkeydp.tools.ext.getLogger
 
@@ -12,12 +13,12 @@ abstract class AbstractDm : Dm {
     companion object {
         val log = getLogger()
     }
-
-//    abstract val nodeData: NodeData
+    
+    abstract val nodeData: NodeData
     
     interface NodeData {
-        val defs: List<NodeDef>
-        val struct: NodeStruct
+        val defMap: Map<String, NodeDef>
+        val structWrapper: NodeStructWrapper
     }
     
     override fun initialize() {
@@ -36,6 +37,21 @@ abstract class AbstractDm : Dm {
      * Initialize node structure
      */
     private fun initNodeStruct() {
-        // TODO
+        val struct = nodeData.structWrapper.structure
+        recurAssignNodeDefChildren(struct)
+    }
+    
+    private fun recurAssignNodeDefChildren(struct: JsonNode) {
+        val defMap = nodeData.defMap
+        struct.fields().forEach { (structName, subStruct) ->
+            val def = defMap.getValue(structName)
+            val children = mutableListOf<NodeDef>()
+            subStruct.fields().forEach { (subStructName, _) ->
+                children.add(defMap.getValue(subStructName))
+            }
+            def.children = children.toList()
+            recurAssignNodeDefChildren(subStruct)
+        }
+        
     }
 }
