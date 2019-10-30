@@ -86,7 +86,6 @@ def | definition
 err | error
 &nbsp;|
 **# G** |
-gnd | group node definition
 &nbsp;|
 **# I** |
 instr | instruction
