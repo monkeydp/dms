@@ -1,13 +1,11 @@
 package com.monkeydp.daios.dms.bundle
 
-import com.monkeydp.daios.dms.dm.DmTestdataRegistrar
 import com.monkeydp.daios.dms.sdk.api.contract.ConnApi
 import com.monkeydp.daios.dms.sdk.datasource.Datasource
 import com.monkeydp.daios.dms.sdk.datasource.DsVersion
 import com.monkeydp.daios.dms.sdk.dm.Dm
 import com.monkeydp.daios.dms.sdk.dm.Dm.DsDef
 import com.monkeydp.daios.dms.sdk.dm.Dm.Impl
-import com.monkeydp.daios.dms.sdk.dm.DmImplRegistrar
 import com.monkeydp.daios.dms.sdk.metadata.node.def.ConnNd
 import com.monkeydp.tools.util.FileUtil
 import java.io.File
@@ -42,13 +40,12 @@ class DmBundle(private val deployDir: File, private val dmClassname: String) {
     
     init {
         bundleClassLoader = initBundleClassLoader()
-        dm = initDm()
+        dm = loadDm()
+        dm.initialize()
         impl = dm.impl
         datasource = dm.datasource
         connNd = dm.connNd
         apis = impl.apis
-        DmImplRegistrar.registerAll(impl, datasource)
-        DmTestdataRegistrar.registerAll(dm.testdata)
         dsDefMap = dm.dsDefs.map { it.version to it }.toMap()
         bundleClassLoader.specificClassLoaders = initSpecificClassLoaderMap()
     }
@@ -86,7 +83,7 @@ class DmBundle(private val deployDir: File, private val dmClassname: String) {
         return jars.map { it.toURI().toURL() }.toTypedArray()
     }
     
-    private fun initDm(): Dm {
+    private fun loadDm(): Dm {
         @Suppress("UNCHECKED_CAST")
         val dmClass: Class<out Dm> = bundleClassLoader.loadClass(dmClassname) as Class<out Dm>
         return dmClass.fields.first { it.name == "INSTANCE" }.get(dmClass) as Dm

@@ -1,7 +1,7 @@
 package com.monkeydp.daios.dms.conn
 
 import com.monkeydp.daios.dms.curd.service.contract.ConnProfileService
-import com.monkeydp.daios.dms.dm.DmTestdataRegistry
+import com.monkeydp.daios.dms.sdk.dm.DmTestdataRegistry
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.CommandLineRunner
 import org.springframework.stereotype.Component

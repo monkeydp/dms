@@ -3,6 +3,8 @@ package com.monkeydp.daios.dms.sdk.metadata.node.def.impl
 import com.monkeydp.daios.dms.sdk.metadata.node.def.NodeDef
 import com.monkeydp.tools.ext.camelCase2List
 import com.monkeydp.tools.ext.lastOf
+import com.monkeydp.tools.ext.notNullSingleInit
+import kotlin.properties.Delegates
 
 /**
  * @author iPotato
@@ -16,5 +18,5 @@ abstract class AbstractNd : NodeDef {
             return classname.camelCase2List().lastOf(1).toLowerCase()
         }
     override val parent: NodeDef? = null
-    override val children = emptyList<NodeDef>()
+    override var children by Delegates.notNullSingleInit<List<NodeDef>>()
 }

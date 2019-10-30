@@ -61,4 +61,6 @@ interface Dm {
     interface Testdata {
         val cps: List<ConnProfile>
     }
+    
+    fun initialize()
 }

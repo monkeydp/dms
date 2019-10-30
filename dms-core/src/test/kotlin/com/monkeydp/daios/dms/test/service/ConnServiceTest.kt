@@ -1,6 +1,6 @@
 package com.monkeydp.daios.dms.test.service
 
-import com.monkeydp.daios.dms.dm.DmTestdataRegistry.testCp
+import com.monkeydp.daios.dms.sdk.dm.DmTestdataRegistry.testCp
 import com.monkeydp.daios.dms.service.contract.ConnService
 import org.junit.Assert
 import org.junit.Test
