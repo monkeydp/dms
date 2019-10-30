@@ -6,7 +6,7 @@ import com.monkeydp.daios.dms.sdk.dm.Dm.Impl
 import com.monkeydp.daios.dms.sdk.metadata.icon.GlobalIcon
 import com.monkeydp.daios.dms.sdk.metadata.instruction.action.GlobalAction
 import com.monkeydp.daios.dms.sdk.metadata.instruction.target.GlobalTarget
-import com.monkeydp.tools.util.FieldUtil
+import com.monkeydp.tools.function.toPropListX
 import kotlin.reflect.KClass
 
 /**
@@ -27,7 +27,7 @@ object DmImplRegistrar {
     }
     
     private fun registerClasses(implClasses: Impl.Classes, datasource: Datasource) {
-        val classes = FieldUtil.getNotnullValues<KClass<*>>(implClasses, true)
+        val classes = implClasses.toPropListX<KClass<*>>()
         classes.forEach { clazz -> DmImplRegistry.registerClass(clazz, datasource) }
     }
     
@@ -41,7 +41,7 @@ object DmImplRegistrar {
     }
     
     private fun registerLocalEnums(implEnumClasses: Impl.EnumClasses, datasource: Datasource) {
-        val enumClasses = FieldUtil.getNotnullValues<KClass<Enumx<*>>>(implEnumClasses, true)
+        val enumClasses = implEnumClasses.toPropListX<KClass<Enumx<*>>>()
         enumClasses.forEach { it.java.enumConstants.forEach { e -> DmImplRegistry.registerEnum(e, datasource) } }
     }
 }
