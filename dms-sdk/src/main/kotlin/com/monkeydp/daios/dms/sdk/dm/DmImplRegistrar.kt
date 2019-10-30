@@ -6,7 +6,7 @@ import com.monkeydp.daios.dms.sdk.dm.Dm.Impl
 import com.monkeydp.daios.dms.sdk.metadata.icon.GlobalIcon
 import com.monkeydp.daios.dms.sdk.metadata.instruction.action.GlobalAction
 import com.monkeydp.daios.dms.sdk.metadata.instruction.target.GlobalTarget
-import com.monkeydp.tools.function.toPropListX
+import com.monkeydp.tools.ext.toPropListX
 import kotlin.reflect.KClass
 
 /**

@@ -9,8 +9,8 @@ import com.monkeydp.daios.dms.curd.service.contract.ConnProfileService
 import com.monkeydp.daios.dms.sdk.conn.Conn
 import com.monkeydp.daios.dms.sdk.entity.ConnProfile
 import com.monkeydp.daios.dms.service.contract.ConnService
-import com.monkeydp.tools.function.getLogger
-import com.monkeydp.tools.function.ierror
+import com.monkeydp.tools.ext.getLogger
+import com.monkeydp.tools.ext.ierror
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 
