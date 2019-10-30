@@ -103,3 +103,6 @@ tpl | template
 &nbsp;|
 **# P** |
 prop | property
+&nbsp;|
+**# S** |
+struct | structure
