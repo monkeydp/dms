@@ -30,7 +30,7 @@ class ModuleDeployer {
      */
     private fun deployModule(moduleDir: File) {
         val configFile = File(moduleDir, Module.configFilename)
-        val config = YamlUtil.loadAs(configFile, DmConfig::class.java)
+        val config = YamlUtil.loadAs<DmConfig>(configFile)
         val dmClassname = config.dmClassname
         val dmBundle = DmBundle(moduleDir, dmClassname)
         moduleRegistry.registerModule(dmBundle)
