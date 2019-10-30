@@ -18,13 +18,16 @@ abstract class AbstractDm : Dm {
     private var isNodeStructInitialized = false
     
     interface NodeData {
-        val defMap: Map<String, NodeDef>
-        val structWrapper: NodeStructWrapper
+        fun structWrapper(): NodeStructWrapper
+        fun defMap(): Map<String, NodeDef>
     }
     
-    override fun initialize() {
+    override fun initialize(path: DmNewPath?) {
+        if (path != null) updatePath(path)
         registerStaticComponents()
     }
+    
+    protected abstract fun updatePath(path: DmNewPath)
     
     private fun registerStaticComponents() {
         log.info("Begin to register all dm static components!")
@@ -40,13 +43,13 @@ abstract class AbstractDm : Dm {
     @Synchronized
     private fun initNodeStruct() {
         if (isNodeStructInitialized) return
-        val struct = nodeData.structWrapper.structure
+        val struct = nodeData.structWrapper().structure
         recurAssignNodeDefChildren(struct)
         isNodeStructInitialized = true
     }
     
     private fun recurAssignNodeDefChildren(struct: JsonNode) {
-        val defMap = nodeData.defMap
+        val defMap = nodeData.defMap()
         val fields = struct.fields()
         fields.forEach { (structName, subStruct) ->
             val def = defMap.getValue(structName)

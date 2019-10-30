@@ -62,5 +62,8 @@ interface Dm {
         val cps: List<ConnProfile>
     }
     
-    fun initialize()
+    /**
+     * @path null when called by dm, must notnull if called by dms!
+     */
+    fun initialize(path: DmNewPath? = null)
 }
