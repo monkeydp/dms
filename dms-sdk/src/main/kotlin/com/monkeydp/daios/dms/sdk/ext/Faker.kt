@@ -1,4 +1,4 @@
-package com.monkeydp.daios.dms.sdk.function
+package com.monkeydp.daios.dms.sdk.ext
 
 import com.github.javafaker.Faker
 

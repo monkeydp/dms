@@ -1,6 +1,6 @@
 package com.monkeydp.daios.dms.sdk.example
 
-import com.monkeydp.daios.dms.sdk.function.faker
+import com.monkeydp.daios.dms.sdk.ext.faker
 
 
 /**
