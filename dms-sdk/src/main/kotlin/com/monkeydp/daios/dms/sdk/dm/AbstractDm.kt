@@ -15,6 +15,7 @@ abstract class AbstractDm : Dm {
     }
     
     abstract val nodeData: NodeData
+    private var isNodeStructInitialized = false
     
     interface NodeData {
         val defMap: Map<String, NodeDef>
@@ -36,14 +37,18 @@ abstract class AbstractDm : Dm {
     /**
      * Initialize node structure
      */
+    @Synchronized
     private fun initNodeStruct() {
+        if (isNodeStructInitialized) return
         val struct = nodeData.structWrapper.structure
         recurAssignNodeDefChildren(struct)
+        isNodeStructInitialized = true
     }
     
     private fun recurAssignNodeDefChildren(struct: JsonNode) {
         val defMap = nodeData.defMap
-        struct.fields().forEach { (structName, subStruct) ->
+        val fields = struct.fields()
+        fields.forEach { (structName, subStruct) ->
             val def = defMap.getValue(structName)
             val children = mutableListOf<NodeDef>()
             subStruct.fields().forEach { (subStructName, _) ->
@@ -52,6 +57,5 @@ abstract class AbstractDm : Dm {
             def.children = children.toList()
             recurAssignNodeDefChildren(subStruct)
         }
-        
     }
 }

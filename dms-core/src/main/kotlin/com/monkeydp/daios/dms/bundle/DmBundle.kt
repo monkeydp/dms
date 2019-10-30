@@ -7,6 +7,7 @@ import com.monkeydp.daios.dms.sdk.dm.Dm
 import com.monkeydp.daios.dms.sdk.dm.Dm.DsDef
 import com.monkeydp.daios.dms.sdk.dm.Dm.Impl
 import com.monkeydp.daios.dms.sdk.metadata.node.def.ConnNd
+import com.monkeydp.tools.ext.singletonInstanceX
 import com.monkeydp.tools.util.FileUtil
 import java.io.File
 import java.io.FileFilter
@@ -85,8 +86,8 @@ class DmBundle(private val deployDir: File, private val dmClassname: String) {
     
     private fun loadDm(): Dm {
         @Suppress("UNCHECKED_CAST")
-        val dmClass: Class<out Dm> = bundleClassLoader.loadClass(dmClassname) as Class<out Dm>
-        return dmClass.fields.first { it.name == "INSTANCE" }.get(dmClass) as Dm
+        val dmClass: Class<Dm> = bundleClassLoader.loadClass(dmClassname) as Class<Dm>
+        return dmClass.singletonInstanceX<Dm>()
     }
     
     fun getDriverClassname(dsVersion: DsVersion<*>) = dsDefMap[dsVersion]?.driver?.classname!!
