@@ -1,6 +1,6 @@
 package com.monkeydp.daios.dms.sdk.metadata.node.def.impl
 
-import com.monkeydp.daios.dms.sdk.metadata.node.def.NodeDef
+import com.monkeydp.daios.dms.sdk.metadata.node.NodeDef
 import com.monkeydp.tools.ext.camelCase2List
 import com.monkeydp.tools.ext.lastOf
 import com.monkeydp.tools.ext.notNullSingleton

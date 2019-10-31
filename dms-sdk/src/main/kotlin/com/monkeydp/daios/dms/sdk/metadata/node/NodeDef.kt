@@ -1,6 +1,4 @@
-package com.monkeydp.daios.dms.sdk.metadata.node.def
-
-import com.monkeydp.daios.dms.sdk.metadata.node.NodeInfo
+package com.monkeydp.daios.dms.sdk.metadata.node
 
 /**
  * @author iPotato

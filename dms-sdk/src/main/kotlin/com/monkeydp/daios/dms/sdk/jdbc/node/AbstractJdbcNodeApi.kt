@@ -3,7 +3,7 @@ package com.monkeydp.daios.dms.sdk.jdbc.node
 import com.monkeydp.daios.dms.sdk.api.impl.AbstractNodeApi
 import com.monkeydp.daios.dms.sdk.metadata.node.Node
 import com.monkeydp.daios.dms.sdk.metadata.node.NodeLoadContext
-import com.monkeydp.daios.dms.sdk.metadata.node.def.NodeDef
+import com.monkeydp.daios.dms.sdk.metadata.node.NodeDef
 
 /**
  * @author iPotato

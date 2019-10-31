@@ -2,7 +2,7 @@ package com.monkeydp.daios.dms.sdk.dm
 
 import com.fasterxml.jackson.databind.JsonNode
 import com.monkeydp.daios.dms.sdk.metadata.node.NodeStructWrapper
-import com.monkeydp.daios.dms.sdk.metadata.node.def.NodeDef
+import com.monkeydp.daios.dms.sdk.metadata.node.NodeDef
 import com.monkeydp.tools.ext.getClassname
 import com.monkeydp.tools.ext.getLogger
 import com.monkeydp.tools.ext.singletonInstance
