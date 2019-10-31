@@ -42,6 +42,7 @@ final object BootContext {
     private final class ContextInitializer(private val env: ConfigurableEnvironment) {
         
         private val prefix = "dms"
+        private val ignoreDmDirNames = listOf("dm-base")
         
         companion object PropertyName {
             private const val rootDirpath = "root-dir"
@@ -91,10 +92,11 @@ final object BootContext {
         private fun initDmDirs(): List<File> {
             return FileUtil.listFiles(dmParentDir,
                     FileFilter { file ->
-                        file.isDirectory && file.name.matches(Module.dmRegex)
+                        !ignoreDmDirNames.contains(file.name) &&
+                        file.isDirectory &&
+                        file.name.matches(Module.dmRegex)
                     }
-            )
-                    .toList()
+            ).toList()
         }
     }
 }

@@ -43,9 +43,6 @@ class ModuleBundle(private val deployDir: File, private val dmClassname: String)
     init {
         bundleClassLoader = initBundleClassLoader()
         dm = loadDm()
-//        dm.initialize(
-//                DmNewConfig(deployDir.path, "${deployDir.path}/$classesPath", bundleClassLoader)
-//        )
         impl = dm.impl
         datasource = dm.datasource
         connNd = dm.connNd
