@@ -9,7 +9,7 @@ import com.monkeydp.tools.ext.getLogger
  * @author iPotato
  * @date 2019/10/27
  */
-abstract class AbstractDm : Dm {
+abstract class AbstractDm(config: DmShareConfig? = null) : Dm {
     companion object {
         val log = getLogger()
     }
@@ -18,22 +18,22 @@ abstract class AbstractDm : Dm {
     protected abstract val nodeData: NodeData
     private var isNodeStructInitialized = false
     
-    protected interface NodeData {
-        fun structWrapper(): NodeStructWrapper
-        fun defMap(): Map<String, NodeDef>
-    }
-    
-    override fun initialize(config: DmNewConfig?) {
+    init {
         if (config != null) {
             classLoader = config.classLoader
             updateConfig(config)
         }
-        registerStaticComponents()
     }
     
-    protected abstract fun updateConfig(config: DmNewConfig)
+    protected abstract fun updateConfig(config: DmShareConfig)
     
-    private fun registerStaticComponents() {
+    protected interface NodeData {
+        fun structWrapper(): NodeStructWrapper
+        fun defMap(): Map<String, NodeDef>
+        val defMapDirpath: String
+    }
+    
+    protected fun registerStaticComponents() {
         log.info("Begin to register all dm static components!")
         initNodeStruct()
         DmImplRegistrar.registerAll(impl, datasource)

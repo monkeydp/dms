@@ -61,9 +61,4 @@ interface Dm {
     interface Testdata {
         val cps: List<ConnProfile>
     }
-    
-    /**
-     * @config null when called by dm, must notnull if called by dms!
-     */
-    fun initialize(config: DmNewConfig? = null)
 }

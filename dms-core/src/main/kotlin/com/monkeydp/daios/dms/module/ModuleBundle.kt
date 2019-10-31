@@ -6,9 +6,9 @@ import com.monkeydp.daios.dms.sdk.datasource.DsVersion
 import com.monkeydp.daios.dms.sdk.dm.Dm
 import com.monkeydp.daios.dms.sdk.dm.Dm.DsDef
 import com.monkeydp.daios.dms.sdk.dm.Dm.Impl
-import com.monkeydp.daios.dms.sdk.dm.DmNewConfig
+import com.monkeydp.daios.dms.sdk.dm.DmShareConfig
 import com.monkeydp.daios.dms.sdk.metadata.node.def.ConnNd
-import com.monkeydp.tools.ext.singletonInstanceX
+import com.monkeydp.tools.ext.newInstanceX
 import com.monkeydp.tools.util.FileUtil
 import java.io.File
 import java.io.FileFilter
@@ -43,9 +43,9 @@ class ModuleBundle(private val deployDir: File, private val dmClassname: String)
     init {
         bundleClassLoader = initBundleClassLoader()
         dm = loadDm()
-        dm.initialize(
-                DmNewConfig(deployDir.path, "${deployDir.path}/$classesPath", bundleClassLoader)
-        )
+//        dm.initialize(
+//                DmNewConfig(deployDir.path, "${deployDir.path}/$classesPath", bundleClassLoader)
+//        )
         impl = dm.impl
         datasource = dm.datasource
         connNd = dm.connNd
@@ -90,7 +90,8 @@ class ModuleBundle(private val deployDir: File, private val dmClassname: String)
     private fun loadDm(): Dm {
         @Suppress("UNCHECKED_CAST")
         val dmClass: Class<Dm> = bundleClassLoader.loadClass(dmClassname) as Class<Dm>
-        return dmClass.singletonInstanceX<Dm>()
+        val config = DmShareConfig(bundleClassLoader, deployDir, File(deployDir, classesPath))
+        return dmClass.newInstanceX(config)
     }
     
     fun getDriverClassname(dsVersion: DsVersion<*>) = dsDefMap[dsVersion]?.driver?.classname!!
