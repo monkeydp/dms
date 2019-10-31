@@ -1,6 +1,6 @@
 package com.monkeydp.daios.dms.sdk.datasource
 
-import com.monkeydp.daios.dms.sdk.contract.Enumx
+import com.monkeydp.daios.dms.sdk.enumeration.Enumx
 
 /**
  * @author iPotato

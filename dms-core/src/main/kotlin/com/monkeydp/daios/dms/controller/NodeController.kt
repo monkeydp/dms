@@ -1,6 +1,6 @@
 package com.monkeydp.daios.dms.controller
 
-import com.monkeydp.daios.dms.sdk.metadata.node.NodeLoadContextX
+import com.monkeydp.daios.dms.sdk.metadata.node.ctx.NodeLoadContextX
 import com.monkeydp.daios.dms.service.contract.NodeService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.bind.annotation.*

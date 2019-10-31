@@ -1,7 +1,7 @@
 package com.monkeydp.daios.dms.sdk.dm
 
-import com.monkeydp.daios.dms.sdk.api.contract.ConnApi
-import com.monkeydp.daios.dms.sdk.api.contract.NodeApi
+import com.monkeydp.daios.dms.sdk.api.ConnApi
+import com.monkeydp.daios.dms.sdk.api.NodeApi
 import com.monkeydp.daios.dms.sdk.datasource.DsVersion
 import com.monkeydp.daios.dms.sdk.metadata.form.CpForm
 import com.monkeydp.daios.dms.sdk.metadata.icon.Icon

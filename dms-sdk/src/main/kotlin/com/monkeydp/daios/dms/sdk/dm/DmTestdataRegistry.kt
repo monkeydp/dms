@@ -1,7 +1,7 @@
 package com.monkeydp.daios.dms.sdk.dm
 
-import com.monkeydp.daios.dms.sdk.conn.ConnJsonMocker.DATASOURCE
-import com.monkeydp.daios.dms.sdk.conn.ConnJsonMocker.DS_VERSION_ID
+import com.monkeydp.daios.dms.sdk.mocker.ConnJsonMocker.DATASOURCE
+import com.monkeydp.daios.dms.sdk.mocker.ConnJsonMocker.DS_VERSION_ID
 import com.monkeydp.daios.dms.sdk.datasource.Datasource
 import com.monkeydp.daios.dms.sdk.datasource.DsVersion
 import com.monkeydp.daios.dms.sdk.entity.ConnProfile

@@ -46,12 +46,14 @@ Following datasource would be developed as an example:
 ```
 dms
  ├─ dm              // which dm you want to develop, add to this dir by `git clone`
+ |   ├─ dm-base     // git clone https://github.com/monkeydp/dm-base
  |   └─ dm-mysql    // git clone https://github.com/monkeydp/dm-mysql
  ├─ dms-core        // dynamic call dm impl when request comming
  ├─ dms-sdk         // dm development base on dms-sdk
  └─ tools           // git submodule update --init 
 ```
 
+> dm-base is common implementation of dms-sdk
  
 ## Api
 

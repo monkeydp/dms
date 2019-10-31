@@ -1,6 +1,6 @@
 package com.monkeydp.daios.dms.module
 
-import com.monkeydp.daios.dms.sdk.api.contract.ConnApi
+import com.monkeydp.daios.dms.sdk.api.ConnApi
 import com.monkeydp.daios.dms.sdk.datasource.Datasource
 import com.monkeydp.daios.dms.sdk.datasource.DsVersion
 import com.monkeydp.daios.dms.sdk.dm.Dm

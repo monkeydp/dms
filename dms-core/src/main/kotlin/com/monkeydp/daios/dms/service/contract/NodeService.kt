@@ -1,8 +1,8 @@
 package com.monkeydp.daios.dms.service.contract
 
-import com.monkeydp.daios.dms.sdk.metadata.node.Node
-import com.monkeydp.daios.dms.sdk.metadata.node.NodeLoadContextX
-import com.monkeydp.daios.dms.sdk.metadata.node.impl.ConnNode
+import com.monkeydp.daios.dms.sdk.metadata.node.main.Node
+import com.monkeydp.daios.dms.sdk.metadata.node.ctx.NodeLoadContextX
+import com.monkeydp.daios.dms.sdk.metadata.node.main.ConnNode
 
 /**
  * @author iPotato
