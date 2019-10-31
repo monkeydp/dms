@@ -1,9 +1,7 @@
-package com.monkeydp.daios.dms.boot
+package com.monkeydp.daios.dms.module
 
 import com.monkeydp.daios.dms.boot.BootContext.Module
 import com.monkeydp.daios.dms.boot.BootContext.Module.moduleDirs
-import com.monkeydp.daios.dms.bundle.DmBundle
-import com.monkeydp.daios.dms.sdk.dm.DmConfig
 import com.monkeydp.tools.util.YamlUtil
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
@@ -30,9 +28,9 @@ class ModuleDeployer {
      */
     private fun deployModule(moduleDir: File) {
         val configFile = File(moduleDir, Module.configFilename)
-        val config = YamlUtil.loadAs<DmConfig>(configFile)
+        val config = YamlUtil.loadAs<ModuleConfig>(configFile)
         val dmClassname = config.dmClassname
-        val dmBundle = DmBundle(moduleDir, dmClassname)
+        val dmBundle = ModuleBundle(moduleDir, dmClassname)
         moduleRegistry.registerModule(dmBundle)
     }
 }

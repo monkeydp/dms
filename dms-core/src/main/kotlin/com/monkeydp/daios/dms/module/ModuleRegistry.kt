@@ -1,6 +1,6 @@
-package com.monkeydp.daios.dms.boot
+package com.monkeydp.daios.dms.module
 
-import com.monkeydp.daios.dms.bundle.DmBundle
+import com.monkeydp.daios.dms.module.ModuleBundle
 import com.monkeydp.daios.dms.sdk.datasource.Datasource
 import com.monkeydp.daios.dms.sdk.entity.ConnProfile
 import org.springframework.stereotype.Component
@@ -12,10 +12,10 @@ import org.springframework.stereotype.Component
 @Component
 class ModuleRegistry {
     
-    private val dmBundleMap = mutableMapOf<Datasource, DmBundle>()
+    private val dmBundleMap = mutableMapOf<Datasource, ModuleBundle>()
     
-    fun registerModule(dmBundle: DmBundle) {
-        dmBundleMap[dmBundle.datasource] = dmBundle
+    fun registerModule(bundle: ModuleBundle) {
+        dmBundleMap[bundle.datasource] = bundle
     }
     
     fun getDmBundle(datasource: Datasource) = dmBundleMap.get(datasource)!!

@@ -1,9 +1,9 @@
-package com.monkeydp.daios.dms.sdk.dm
+package com.monkeydp.daios.dms.module
 
 /**
  * @author iPotato
  * @date 2019/10/14
  */
-class DmConfig {
+class ModuleConfig {
     lateinit var dmClassname: String
 }

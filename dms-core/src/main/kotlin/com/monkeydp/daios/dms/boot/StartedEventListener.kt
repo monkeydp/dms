@@ -1,5 +1,6 @@
 package com.monkeydp.daios.dms.boot
 
+import com.monkeydp.daios.dms.module.ModuleDeployer
 import org.springframework.boot.context.event.ApplicationStartedEvent
 import org.springframework.context.ApplicationListener
 

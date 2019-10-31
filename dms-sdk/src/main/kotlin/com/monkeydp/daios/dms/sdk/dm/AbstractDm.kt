@@ -14,16 +14,20 @@ abstract class AbstractDm : Dm {
         val log = getLogger()
     }
     
-    abstract val nodeData: NodeData
+    protected var classLoader = Thread.currentThread().contextClassLoader
+    protected abstract val nodeData: NodeData
     private var isNodeStructInitialized = false
     
-    interface NodeData {
+    protected interface NodeData {
         fun structWrapper(): NodeStructWrapper
         fun defMap(): Map<String, NodeDef>
     }
     
     override fun initialize(config: DmNewConfig?) {
-        if (config != null) updateConfig(config)
+        if (config != null) {
+            classLoader = config.classLoader
+            updateConfig(config)
+        }
         registerStaticComponents()
     }
     

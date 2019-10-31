@@ -1,6 +1,6 @@
 package com.monkeydp.daios.dms.service.impl
 
-import com.monkeydp.daios.dms.boot.ModuleRegistry
+import com.monkeydp.daios.dms.module.ModuleRegistry
 import com.monkeydp.daios.dms.component.UserSession
 import com.monkeydp.daios.dms.conn.BelongsTo
 import com.monkeydp.daios.dms.conn.ConnManager

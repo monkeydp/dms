@@ -1,4 +1,4 @@
-package com.monkeydp.daios.dms.bundle
+package com.monkeydp.daios.dms.module
 
 import com.monkeydp.daios.dms.sdk.api.contract.ConnApi
 import com.monkeydp.daios.dms.sdk.datasource.Datasource
@@ -19,7 +19,7 @@ import java.net.URLClassLoader
  * @author iPotato
  * @date 2019/10/14
  */
-class DmBundle(private val deployDir: File, private val dmClassname: String) {
+class ModuleBundle(private val deployDir: File, private val dmClassname: String) {
     
     companion object {
         private const val classesPath = "classes"
@@ -130,6 +130,5 @@ class DmBundle(private val deployDir: File, private val dmClassname: String) {
         }
     }
     
-    private class SpecificClassLoader(urls: Array<URL>, parent: BundleClassLoader) : URLClassLoader(urls, parent) {
-    }
+    private class SpecificClassLoader(urls: Array<URL>, parent: BundleClassLoader) : URLClassLoader(urls, parent)
 }
