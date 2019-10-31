@@ -5,5 +5,5 @@ package com.monkeydp.daios.dms.sdk.metadata.instruction.action
  * @date 2019/10/25
  */
 enum class GlobalAction : Action<GlobalAction> {
-    NEW, EDIT, DELETE
+    NEW, EDIT, DELETE, OPEN, CLOSE
 }

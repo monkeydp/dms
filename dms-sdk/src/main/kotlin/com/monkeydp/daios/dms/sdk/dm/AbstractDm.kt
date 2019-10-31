@@ -12,7 +12,7 @@ import com.monkeydp.tools.util.FileUtil
  * @author iPotato
  * @date 2019/10/27
  */
-abstract class AbstractDm(config: DmShareConfig? = null) : Dm {
+abstract class AbstractDm(shareConfig: DmShareConfig? = null) : Dm {
     
     companion object {
         private val log = getLogger()
@@ -23,12 +23,20 @@ abstract class AbstractDm(config: DmShareConfig? = null) : Dm {
     private var classLoader = Thread.currentThread().contextClassLoader
     protected abstract val config: LocalConfig
     
-    
     init {
-        if (config != null) {
-            classLoader = config.classLoader
-            updateConfig(config)
+        if (shareConfig != null) {
+            classLoader = shareConfig.classLoader
+            updateConfig(shareConfig)
         }
+    }
+    
+    private val nodeDefMap by lazy {
+        val files = FileUtil.listFiles(config.node.defDirpath)
+        files.map { file ->
+            val classname = file.getClassname(config.classesDirpath)
+            val nd = classLoader.loadClass(classname).singletonInstance() as NodeDef
+            nd.structName to nd
+        }.toMap()
     }
     
     protected abstract fun updateConfig(config: DmShareConfig)
@@ -62,25 +70,15 @@ abstract class AbstractDm(config: DmShareConfig? = null) : Dm {
     }
     
     private fun recurAssignNodeDefChildren(struct: JsonNode) {
-        val defMap = nodeDefMap()
         val fields = struct.fields()
         fields.forEach { (structName, subStruct) ->
-            val def = defMap.getValue(structName)
+            val def = nodeDefMap.getValue(structName)
             val children = mutableListOf<NodeDef>()
             subStruct.fields().forEach { (subStructName, _) ->
-                children.add(defMap.getValue(subStructName))
+                children.add(nodeDefMap.getValue(subStructName))
             }
             def.children = children.toList()
             recurAssignNodeDefChildren(subStruct)
         }
-    }
-    
-    private fun nodeDefMap(): Map<String, NodeDef> {
-        val files = FileUtil.listFiles(config.node.defDirpath)
-        return files.map { file ->
-            val classname = file.getClassname(config.classesDirpath)
-            val nd = classLoader.loadClass(classname).singletonInstance() as NodeDef
-            nd.structName to nd
-        }.toMap()
     }
 }

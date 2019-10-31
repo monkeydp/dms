@@ -6,5 +6,6 @@ package com.monkeydp.daios.dms.sdk.metadata.instruction.target
  */
 enum class GlobalTarget : Target<GlobalTarget> {
     CONN, DB, TABLE, VIEW,
-    GROUP
+    GROUP,
+    QUERY
 }
