@@ -4,8 +4,8 @@ import com.monkeydp.daios.dms.sdk.api.contract.ConnApi
 import com.monkeydp.daios.dms.sdk.datasource.Datasource
 import com.monkeydp.daios.dms.sdk.datasource.DsVersion
 import com.monkeydp.daios.dms.sdk.dm.Dm
-import com.monkeydp.daios.dms.sdk.dm.Dm.DsDef
-import com.monkeydp.daios.dms.sdk.dm.Dm.Impl
+import com.monkeydp.daios.dms.sdk.datasource.DsDef
+import com.monkeydp.daios.dms.sdk.dm.DmImpl
 import com.monkeydp.daios.dms.sdk.dm.DmShareConfig
 import com.monkeydp.daios.dms.sdk.metadata.node.def.ConnNd
 import com.monkeydp.tools.ext.newInstanceX
@@ -29,10 +29,10 @@ class ModuleBundle(private val deployDir: File, private val dmClassname: String)
     
     private val bundleClassLoader: BundleClassLoader
     private val dm: Dm
-    private val impl: Impl
+    private val impl: DmImpl
     val datasource: Datasource
     val connNd: ConnNd
-    val apis: Impl.Apis
+    val apis: DmImpl.Apis
     
     private val dsDefMap: Map<DsVersion<*>, DsDef>
     

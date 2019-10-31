@@ -5,7 +5,7 @@ package com.monkeydp.daios.dms.sdk.dm
  * @date 2019/10/27
  */
 object DmTestdataRegistrar {
-    fun registerAll(testdata: Dm.Testdata) {
+    fun registerAll(testdata: DmTestdata) {
         DmTestdataRegistry.cps.addAll(testdata.cps)
     }
 }

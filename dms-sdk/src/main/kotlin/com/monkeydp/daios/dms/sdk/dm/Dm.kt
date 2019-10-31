@@ -1,17 +1,8 @@
 package com.monkeydp.daios.dms.sdk.dm
 
-import com.monkeydp.daios.dms.sdk.api.contract.ConnApi
-import com.monkeydp.daios.dms.sdk.api.contract.NodeApi
 import com.monkeydp.daios.dms.sdk.datasource.Datasource
-import com.monkeydp.daios.dms.sdk.datasource.DsDriver
-import com.monkeydp.daios.dms.sdk.datasource.DsVersion
-import com.monkeydp.daios.dms.sdk.entity.ConnProfile
-import com.monkeydp.daios.dms.sdk.metadata.form.CpForm
-import com.monkeydp.daios.dms.sdk.metadata.icon.Icon
-import com.monkeydp.daios.dms.sdk.metadata.instruction.action.Action
-import com.monkeydp.daios.dms.sdk.metadata.instruction.target.Target
+import com.monkeydp.daios.dms.sdk.datasource.DsDef
 import com.monkeydp.daios.dms.sdk.metadata.node.def.ConnNd
-import kotlin.reflect.KClass
 
 /**
  * Datasource module
@@ -20,45 +11,9 @@ import kotlin.reflect.KClass
  * @date 2019/10/8
  */
 interface Dm {
-    
     val datasource: Datasource
     val connNd: ConnNd
     val dsDefs: List<DsDef>
-    val impl: Impl
-    val testdata: Testdata
-    
-    interface Impl {
-    
-        val apis: Apis
-        val classes: Classes
-        val enumClasses: EnumClasses
-    
-        interface Apis {
-            val connApi: ConnApi
-            val nodeApi: NodeApi
-        }
-    
-        interface Classes {
-            val cpFormClass: KClass<out CpForm>
-        }
-        
-        interface EnumClasses {
-            val dsVersionClass: KClass<out DsVersion<*>>
-            val actionClass: KClass<out Action<*>>
-            val targetClass: KClass<out Target<*>>
-            val iconClass: KClass<out Icon<*>>
-        }
-    }
-    
-    /**
-     * Datasource definition
-     */
-    interface DsDef {
-        val version: DsVersion<*>
-        val driver: DsDriver
-    }
-    
-    interface Testdata {
-        val cps: List<ConnProfile>
-    }
+    val impl: DmImpl
+    val testdata: DmTestdata
 }

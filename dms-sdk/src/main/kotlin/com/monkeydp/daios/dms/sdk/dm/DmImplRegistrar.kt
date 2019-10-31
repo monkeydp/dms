@@ -2,7 +2,6 @@ package com.monkeydp.daios.dms.sdk.dm
 
 import com.monkeydp.daios.dms.sdk.contract.Enumx
 import com.monkeydp.daios.dms.sdk.datasource.Datasource
-import com.monkeydp.daios.dms.sdk.dm.Dm.Impl
 import com.monkeydp.daios.dms.sdk.metadata.icon.GlobalIcon
 import com.monkeydp.daios.dms.sdk.metadata.instruction.action.GlobalAction
 import com.monkeydp.daios.dms.sdk.metadata.instruction.target.GlobalTarget
@@ -21,17 +20,17 @@ object DmImplRegistrar {
             GlobalIcon::class
     )
     
-    fun registerAll(impl: Impl, datasource: Datasource) {
+    fun registerAll(impl: DmImpl, datasource: Datasource) {
         registerClasses(impl.classes, datasource)
         registerEnums(impl.enumClasses, datasource)
     }
     
-    private fun registerClasses(implClasses: Impl.Classes, datasource: Datasource) {
+    private fun registerClasses(implClasses: DmImpl.Classes, datasource: Datasource) {
         val classes = implClasses.toPropListX<KClass<*>>()
         classes.forEach { clazz -> DmImplRegistry.registerClass(clazz, datasource) }
     }
     
-    private fun registerEnums(implEnumClasses: Impl.EnumClasses, datasource: Datasource) {
+    private fun registerEnums(implEnumClasses: DmImpl.EnumClasses, datasource: Datasource) {
         registerGlobalEnums(globalEnumClasses)
         registerLocalEnums(implEnumClasses, datasource)
     }
@@ -40,7 +39,7 @@ object DmImplRegistrar {
         enumClasses.forEach { it.java.enumConstants.forEach { e -> DmImplRegistry.registerEnum(e) } }
     }
     
-    private fun registerLocalEnums(implEnumClasses: Impl.EnumClasses, datasource: Datasource) {
+    private fun registerLocalEnums(implEnumClasses: DmImpl.EnumClasses, datasource: Datasource) {
         val enumClasses = implEnumClasses.toPropListX<KClass<Enumx<*>>>()
         enumClasses.forEach { it.java.enumConstants.forEach { e -> DmImplRegistry.registerEnum(e, datasource) } }
     }
