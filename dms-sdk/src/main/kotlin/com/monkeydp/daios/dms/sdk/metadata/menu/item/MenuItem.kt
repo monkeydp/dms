@@ -1,4 +1,4 @@
-package com.monkeydp.daios.dms.sdk.metadata.menu
+package com.monkeydp.daios.dms.sdk.metadata.menu.item
 
 /**
  * @author iPotato

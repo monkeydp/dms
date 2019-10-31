@@ -93,17 +93,19 @@ err | error
 instr | instruction
 &nbsp;|
 **# M** |
+mi | menu item
+mid | menu item definition
 msg | message
 &nbsp;|
 **# N** |
 nd | node definition
 ni | node info
 &nbsp;|
-**# N** |
-tpl | template
-&nbsp;|
 **# P** |
 prop | property
 &nbsp;|
 **# S** |
 struct | structure
+&nbsp;|
+**# T** |
+tpl | template
