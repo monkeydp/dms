@@ -2,9 +2,9 @@ package com.monkeydp.daios.dms.module
 
 import com.monkeydp.daios.dms.sdk.api.ConnApi
 import com.monkeydp.daios.dms.sdk.datasource.Datasource
+import com.monkeydp.daios.dms.sdk.datasource.DsDef
 import com.monkeydp.daios.dms.sdk.datasource.DsVersion
 import com.monkeydp.daios.dms.sdk.dm.Dm
-import com.monkeydp.daios.dms.sdk.datasource.DsDef
 import com.monkeydp.daios.dms.sdk.dm.DmImpl
 import com.monkeydp.daios.dms.sdk.dm.DmShareConfig
 import com.monkeydp.daios.dms.sdk.metadata.node.def.ConnNd
@@ -87,7 +87,7 @@ class ModuleBundle(private val deployDir: File, private val dmClassname: String)
     private fun loadDm(): Dm {
         @Suppress("UNCHECKED_CAST")
         val dmClass: Class<Dm> = bundleClassLoader.loadClass(dmClassname) as Class<Dm>
-        val config = DmShareConfig(bundleClassLoader, deployDir, File(deployDir, classesPath))
+        val config = DmShareConfig(deployDir)
         return dmClass.newInstanceX(config)
     }
     

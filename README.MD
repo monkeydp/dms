@@ -71,6 +71,7 @@ abbreviation | original
 :--- | :---
 **# A** |
 abstr | abstract
+annot | annotation
 &nbsp;|
 **# C** |
 conn | connection
