@@ -33,7 +33,7 @@ object DmImplRegistry {
     
     inline fun <reified E : Enumx<out E>> getEnum(enumName: String): E {
         val enumList = getEnumList(E::class)
-        return enumList.first { it.asEnum().name == enumName }
+        return enumList.first { it.asEnum().name == enumName.toUpperCase() }
     }
     
     internal fun registerClass(clazz: KClass<*>, datasource: Datasource) {

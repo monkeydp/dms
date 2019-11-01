@@ -95,7 +95,6 @@ instr | instruction
 &nbsp;|
 **# M** |
 mi | menu item
-mid | menu item definition
 msg | message
 &nbsp;|
 **# N** |
@@ -106,6 +105,7 @@ ni | node info
 prop | property
 &nbsp;|
 **# S** |
+std | standard
 struct | structure
 &nbsp;|
 **# T** |

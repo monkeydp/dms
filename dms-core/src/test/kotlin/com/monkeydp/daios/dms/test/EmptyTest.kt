@@ -9,6 +9,6 @@ import org.junit.Test
 class EmptyTest : AbstractTest() {
     @Test
     fun test() {
-
+    
     }
 }
