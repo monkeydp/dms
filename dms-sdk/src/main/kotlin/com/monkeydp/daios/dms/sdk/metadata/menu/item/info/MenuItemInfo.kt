@@ -1,4 +1,4 @@
-package com.monkeydp.daios.dms.sdk.metadata.menu.item
+package com.monkeydp.daios.dms.sdk.metadata.menu.item.info
 
 import com.monkeydp.daios.dms.sdk.metadata.icon.GlobalIcon.EMPTY_ICON
 import com.monkeydp.daios.dms.sdk.metadata.icon.Icon

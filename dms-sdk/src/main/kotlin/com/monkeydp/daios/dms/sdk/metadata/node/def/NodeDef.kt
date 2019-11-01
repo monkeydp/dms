@@ -1,5 +1,6 @@
 package com.monkeydp.daios.dms.sdk.metadata.node.def
 
+import com.monkeydp.daios.dms.sdk.metadata.menu.Menu
 import com.monkeydp.daios.dms.sdk.metadata.node.info.NodeInfo
 
 /**
@@ -9,6 +10,7 @@ import com.monkeydp.daios.dms.sdk.metadata.node.info.NodeInfo
 interface NodeDef {
     val structName: String
     val info: NodeInfo
-    val parent: NodeDef?
+    var parent: NodeDef?
     var children: List<NodeDef>
+    var menu: Menu?
 }
