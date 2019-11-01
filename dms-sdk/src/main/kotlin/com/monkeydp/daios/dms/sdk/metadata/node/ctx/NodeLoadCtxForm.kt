@@ -13,11 +13,11 @@ import io.swagger.annotations.ApiModelProperty
  * @date 2019/10/25
  */
 @ApiModel
-data class NodeLoadContextX(
+data class NodeLoadCtxForm(
         @ApiModelProperty(required = true, example = CP_ID)
         val cpId: Long = INVALID_ID,
         @ApiModelProperty(required = true, example = NODE_INFO_PATH)
         val path: NodeInfoPath
 ) {
-    fun toInner(conn: Conn<*>) = NodeLoadContext(conn, path)
+    fun toInner(conn: Conn<*>) = NodeLoadCtx(conn, path)
 }

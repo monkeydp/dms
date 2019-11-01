@@ -1,6 +1,5 @@
 package com.monkeydp.daios.dms.module
 
-import com.monkeydp.daios.dms.module.ModuleBundle
 import com.monkeydp.daios.dms.sdk.datasource.Datasource
 import com.monkeydp.daios.dms.sdk.entity.ConnProfile
 import org.springframework.stereotype.Component
@@ -18,9 +17,9 @@ class ModuleRegistry {
         dmBundleMap[bundle.datasource] = bundle
     }
     
-    fun getDmBundle(datasource: Datasource) = dmBundleMap.get(datasource)!!
+    fun getBundle(datasource: Datasource) = dmBundleMap.get(datasource)!!
     
-    fun getDmBundle(cp: ConnProfile) = getDmBundle(cp.datasource)
+    fun getBundle(cp: ConnProfile) = getBundle(cp.datasource)
     
-    fun getConnNodeDef(datasource: Datasource) = getDmBundle(datasource).connNd
+    fun getConnNodeDef(datasource: Datasource) = getBundle(datasource).connNd
 }

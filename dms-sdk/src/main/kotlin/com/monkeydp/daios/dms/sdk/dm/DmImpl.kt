@@ -1,6 +1,7 @@
 package com.monkeydp.daios.dms.sdk.dm
 
 import com.monkeydp.daios.dms.sdk.api.ConnApi
+import com.monkeydp.daios.dms.sdk.api.MenuApi
 import com.monkeydp.daios.dms.sdk.api.NodeApi
 import com.monkeydp.daios.dms.sdk.datasource.DsVersion
 import com.monkeydp.daios.dms.sdk.metadata.form.CpForm
@@ -18,6 +19,7 @@ interface DmImpl {
     interface Apis {
         val connApi: ConnApi
         val nodeApi: NodeApi
+        val menuApi: MenuApi
     }
     
     interface Classes {

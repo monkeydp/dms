@@ -13,4 +13,5 @@ interface MenuItem {
     val name: String
     val icon: Icon<*>
     var menu: Menu?
+    val hasSubmenu: Boolean
 }
