@@ -1,7 +1,7 @@
 package com.monkeydp.daios.dms.sdk.metadata.node
 
-import com.monkeydp.tools.ext.copyFieldsFrom
 import com.monkeydp.tools.ext.ierror
+import com.monkeydp.tools.ext.replaceLast
 import kotlin.reflect.full.createInstance
 
 /**
@@ -33,7 +33,7 @@ open class NodePath : ArrayList<Node>() {
     }
     
     fun replaceLastNodeName(name: String?) {
-        if (name != null) this.last().copyFieldsFrom(Pair(Node::name, name), forceAssess = true)
+        if (name != null) this.replaceLast(this.last().create<Node>(name))
     }
     
     open fun getLastNode(): Node {

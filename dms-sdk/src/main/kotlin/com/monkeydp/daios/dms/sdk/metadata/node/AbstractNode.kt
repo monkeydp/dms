@@ -33,4 +33,6 @@ abstract class AbstractNode(
         if (initKClass == null) ierror("Cannot create node, undefined KClass for init!")
         return initKClass?.java?.newInstanceX(name) as N
     }
+    
+    override fun toString() = this.name
 }
