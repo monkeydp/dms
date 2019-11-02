@@ -5,7 +5,6 @@ import com.monkeydp.daios.dms.curd.service.contract.ConnProfileService
 import com.monkeydp.daios.dms.module.ModuleRegistry
 import com.monkeydp.daios.dms.sdk.metadata.node.ConnNode
 import com.monkeydp.daios.dms.sdk.metadata.node.Node
-import com.monkeydp.daios.dms.sdk.metadata.node.StdConnNode
 import com.monkeydp.daios.dms.sdk.metadata.node.ctx.NodeLoadCtxForm
 import com.monkeydp.daios.dms.service.contract.ConnService
 import com.monkeydp.daios.dms.service.contract.NodeService
@@ -33,9 +32,8 @@ internal class NodeServiceImpl : NodeService {
         val cps = cpService.findAllByUserId(userId)
         val connNodes = mutableListOf<ConnNode>()
         cps.forEach { cp ->
-            // TODO
             val def = registry.getConnNodeDef(cp.datasource)
-            connNodes.add(StdConnNode(cp))
+            connNodes.add(def.create(cp))
         }
         return connNodes.toList()
     }

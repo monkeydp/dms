@@ -4,10 +4,9 @@ import com.fasterxml.jackson.annotation.JsonIgnore
 import com.monkeydp.daios.dms.sdk.metadata.icon.GlobalIcon.EMPTY_ICON
 import com.monkeydp.daios.dms.sdk.metadata.icon.Icon
 import com.monkeydp.daios.dms.sdk.metadata.menu.Menu
-import com.monkeydp.tools.ext.camelCase2List
-import com.monkeydp.tools.ext.lastOf
-import com.monkeydp.tools.ext.notNullSingleton
+import com.monkeydp.tools.ext.*
 import kotlin.properties.Delegates
+import kotlin.reflect.KClass
 
 /**
  * @author iPotato
@@ -27,4 +26,11 @@ abstract class AbstractNode(
     override var children by Delegates.notNullSingleton<List<Node>>()
     @JsonIgnore
     override var menu: Menu? = null
+    open val initKClass: KClass<out Node>? = null
+    
+    @Suppress("UNCHECKED_CAST")
+    override fun <N : Node> create(name: String): N {
+        if (initKClass == null) ierror("Cannot create node, undefined KClass for init!")
+        return initKClass?.java?.newInstanceX(name) as N
+    }
 }

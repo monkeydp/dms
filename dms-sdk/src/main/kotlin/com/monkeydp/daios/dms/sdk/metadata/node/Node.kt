@@ -16,4 +16,6 @@ interface Node {
     var parent: Node?
     var children: List<Node>
     var menu: Menu?
+    
+    fun <N : Node> create(name: String = ""): N
 }

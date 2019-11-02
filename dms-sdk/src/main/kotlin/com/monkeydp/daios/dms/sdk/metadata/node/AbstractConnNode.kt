@@ -3,6 +3,7 @@ package com.monkeydp.daios.dms.sdk.metadata.node
 import com.monkeydp.daios.dms.sdk.entity.ConnProfile
 import com.monkeydp.daios.dms.sdk.metadata.icon.GlobalIcon
 import com.monkeydp.daios.dms.sdk.metadata.instruction.target.GlobalTarget
+import com.monkeydp.tools.ext.newInstanceX
 import com.monkeydp.tools.ext.notNullSingleton
 import kotlin.properties.Delegates
 
@@ -18,8 +19,11 @@ abstract class AbstractConnNode(
     override val name by lazy { cp?.form?.connName ?: "" }
     override val target = GlobalTarget.CONN
     override val icon = GlobalIcon.CONN_ICON
+    override val initKClass = StdConnNode::class
     
     init {
         if (cp != null) this.cp = cp
     }
+    
+    override fun create(cp: ConnProfile) = initKClass.java.newInstanceX(cp)
 }

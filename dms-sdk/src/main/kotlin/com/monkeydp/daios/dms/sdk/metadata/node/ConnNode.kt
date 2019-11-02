@@ -8,4 +8,5 @@ import com.monkeydp.daios.dms.sdk.entity.ConnProfile
  */
 interface ConnNode : Node {
     val cp: ConnProfile
+    fun create(cp: ConnProfile): ConnNode
 }
