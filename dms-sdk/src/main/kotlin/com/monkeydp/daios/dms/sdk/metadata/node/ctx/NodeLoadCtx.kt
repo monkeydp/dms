@@ -1,7 +1,7 @@
 package com.monkeydp.daios.dms.sdk.metadata.node.ctx
 
 import com.monkeydp.daios.dms.sdk.conn.Conn
-import com.monkeydp.daios.dms.sdk.metadata.node.info.NodeInfoPath
+import com.monkeydp.daios.dms.sdk.metadata.node.NodePath
 
 /**
  * @author iPotato
@@ -9,5 +9,5 @@ import com.monkeydp.daios.dms.sdk.metadata.node.info.NodeInfoPath
  */
 data class NodeLoadCtx(
         var conn: Conn<*>,
-        val path: NodeInfoPath
+        val path: NodePath
 )

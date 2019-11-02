@@ -2,7 +2,8 @@ package com.monkeydp.daios.dms.sdk.dm
 
 import com.monkeydp.daios.dms.sdk.datasource.Datasource
 import com.monkeydp.daios.dms.sdk.datasource.DsDef
-import com.monkeydp.daios.dms.sdk.metadata.node.def.ConnNd
+import com.monkeydp.daios.dms.sdk.metadata.node.ConnNode
+import kotlin.reflect.KClass
 
 /**
  * Datasource module
@@ -12,7 +13,7 @@ import com.monkeydp.daios.dms.sdk.metadata.node.def.ConnNd
  */
 interface Dm {
     val datasource: Datasource
-    val connNd: ConnNd
+    val connNode: ConnNode
     val dsDefs: List<DsDef>
     val impl: DmImpl
     val testdata: DmTestdata

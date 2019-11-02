@@ -1,6 +1,6 @@
 package com.monkeydp.daios.dms.sdk.metadata.menu.ctx
 
-import com.monkeydp.daios.dms.sdk.metadata.node.info.NodeInfoPath
+import com.monkeydp.daios.dms.sdk.metadata.node.NodePath
 import com.monkeydp.daios.dms.sdk.mocker.ConnJsonMocker.CP_ID
 import com.monkeydp.daios.dms.sdk.mocker.NodeJsonMocker.NODE_INFO_PATH
 import com.monkeydp.daios.dms.sdk.util.IdUtil
@@ -14,7 +14,7 @@ data class NodeMenuLoadCtxForm(
         @ApiModelProperty(required = true, example = CP_ID)
         val cpId: Long = IdUtil.INVALID_ID,
         @ApiModelProperty(required = true, example = NODE_INFO_PATH)
-        val path: NodeInfoPath
+        val path: NodePath
 ) {
     fun toInner() = NodeMenuLoadCtx(path)
 }

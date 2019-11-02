@@ -3,9 +3,10 @@ package com.monkeydp.daios.dms.service.impl
 import com.monkeydp.daios.dms.component.UserSession
 import com.monkeydp.daios.dms.curd.service.contract.ConnProfileService
 import com.monkeydp.daios.dms.module.ModuleRegistry
+import com.monkeydp.daios.dms.sdk.metadata.node.ConnNode
+import com.monkeydp.daios.dms.sdk.metadata.node.Node
+import com.monkeydp.daios.dms.sdk.metadata.node.StdConnNode
 import com.monkeydp.daios.dms.sdk.metadata.node.ctx.NodeLoadCtxForm
-import com.monkeydp.daios.dms.sdk.metadata.node.main.ConnNode
-import com.monkeydp.daios.dms.sdk.metadata.node.main.Node
 import com.monkeydp.daios.dms.service.contract.ConnService
 import com.monkeydp.daios.dms.service.contract.NodeService
 import org.springframework.beans.factory.annotation.Autowired
@@ -33,7 +34,7 @@ internal class NodeServiceImpl : NodeService {
         val connNodes = mutableListOf<ConnNode>()
         cps.forEach { cp ->
             val def = registry.getConnNodeDef(cp.datasource)
-            connNodes.add(ConnNode(def, cp))
+            connNodes.add(StdConnNode(def, cp))
         }
         return connNodes.toList()
     }
@@ -43,6 +44,6 @@ internal class NodeServiceImpl : NodeService {
         val cp = connService.findCp(cpId)
         val conn = connService.findConn(cpId)
         val bundle = registry.getBundle(cp)
-        return bundle.apis.nodeApi.loadNodes(ctx.toInner(conn))
+        return bundle.apis.nodeApi.loadSubNodes(ctx.toInner(conn))
     }
 }
