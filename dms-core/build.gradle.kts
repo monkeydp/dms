@@ -34,7 +34,10 @@ dependencies {
     developmentOnly("org.springframework.boot:spring-boot-devtools")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     // other modules
-    api(project(":dms-sdk"))
+    api(project(":dms-sdk")) {
+        exclude("org.springframework.boot")
+        exclude("org.codehaus.groovy")
+    }
     // zip
     implementation("net.lingala.zip4j:zip4j:2.2.1")
     // command line
