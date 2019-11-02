@@ -36,7 +36,6 @@ dependencies {
     // other modules
     api(project(":dms-sdk")) {
         exclude("org.springframework.boot")
-        exclude("org.codehaus.groovy")
     }
     // zip
     implementation("net.lingala.zip4j:zip4j:2.2.1")
