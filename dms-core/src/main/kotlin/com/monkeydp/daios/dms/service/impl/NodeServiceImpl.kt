@@ -33,8 +33,9 @@ internal class NodeServiceImpl : NodeService {
         val cps = cpService.findAllByUserId(userId)
         val connNodes = mutableListOf<ConnNode>()
         cps.forEach { cp ->
+            // TODO
             val def = registry.getConnNodeDef(cp.datasource)
-            connNodes.add(StdConnNode(def, cp))
+            connNodes.add(StdConnNode(cp))
         }
         return connNodes.toList()
     }

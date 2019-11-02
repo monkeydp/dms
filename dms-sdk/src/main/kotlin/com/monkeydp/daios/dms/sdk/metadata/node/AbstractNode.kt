@@ -5,7 +5,6 @@ import com.monkeydp.daios.dms.sdk.metadata.icon.GlobalIcon.EMPTY_ICON
 import com.monkeydp.daios.dms.sdk.metadata.icon.Icon
 import com.monkeydp.daios.dms.sdk.metadata.menu.Menu
 import com.monkeydp.tools.ext.camelCase2List
-import com.monkeydp.tools.ext.copyFieldsFromX
 import com.monkeydp.tools.ext.lastOf
 import com.monkeydp.tools.ext.notNullSingleton
 import kotlin.properties.Delegates
@@ -15,7 +14,6 @@ import kotlin.properties.Delegates
  * @date 2019/10/25
  */
 abstract class AbstractNode(
-        def: Node? = null,
         name: String = ""
 ) : Node {
     override val structName by lazy @JsonIgnore {
@@ -29,8 +27,4 @@ abstract class AbstractNode(
     override var children by Delegates.notNullSingleton<List<Node>>()
     @JsonIgnore
     override var menu: Menu? = null
-    
-    init {
-        if (def != null) this.copyFieldsFromX(def, ::name)
-    }
 }

@@ -11,9 +11,8 @@ import kotlin.properties.Delegates
  * @date 2019/11/2
  */
 abstract class AbstractConnNode(
-        def: ConnNode? = null,
         cp: ConnProfile? = null
-) : ConnNode, AbstractNode(def) {
+) : ConnNode, AbstractNode() {
     override var cp by Delegates.notNullSingleton<ConnProfile>()
         protected set
     override val name by lazy { cp?.form?.connName ?: "" }
