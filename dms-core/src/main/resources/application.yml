@@ -19,6 +19,11 @@ spring:
   h2:
     console:
       enabled: true
+logging:
+  level:
+    root: WARN
+    com.monkeydp: DEBUG
+    org.reflections.Reflections: ERROR
 dms:
   root-dir: ${rootDir}
   module:
