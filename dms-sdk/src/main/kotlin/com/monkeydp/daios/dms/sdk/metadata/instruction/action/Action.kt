@@ -25,7 +25,7 @@ interface Action<E> : Enumx<E>
     class ActionDeserializer : JsonDeserializer<Action<*>>() {
         override fun deserialize(p: JsonParser?, ctxt: DeserializationContext?): Action<*> {
             val name = p?.getValueAsString()!!
-            return DmImplRegistry.getEnum(name)
+            return DmImplRegistry.getEnumByDsThreadLocal(name)
         }
     }
 }

@@ -35,7 +35,7 @@ interface Icon<E> : Enumx<E>
         override fun deserialize(p: JsonParser?, ctxt: DeserializationContext?): Icon<*> {
             val jsonNode = p?.readValueAsTree<JsonNode>()!!
             val name = jsonNode.get(Enum<*>::name.name).asText()
-            return DmImplRegistry.getEnum(name)
+            return DmImplRegistry.getEnumByDsThreadLocal(name)
         }
     }
     

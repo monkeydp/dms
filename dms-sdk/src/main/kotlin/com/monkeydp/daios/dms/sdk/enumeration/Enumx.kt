@@ -13,7 +13,6 @@ interface Enumx<E>
     fun asEnum() = this as Enum<E>
     
     companion object {
-        fun getContract(enumx: Enumx<*>) = getContract(enumx::class)
         @Suppress("UNCHECKED_CAST")
         fun getContract(enumxClass: KClass<out Enumx<*>>): KClass<out Enumx<*>> {
             val interfaces = enumxClass.java.interfaces
