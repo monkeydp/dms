@@ -7,7 +7,7 @@ plugins {
     id("io.spring.dependency-management") version "1.0.8.RELEASE"
     // kotlin
     val kotlinVersion = "1.3.50"
-    kotlin("jvm") version kotlinVersion
+    kotlin("jvm")
     kotlin("plugin.spring") version kotlinVersion
     kotlin("plugin.allopen") version kotlinVersion
 }

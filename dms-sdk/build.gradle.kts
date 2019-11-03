@@ -3,7 +3,7 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 plugins {
     // kotlin
     val kotlinVersion = "1.3.50"
-    kotlin("jvm") version kotlinVersion
+    kotlin("jvm")
     kotlin("plugin.spring") version kotlinVersion
     kotlin("plugin.jpa") version kotlinVersion
 }
@@ -12,6 +12,8 @@ group = "com.monkeydp.daios.dms"
 java.sourceCompatibility = JavaVersion.VERSION_1_8
 
 dependencies {
+    // kotlin
+    api("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.2")
     // monkeydp
     api("com.monkeydp:tools:+")
     // jackson
