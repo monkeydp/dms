@@ -1,4 +1,4 @@
-package com.monkeydp.daios.dms.component
+package com.monkeydp.daios.dms.session
 
 import com.monkeydp.daios.dms.sdk.entity.User
 import org.springframework.beans.factory.annotation.Autowired
