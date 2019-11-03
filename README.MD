@@ -97,6 +97,9 @@ instr | instruction
 mi | menu item
 msg | message
 &nbsp;|
+**# N** |
+nd | node definition
+&nbsp;|
 **# P** |
 prop | property
 &nbsp;|

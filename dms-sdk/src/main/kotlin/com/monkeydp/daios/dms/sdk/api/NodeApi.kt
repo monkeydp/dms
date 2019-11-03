@@ -1,6 +1,6 @@
 package com.monkeydp.daios.dms.sdk.api
 
-import com.monkeydp.daios.dms.sdk.metadata.node.Node
+import com.monkeydp.daios.dms.sdk.metadata.node.main.Node
 import com.monkeydp.daios.dms.sdk.metadata.node.ctx.NodeLoadCtx
 
 /**

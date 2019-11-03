@@ -7,7 +7,7 @@ import com.monkeydp.daios.dms.sdk.datasource.DsVersion
 import com.monkeydp.daios.dms.sdk.dm.Dm
 import com.monkeydp.daios.dms.sdk.dm.DmImpl
 import com.monkeydp.daios.dms.sdk.dm.DmShareConfig
-import com.monkeydp.daios.dms.sdk.metadata.node.ConnNode
+import com.monkeydp.daios.dms.sdk.metadata.node.def.ConnNd
 import com.monkeydp.tools.ext.newInstanceX
 import com.monkeydp.tools.util.FileUtil
 import java.io.File
@@ -31,7 +31,7 @@ class ModuleBundle(private val deployDir: File, private val dmClassname: String)
     private val dm: Dm
     private val impl: DmImpl
     val datasource: Datasource
-    val connNode: ConnNode
+    val connNd: ConnNd
     val apis: DmImpl.Apis
     
     private val dsDefMap: Map<DsVersion<*>, DsDef>
@@ -45,7 +45,7 @@ class ModuleBundle(private val deployDir: File, private val dmClassname: String)
         dm = loadDm()
         impl = dm.impl
         datasource = dm.datasource
-        connNode = dm.connNode
+        connNd = dm.connNd
         apis = impl.apis
         dsDefMap = dm.dsDefs.map { it.version to it }.toMap()
         bundleClassLoader.specificClassLoaders = initSpecificClassLoaderMap()

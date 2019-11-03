@@ -1,4 +1,4 @@
-package com.monkeydp.daios.dms.sdk.metadata.node
+package com.monkeydp.daios.dms.sdk.metadata.node.main
 
 import com.monkeydp.daios.dms.sdk.entity.ConnProfile
 
@@ -8,5 +8,4 @@ import com.monkeydp.daios.dms.sdk.entity.ConnProfile
  */
 interface ConnNode : Node {
     val cp: ConnProfile
-    fun create(cp: ConnProfile): ConnNode
 }

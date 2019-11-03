@@ -3,8 +3,8 @@ package com.monkeydp.daios.dms.service.impl
 import com.monkeydp.daios.dms.component.UserSession
 import com.monkeydp.daios.dms.curd.service.contract.ConnProfileService
 import com.monkeydp.daios.dms.module.ModuleRegistry
-import com.monkeydp.daios.dms.sdk.metadata.node.ConnNode
-import com.monkeydp.daios.dms.sdk.metadata.node.Node
+import com.monkeydp.daios.dms.sdk.metadata.node.main.ConnNode
+import com.monkeydp.daios.dms.sdk.metadata.node.main.Node
 import com.monkeydp.daios.dms.sdk.metadata.node.ctx.NodeLoadCtxForm
 import com.monkeydp.daios.dms.service.contract.ConnService
 import com.monkeydp.daios.dms.service.contract.NodeService

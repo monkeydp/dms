@@ -1,7 +1,8 @@
 package com.monkeydp.daios.dms.sdk.metadata.node
 
+import com.monkeydp.daios.dms.sdk.metadata.node.def.NodeDef
+import com.monkeydp.daios.dms.sdk.metadata.node.main.Node
 import com.monkeydp.tools.ext.ierror
-import com.monkeydp.tools.ext.replaceLast
 import kotlin.reflect.full.createInstance
 
 /**
@@ -10,18 +11,16 @@ import kotlin.reflect.full.createInstance
  */
 open class NodePath : ArrayList<Node>() {
     companion object {
-        fun of(vararg nodes: Node, name: String? = null): NodePath {
+        fun of(vararg nodes: Node): NodePath {
             val path = NodePath()
             path.addAll(nodes)
-            path.replaceLastNodeName(name)
             return path
         }
-        
-        fun of(oldPath: NodePath, vararg nodes: Node, name: String? = null): NodePath {
+    
+        fun of(oldPath: NodePath, vararg nodes: Node): NodePath {
             val path = NodePath()
             path.addAll(oldPath)
             path.addAll(nodes)
-            path.replaceLastNodeName(name)
             return path
         }
     }
@@ -32,11 +31,7 @@ open class NodePath : ArrayList<Node>() {
         return path
     }
     
-    fun replaceLastNodeName(name: String?) {
-        if (name != null) this.replaceLast(this.last().create<Node>(name))
-    }
-    
-    open fun getLastNode(): Node {
+    open fun getLastNodeDef(): NodeDef {
         throw ierror("You have to implement this fun in subclass!")
     }
 }
