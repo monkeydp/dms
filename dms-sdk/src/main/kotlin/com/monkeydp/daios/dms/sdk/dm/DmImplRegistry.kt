@@ -6,6 +6,7 @@ import com.monkeydp.daios.dms.sdk.datasource.dsThreadLocal
 import com.monkeydp.daios.dms.sdk.enumeration.Enumx
 import com.monkeydp.daios.dms.sdk.metadata.form.CpForm
 import com.monkeydp.tools.exception.inner.AbstractInnerException
+import com.monkeydp.tools.ext.firstOfSnackCase
 import kotlin.reflect.KClass
 import kotlin.reflect.full.isSubclassOf
 
@@ -39,6 +40,12 @@ object DmImplRegistry {
     
     inline fun <reified E : Enumx<out E>> getEnumByDsThreadLocal(enumName: String): E =
             getEnum(enumName, dsThreadLocal.get())
+    
+    inline fun <reified E : Enumx<out E>> getEnumByPrefix(enumName: String): E {
+        val dsName = enumName.firstOfSnackCase().toUpperCase()
+        val ds = Datasource.valueOfOrNull(dsName)
+        return getEnum(enumName, ds)
+    }
     
     inline fun <reified E : Enumx<out E>> getEnum(enumName: String, datasource: Datasource? = null): E {
         val enumNameUpper = enumName.toUpperCase()

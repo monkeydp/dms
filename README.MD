@@ -95,6 +95,7 @@ instr | instruction
 &nbsp;|
 **# M** |
 mi | menu item
+mid | menu item definition
 msg | message
 &nbsp;|
 **# N** |

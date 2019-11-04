@@ -1,6 +1,7 @@
 package com.monkeydp.daios.dms.sdk.datasource
 
 import com.monkeydp.tools.ext.ierror
+import com.monkeydp.tools.ext.valueOfOrNull
 
 /**
  * @author iPotato
@@ -9,6 +10,10 @@ import com.monkeydp.tools.ext.ierror
 enum class Datasource {
     
     MYSQL;
+    
+    companion object {
+        fun valueOfOrNull(enumName: String) = Datasource::class.valueOfOrNull(enumName)
+    }
     
     private val asPrefix = "${name}_"
     

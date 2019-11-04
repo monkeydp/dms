@@ -5,12 +5,10 @@ import com.monkeydp.daios.dms.sdk.metadata.instruction.Instruction
 
 /**
  * @author iPotato
- * @date 2019/10/31
+ * @date 2019/11/4
  */
-interface MenuItem {
-    val instr: Instruction
-    val name: String
-    val icon: Icon<*>
-    val hasSubmenu: Boolean
-    var status: MenuItemStatus
-}
+data class MenuItemInfo(
+        val instr: Instruction,
+        val name: String,
+        val icon: Icon<*>
+)
