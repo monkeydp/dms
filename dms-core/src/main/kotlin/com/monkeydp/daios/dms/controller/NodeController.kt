@@ -1,6 +1,5 @@
 package com.monkeydp.daios.dms.controller
 
-import com.monkeydp.daios.dms.annot.NeedDatasource
 import com.monkeydp.daios.dms.sdk.metadata.node.ctx.NodeLoadCtxForm
 import com.monkeydp.daios.dms.service.contract.NodeService
 import org.springframework.beans.factory.annotation.Autowired
@@ -21,5 +20,5 @@ class NodeController {
     fun loadConnNodes() = service.loadConnNodes()
     
     @PostMapping("load-sub-nodes")
-    fun loadSubNodes(@RequestBody @NeedDatasource ctx: NodeLoadCtxForm) = service.loadSubNodes(ctx)
+    fun loadSubNodes(@RequestBody ctx: NodeLoadCtxForm) = service.loadSubNodes(ctx)
 }

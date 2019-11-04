@@ -1,5 +1,6 @@
 package com.monkeydp.daios.dms.sdk.metadata.node.ctx
 
+import com.monkeydp.daios.dms.sdk.annot.NeedDatasource
 import com.monkeydp.daios.dms.sdk.conn.Conn
 import com.monkeydp.daios.dms.sdk.metadata.node.NodePath
 import com.monkeydp.daios.dms.sdk.mocker.ConnJsonMocker.CP_ID
@@ -13,6 +14,7 @@ import io.swagger.annotations.ApiModelProperty
  * @date 2019/10/25
  */
 @ApiModel
+@NeedDatasource
 data class NodeLoadCtxForm(
         @ApiModelProperty(required = true, example = CP_ID)
         val cpId: Long = INVALID_ID,

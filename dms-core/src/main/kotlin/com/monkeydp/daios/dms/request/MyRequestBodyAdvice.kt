@@ -2,7 +2,7 @@ package com.monkeydp.daios.dms.request
 
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import com.fasterxml.jackson.module.kotlin.readValue
-import com.monkeydp.daios.dms.annot.NeedDatasource
+import com.monkeydp.daios.dms.sdk.annot.NeedDatasource
 import com.monkeydp.daios.dms.sdk.datasource.Datasource
 import com.monkeydp.daios.dms.sdk.datasource.dsThreadLocal
 import com.monkeydp.daios.dms.service.contract.ConnService
@@ -33,7 +33,7 @@ class MyRequestBodyAdvice : RequestBodyAdviceAdapter() {
     override fun beforeBodyRead(inputMessage: HttpInputMessage, methodParameter: MethodParameter, targetType: Type,
                                 selectedConverterType: Class<out HttpMessageConverter<*>>): HttpInputMessage {
         if (dsThreadLocal.get() != null) return inputMessage
-        val annot = methodParameter.getParameterAnnotation(NeedDatasource::class.java)
+        val annot = (targetType as Class<*>).getDeclaredAnnotation(NeedDatasource::class.java)
         if (annot == null) return inputMessage
         val body = inputMessage.body as PushbackInputStream
         val bytes = body.readBytes()
