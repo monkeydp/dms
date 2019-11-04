@@ -1,4 +1,4 @@
-package com.monkeydp.daios.dms.sdk.metadata.node.main
+package com.monkeydp.daios.dms.sdk.metadata.node
 
 import com.monkeydp.daios.dms.sdk.metadata.icon.Icon
 import com.monkeydp.daios.dms.sdk.metadata.instruction.target.Target

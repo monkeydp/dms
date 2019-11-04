@@ -7,8 +7,8 @@ import com.monkeydp.daios.dms.sdk.metadata.instruction.Instruction
 import com.monkeydp.daios.dms.sdk.metadata.instruction.StdInstr
 import com.monkeydp.daios.dms.sdk.metadata.menu.item.MenuItem
 import com.monkeydp.daios.dms.sdk.metadata.menu.item.StdMi
-import com.monkeydp.daios.dms.sdk.metadata.node.main.Node
-import com.monkeydp.daios.dms.sdk.metadata.node.main.StdNode
+import com.monkeydp.daios.dms.sdk.metadata.node.Node
+import com.monkeydp.daios.dms.sdk.metadata.node.StdNode
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.context.annotation.Configuration
 import org.springframework.http.converter.json.Jackson2ObjectMapperBuilder

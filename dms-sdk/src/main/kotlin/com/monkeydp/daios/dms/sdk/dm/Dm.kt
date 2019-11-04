@@ -2,7 +2,6 @@ package com.monkeydp.daios.dms.sdk.dm
 
 import com.monkeydp.daios.dms.sdk.datasource.Datasource
 import com.monkeydp.daios.dms.sdk.datasource.DsDef
-import com.monkeydp.daios.dms.sdk.metadata.node.def.ConnNd
 
 /**
  * Datasource module
@@ -12,7 +11,6 @@ import com.monkeydp.daios.dms.sdk.metadata.node.def.ConnNd
  */
 interface Dm {
     val datasource: Datasource
-    val connNd: ConnNd
     val dsDefs: List<DsDef>
     val impl: DmImpl
     val testdata: DmTestdata

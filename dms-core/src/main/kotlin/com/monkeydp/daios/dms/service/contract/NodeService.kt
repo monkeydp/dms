@@ -1,7 +1,7 @@
 package com.monkeydp.daios.dms.service.contract
 
-import com.monkeydp.daios.dms.sdk.metadata.node.main.ConnNode
-import com.monkeydp.daios.dms.sdk.metadata.node.main.Node
+import com.monkeydp.daios.dms.sdk.metadata.node.ConnNode
+import com.monkeydp.daios.dms.sdk.metadata.node.Node
 import com.monkeydp.daios.dms.sdk.metadata.node.ctx.NodeLoadCtxForm
 
 /**

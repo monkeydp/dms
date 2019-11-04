@@ -1,6 +1,6 @@
 package com.monkeydp.daios.dms.sdk.metadata.menu.item
 
-import com.monkeydp.daios.dms.sdk.metadata.menu.def.MenuDef
+import com.monkeydp.daios.dms.sdk.metadata.menu.MenuDef
 import java.util.concurrent.CopyOnWriteArrayList
 
 /**
