@@ -3,6 +3,8 @@ package com.monkeydp.daios.dms.config
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.databind.module.SimpleAbstractTypeResolver
 import com.fasterxml.jackson.databind.module.SimpleModule
+import com.monkeydp.daios.dms.sdk.metadata.menu.Menu
+import com.monkeydp.daios.dms.sdk.metadata.menu.StdMenu
 import com.monkeydp.daios.dms.sdk.metadata.node.main.Node
 import com.monkeydp.daios.dms.sdk.metadata.node.main.StdNode
 import org.springframework.beans.factory.annotation.Autowired
@@ -28,9 +30,10 @@ class JacksonConfig {
     fun configureObjectMapper(objectMapper: ObjectMapper) {
         objectMapper.registerModule(object : SimpleModule("CustomModule") {
             override fun setupModule(context: SetupContext) {
-                val resolver = SimpleAbstractTypeResolver()
+                val nodeResolver = SimpleAbstractTypeResolver()
                         .addMapping(Node::class.java, StdNode::class.java)
-                context.addAbstractTypeResolver(resolver)
+                        .addMapping(Menu::class.java, StdMenu::class.java)
+                context.addAbstractTypeResolver(nodeResolver)
             }
         })
     }

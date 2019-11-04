@@ -20,5 +20,5 @@ class MenuController {
     private lateinit var service: MenuService
     
     @PostMapping("load-node-menu")
-    fun loadNodeMenu(@RequestBody ctx: NodeMenuLoadCtxForm) = service.loadNodeMenu(ctx)
+    fun loadNodeMenu(@RequestBody ctx: NodeMenuLoadCtxForm) = service.loadNodeMenu(ctx)?.items ?: emptyList()
 }
