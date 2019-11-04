@@ -5,7 +5,7 @@ package com.monkeydp.daios.dms.sdk.mocker
  * @date 2019/10/28
  */
 object NodeJsonMocker {
-    const val NODE_INFO_PATH =
+    const val NODE_PATH =
             """[
                   {
                     "target": "CONN",

@@ -1,9 +1,11 @@
 package com.monkeydp.daios.dms.sdk.metadata.menu.ctx
 
 import com.monkeydp.daios.dms.sdk.annot.NeedDatasource
+import com.monkeydp.daios.dms.sdk.metadata.menu.item.MenuPath
 import com.monkeydp.daios.dms.sdk.metadata.node.NodePath
 import com.monkeydp.daios.dms.sdk.mocker.ConnJsonMocker.CP_ID
-import com.monkeydp.daios.dms.sdk.mocker.NodeJsonMocker.NODE_INFO_PATH
+import com.monkeydp.daios.dms.sdk.mocker.MenuJsonMocker.MENU_PATH
+import com.monkeydp.daios.dms.sdk.mocker.NodeJsonMocker.NODE_PATH
 import com.monkeydp.daios.dms.sdk.util.IdUtil
 import io.swagger.annotations.ApiModel
 import io.swagger.annotations.ApiModelProperty
@@ -17,8 +19,10 @@ import io.swagger.annotations.ApiModelProperty
 data class NodeMenuLoadCtxForm(
         @ApiModelProperty(required = true, example = CP_ID)
         val cpId: Long = IdUtil.INVALID_ID,
-        @ApiModelProperty(required = true, example = NODE_INFO_PATH)
-        val path: NodePath
+        @ApiModelProperty(required = true, example = NODE_PATH)
+        val nodePath: NodePath,
+        @ApiModelProperty(required = true, example = MENU_PATH)
+        val menuPath: MenuPath = MenuPath()
 ) {
-    fun toInner() = NodeMenuLoadCtx(path)
+    fun toInner() = NodeMenuLoadCtx(nodePath, menuPath)
 }

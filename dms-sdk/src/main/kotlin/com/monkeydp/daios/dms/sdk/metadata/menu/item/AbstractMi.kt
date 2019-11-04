@@ -25,5 +25,13 @@ abstract class AbstractMi : MenuItem {
         hasSubmenu = def.menuDef != null
     }
     
+    constructor(instr: Instruction, name: String, icon: Icon<*>, hasSubmenu: Boolean, status: MenuItemStatus) {
+        this.instr = instr
+        this.name = name
+        this.icon = icon
+        this.hasSubmenu = hasSubmenu
+        this.status = status
+    }
+    
     override fun toString() = name
 }
