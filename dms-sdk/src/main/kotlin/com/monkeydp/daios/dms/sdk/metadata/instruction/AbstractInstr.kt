@@ -17,5 +17,12 @@ abstract class AbstractInstr : Instruction {
             this.action == other.action &&
             this.target == other.target
     
+    override fun hashCode(): Int {
+        var result = 17
+        result = result * 31 + action.hashCode()
+        result = result * 31 + target.hashCode()
+        return result
+    }
+    
     override fun toString() = "${action.fullName} ${target.fullName}"
 }

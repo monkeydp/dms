@@ -18,7 +18,7 @@ object NodeJsonMocker {
                   },
                   {
                     "target": "DB",
-                    "name": "testdb",
+                    "name": "test_db",
                     "icon": {
                       "name": "DB_ICON",
                       "color": "",
