@@ -9,5 +9,5 @@ import com.monkeydp.daios.dms.sdk.useful.UserInput
  */
 data class InstrParseCtx(
         val instr: Instruction,
-        val userInput: UserInput
+        val userInput: UserInput = UserInput()
 )
