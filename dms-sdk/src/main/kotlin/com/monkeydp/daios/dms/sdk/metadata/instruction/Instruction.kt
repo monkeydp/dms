@@ -10,10 +10,6 @@ import com.monkeydp.daios.dms.sdk.metadata.instruction.target.Target
  * @date 2019/10/25
  */
 interface Instruction {
-    
     val action: Action<*>
     val target: Target<*>
-    
-    fun isInstruction(action: Action<*>, target: Target<*>) =
-            action == this.action && target == this.target
 }

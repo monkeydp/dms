@@ -7,10 +7,8 @@ import com.monkeydp.daios.dms.sdk.metadata.instruction.target.Target
  * @author iPotato
  * @date 2019/11/3
  */
-class StdNode(
-        target: Target<*>,
-        name: String,
-        icon: Icon<*>
-) : AbstractNode(target, name, icon) {
-    constructor(node: Node) : this(node.target, node.name, node.icon)
-}
+data class StdNode(
+        override val target: Target<*>,
+        override val name: String,
+        override val icon: Icon<*>
+) : Node

@@ -27,10 +27,10 @@ class ModuleDeployer {
      * Deploy module like dm-mysql
      */
     private fun deployModule(moduleDir: File) {
-        val configFile = File(moduleDir, Module.configFilename)
-        val config = YamlUtil.loadAs<ModuleConfig>(configFile)
-        val dmClassname = config.dmClassname
-        val dmBundle = ModuleBundle(moduleDir, dmClassname)
-        moduleRegistry.registerModule(dmBundle)
+        val bootFile = File(moduleDir, Module.bootFilename)
+        val config = YamlUtil.loadAs<DmBootConfig>(bootFile)
+        val classname = config.classname
+        val bundle = ModuleBundle(moduleDir, classname)
+        moduleRegistry.registerModule(bundle)
     }
 }

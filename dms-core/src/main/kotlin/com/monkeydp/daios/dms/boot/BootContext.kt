@@ -29,8 +29,8 @@ final object BootContext {
          */
         lateinit var outsideModuleZips: List<File>
         lateinit var moduleDirs: List<File>
-        
-        const val configFilename = "module.yml"
+    
+        const val bootFilename = "boot.yml"
         val dmRegex = "^dm-.+".toRegex()
         val dmZipRegex = "^dm-.+.zip$".toRegex()
     }

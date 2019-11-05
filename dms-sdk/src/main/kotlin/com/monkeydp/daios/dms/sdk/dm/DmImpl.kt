@@ -1,6 +1,7 @@
 package com.monkeydp.daios.dms.sdk.dm
 
 import com.monkeydp.daios.dms.sdk.api.ConnApi
+import com.monkeydp.daios.dms.sdk.api.InstrApi
 import com.monkeydp.daios.dms.sdk.api.MenuApi
 import com.monkeydp.daios.dms.sdk.api.NodeApi
 import com.monkeydp.daios.dms.sdk.datasource.DsVersion
@@ -20,6 +21,7 @@ interface DmImpl {
         val connApi: ConnApi
         val nodeApi: NodeApi
         val menuApi: MenuApi
+        val instrApi: InstrApi
     }
     
     interface Classes {

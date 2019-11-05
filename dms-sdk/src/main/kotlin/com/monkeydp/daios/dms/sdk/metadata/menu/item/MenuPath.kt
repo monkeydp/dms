@@ -1,6 +1,5 @@
 package com.monkeydp.daios.dms.sdk.metadata.menu.item
 
-import com.monkeydp.daios.dms.sdk.metadata.menu.MenuDef
 import java.util.concurrent.CopyOnWriteArrayList
 
 /**
@@ -24,13 +23,5 @@ class MenuPath : CopyOnWriteArrayList<MenuItem>() {
         }
     }
     
-    private val iterator by lazy { iterator() }
-    
-    fun recurFindNextDef(def: MenuDef): MenuDef? {
-        if (!iterator.hasNext()) return def
-        val item = iterator.next()
-        var nextDef = def.items.firstOrNull() { it.info.instr == item.instr }?.menuDef
-        if (iterator.hasNext() && nextDef != null) nextDef = recurFindNextDef(nextDef)
-        return nextDef
-    }
+    val iterator by lazy { iterator() }
 }

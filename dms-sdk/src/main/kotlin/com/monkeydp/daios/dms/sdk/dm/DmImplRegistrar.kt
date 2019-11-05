@@ -1,10 +1,8 @@
 package com.monkeydp.daios.dms.sdk.dm
 
-import com.monkeydp.daios.dms.sdk.enumeration.Enumx
+import com.monkeydp.daios.dms.sdk.config.GlobalConfig.globalEnumClasses
 import com.monkeydp.daios.dms.sdk.datasource.Datasource
-import com.monkeydp.daios.dms.sdk.metadata.icon.GlobalIcon
-import com.monkeydp.daios.dms.sdk.metadata.instruction.action.GlobalAction
-import com.monkeydp.daios.dms.sdk.metadata.instruction.target.GlobalTarget
+import com.monkeydp.daios.dms.sdk.enumeration.Enumx
 import com.monkeydp.tools.ext.toPropListX
 import kotlin.reflect.KClass
 
@@ -13,12 +11,6 @@ import kotlin.reflect.KClass
  * @date 2019/10/27
  */
 object DmImplRegistrar {
-    
-    private val globalEnumClasses = listOf<KClass<out Enumx<*>>>(
-            GlobalAction::class,
-            GlobalTarget::class,
-            GlobalIcon::class
-    )
     
     fun registerAll(impl: DmImpl, datasource: Datasource) {
         registerClasses(impl.classes, datasource)
@@ -30,9 +22,9 @@ object DmImplRegistrar {
         classes.forEach { clazz -> DmImplRegistry.registerClass(clazz, datasource) }
     }
     
-    private fun registerEnums(implEnumClasses: DmImpl.EnumClasses, datasource: Datasource) {
+    private fun registerEnums(localEnumClasses: DmImpl.EnumClasses, datasource: Datasource) {
         registerGlobalEnums(globalEnumClasses)
-        registerLocalEnums(implEnumClasses, datasource)
+        registerLocalEnums(localEnumClasses, datasource)
     }
     
     private fun registerGlobalEnums(enumClasses: List<KClass<out Enumx<*>>>) {
