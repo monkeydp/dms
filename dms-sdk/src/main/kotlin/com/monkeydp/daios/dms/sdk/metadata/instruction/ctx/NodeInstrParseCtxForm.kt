@@ -21,7 +21,7 @@ data class NodeInstrParseCtxForm(
         override val cpId: Long,
         @ApiModelProperty(required = true, example = """{"action":"NEW","target":"TABLE"}""")
         override val instr: Instruction,
-        @ApiModelProperty(required = true, example = """{"tableName":"test_table"}""")
+        @ApiModelProperty(required = true, example = """{"name":"test_table"}""")
         override val userInput: UserInput = UserInput(),
         @ApiModelProperty(required = true, example = NodeJsonMocker.NODE_PATH)
         val nodePath: NodePath
