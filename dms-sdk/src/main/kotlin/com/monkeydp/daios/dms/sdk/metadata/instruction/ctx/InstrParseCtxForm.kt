@@ -7,7 +7,8 @@ import com.monkeydp.daios.dms.sdk.useful.UserInput
  * @author iPotato
  * @date 2019/11/5
  */
-interface InstrParseCtx {
+interface InstrParseCtxForm {
+    val cpId: Long
     val instr: Instruction
     val userInput: UserInput
 }

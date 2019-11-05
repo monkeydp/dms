@@ -8,15 +8,15 @@ enum class GlobalIcon(
         override val namex: String,
         override val color: String
 ) : Icon<GlobalIcon> {
-    EMPTY_ICON("empty_icon", ""),
+    EMPTY_ICON("empty icon", ""),
     
-    CONN_ICON("conn_icon", ""),
-    DB_ICON("db_icon", ""),
-    TABLE_ICON("table_icon", ""),
-    VIEW_ICON("view_icon", ""),
+    CONN_ICON("conn icon", ""),
+    DB_ICON("db icon", ""),
+    TABLE_ICON("table icon", ""),
+    VIEW_ICON("view icon", ""),
     
-    GROUP_ICON("default_group_icon", ""),
-    DB_GROUP_ICON("db_group_icon", ""),
-    TABLE_GROUP_ICON("table_group_icon", ""),
-    VIEW_GROUP_ICON("view_group_icon", ""),
+    GROUP_ICON("default group icon", ""),
+    DB_GROUP_ICON("db group icon", ""),
+    TABLE_GROUP_ICON("table group icon", ""),
+    VIEW_GROUP_ICON("view group icon", ""),
 }

@@ -8,6 +8,7 @@ import com.monkeydp.daios.dms.sdk.dm.DmImplRegistry
 import com.monkeydp.daios.dms.sdk.enumeration.Enumx
 import com.monkeydp.daios.dms.sdk.metadata.instruction.target.Target.TargetDeserializer
 import com.monkeydp.tools.ext.toUpperCamelCase
+import io.swagger.annotations.ApiModelProperty
 
 /**
  * @author iPotato
@@ -18,8 +19,10 @@ interface Target<E> : Enumx<E>
         where E : Target<E>, E : Enum<E> {
     
     val defaultFullName
+        @ApiModelProperty(hidden = true)
         get() = asEnum().name.toUpperCamelCase()
     val fullName
+        @ApiModelProperty(hidden = true)
         get() = defaultFullName
     
     class TargetDeserializer : JsonDeserializer<Target<*>>() {

@@ -10,5 +10,5 @@ import com.monkeydp.daios.dms.sdk.metadata.node.ctx.NodeLoadCtxForm
  */
 interface NodeService {
     fun loadConnNodes(): List<ConnNode>
-    fun loadSubNodes(ctx: NodeLoadCtxForm): List<Node>
+    fun loadSubNodes(form: NodeLoadCtxForm): List<Node>
 }

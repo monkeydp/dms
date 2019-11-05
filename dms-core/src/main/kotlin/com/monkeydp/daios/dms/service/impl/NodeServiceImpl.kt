@@ -39,11 +39,11 @@ internal class NodeServiceImpl : NodeService {
         return connNodes.toList()
     }
     
-    override fun loadSubNodes(ctx: NodeLoadCtxForm): List<Node> {
-        val cpId = ctx.cpId
+    override fun loadSubNodes(form: NodeLoadCtxForm): List<Node> {
+        val cpId = form.cpId
         val cp = connService.findCp(cpId)
         val conn = connService.findConn(cpId)
         val bundle = registry.getBundle(cp)
-        return bundle.apis.nodeApi.loadSubNodes(ctx.toInner(conn))
+        return bundle.apis.nodeApi.loadSubNodes(form.toInner(conn))
     }
 }
