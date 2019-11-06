@@ -1,7 +1,7 @@
 package com.monkeydp.daios.dms.sdk.entity
 
 import com.fasterxml.jackson.annotation.JsonIgnore
-import com.monkeydp.daios.dms.sdk.util.IdUtil
+import com.monkeydp.daios.dms.sdk.helper.IdHelper
 import javax.persistence.GeneratedValue
 import javax.persistence.Id
 import javax.persistence.MappedSuperclass
@@ -17,9 +17,9 @@ abstract class AbstractEntity(
         open val id: Long = INVALID_ID
 ) {
     companion object {
-        const val INVALID_ID = IdUtil.INVALID_ID
+        const val INVALID_ID = IdHelper.INVALID_ID
     }
     
     @JsonIgnore
-    open fun isValid() = IdUtil.isValid(id)
+    open fun isValid() = IdHelper.isValid(id)
 }

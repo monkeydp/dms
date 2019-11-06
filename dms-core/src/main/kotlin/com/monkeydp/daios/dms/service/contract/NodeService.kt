@@ -2,7 +2,7 @@ package com.monkeydp.daios.dms.service.contract
 
 import com.monkeydp.daios.dms.sdk.metadata.node.ConnNode
 import com.monkeydp.daios.dms.sdk.metadata.node.Node
-import com.monkeydp.daios.dms.sdk.metadata.node.ctx.NodeLoadCtxForm
+import com.monkeydp.daios.dms.sdk.metadata.node.NodeLoadCtx
 
 /**
  * @author iPotato
@@ -10,5 +10,5 @@ import com.monkeydp.daios.dms.sdk.metadata.node.ctx.NodeLoadCtxForm
  */
 interface NodeService {
     fun loadConnNodes(): List<ConnNode>
-    fun loadSubNodes(form: NodeLoadCtxForm): List<Node>
+    fun loadSubNodes(ctx: NodeLoadCtx): List<Node>
 }

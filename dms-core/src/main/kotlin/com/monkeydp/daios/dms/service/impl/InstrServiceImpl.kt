@@ -2,8 +2,7 @@ package com.monkeydp.daios.dms.service.impl
 
 import com.monkeydp.daios.dms.module.ModuleRegistry
 import com.monkeydp.daios.dms.sdk.metadata.instruction.ctx.InstrParseCtx
-import com.monkeydp.daios.dms.sdk.metadata.instruction.ctx.InstrParseCtxForm
-import com.monkeydp.daios.dms.sdk.metadata.instruction.ctx.NodeInstrParseCtxForm
+import com.monkeydp.daios.dms.sdk.metadata.instruction.ctx.NodeInstrParseCtx
 import com.monkeydp.daios.dms.service.contract.ConnService
 import com.monkeydp.daios.dms.service.contract.InstrService
 import com.monkeydp.tools.ext.ierror
@@ -21,16 +20,15 @@ class InstrServiceImpl : InstrService {
     @Autowired
     private lateinit var connService: ConnService
     
-    override fun parse(form: InstrParseCtxForm) {
-        val cp = connService.findCp(form.cpId)
+    override fun parse(ctx: InstrParseCtx) {
+        val cp = connService.findCp(ctx.cpId)
         val bundle = registry.getBundle(cp)
-        var ctx: InstrParseCtx
-        when (form) {
-            is NodeInstrParseCtxForm -> {
+        when (ctx) {
+            is NodeInstrParseCtx -> {
                 val conn = connService.findConn(cp.id)
-                ctx = form.toInner(conn)
+                ctx.conn = conn
             }
-            else                     -> ierror("Unknown instruction parsing context!")
+            else -> ierror("Unknown instruction parsing context!")
         }
         bundle.apis.instrApi.parse(ctx)
     }

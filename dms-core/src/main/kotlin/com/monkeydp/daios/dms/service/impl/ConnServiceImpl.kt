@@ -1,14 +1,14 @@
 package com.monkeydp.daios.dms.service.impl
 
-import com.monkeydp.daios.dms.module.ModuleRegistry
-import com.monkeydp.daios.dms.session.UserSession
 import com.monkeydp.daios.dms.conn.BelongsTo
 import com.monkeydp.daios.dms.conn.ConnManager
 import com.monkeydp.daios.dms.conn.ConnWrapper
 import com.monkeydp.daios.dms.curd.service.contract.ConnProfileService
+import com.monkeydp.daios.dms.module.ModuleRegistry
 import com.monkeydp.daios.dms.sdk.conn.Conn
 import com.monkeydp.daios.dms.sdk.entity.ConnProfile
 import com.monkeydp.daios.dms.service.contract.ConnService
+import com.monkeydp.daios.dms.session.UserSession
 import com.monkeydp.tools.ext.getLogger
 import com.monkeydp.tools.ext.ierror
 import org.springframework.beans.factory.annotation.Autowired
@@ -53,7 +53,7 @@ internal class ConnServiceImpl : ConnService {
     override fun openConn(cpId: Long, belongsTo: BelongsTo): ConnWrapper {
         return when (belongsTo) {
             BelongsTo.USER -> openUserConn(cpId)
-            else           -> openOtherConn(cpId, belongsTo)
+            else -> openOtherConn(cpId, belongsTo)
         }
     }
     

@@ -6,7 +6,7 @@ import com.monkeydp.daios.dms.sdk.metadata.node.NodePath
 import com.monkeydp.daios.dms.sdk.mocker.ConnJsonMocker.CP_ID
 import com.monkeydp.daios.dms.sdk.mocker.MenuJsonMocker.MENU_PATH
 import com.monkeydp.daios.dms.sdk.mocker.NodeJsonMocker.NODE_PATH
-import com.monkeydp.daios.dms.sdk.util.IdUtil
+import com.monkeydp.daios.dms.sdk.helper.IdHelper
 import io.swagger.annotations.ApiModel
 import io.swagger.annotations.ApiModelProperty
 
@@ -18,7 +18,7 @@ import io.swagger.annotations.ApiModelProperty
 @NeedDatasource
 data class NodeMenuLoadCtxForm(
         @ApiModelProperty(required = true, example = CP_ID)
-        val cpId: Long = IdUtil.INVALID_ID,
+        val cpId: Long = IdHelper.INVALID_ID,
         @ApiModelProperty(required = true, example = NODE_PATH)
         val nodePath: NodePath,
         @ApiModelProperty(required = true, example = MENU_PATH)

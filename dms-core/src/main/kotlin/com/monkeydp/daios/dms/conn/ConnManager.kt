@@ -1,8 +1,8 @@
 package com.monkeydp.daios.dms.conn
 
 import com.monkeydp.daios.dms.sdk.entity.ConnProfile
-import com.monkeydp.daios.dms.sdk.util.IdUtil
-import com.monkeydp.daios.dms.sdk.util.IdUtil.INVALID_ID
+import com.monkeydp.daios.dms.sdk.helper.IdHelper
+import com.monkeydp.daios.dms.sdk.helper.IdHelper.INVALID_ID
 import com.monkeydp.tools.exception.inner.AbstractInnerException
 import com.monkeydp.tools.ext.ierror
 import org.springframework.stereotype.Component
@@ -113,8 +113,8 @@ class ConnManager {
             private var activeUserConnId: Long = INVALID_ID
     ) {
         val cpId: Long = cp.id
-        
-        private fun hasActiveUserConn() = IdUtil.isValid(activeUserConnId)
+    
+        private fun hasActiveUserConn() = IdHelper.isValid(activeUserConnId)
         
         fun activateCw(cw: ConnWrapper) {
             if (cw.belongsToUser()) activateUserCw(cw)

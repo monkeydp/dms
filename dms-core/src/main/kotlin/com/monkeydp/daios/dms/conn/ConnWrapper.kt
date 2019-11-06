@@ -3,8 +3,8 @@ package com.monkeydp.daios.dms.conn
 import com.monkeydp.daios.dms.conn.BelongsTo.TASK
 import com.monkeydp.daios.dms.conn.BelongsTo.USER
 import com.monkeydp.daios.dms.sdk.conn.Conn
+import com.monkeydp.daios.dms.sdk.helper.IdHelper
 import com.monkeydp.tools.ext.ierror
-import com.monkeydp.tools.util.RandomUtil
 
 /**
  * @author iPotato
@@ -13,7 +13,7 @@ import com.monkeydp.tools.util.RandomUtil
 class ConnWrapper(val conn: Conn<*>, private val belongsTo: BelongsTo = USER) : AutoCloseable {
     
     // TODO auto increment id
-    val connId = RandomUtil.randomId()
+    val connId = IdHelper.randomId()
     
     val cpId = conn.cpId
     

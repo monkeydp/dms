@@ -8,6 +8,7 @@ import com.monkeydp.daios.dms.sdk.useful.UserInput
  * @date 2019/11/5
  */
 interface InstrParseCtx {
+    val cpId: Long
     val instr: Instruction
     val userInput: UserInput
 }

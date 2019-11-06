@@ -1,6 +1,6 @@
 package com.monkeydp.daios.dms.controller
 
-import com.monkeydp.daios.dms.sdk.metadata.node.ctx.NodeLoadCtxForm
+import com.monkeydp.daios.dms.sdk.metadata.node.NodeLoadCtx
 import com.monkeydp.daios.dms.service.contract.NodeService
 import io.swagger.annotations.Api
 import io.swagger.annotations.ApiOperation
@@ -25,5 +25,5 @@ class NodeController {
     
     @ApiOperation("Load sub nodes")
     @PostMapping("load-sub-nodes")
-    fun loadSubNodes(@RequestBody ctx: NodeLoadCtxForm) = service.loadSubNodes(ctx)
+    fun loadSubNodes(@RequestBody ctx: NodeLoadCtx) = service.loadSubNodes(ctx)
 }

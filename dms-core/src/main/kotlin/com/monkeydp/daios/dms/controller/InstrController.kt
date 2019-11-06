@@ -1,6 +1,6 @@
 package com.monkeydp.daios.dms.controller
 
-import com.monkeydp.daios.dms.sdk.metadata.instruction.ctx.NodeInstrParseCtxForm
+import com.monkeydp.daios.dms.sdk.metadata.instruction.ctx.NodeInstrParseCtx
 import com.monkeydp.daios.dms.service.contract.InstrService
 import io.swagger.annotations.Api
 import io.swagger.annotations.ApiOperation
@@ -24,5 +24,5 @@ class InstrController {
     
     @ApiOperation("Parse instruction related to node")
     @PostMapping("parse-node-instr")
-    fun parseNodeInstr(@RequestBody form: NodeInstrParseCtxForm) = service.parse(form)
+    fun parseNodeInstr(@RequestBody ctx: NodeInstrParseCtx) = service.parse(ctx)
 }
