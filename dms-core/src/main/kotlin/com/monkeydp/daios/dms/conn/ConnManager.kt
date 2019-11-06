@@ -8,7 +8,6 @@ import com.monkeydp.tools.ext.ierror
 import org.springframework.stereotype.Component
 
 /**
- * TODO consider concurrency
  * @author iPotato
  * @date 2019/10/24
  */
@@ -126,7 +125,7 @@ class ConnManager {
             cw.checkBelongsToUser()
             if (hasActiveUserConn()) ierror("Active user conn is already exist!")
             activeUserConnId = cw.connId
-            activeCwMap.putIfAbsent(cw.connId, cw)
+            activeCwMap.putIfAbsent(activeUserConnId, cw)
         }
         
         private fun activeOtherCw(cw: ConnWrapper) {
