@@ -31,7 +31,7 @@ Following datasource would be developed as an example:
     - open/close/test connection
     - manager active connection
 - 🏃 Metadata Loader
-    - node  ✔ <br/> (navigator)
+    - node  ✔
     - menu  ✔
     - form
 - Command Executor
