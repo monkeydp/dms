@@ -24,21 +24,25 @@ Following datasource would be developed as an example:
 
 ## Project Progress
 
-- Base Function (OK)
+- 🏁 Base Function
     - auto package dm zip to dms when dms start up
     - dynamic load libs and drivers from diff dm
-- Connection Manager (OK)
+-  🏁 Connection Manager
     - open/close/test connection
     - manager active connection
-- Metadata Loader (Doing...)
-    - navigate
-    - menu
+- 🏃 Metadata Loader
+    - node  ✅ <br/> (navigator)
+    - menu  ✅
     - form
 - Command Executor
     - sql
     - redis script
     - mongodb script
 - More...
+
+> 🏁 Finished all in list<br/>
+> ✅ Finished one <br/>
+> 🏃 Doing
 
 
 ## Directory structure
