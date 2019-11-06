@@ -1,6 +1,6 @@
 package com.monkeydp.daios.dms.sdk.api
 
-import com.monkeydp.daios.dms.sdk.metadata.instruction.ctx.InstrParseCtx
+import com.monkeydp.daios.dms.sdk.instruction.ctx.InstrParseCtx
 
 /**
  * @author iPotato

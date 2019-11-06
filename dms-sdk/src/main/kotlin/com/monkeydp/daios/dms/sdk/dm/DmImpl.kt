@@ -7,8 +7,8 @@ import com.monkeydp.daios.dms.sdk.api.NodeApi
 import com.monkeydp.daios.dms.sdk.datasource.DsVersion
 import com.monkeydp.daios.dms.sdk.metadata.form.CpForm
 import com.monkeydp.daios.dms.sdk.metadata.icon.Icon
-import com.monkeydp.daios.dms.sdk.metadata.instruction.action.Action
-import com.monkeydp.daios.dms.sdk.metadata.instruction.target.Target
+import com.monkeydp.daios.dms.sdk.instruction.action.Action
+import com.monkeydp.daios.dms.sdk.instruction.target.Target
 import kotlin.reflect.KClass
 
 interface DmImpl {

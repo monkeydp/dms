@@ -1,4 +1,4 @@
-package com.monkeydp.daios.dms.sdk.metadata.instruction
+package com.monkeydp.daios.dms.sdk.instruction
 
 import com.monkeydp.daios.dms.sdk.config.GlobalConfig.globalActionClass
 import com.monkeydp.daios.dms.sdk.config.GlobalConfig.globalTargetClass

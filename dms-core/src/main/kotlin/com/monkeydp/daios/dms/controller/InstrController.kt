@@ -1,6 +1,6 @@
 package com.monkeydp.daios.dms.controller
 
-import com.monkeydp.daios.dms.sdk.metadata.instruction.ctx.NodeInstrParseCtx
+import com.monkeydp.daios.dms.sdk.instruction.ctx.NodeInstrParseCtx
 import com.monkeydp.daios.dms.service.contract.InstrService
 import io.swagger.annotations.Api
 import io.swagger.annotations.ApiOperation

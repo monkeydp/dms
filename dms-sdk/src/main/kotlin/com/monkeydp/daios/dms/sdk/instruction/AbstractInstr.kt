@@ -1,7 +1,7 @@
-package com.monkeydp.daios.dms.sdk.metadata.instruction
+package com.monkeydp.daios.dms.sdk.instruction
 
-import com.monkeydp.daios.dms.sdk.metadata.instruction.action.Action
-import com.monkeydp.daios.dms.sdk.metadata.instruction.target.Target
+import com.monkeydp.daios.dms.sdk.instruction.action.Action
+import com.monkeydp.daios.dms.sdk.instruction.target.Target
 
 /**
  * @author iPotato

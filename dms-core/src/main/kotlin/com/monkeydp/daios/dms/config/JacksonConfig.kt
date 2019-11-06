@@ -3,8 +3,8 @@ package com.monkeydp.daios.dms.config
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.databind.module.SimpleAbstractTypeResolver
 import com.fasterxml.jackson.databind.module.SimpleModule
-import com.monkeydp.daios.dms.sdk.metadata.instruction.Instruction
-import com.monkeydp.daios.dms.sdk.metadata.instruction.StdInstr
+import com.monkeydp.daios.dms.sdk.instruction.Instruction
+import com.monkeydp.daios.dms.sdk.instruction.StdInstr
 import com.monkeydp.daios.dms.sdk.metadata.menu.item.MenuItem
 import com.monkeydp.daios.dms.sdk.metadata.menu.item.StdMi
 import com.monkeydp.daios.dms.sdk.metadata.node.Node

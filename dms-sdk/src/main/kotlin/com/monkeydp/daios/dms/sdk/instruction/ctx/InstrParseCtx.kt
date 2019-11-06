@@ -1,6 +1,6 @@
-package com.monkeydp.daios.dms.sdk.metadata.instruction.ctx
+package com.monkeydp.daios.dms.sdk.instruction.ctx
 
-import com.monkeydp.daios.dms.sdk.metadata.instruction.Instruction
+import com.monkeydp.daios.dms.sdk.instruction.Instruction
 import com.monkeydp.daios.dms.sdk.useful.UserInput
 
 /**

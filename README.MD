@@ -30,6 +30,7 @@ Following datasource would be developed as an example:
 -  🏁 Connection Manager
     - open/close/test connection
     - manager active connection
+- 🏁 Instruction Parser
 - 🏃 Metadata Loader
     - node  ✔
     - menu  ✔

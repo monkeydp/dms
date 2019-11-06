@@ -1,4 +1,4 @@
-package com.monkeydp.daios.dms.sdk.metadata.instruction.action
+package com.monkeydp.daios.dms.sdk.instruction.target
 
 import com.monkeydp.tools.ext.toUpperCamelCase
 
@@ -6,8 +6,16 @@ import com.monkeydp.tools.ext.toUpperCamelCase
  * @author iPotato
  * @date 2019/10/25
  */
-enum class GlobalAction(fullName: String = "") : Action<GlobalAction> {
-    NEW, EDIT, DELETE, OPEN, CLOSE, MANAGE;
+enum class GlobalTarget(fullName: String = "") : Target<GlobalTarget> {
+    
+    CONN("connection"),
+    DB("database"),
+    TABLE,
+    VIEW,
+    
+    GROUP,
+    
+    QUERY;
     
     override val fullName: String
     

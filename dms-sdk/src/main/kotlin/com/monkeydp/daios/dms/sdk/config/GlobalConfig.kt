@@ -2,8 +2,8 @@ package com.monkeydp.daios.dms.sdk.config
 
 import com.monkeydp.daios.dms.sdk.enumeration.Enumx
 import com.monkeydp.daios.dms.sdk.metadata.icon.GlobalIcon
-import com.monkeydp.daios.dms.sdk.metadata.instruction.action.GlobalAction
-import com.monkeydp.daios.dms.sdk.metadata.instruction.target.GlobalTarget
+import com.monkeydp.daios.dms.sdk.instruction.action.GlobalAction
+import com.monkeydp.daios.dms.sdk.instruction.target.GlobalTarget
 import com.monkeydp.tools.ext.toPropListX
 import kotlin.reflect.KClass
 
