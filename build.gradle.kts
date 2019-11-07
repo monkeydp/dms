@@ -1,6 +1,10 @@
 group = "com.monkeydp.daios"
 version = "0.0.3-SNAPSHOT"
 
-tasks.withType<Jar> {
-    onlyIf { false }
+tasks.withType<Assemble> {
+    enabled = false
+}
+
+tasks.withType<GradleBuild> {
+    enabled = false
 }
