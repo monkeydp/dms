@@ -1,6 +1,6 @@
 package com.monkeydp.daios.dms.service.contract
 
-import com.monkeydp.daios.dms.sdk.instruction.ctx.InstrParseCtx
+import com.monkeydp.daios.dms.sdk.instruction.InstrParsingCtx
 
 /**
  * @author iPotato
@@ -10,5 +10,5 @@ interface InstrService {
     /**
      * Return value should send by message exchange
      */
-    fun parse(ctx: InstrParseCtx)
+    fun parse(ctx: InstrParsingCtx)
 }

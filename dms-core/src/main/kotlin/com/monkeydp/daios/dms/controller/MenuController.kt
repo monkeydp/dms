@@ -1,6 +1,6 @@
 package com.monkeydp.daios.dms.controller
 
-import com.monkeydp.daios.dms.sdk.metadata.menu.ctx.NodeMenuLoadCtxForm
+import com.monkeydp.daios.dms.sdk.metadata.menu.MenuLoadCtx
 import com.monkeydp.daios.dms.service.contract.MenuService
 import io.swagger.annotations.Api
 import io.swagger.annotations.ApiOperation
@@ -22,7 +22,7 @@ class MenuController {
     @Autowired
     private lateinit var service: MenuService
     
-    @ApiOperation("Load menu of node")
-    @PostMapping("load-node-menu")
-    fun loadNodeMenu(@RequestBody ctx: NodeMenuLoadCtxForm) = service.loadNodeMenu(ctx)?.items ?: emptyList()
+    @ApiOperation("Load menu")
+    @PostMapping("load-menu")
+    fun loadMenu(@RequestBody ctx: MenuLoadCtx) = service.loadNodeMenu(ctx)?.items ?: emptyList()
 }

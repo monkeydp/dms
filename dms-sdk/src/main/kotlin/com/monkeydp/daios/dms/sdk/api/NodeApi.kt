@@ -1,7 +1,7 @@
 package com.monkeydp.daios.dms.sdk.api
 
 import com.monkeydp.daios.dms.sdk.entity.ConnProfile
-import com.monkeydp.daios.dms.sdk.metadata.node.NodeLoadCtx
+import com.monkeydp.daios.dms.sdk.metadata.node.NodeLoadingCtx
 import com.monkeydp.daios.dms.sdk.metadata.node.ConnNode
 import com.monkeydp.daios.dms.sdk.metadata.node.Node
 
@@ -11,5 +11,5 @@ import com.monkeydp.daios.dms.sdk.metadata.node.Node
  */
 interface NodeApi {
     fun loadConnNode(cp: ConnProfile): ConnNode
-    fun loadSubNodes(ctx: NodeLoadCtx): List<Node>
+    fun loadSubNodes(ctx: NodeLoadingCtx): List<Node>
 }

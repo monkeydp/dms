@@ -1,11 +1,11 @@
 package com.monkeydp.daios.dms.sdk.api
 
-import com.monkeydp.daios.dms.sdk.instruction.ctx.InstrParseCtx
+import com.monkeydp.daios.dms.sdk.instruction.InstrParsingCtx
 
 /**
  * @author iPotato
  * @date 2019/11/5
  */
 interface InstrApi {
-    fun parse(ctx: InstrParseCtx)
+    fun parse(ctx: InstrParsingCtx)
 }

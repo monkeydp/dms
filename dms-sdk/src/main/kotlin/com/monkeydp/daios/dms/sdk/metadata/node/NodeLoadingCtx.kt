@@ -16,7 +16,7 @@ import kotlin.properties.Delegates
  */
 @ApiModel
 @NeedDatasource
-class NodeLoadCtx(
+class NodeLoadingCtx(
         @ApiModelProperty(required = true, example = ConnJsonMocker.CP_ID)
         val cpId: Long,
         @ApiModelProperty(required = true, example = NodeJsonMocker.NODE_PATH)
