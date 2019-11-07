@@ -1,5 +1,6 @@
 package com.monkeydp.daios.dms.sdk.useful
 
+import com.monkeydp.tools.ext.toJson
 import com.monkeydp.tools.ext.toPropMapX
 import com.monkeydp.tools.util.JsonUtil
 import javax.persistence.AttributeConverter
@@ -21,7 +22,7 @@ class UserInput() : HashMap<String, Any>() {
     fun <T : Any> convertTo(clazz: KClass<T>) = JsonUtil.convertTo<T>(this, clazz.java)
     
     class StringConverter : AttributeConverter<UserInput, String> {
-        override fun convertToDatabaseColumn(attribute: UserInput): String = JsonUtil.toString(attribute)
+        override fun convertToDatabaseColumn(attribute: UserInput): String = attribute.toJson()
         override fun convertToEntityAttribute(dbData: String): UserInput = JsonUtil.toObject<UserInput>(dbData)
     }
 }

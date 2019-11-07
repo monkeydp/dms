@@ -6,7 +6,7 @@ import com.monkeydp.daios.dms.sdk.datasource.DsDef
 import com.monkeydp.daios.dms.sdk.datasource.DsVersion
 import com.monkeydp.daios.dms.sdk.dm.Dm
 import com.monkeydp.daios.dms.sdk.dm.DmImpl
-import com.monkeydp.daios.dms.sdk.dm.DmShareConfig
+import com.monkeydp.daios.dms.sdk.dm.DmOpenConfig
 import com.monkeydp.tools.ext.newInstanceX
 import com.monkeydp.tools.util.FileUtil
 import java.io.File
@@ -18,7 +18,9 @@ import java.net.URLClassLoader
  * @author iPotato
  * @date 2019/10/14
  */
-class ModuleBundle(private val deployDir: File, private val dmClassname: String) {
+class ModuleBundle(private val openConfig: DmOpenConfig, private val dmClassname: String) {
+    
+    private val deployDir = openConfig.deployDir
     
     companion object {
         private const val classesPath = "classes"
@@ -84,8 +86,7 @@ class ModuleBundle(private val deployDir: File, private val dmClassname: String)
     private fun loadDm(): Dm {
         @Suppress("UNCHECKED_CAST")
         val dmClass: Class<Dm> = bundleClassLoader.loadClass(dmClassname) as Class<Dm>
-        val config = DmShareConfig(deployDir)
-        return dmClass.newInstanceX(config)
+        return dmClass.newInstanceX(openConfig)
     }
     
     fun getDriverClassname(dsVersion: DsVersion<*>) = dsDefMap[dsVersion]?.driver?.classname!!

@@ -8,6 +8,8 @@ import com.monkeydp.tools.ext.toUpperCamelCase
  */
 enum class GlobalTarget(fullName: String = "") : Target<GlobalTarget> {
     
+    NONE,
+    
     CONN("connection"),
     DB("database"),
     TABLE,
@@ -15,7 +17,9 @@ enum class GlobalTarget(fullName: String = "") : Target<GlobalTarget> {
     
     GROUP,
     
-    QUERY;
+    QUERY,
+    INFO("information")
+    ;
     
     override val fullName: String
     

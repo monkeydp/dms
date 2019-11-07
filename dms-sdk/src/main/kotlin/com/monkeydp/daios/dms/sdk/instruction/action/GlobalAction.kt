@@ -7,7 +7,8 @@ import com.monkeydp.tools.ext.toUpperCamelCase
  * @date 2019/10/25
  */
 enum class GlobalAction(fullName: String = "") : Action<GlobalAction> {
-    NEW, EDIT, DELETE, OPEN, CLOSE, MANAGE;
+    NEW, EDIT, DELETE, OPEN, CLOSE, MANAGE, SHOW
+    ;
     
     override val fullName: String
     

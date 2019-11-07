@@ -1,5 +1,6 @@
 package com.monkeydp.daios.dms.sdk.metadata.node
 
+import com.fasterxml.jackson.annotation.JsonIgnore
 import com.monkeydp.daios.dms.sdk.annot.NeedDatasource
 import com.monkeydp.daios.dms.sdk.conn.Conn
 import com.monkeydp.daios.dms.sdk.helper.IdHelper
@@ -23,6 +24,7 @@ class NodeLoadingCtx(
         val path: NodePath
 ) {
     var conn: Conn<*> by Delegates.notNullSingleton()
+        @JsonIgnore get
     
     constructor(conn: Conn<*>, path: NodePath) : this(IdHelper.INVALID_ID, path) {
         this.conn = conn

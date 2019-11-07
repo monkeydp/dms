@@ -5,6 +5,7 @@ package com.monkeydp.daios.dms.sdk.mocker
  * @date 2019/11/5
  */
 object InstrJsonMocker {
+    const val SELECTED = "TABLE"
     const val INSTR = """{"action":"NEW","target":"TABLE"}"""
     const val NEW_TABLE_USER_INPUT =
             """
