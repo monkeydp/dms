@@ -19,7 +19,7 @@ class MenuServiceImpl : MenuService {
     @Autowired
     private lateinit var connService: ConnService
     
-    override fun loadNodeMenu(ctx: MenuLoadCtx): Menu? {
+    override fun loadMenu(ctx: MenuLoadCtx): Menu? {
         val cp = connService.findCp(ctx.cpId)
         val bundle = registry.getBundle(cp)
         return bundle.apis.menuApi.loadMenu(ctx)

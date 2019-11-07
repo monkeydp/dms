@@ -22,7 +22,7 @@ class InstrController {
     @Autowired
     private lateinit var service: InstrService
     
-    @ApiOperation("Parse instruction related to node")
-    @PostMapping("parse-node-instr")
-    fun parseNodeInstr(@RequestBody ctx: InstrParsingCtx) = service.parse(ctx)
+    @ApiOperation("Parse instruction")
+    @PostMapping("parse-instr")
+    fun parseInstr(@RequestBody ctx: InstrParsingCtx) = service.parse(ctx)
 }
