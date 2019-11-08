@@ -87,6 +87,7 @@ cw | connection wrapper
 &nbsp;|
 **# D** |
 db | database
+desc | description
 ds | datasource
 def | definition
 &nbsp;|

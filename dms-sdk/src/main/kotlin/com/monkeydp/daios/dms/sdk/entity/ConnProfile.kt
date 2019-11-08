@@ -1,14 +1,15 @@
 package com.monkeydp.daios.dms.sdk.entity
 
 import com.fasterxml.jackson.annotation.JsonIgnore
-import com.monkeydp.daios.dms.sdk.mocker.ConnJsonMocker.CP_USER_INPUT
-import com.monkeydp.daios.dms.sdk.mocker.ConnJsonMocker.DATASOURCE
-import com.monkeydp.daios.dms.sdk.mocker.ConnJsonMocker.DS_VERSION_ID
 import com.monkeydp.daios.dms.sdk.datasource.Datasource
 import com.monkeydp.daios.dms.sdk.datasource.DsVersion
 import com.monkeydp.daios.dms.sdk.dm.DmImplRegistry
 import com.monkeydp.daios.dms.sdk.metadata.form.CpForm
+import com.monkeydp.daios.dms.sdk.mocker.ConnJsonMocker.CP_USER_INPUT
+import com.monkeydp.daios.dms.sdk.mocker.ConnJsonMocker.DATASOURCE
+import com.monkeydp.daios.dms.sdk.mocker.ConnJsonMocker.DS_VERSION_ID
 import com.monkeydp.daios.dms.sdk.useful.UserInput
+import com.monkeydp.tools.ext.convertTo
 import io.swagger.annotations.ApiModel
 import io.swagger.annotations.ApiModelProperty
 import javax.persistence.Column
