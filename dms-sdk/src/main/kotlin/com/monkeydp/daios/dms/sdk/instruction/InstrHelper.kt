@@ -34,7 +34,8 @@ object InstrHelper {
             getEnumByClassname(globalTargetClass, any, reverseIndex)
     
     private inline fun <reified E : Enum<E>> getEnumByClassname(enumClass: KClass<E>, any: Any, reverseIndex: Int): E {
-        val strs = any.javaClass.simpleName.camelCase2List()
+        val clazz = if (any is Class<*>) any else any.javaClass
+        val strs = clazz.simpleName.camelCase2List()
         val enumName = strs.lastOf(reverseIndex).toUpperCase()
         return enumClass.valueOf<E>(enumName)
     }

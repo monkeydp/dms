@@ -16,7 +16,7 @@ import io.swagger.annotations.ApiModelProperty
  */
 @ApiModel
 @NeedDatasource
-data class MenuLoadCtx(
+data class MenuLoadingCtx(
         @ApiModelProperty(required = true, example = CP_ID)
         val cpId: Long = IdHelper.INVALID_ID,
         @ApiModelProperty(required = true, example = NODE_PATH)

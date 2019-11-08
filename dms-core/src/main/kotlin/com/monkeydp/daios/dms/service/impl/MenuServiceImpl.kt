@@ -2,7 +2,7 @@ package com.monkeydp.daios.dms.service.impl
 
 import com.monkeydp.daios.dms.module.ModuleRegistry
 import com.monkeydp.daios.dms.sdk.metadata.menu.Menu
-import com.monkeydp.daios.dms.sdk.metadata.menu.MenuLoadCtx
+import com.monkeydp.daios.dms.sdk.metadata.menu.MenuLoadingCtx
 import com.monkeydp.daios.dms.service.contract.ConnService
 import com.monkeydp.daios.dms.service.contract.MenuService
 import org.springframework.beans.factory.annotation.Autowired
@@ -19,7 +19,7 @@ class MenuServiceImpl : MenuService {
     @Autowired
     private lateinit var connService: ConnService
     
-    override fun loadMenu(ctx: MenuLoadCtx): Menu? {
+    override fun loadMenu(ctx: MenuLoadingCtx): Menu? {
         val cp = connService.findCp(ctx.cpId)
         val bundle = registry.getBundle(cp)
         return bundle.apis.menuApi.loadMenu(ctx)

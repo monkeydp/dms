@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore
 import com.monkeydp.daios.dms.sdk.datasource.Datasource
 import com.monkeydp.daios.dms.sdk.datasource.DsVersion
 import com.monkeydp.daios.dms.sdk.dm.DmImplRegistry
-import com.monkeydp.daios.dms.sdk.metadata.form.CpForm
+import com.monkeydp.daios.dms.sdk.metadata.form.backend.CpForm
 import com.monkeydp.daios.dms.sdk.mocker.ConnJsonMocker.CP_USER_INPUT
 import com.monkeydp.daios.dms.sdk.mocker.ConnJsonMocker.DATASOURCE
 import com.monkeydp.daios.dms.sdk.mocker.ConnJsonMocker.DS_VERSION_ID

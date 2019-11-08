@@ -1,14 +1,11 @@
 package com.monkeydp.daios.dms.sdk.dm
 
-import com.monkeydp.daios.dms.sdk.api.ConnApi
-import com.monkeydp.daios.dms.sdk.api.InstrApi
-import com.monkeydp.daios.dms.sdk.api.MenuApi
-import com.monkeydp.daios.dms.sdk.api.NodeApi
+import com.monkeydp.daios.dms.sdk.api.*
 import com.monkeydp.daios.dms.sdk.datasource.DsVersion
-import com.monkeydp.daios.dms.sdk.metadata.form.CpForm
-import com.monkeydp.daios.dms.sdk.metadata.icon.Icon
 import com.monkeydp.daios.dms.sdk.instruction.action.Action
 import com.monkeydp.daios.dms.sdk.instruction.target.Target
+import com.monkeydp.daios.dms.sdk.metadata.form.backend.CpForm
+import com.monkeydp.daios.dms.sdk.metadata.icon.Icon
 import kotlin.reflect.KClass
 
 interface DmImpl {
@@ -21,6 +18,7 @@ interface DmImpl {
         val connApi: ConnApi
         val nodeApi: NodeApi
         val menuApi: MenuApi
+        val formApi: FormApi
         val instrApi: InstrApi
     }
     

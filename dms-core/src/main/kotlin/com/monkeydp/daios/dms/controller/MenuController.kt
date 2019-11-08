@@ -1,6 +1,6 @@
 package com.monkeydp.daios.dms.controller
 
-import com.monkeydp.daios.dms.sdk.metadata.menu.MenuLoadCtx
+import com.monkeydp.daios.dms.sdk.metadata.menu.MenuLoadingCtx
 import com.monkeydp.daios.dms.service.contract.MenuService
 import io.swagger.annotations.Api
 import io.swagger.annotations.ApiOperation
@@ -24,5 +24,5 @@ class MenuController {
     
     @ApiOperation("Load menu")
     @PostMapping("load-menu")
-    fun loadMenu(@RequestBody ctx: MenuLoadCtx) = service.loadMenu(ctx)?.items ?: emptyList()
+    fun loadMenu(@RequestBody ctx: MenuLoadingCtx) = service.loadMenu(ctx)?.items ?: emptyList()
 }

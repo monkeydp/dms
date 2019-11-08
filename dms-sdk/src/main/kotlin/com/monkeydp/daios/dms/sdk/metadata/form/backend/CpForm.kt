@@ -1,10 +1,12 @@
-package com.monkeydp.daios.dms.sdk.metadata.form
+package com.monkeydp.daios.dms.sdk.metadata.form.backend
+
+import com.monkeydp.daios.dms.sdk.metadata.form.backend.BackendForm
 
 /**
  * @author iPotato
  * @date 2019/10/26
  */
-interface CpForm {
+interface CpForm : BackendForm {
     val connName: String
     val host: String
     val port: String

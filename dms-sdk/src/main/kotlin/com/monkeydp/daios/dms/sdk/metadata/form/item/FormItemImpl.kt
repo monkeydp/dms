@@ -11,7 +11,7 @@ import kotlin.annotation.AnnotationTarget.PROPERTY
  * @date 2019/11/8
  */
 @Target(PROPERTY)
-annotation class FormItemInfo(
+annotation class FormItemImpl(
         /**
          * If empty, the prop name is used
          * Camelcase prop name would be separated by space, capitalize every word
