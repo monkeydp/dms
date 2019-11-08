@@ -1,6 +1,6 @@
 package com.monkeydp.daios.dms.sdk.api
 
-import com.monkeydp.daios.dms.sdk.entity.ConnProfile
+import com.monkeydp.daios.dms.sdk.conn.ConnProfile
 import com.monkeydp.daios.dms.sdk.metadata.node.NodeLoadingCtx
 import com.monkeydp.daios.dms.sdk.metadata.node.ConnNode
 import com.monkeydp.daios.dms.sdk.metadata.node.Node

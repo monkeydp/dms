@@ -6,7 +6,7 @@ import com.monkeydp.daios.dms.conn.ConnWrapper
 import com.monkeydp.daios.dms.curd.service.contract.ConnProfileService
 import com.monkeydp.daios.dms.module.ModuleRegistry
 import com.monkeydp.daios.dms.sdk.conn.Conn
-import com.monkeydp.daios.dms.sdk.entity.ConnProfile
+import com.monkeydp.daios.dms.sdk.conn.ConnProfile
 import com.monkeydp.daios.dms.service.contract.ConnService
 import com.monkeydp.daios.dms.session.UserSession
 import com.monkeydp.tools.ext.getLogger

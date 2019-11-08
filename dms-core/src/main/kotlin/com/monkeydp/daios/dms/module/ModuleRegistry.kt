@@ -1,7 +1,7 @@
 package com.monkeydp.daios.dms.module
 
 import com.monkeydp.daios.dms.sdk.datasource.Datasource
-import com.monkeydp.daios.dms.sdk.entity.ConnProfile
+import com.monkeydp.daios.dms.sdk.conn.ConnProfile
 import org.springframework.stereotype.Component
 
 /**

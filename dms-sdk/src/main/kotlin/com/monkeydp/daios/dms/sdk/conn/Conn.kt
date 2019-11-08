@@ -1,7 +1,5 @@
 package com.monkeydp.daios.dms.sdk.conn
 
-import com.monkeydp.daios.dms.sdk.entity.ConnProfile
-
 /**
  * @author iPotato
  * @date 2019/10/6

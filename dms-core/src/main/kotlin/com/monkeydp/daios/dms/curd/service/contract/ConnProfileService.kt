@@ -1,6 +1,6 @@
 package com.monkeydp.daios.dms.curd.service.contract
 
-import com.monkeydp.daios.dms.sdk.entity.ConnProfile
+import com.monkeydp.daios.dms.sdk.conn.ConnProfile
 
 /**
  * @author iPotato

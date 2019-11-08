@@ -4,7 +4,7 @@ import com.monkeydp.daios.dms.sdk.datasource.Datasource
 import com.monkeydp.daios.dms.sdk.datasource.DsVersion
 import com.monkeydp.daios.dms.sdk.datasource.dsThreadLocal
 import com.monkeydp.daios.dms.sdk.enumeration.Enumx
-import com.monkeydp.daios.dms.sdk.metadata.form.backend.CpForm
+import com.monkeydp.daios.dms.sdk.conn.NewConnForm
 import com.monkeydp.tools.exception.inner.AbstractInnerException
 import com.monkeydp.tools.ext.firstOfSnackCase
 import kotlin.reflect.KClass
@@ -18,7 +18,7 @@ object DmImplRegistry {
     
     private val enumsMap: MutableMap<Pair<Datasource?, KClass<out Enumx<*>>>, List<Enumx<*>>> = mutableMapOf()
     
-    private val cpFormClassMap = mutableMapOf<Datasource, KClass<out CpForm>>()
+    private val newConnFormClassMap = mutableMapOf<Datasource, KClass<out NewConnForm>>()
     
     private fun key(enum: Enumx<*>, datasource: Datasource? = null) = key(enum.javaClass.kotlin, datasource)
     fun key(kClass: KClass<out Enumx<*>>, datasource: Datasource? = null) =
@@ -71,7 +71,7 @@ object DmImplRegistry {
     internal fun registerClass(clazz: KClass<*>, datasource: Datasource) {
         @Suppress("UNCHECKED_CAST")
         when {
-            clazz.isSubclassOf(CpForm::class) -> cpFormClassMap.putIfAbsent(datasource, clazz as KClass<out CpForm>)
+            clazz.isSubclassOf(NewConnForm::class) -> newConnFormClassMap.putIfAbsent(datasource, clazz as KClass<out NewConnForm>)
         }
     }
     
@@ -80,7 +80,7 @@ object DmImplRegistry {
         return enums.first { it.id == dsVersionId }
     }
     
-    fun getCpFormClass(datasource: Datasource) = cpFormClassMap.get(datasource)!!
+    fun getNewConnFormClass(datasource: Datasource) = newConnFormClassMap.get(datasource)!!
     
     class NoSuchEnumException(enumName: String) : AbstractInnerException("No such enum named $enumName")
 }

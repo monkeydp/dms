@@ -1,6 +1,6 @@
 package com.monkeydp.daios.dms.conn
 
-import com.monkeydp.daios.dms.sdk.entity.ConnProfile
+import com.monkeydp.daios.dms.sdk.conn.ConnProfile
 import com.monkeydp.daios.dms.sdk.helper.IdHelper
 import com.monkeydp.daios.dms.sdk.helper.IdHelper.INVALID_ID
 import com.monkeydp.tools.exception.inner.AbstractInnerException

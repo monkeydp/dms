@@ -1,6 +1,6 @@
 package com.monkeydp.daios.dms.controller
 
-import com.monkeydp.daios.dms.sdk.entity.ConnProfile
+import com.monkeydp.daios.dms.sdk.conn.ConnProfile
 import com.monkeydp.daios.dms.sdk.mocker.ConnJsonMocker.CP_ID
 import com.monkeydp.daios.dms.service.contract.ConnService
 import io.swagger.annotations.Api
