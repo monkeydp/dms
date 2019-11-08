@@ -1,5 +1,6 @@
 package com.monkeydp.daios.dms.sdk.dm
 
+import com.monkeydp.daios.dms.sdk.SdkImpl
 import com.monkeydp.daios.dms.sdk.datasource.Datasource
 import com.monkeydp.daios.dms.sdk.datasource.DsDef
 
@@ -12,6 +13,6 @@ import com.monkeydp.daios.dms.sdk.datasource.DsDef
 interface Dm {
     val datasource: Datasource
     val dsDefs: List<DsDef>
-    val impl: DmImpl
+    val impl: SdkImpl
     val testdata: DmTestdata
 }

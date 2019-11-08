@@ -1,14 +1,14 @@
-package com.monkeydp.daios.dms.sdk.dm
+package com.monkeydp.daios.dms.sdk
 
 import com.monkeydp.daios.dms.sdk.api.*
+import com.monkeydp.daios.dms.sdk.conn.NewConnForm
 import com.monkeydp.daios.dms.sdk.datasource.DsVersion
 import com.monkeydp.daios.dms.sdk.instruction.action.Action
 import com.monkeydp.daios.dms.sdk.instruction.target.Target
-import com.monkeydp.daios.dms.sdk.conn.NewConnForm
 import com.monkeydp.daios.dms.sdk.metadata.icon.Icon
 import kotlin.reflect.KClass
 
-interface DmImpl {
+interface SdkImpl {
     
     val apis: Apis
     val classes: Classes

@@ -4,7 +4,7 @@ import com.fasterxml.jackson.core.JsonParser
 import com.fasterxml.jackson.databind.DeserializationContext
 import com.fasterxml.jackson.databind.JsonDeserializer
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize
-import com.monkeydp.daios.dms.sdk.dm.DmImplRegistry
+import com.monkeydp.daios.dms.sdk.SdkImplRegistry
 import com.monkeydp.daios.dms.sdk.enumx.Enumx
 import com.monkeydp.daios.dms.sdk.instruction.action.Action.ActionDeserializer
 import com.monkeydp.tools.ext.toUpperCamelCase
@@ -28,7 +28,7 @@ interface Action<E> : Enumx<E>
     class ActionDeserializer : JsonDeserializer<Action<*>>() {
         override fun deserialize(p: JsonParser?, ctxt: DeserializationContext?): Action<*> {
             val name = p?.getValueAsString()!!
-            return DmImplRegistry.getEnumByDsThreadLocal(name)
+            return SdkImplRegistry.getEnumByDsThreadLocal(name)
         }
     }
 }

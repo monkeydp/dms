@@ -7,7 +7,7 @@ import com.fasterxml.jackson.databind.JsonDeserializer
 import com.fasterxml.jackson.databind.JsonNode
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize
 import com.monkeydp.daios.dms.sdk.enumx.Enumx
-import com.monkeydp.daios.dms.sdk.dm.DmImplRegistry
+import com.monkeydp.daios.dms.sdk.SdkImplRegistry
 import com.monkeydp.daios.dms.sdk.metadata.icon.Icon.IconDeserializer
 import com.monkeydp.tools.ext.toPropMap
 
@@ -35,7 +35,7 @@ interface Icon<E> : Enumx<E>
         override fun deserialize(p: JsonParser?, ctxt: DeserializationContext?): Icon<*> {
             val jsonNode = p?.readValueAsTree<JsonNode>()!!
             val name = jsonNode.get(Enum<*>::name.name).asText()
-            return DmImplRegistry.getEnumByDsThreadLocal(name)
+            return SdkImplRegistry.getEnumByDsThreadLocal(name)
         }
     }
     

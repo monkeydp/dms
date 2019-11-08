@@ -5,7 +5,7 @@ import com.monkeydp.daios.dms.sdk.datasource.Datasource
 import com.monkeydp.daios.dms.sdk.datasource.DsDef
 import com.monkeydp.daios.dms.sdk.datasource.DsVersion
 import com.monkeydp.daios.dms.sdk.dm.Dm
-import com.monkeydp.daios.dms.sdk.dm.DmImpl
+import com.monkeydp.daios.dms.sdk.SdkImpl
 import com.monkeydp.daios.dms.sdk.dm.DmOpenConfig
 import com.monkeydp.tools.ext.newInstanceX
 import com.monkeydp.tools.util.FileUtil
@@ -30,9 +30,9 @@ class ModuleBundle(private val openConfig: DmOpenConfig, private val dmClassname
     
     private val bundleClassLoader: BundleClassLoader
     private val dm: Dm
-    private val impl: DmImpl
+    private val impl: SdkImpl
     val datasource: Datasource
-    val apis: DmImpl.Apis
+    val apis: SdkImpl.Apis
     
     private val dsDefMap: Map<DsVersion<*>, DsDef>
     

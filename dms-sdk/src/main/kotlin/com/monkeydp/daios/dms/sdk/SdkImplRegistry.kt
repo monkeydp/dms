@@ -1,4 +1,4 @@
-package com.monkeydp.daios.dms.sdk.dm
+package com.monkeydp.daios.dms.sdk
 
 import com.monkeydp.daios.dms.sdk.datasource.Datasource
 import com.monkeydp.daios.dms.sdk.datasource.DsVersion
@@ -14,13 +14,14 @@ import kotlin.reflect.full.isSubclassOf
  * @author iPotato
  * @date 2019/10/25
  */
-object DmImplRegistry {
+object SdkImplRegistry {
     
     private val enumsMap: MutableMap<Pair<Datasource?, KClass<out Enumx<*>>>, List<Enumx<*>>> = mutableMapOf()
     
     private val newConnFormClassMap = mutableMapOf<Datasource, KClass<out NewConnForm>>()
     
-    private fun key(enum: Enumx<*>, datasource: Datasource? = null) = key(enum.javaClass.kotlin, datasource)
+    private fun key(enum: Enumx<*>, datasource: Datasource? = null) =
+            key(enum.javaClass.kotlin, datasource)
     fun key(kClass: KClass<out Enumx<*>>, datasource: Datasource? = null) =
             Pair(datasource, Enumx.getContract(kClass))
     
@@ -53,7 +54,8 @@ object DmImplRegistry {
                 if (datasource == null) getEnumFromGlobal<E>(enumNameUpper)
                 else getEnumFromLocal<E>(enumNameUpper, datasource)
         // If enum cannot found from local, try to find from global
-        if (enum == null && datasource != null) enum = getEnumFromGlobal<E>(enumNameUpper)
+        if (enum == null && datasource != null) enum =
+                getEnumFromGlobal<E>(enumNameUpper)
         if (enum == null) throw NoSuchEnumException(enumNameUpper)
         return enum
     }
