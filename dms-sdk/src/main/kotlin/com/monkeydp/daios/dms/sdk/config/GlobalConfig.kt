@@ -1,6 +1,6 @@
 package com.monkeydp.daios.dms.sdk.config
 
-import com.monkeydp.daios.dms.sdk.enumeration.Enumx
+import com.monkeydp.daios.dms.sdk.enumx.Enumx
 import com.monkeydp.daios.dms.sdk.metadata.icon.GlobalIcon
 import com.monkeydp.daios.dms.sdk.instruction.action.GlobalAction
 import com.monkeydp.daios.dms.sdk.instruction.target.GlobalTarget

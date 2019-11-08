@@ -1,6 +1,6 @@
 package com.monkeydp.daios.dms.sdk.business
 
-import com.monkeydp.daios.dms.sdk.enumeration.Enumx
+import com.monkeydp.daios.dms.sdk.enumx.Enumx
 
 
 /**

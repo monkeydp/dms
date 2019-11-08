@@ -3,7 +3,7 @@ package com.monkeydp.daios.dms.sdk.dm
 import com.monkeydp.daios.dms.sdk.datasource.Datasource
 import com.monkeydp.daios.dms.sdk.datasource.DsVersion
 import com.monkeydp.daios.dms.sdk.datasource.dsThreadLocal
-import com.monkeydp.daios.dms.sdk.enumeration.Enumx
+import com.monkeydp.daios.dms.sdk.enumx.Enumx
 import com.monkeydp.daios.dms.sdk.conn.NewConnForm
 import com.monkeydp.tools.exception.inner.AbstractInnerException
 import com.monkeydp.tools.ext.firstOfSnackCase

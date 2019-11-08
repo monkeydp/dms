@@ -1,7 +1,7 @@
 package com.monkeydp.daios.dms.sdk.metadata.form
 
 import com.monkeydp.daios.dms.sdk.metadata.form.item.FormItem
-import com.monkeydp.daios.dms.sdk.metadata.form.item.FormItemImpl
+import com.monkeydp.daios.dms.sdk.metadata.form.item.SdkFormItem
 import com.monkeydp.daios.dms.sdk.metadata.form.item.StdFormItem
 import com.monkeydp.tools.ext.camelCaseSeparated
 import com.monkeydp.tools.ext.getAnnotatedProps
@@ -15,10 +15,10 @@ import kotlin.reflect.full.findAnnotation
 object FormBuilder {
     
     fun buildForm(clazz: KClass<*>): Form {
-        val props = clazz.getAnnotatedProps<FormItemImpl>()
+        val props = clazz.getAnnotatedProps<SdkFormItem>()
         val items = mutableListOf<FormItem>()
         props.forEach {
-            val annot = it.findAnnotation<FormItemImpl>()!!
+            val annot = it.findAnnotation<SdkFormItem>()!!
             val propName = it.name
             val item = StdFormItem(
                     label = if (annot.label.isNotEmpty()) annot.label else propName.camelCaseSeparated(true),

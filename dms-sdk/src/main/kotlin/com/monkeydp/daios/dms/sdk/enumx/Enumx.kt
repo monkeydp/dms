@@ -1,4 +1,4 @@
-package com.monkeydp.daios.dms.sdk.enumeration
+package com.monkeydp.daios.dms.sdk.enumx
 
 import kotlin.reflect.KClass
 import kotlin.reflect.full.isSubclassOf

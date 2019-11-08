@@ -5,7 +5,7 @@ import com.fasterxml.jackson.databind.DeserializationContext
 import com.fasterxml.jackson.databind.JsonDeserializer
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize
 import com.monkeydp.daios.dms.sdk.dm.DmImplRegistry
-import com.monkeydp.daios.dms.sdk.enumeration.Enumx
+import com.monkeydp.daios.dms.sdk.enumx.Enumx
 import com.monkeydp.daios.dms.sdk.instruction.target.Target.TargetDeserializer
 import com.monkeydp.tools.ext.toUpperCamelCase
 import io.swagger.annotations.ApiModelProperty

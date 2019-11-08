@@ -2,7 +2,7 @@ package com.monkeydp.daios.dms.sdk.dm
 
 import com.monkeydp.daios.dms.sdk.config.GlobalConfig.globalEnumClasses
 import com.monkeydp.daios.dms.sdk.datasource.Datasource
-import com.monkeydp.daios.dms.sdk.enumeration.Enumx
+import com.monkeydp.daios.dms.sdk.enumx.Enumx
 import com.monkeydp.tools.ext.toPropListX
 import kotlin.reflect.KClass
 
