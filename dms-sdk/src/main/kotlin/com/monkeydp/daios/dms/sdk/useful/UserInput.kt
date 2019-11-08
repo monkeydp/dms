@@ -18,9 +18,6 @@ class UserInput() : HashMap<String, Any>() {
         this.putAll(any.toPropMapX<String, Any>())
     }
     
-    inline fun <reified T> convertTo() = JsonUtil.convertTo<T>(this)
-    fun <T : Any> convertTo(clazz: KClass<T>) = JsonUtil.convertTo<T>(this, clazz.java)
-    
     class StringConverter : AttributeConverter<UserInput, String> {
         override fun convertToDatabaseColumn(attribute: UserInput): String = attribute.toJson()
         override fun convertToEntityAttribute(dbData: String): UserInput = JsonUtil.toObject<UserInput>(dbData)
