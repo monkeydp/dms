@@ -1,9 +1,9 @@
 package com.monkeydp.daios.dms.sdk.enumx
 
 import com.monkeydp.tools.ext.getInterfaces
-import com.monkeydp.tools.ext.ierror
+import com.monkeydp.tools.ext.hasAnnotation
+import com.monkeydp.tools.ext.matchOnce
 import kotlin.reflect.KClass
-import kotlin.reflect.full.findAnnotation
 
 /**
  * @author iPotato
@@ -20,15 +20,6 @@ object EnumxHelper {
         val interfaces = mutableSetOf<KClass<*>>()
         if (enumKClass.java.isInterface) interfaces.add(enumKClass)
         interfaces.addAll(enumKClass.getInterfaces())
-    
-        val matched = interfaces.filter { it.findAnnotation<SdkEnumContract>() != null }
-        if (matched.size != 1)
-            ierror("""Matches contract 0 times or more then once
-                      Enum class is: $enumKClass
-                      Matching times: ${matched.size}
-                      Following contracts are matched:
-                      $matched
-                    """)
-        return matched.first()
+        return interfaces.matchOnce { it.hasAnnotation<SdkEnumContract>() }
     }
 }
