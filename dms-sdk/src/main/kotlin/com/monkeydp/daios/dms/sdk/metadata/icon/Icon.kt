@@ -8,6 +8,7 @@ import com.fasterxml.jackson.databind.JsonNode
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize
 import com.monkeydp.daios.dms.sdk.enumx.Enumx
 import com.monkeydp.daios.dms.sdk.SdkImplRegistry
+import com.monkeydp.daios.dms.sdk.enumx.SdkEnumContract
 import com.monkeydp.daios.dms.sdk.metadata.icon.Icon.IconDeserializer
 import com.monkeydp.tools.ext.toPropMap
 
@@ -16,6 +17,7 @@ import com.monkeydp.tools.ext.toPropMap
  * @author iPotato
  * @date 2019/10/25
  */
+@SdkEnumContract
 @JsonDeserialize(using = IconDeserializer::class)
 interface Icon<E> : Enumx<E>
         where E : Icon<E>, E : Enum<E> {

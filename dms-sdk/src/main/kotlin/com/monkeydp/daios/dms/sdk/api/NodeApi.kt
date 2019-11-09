@@ -9,6 +9,7 @@ import com.monkeydp.daios.dms.sdk.metadata.node.Node
  * @author iPotato
  * @date 2019/10/25
  */
+@SdkApiContract
 interface NodeApi {
     fun loadConnNode(cp: ConnProfile): ConnNode
     fun loadSubNodes(ctx: NodeLoadingCtx): List<Node>

@@ -7,6 +7,7 @@ import com.monkeydp.daios.dms.sdk.metadata.form.FormLoadingCtx
  * @author iPotato
  * @date 2019/10/25
  */
+@SdkApiContract
 interface FormApi {
     fun loadFrom(ctx: FormLoadingCtx): Form
 }

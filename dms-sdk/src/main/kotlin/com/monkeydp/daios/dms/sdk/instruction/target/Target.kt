@@ -6,6 +6,7 @@ import com.fasterxml.jackson.databind.JsonDeserializer
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize
 import com.monkeydp.daios.dms.sdk.SdkImplRegistry
 import com.monkeydp.daios.dms.sdk.enumx.Enumx
+import com.monkeydp.daios.dms.sdk.enumx.SdkEnumContract
 import com.monkeydp.daios.dms.sdk.instruction.target.Target.TargetDeserializer
 import com.monkeydp.tools.ext.toUpperCamelCase
 import io.swagger.annotations.ApiModelProperty
@@ -14,6 +15,7 @@ import io.swagger.annotations.ApiModelProperty
  * @author iPotato
  * @date 2019/10/25
  */
+@SdkEnumContract
 @JsonDeserialize(using = TargetDeserializer::class)
 interface Target<E> : Enumx<E>
         where E : Target<E>, E : Enum<E> {
