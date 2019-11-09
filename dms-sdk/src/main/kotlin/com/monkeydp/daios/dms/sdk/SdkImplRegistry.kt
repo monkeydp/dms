@@ -1,10 +1,11 @@
 package com.monkeydp.daios.dms.sdk
 
+import com.monkeydp.daios.dms.sdk.conn.NewConnForm
 import com.monkeydp.daios.dms.sdk.datasource.Datasource
 import com.monkeydp.daios.dms.sdk.datasource.DsVersion
 import com.monkeydp.daios.dms.sdk.datasource.dsThreadLocal
+import com.monkeydp.daios.dms.sdk.enumx.EnumxHelper
 import com.monkeydp.daios.dms.sdk.enumx.Enumx
-import com.monkeydp.daios.dms.sdk.conn.NewConnForm
 import com.monkeydp.tools.exception.inner.AbstractInnerException
 import com.monkeydp.tools.ext.firstOfSnackCase
 import kotlin.reflect.KClass
@@ -20,10 +21,11 @@ object SdkImplRegistry {
     
     private val newConnFormClassMap = mutableMapOf<Datasource, KClass<out NewConnForm>>()
     
-    private fun key(enum: Enumx<*>, datasource: Datasource? = null) =
-            key(enum.javaClass.kotlin, datasource)
-    fun key(kClass: KClass<out Enumx<*>>, datasource: Datasource? = null) =
-            Pair(datasource, Enumx.getContract(kClass))
+    private fun key(enumx: Enumx<*>, datasource: Datasource? = null) =
+            key(enumx.javaClass.kotlin, datasource)
+    
+    private fun key(kClass: KClass<out Enumx<*>>, datasource: Datasource? = null) =
+            Pair(datasource, EnumxHelper.getEnumxContract(kClass))
     
     internal fun registerEnum(enum: Enumx<*>, datasource: Datasource? = null) {
         val key = key(enum, datasource)
