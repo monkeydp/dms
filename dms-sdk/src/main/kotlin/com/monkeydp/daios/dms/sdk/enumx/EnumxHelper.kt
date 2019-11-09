@@ -2,7 +2,7 @@ package com.monkeydp.daios.dms.sdk.enumx
 
 import com.monkeydp.tools.ext.getInterfaces
 import com.monkeydp.tools.ext.hasAnnotation
-import com.monkeydp.tools.ext.matchOnce
+import com.monkeydp.tools.ext.matchOne
 import kotlin.reflect.KClass
 
 /**
@@ -20,6 +20,6 @@ object EnumxHelper {
         val interfaces = mutableSetOf<KClass<*>>()
         if (enumKClass.java.isInterface) interfaces.add(enumKClass)
         interfaces.addAll(enumKClass.getInterfaces())
-        return interfaces.matchOnce { it.hasAnnotation<SdkEnumContract>() }
+        return interfaces.matchOne { it.hasAnnotation<SdkEnumContract>() }
     }
 }

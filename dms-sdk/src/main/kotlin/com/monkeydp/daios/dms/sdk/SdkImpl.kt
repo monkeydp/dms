@@ -30,6 +30,13 @@ interface SdkImpl {
     }
     
     interface Classes {
+        // Class
         val newConnFormClass: KClass<out NewConnForm>
+    
+        // Enum class
+        val dsVersionClass: KClass<out DsVersion<*>>
+        val actionClass: KClass<out Action<*>>
+        val targetClass: KClass<out Target<*>>
+        val iconClass: KClass<out Icon<*>>
     }
 }
