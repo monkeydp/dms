@@ -22,14 +22,14 @@ interface SdkImpl {
         val instrApi: InstrApi
     }
     
-    interface Classes {
-        val newConnFormClass: KClass<out NewConnForm>
-    }
-    
     interface EnumClasses {
         val dsVersionClass: KClass<out DsVersion<*>>
         val actionClass: KClass<out Action<*>>
         val targetClass: KClass<out Target<*>>
         val iconClass: KClass<out Icon<*>>
+    }
+    
+    interface Classes {
+        val newConnFormClass: KClass<out NewConnForm>
     }
 }
