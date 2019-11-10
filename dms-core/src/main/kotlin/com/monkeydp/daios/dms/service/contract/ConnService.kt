@@ -1,9 +1,10 @@
 package com.monkeydp.daios.dms.service.contract
 
-import com.monkeydp.daios.dms.conn.ConnWrapper
 import com.monkeydp.daios.dms.conn.BelongsTo
 import com.monkeydp.daios.dms.conn.BelongsTo.USER
+import com.monkeydp.daios.dms.conn.ConnWrapper
 import com.monkeydp.daios.dms.sdk.conn.ConnProfile
+import com.monkeydp.daios.dms.sdk.datasource.Datasource
 
 /**
  * @author iPotato
@@ -42,6 +43,11 @@ interface ConnService {
      * @see ConnManger from conn manager first, then is db
      */
     fun findCp(cpId: Long): ConnProfile
+    
+    /**
+     * Find a datasource
+     */
+    fun findDatasource(cpId: Long): Datasource
     
     /**
      * Find a conn wrapper

@@ -1,10 +1,12 @@
 package com.monkeydp.daios.dms.service.impl
 
-import com.monkeydp.daios.dms.module.ModuleRegistry
+import com.monkeydp.daios.dms.sdk.api.InstrApi
+import com.monkeydp.daios.dms.sdk.datasource.Datasource
 import com.monkeydp.daios.dms.sdk.instruction.InstrParsingCtx
 import com.monkeydp.daios.dms.service.contract.ConnService
 import com.monkeydp.daios.dms.service.contract.InstrService
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.context.annotation.Lazy
 import org.springframework.stereotype.Service
 
 /**
@@ -13,16 +15,19 @@ import org.springframework.stereotype.Service
  */
 @Service
 class InstrServiceImpl : InstrService {
+    @Lazy
     @Autowired
-    private lateinit var registry: ModuleRegistry
+    lateinit var apiMap: Map<Datasource, InstrApi>
     @Autowired
     private lateinit var connService: ConnService
     
     override fun parse(ctx: InstrParsingCtx) {
-        val cp = connService.findCp(ctx.cpId)
-        val bundle = registry.getBundle(cp)
-        val conn = connService.findConn(cp.id)
+        val ds = connService.findDatasource(ctx.cpId)
+    
+        val conn = connService.findConn(ctx.cpId)
         ctx.conn = conn
-        bundle.apis.instrApi.parse(ctx)
+    
+        val api = apiMap.getValue(ds)
+        api.parse(ctx)
     }
 }

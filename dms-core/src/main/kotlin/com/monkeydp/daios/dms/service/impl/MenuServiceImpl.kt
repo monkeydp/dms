@@ -1,11 +1,13 @@
 package com.monkeydp.daios.dms.service.impl
 
-import com.monkeydp.daios.dms.module.ModuleRegistry
+import com.monkeydp.daios.dms.sdk.api.MenuApi
+import com.monkeydp.daios.dms.sdk.datasource.Datasource
 import com.monkeydp.daios.dms.sdk.metadata.menu.Menu
 import com.monkeydp.daios.dms.sdk.metadata.menu.MenuLoadingCtx
 import com.monkeydp.daios.dms.service.contract.ConnService
 import com.monkeydp.daios.dms.service.contract.MenuService
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.context.annotation.Lazy
 import org.springframework.stereotype.Service
 
 /**
@@ -14,14 +16,15 @@ import org.springframework.stereotype.Service
  */
 @Service
 class MenuServiceImpl : MenuService {
+    @Lazy
     @Autowired
-    private lateinit var registry: ModuleRegistry
+    lateinit var apiMap: Map<Datasource, MenuApi>
     @Autowired
     private lateinit var connService: ConnService
     
     override fun loadMenu(ctx: MenuLoadingCtx): Menu? {
-        val cp = connService.findCp(ctx.cpId)
-        val bundle = registry.getBundle(cp)
-        return bundle.apis.menuApi.loadMenu(ctx)
+        val ds = connService.findDatasource(ctx.cpId)
+        val api = apiMap.getValue(ds)
+        return api.loadMenu(ctx)
     }
 }

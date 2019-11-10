@@ -5,13 +5,16 @@ import com.monkeydp.daios.dms.conn.ConnManager
 import com.monkeydp.daios.dms.conn.ConnWrapper
 import com.monkeydp.daios.dms.curd.service.contract.ConnProfileService
 import com.monkeydp.daios.dms.module.ModuleRegistry
+import com.monkeydp.daios.dms.sdk.api.ConnApi
 import com.monkeydp.daios.dms.sdk.conn.Conn
 import com.monkeydp.daios.dms.sdk.conn.ConnProfile
+import com.monkeydp.daios.dms.sdk.datasource.Datasource
 import com.monkeydp.daios.dms.service.contract.ConnService
 import com.monkeydp.daios.dms.session.UserSession
 import com.monkeydp.tools.ext.getLogger
 import com.monkeydp.tools.ext.ierror
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.context.annotation.Lazy
 import org.springframework.stereotype.Service
 
 /**
@@ -29,6 +32,9 @@ internal class ConnServiceImpl : ConnService {
     private lateinit var session: UserSession
     @Autowired
     private lateinit var registry: ModuleRegistry
+    @Lazy
+    @Autowired
+    lateinit var apiMap: Map<Datasource, ConnApi>
     @Autowired
     private lateinit var cpService: ConnProfileService
     @Autowired
@@ -78,10 +84,13 @@ internal class ConnServiceImpl : ConnService {
     
     override fun findCp(cpId: Long) = manager.getActiveCp(cpId, true) ?: cpService.findById(cpId)
     
+    override fun findDatasource(cpId: Long) = findCp(cpId).datasource
+    
     private fun getConn(cp: ConnProfile): Conn<*> {
         val bundle = registry.getBundle(cp)
         bundle.setSpecificClassLoader(cp.dsVersion)
-        val conn = bundle.apis.connApi.getConn(cp)
+        val api = apiMap.getValue(cp.datasource)
+        val conn = api.getConn(cp)
         bundle.removeSpecificClassLoader()
         return conn
     }

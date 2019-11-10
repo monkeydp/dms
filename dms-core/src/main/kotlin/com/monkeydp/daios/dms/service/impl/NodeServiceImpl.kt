@@ -1,7 +1,8 @@
 package com.monkeydp.daios.dms.service.impl
 
 import com.monkeydp.daios.dms.curd.service.contract.ConnProfileService
-import com.monkeydp.daios.dms.module.ModuleRegistry
+import com.monkeydp.daios.dms.sdk.api.NodeApi
+import com.monkeydp.daios.dms.sdk.datasource.Datasource
 import com.monkeydp.daios.dms.sdk.metadata.node.ConnNode
 import com.monkeydp.daios.dms.sdk.metadata.node.Node
 import com.monkeydp.daios.dms.sdk.metadata.node.NodeLoadingCtx
@@ -9,6 +10,7 @@ import com.monkeydp.daios.dms.service.contract.ConnService
 import com.monkeydp.daios.dms.service.contract.NodeService
 import com.monkeydp.daios.dms.session.UserSession
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.context.annotation.Lazy
 import org.springframework.stereotype.Service
 
 /**
@@ -20,8 +22,9 @@ internal class NodeServiceImpl : NodeService {
     
     @Autowired
     private lateinit var session: UserSession
+    @Lazy
     @Autowired
-    private lateinit var registry: ModuleRegistry
+    lateinit var apiMap: Map<Datasource, NodeApi>
     @Autowired
     private lateinit var cpService: ConnProfileService
     @Autowired
@@ -32,8 +35,8 @@ internal class NodeServiceImpl : NodeService {
         val cps = cpService.findAllByUserId(userId)
         val connNodes = mutableListOf<ConnNode>()
         cps.forEach { cp ->
-            val bundle = registry.getBundle(cp)
-            val connNode = bundle.apis.nodeApi.loadConnNode(cp)
+            val api = apiMap.getValue(cp.datasource)
+            val connNode = api.loadConnNode(cp)
             connNodes.add(connNode)
         }
         return connNodes.toList()
@@ -41,10 +44,13 @@ internal class NodeServiceImpl : NodeService {
     
     override fun loadSubNodes(ctx: NodeLoadingCtx): List<Node> {
         val cpId = ctx.cpId
-        val cp = connService.findCp(cpId)
+    
         val conn = connService.findConn(cpId)
         ctx.conn = conn
-        val bundle = registry.getBundle(cp)
-        return bundle.apis.nodeApi.loadSubNodes(ctx)
+    
+        val ds = connService.findDatasource(cpId)
+        val api = apiMap.getValue(ds)
+        
+        return api.loadSubNodes(ctx)
     }
 }
