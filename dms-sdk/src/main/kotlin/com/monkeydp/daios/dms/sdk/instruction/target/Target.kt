@@ -30,7 +30,7 @@ interface Target<E> : Enumx<E>
     class TargetDeserializer : JsonDeserializer<Target<*>>() {
         override fun deserialize(p: JsonParser?, ctxt: DeserializationContext?): Target<*> {
             val name = p?.getValueAsString()!!
-            return SdkImplRegistry.getEnumByDsThreadLocal(name)
+            return SdkImplRegistry.findEnum(name)
         }
     }
 }

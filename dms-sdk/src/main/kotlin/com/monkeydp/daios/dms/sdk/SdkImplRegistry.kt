@@ -1,15 +1,18 @@
 package com.monkeydp.daios.dms.sdk
 
-import com.monkeydp.daios.dms.sdk.conn.NewConnForm
 import com.monkeydp.daios.dms.sdk.datasource.Datasource
 import com.monkeydp.daios.dms.sdk.datasource.DsVersion
 import com.monkeydp.daios.dms.sdk.datasource.dsThreadLocal
-import com.monkeydp.daios.dms.sdk.enumx.EnumxHelper
 import com.monkeydp.daios.dms.sdk.enumx.Enumx
-import com.monkeydp.tools.exception.inner.AbstractInnerException
-import com.monkeydp.tools.ext.firstOfSnackCase
+import com.monkeydp.daios.dms.sdk.enumx.SdkEnum
+import com.monkeydp.tools.ext.getFirstUpperBound
+import com.monkeydp.tools.ext.ierror
+import com.monkeydp.tools.ext.notNullSingleton
+import com.monkeydp.tools.useful.Null
+import kotlin.properties.Delegates
 import kotlin.reflect.KClass
-import kotlin.reflect.full.isSubclassOf
+import kotlin.reflect.full.findAnnotation
+import kotlin.reflect.full.memberProperties
 
 /**
  * @author iPotato
@@ -17,74 +20,61 @@ import kotlin.reflect.full.isSubclassOf
  */
 object SdkImplRegistry {
     
-    private val enumsMap: MutableMap<Pair<Datasource?, KClass<out Enumx<*>>>, List<Enumx<*>>> = mutableMapOf()
+    /**
+     * Pair<Datasource, contractKClass> → implKClass
+     */
+    var implClassesMap: Map<Pair<Datasource, KClass<*>>, KClass<*>> by Delegates.notNullSingleton()
     
-    private val newConnFormClassMap = mutableMapOf<Datasource, KClass<out NewConnForm>>()
+    fun key(contract: KClass<*>, ds: Datasource) = Pair(ds, contract)
     
-    private fun key(enumx: Enumx<*>, datasource: Datasource? = null) =
-            key(enumx.javaClass.kotlin, datasource)
-    
-    private fun key(kClass: KClass<out Enumx<*>>, datasource: Datasource? = null) =
-            Pair(datasource, EnumxHelper.getEnumxContract(kClass))
-    
-    internal fun registerEnum(enum: Enumx<*>, datasource: Datasource? = null) {
-        val key = key(enum, datasource)
-        val oldEnums = enumsMap[key]
-        val newEnums = mutableListOf<Enumx<*>>(enum)
-        if (oldEnums != null) newEnums.addAll(oldEnums)
-        enumsMap[key] = newEnums.toList()
+    internal fun registerClasses(implClasses: SdkImpl.Classes, ds: Datasource) {
+        val implClassesMap =
+                mutableMapOf<Pair<Datasource, KClass<*>>, KClass<*>>()
+        implClasses::class.memberProperties.forEach {
+            val contract = it.getFirstUpperBound()
+            val implClass = it.getter.call(implClasses) as KClass<*>
+            implClassesMap[key(contract, ds)] = implClass
+        }
+        this.implClassesMap = implClassesMap.toMap()
     }
     
     @Suppress("UNCHECKED_CAST")
-    fun <E : Enumx<out E>> getEnums(kClass: KClass<E>, datasource: Datasource? = null) =
-            enumsMap[key(kClass, datasource)] as List<E>?
+    inline fun <reified C : Any> getImplKClass(ds: Datasource) =
+            implClassesMap.getValue(key(C::class, ds)) as KClass<C>
     
-    private fun <E : Enumx<out E>> getEnumsX(kClass: KClass<E>, datasource: Datasource) = getEnums(kClass, datasource)!!
+    inline fun <reified I : Any> getKClass(ds: Datasource) = getImplKClass<I>(ds)
     
-    inline fun <reified E : Enumx<out E>> getEnumByDsThreadLocal(enumName: String): E =
-            getEnum(enumName, dsThreadLocal.get())
+    @Suppress("UNCHECKED_CAST")
+    inline fun <reified E : Enumx<out E>> getEnumKClass(ds: Datasource) =
+            getImplKClass<E>(ds) as KClass<out E>
     
-    inline fun <reified E : Enumx<out E>> getEnumByPrefix(enumName: String): E {
-        val dsName = enumName.firstOfSnackCase().toUpperCase()
-        val ds = Datasource.valueOfOrNull(dsName)
-        return getEnum(enumName, ds)
+    inline fun <reified E : Enumx<out E>> getEnum(enumName: String, ds: Datasource): E? {
+        val enumKClass = getEnumKClass<E>(ds)
+        return getEnum<E>(enumKClass, enumName)
     }
     
-    inline fun <reified E : Enumx<out E>> getEnum(enumName: String, datasource: Datasource? = null): E {
-        val enumNameUpper = enumName.toUpperCase()
-        var enum: E? =
-                if (datasource == null) getEnumFromGlobal<E>(enumNameUpper)
-                else getEnumFromLocal<E>(enumNameUpper, datasource)
-        // If enum cannot found from local, try to find from global
-        if (enum == null && datasource != null) enum =
-                getEnumFromGlobal<E>(enumNameUpper)
-        if (enum == null) throw NoSuchEnumException(enumNameUpper)
+    inline fun <reified E : Enumx<out E>> getEnum(enumKClass: KClass<out E>, enumName: String) =
+            enumKClass.java.enumConstants.firstOrNull { it.asEnum().name == enumName.toUpperCase() }
+    
+    
+    inline fun <reified E : Enumx<out E>> findEnum(enumName: String) =
+            findEnum<E>(enumName, dsThreadLocal.get())
+    
+    inline fun <reified E : Enumx<out E>> findEnum(enumName: String, ds: Datasource): E {
+        val enumKClass = getEnumKClass<E>(ds)
+        var enum = getEnum<E>(enumKClass, enumName)
+        if (enum == null) {
+            val parent = enumKClass.findAnnotation<SdkEnum>()!!.parent
+            @Suppress("UNCHECKED_CAST")
+            if (parent != Null::class)
+                enum = getEnum<E>(parent as KClass<out E>, enumName)
+        }
+        if (enum == null) ierror("No such enum named ${enumName.toUpperCase()}, datasource is $ds")
         return enum
     }
     
-    inline fun <reified E : Enumx<out E>> getEnumFromGlobal(enumName: String): E? {
-        val enums = getEnums(E::class, null)
-        return enums?.firstOrNull() { it.asEnum().name == enumName }
+    fun findDsVersion(datasource: Datasource, dsVersionId: String): DsVersion<*> {
+        val enumKClass = getEnumKClass<DsVersion<*>>(datasource)
+        return enumKClass.java.enumConstants.first { it.id == dsVersionId }
     }
-    
-    inline fun <reified E : Enumx<out E>> getEnumFromLocal(enumName: String, datasource: Datasource): E? {
-        val enums = getEnums(E::class, datasource)
-        return enums?.firstOrNull() { it.asEnum().name == enumName }
-    }
-    
-    internal fun registerClass(clazz: KClass<*>, datasource: Datasource) {
-        @Suppress("UNCHECKED_CAST")
-        when {
-            clazz.isSubclassOf(NewConnForm::class) -> newConnFormClassMap.putIfAbsent(datasource, clazz as KClass<out NewConnForm>)
-        }
-    }
-    
-    fun getDsVersion(datasource: Datasource, dsVersionId: String): DsVersion<*> {
-        val enums = getEnumsX(DsVersion::class, datasource)
-        return enums.first { it.id == dsVersionId }
-    }
-    
-    fun getNewConnFormClass(datasource: Datasource) = newConnFormClassMap.get(datasource)!!
-    
-    class NoSuchEnumException(enumName: String) : AbstractInnerException("No such enum named $enumName")
 }

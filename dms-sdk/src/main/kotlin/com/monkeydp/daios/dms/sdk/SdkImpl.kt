@@ -12,7 +12,6 @@ interface SdkImpl {
     
     val apis: Apis
     val classes: Classes
-    val enumClasses: EnumClasses
     
     interface Apis {
         val connApi: ConnApi
@@ -20,13 +19,6 @@ interface SdkImpl {
         val menuApi: MenuApi
         val formApi: FormApi
         val instrApi: InstrApi
-    }
-    
-    interface EnumClasses {
-        val dsVersionClass: KClass<out DsVersion<*>>
-        val actionClass: KClass<out Action<*>>
-        val targetClass: KClass<out Target<*>>
-        val iconClass: KClass<out Icon<*>>
     }
     
     interface Classes {

@@ -1,9 +1,9 @@
 package com.monkeydp.daios.dms.sdk.conn
 
 import com.fasterxml.jackson.annotation.JsonIgnore
+import com.monkeydp.daios.dms.sdk.SdkImplRegistry
 import com.monkeydp.daios.dms.sdk.datasource.Datasource
 import com.monkeydp.daios.dms.sdk.datasource.DsVersion
-import com.monkeydp.daios.dms.sdk.SdkImplRegistry
 import com.monkeydp.daios.dms.sdk.entity.AbstractEntity
 import com.monkeydp.daios.dms.sdk.entity.User
 import com.monkeydp.daios.dms.sdk.mocker.ConnJsonMocker.CP_USER_INPUT
@@ -61,14 +61,14 @@ data class ConnProfile(
     
     val dsVersion: DsVersion<*>
         @JsonIgnore
-        get() = SdkImplRegistry.getDsVersion(datasource, dsVersionId)
+        get() = SdkImplRegistry.findDsVersion(datasource, dsVersionId)
     
     
     val form: NewConnForm
         @JsonIgnore
         get() {
-            val newConnFormClass = SdkImplRegistry.getNewConnFormClass(datasource)
-            return userInput.convertTo(newConnFormClass)
+            val kClass = SdkImplRegistry.getImplKClass<NewConnForm>(datasource)
+            return userInput.convertTo(kClass)
         }
     
     @JsonIgnore

@@ -1,11 +1,11 @@
 package com.monkeydp.daios.dms.sdk.dm
 
 import com.monkeydp.daios.dms.sdk.SdkImplRegistry
-import com.monkeydp.daios.dms.sdk.mocker.ConnJsonMocker.DATASOURCE
-import com.monkeydp.daios.dms.sdk.mocker.ConnJsonMocker.DS_VERSION_ID
+import com.monkeydp.daios.dms.sdk.conn.ConnProfile
 import com.monkeydp.daios.dms.sdk.datasource.Datasource
 import com.monkeydp.daios.dms.sdk.datasource.DsVersion
-import com.monkeydp.daios.dms.sdk.conn.ConnProfile
+import com.monkeydp.daios.dms.sdk.mocker.ConnJsonMocker.DATASOURCE
+import com.monkeydp.daios.dms.sdk.mocker.ConnJsonMocker.DS_VERSION_ID
 
 /**
  * @author iPotato
@@ -14,7 +14,7 @@ import com.monkeydp.daios.dms.sdk.conn.ConnProfile
 object DmTestdataRegistry {
     
     private val testDs = Datasource.valueOf(DATASOURCE)
-    private val testDsVersion = SdkImplRegistry.getDsVersion(testDs, DS_VERSION_ID)
+    private val testDsVersion = SdkImplRegistry.findDsVersion(testDs, DS_VERSION_ID)
     
     /**
      * Not in db, include all test cps of every dm
