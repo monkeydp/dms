@@ -1,6 +1,6 @@
 package com.monkeydp.daios.dms.sdk.dm
 
-import com.monkeydp.daios.dms.sdk.SdkImpl
+import com.monkeydp.daios.dms.sdk.main.SdkImpl
 import com.monkeydp.daios.dms.sdk.datasource.Datasource
 import com.monkeydp.daios.dms.sdk.datasource.DsDef
 

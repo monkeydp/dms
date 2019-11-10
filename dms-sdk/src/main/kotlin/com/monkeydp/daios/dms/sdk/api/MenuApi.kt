@@ -1,5 +1,6 @@
 package com.monkeydp.daios.dms.sdk.api
 
+import com.monkeydp.daios.dms.sdk.main.SdkApiContract
 import com.monkeydp.daios.dms.sdk.metadata.menu.Menu
 import com.monkeydp.daios.dms.sdk.metadata.menu.MenuLoadingCtx
 

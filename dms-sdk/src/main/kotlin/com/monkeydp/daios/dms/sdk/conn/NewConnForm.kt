@@ -1,6 +1,6 @@
 package com.monkeydp.daios.dms.sdk.conn
 
-import com.monkeydp.daios.dms.sdk.metadata.form.SdkFormContract
+import com.monkeydp.daios.dms.sdk.main.SdkFormContract
 
 /**
  * @author iPotato

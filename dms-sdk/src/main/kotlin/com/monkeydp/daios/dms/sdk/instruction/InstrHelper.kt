@@ -1,8 +1,8 @@
 package com.monkeydp.daios.dms.sdk.instruction
 
-import com.monkeydp.daios.dms.sdk.config.GlobalConfig.globalActionClass
-import com.monkeydp.daios.dms.sdk.config.GlobalConfig.globalTargetClass
 import com.monkeydp.daios.dms.sdk.instruction.action.Action
+import com.monkeydp.daios.dms.sdk.instruction.action.GlobalAction
+import com.monkeydp.daios.dms.sdk.instruction.target.GlobalTarget
 import com.monkeydp.daios.dms.sdk.instruction.target.Target
 import com.monkeydp.tools.ext.camelCase2List
 import com.monkeydp.tools.ext.lastOf
@@ -28,10 +28,10 @@ object InstrHelper {
     }
     
     fun getActionByClassname(any: Any, reverseIndex: Int = DEFAULT_ACTION_REVERSE_INDEX): Action<*> =
-            getEnumByClassname(globalActionClass, any, reverseIndex)
+            getEnumByClassname(GlobalAction::class, any, reverseIndex)
     
     fun getTargetByClassname(any: Any, reverseIndex: Int = DEFAULT_TARGET_REVERSE_INDEX): Target<*> =
-            getEnumByClassname(globalTargetClass, any, reverseIndex)
+            getEnumByClassname(GlobalTarget::class, any, reverseIndex)
     
     private inline fun <reified E : Enum<E>> getEnumByClassname(enumClass: KClass<E>, any: Any, reverseIndex: Int): E {
         val clazz = if (any is Class<*>) any else any.javaClass

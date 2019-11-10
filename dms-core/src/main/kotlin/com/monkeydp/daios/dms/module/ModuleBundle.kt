@@ -5,7 +5,7 @@ import com.monkeydp.daios.dms.sdk.datasource.Datasource
 import com.monkeydp.daios.dms.sdk.datasource.DsDef
 import com.monkeydp.daios.dms.sdk.datasource.DsVersion
 import com.monkeydp.daios.dms.sdk.dm.Dm
-import com.monkeydp.daios.dms.sdk.SdkImpl
+import com.monkeydp.daios.dms.sdk.main.SdkImpl
 import com.monkeydp.daios.dms.sdk.dm.DmOpenConfig
 import com.monkeydp.tools.ext.newInstanceX
 import com.monkeydp.tools.util.FileUtil

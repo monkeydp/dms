@@ -1,5 +1,6 @@
 package com.monkeydp.daios.dms.sdk.enumx
 
+import com.monkeydp.daios.dms.sdk.main.SdkEnumContract
 import com.monkeydp.tools.ext.getInterfaces
 import com.monkeydp.tools.ext.hasAnnotation
 import com.monkeydp.tools.ext.matchOne
