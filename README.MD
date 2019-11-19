@@ -27,18 +27,18 @@ Following datasource would be developed as an example:
 - 🏁 Base Function
     - auto package dm zip to dms when dms start up
     - dynamic load libs and drivers from diff dm
--  🏁 Connection Manager
+- 🏁 Connection Manager
     - open/close/test connection
-    - manager active connection
-- 🏁 Instruction Parser
-- 🏃 Metadata Loader
-    - node  ✔
-    - menu  ✔
+    - manage active connection
+- 🏁 Metadata Loader
+    - node
+    - menu
     - form
-- Command Executor
-    - sql
-    - redis script
-    - mongodb script
+- 🏁 Instruction Parser
+- 🏃 Query
+    - sql editor
+    - redis script editor
+    - mongodb script editor
 - More...
 
 > 🏁 Finished all in list<br/>
