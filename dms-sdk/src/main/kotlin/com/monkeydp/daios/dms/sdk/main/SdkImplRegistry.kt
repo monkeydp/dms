@@ -2,8 +2,8 @@ package com.monkeydp.daios.dms.sdk.main
 
 import com.monkeydp.daios.dms.sdk.datasource.Datasource
 import com.monkeydp.daios.dms.sdk.datasource.DsVersion
-import com.monkeydp.daios.dms.sdk.datasource.dsThreadLocal
 import com.monkeydp.daios.dms.sdk.enumx.Enumx
+import com.monkeydp.daios.dms.sdk.request.RequestContext
 import com.monkeydp.tools.ext.getFirstUpperBound
 import com.monkeydp.tools.ext.ierror
 import com.monkeydp.tools.ext.notNullSingleton
@@ -58,7 +58,7 @@ object SdkImplRegistry {
     
     
     inline fun <reified E : Enumx<out E>> findEnum(enumName: String) =
-            findEnum<E>(enumName, dsThreadLocal.get())
+            findEnum<E>(enumName, RequestContext.datasource)
     
     inline fun <reified E : Enumx<out E>> findEnum(enumName: String, ds: Datasource): E {
         val enumKClass = getEnumKClass<E>(ds)

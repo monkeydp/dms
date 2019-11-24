@@ -3,6 +3,7 @@ package com.monkeydp.daios.dms.service.impl
 import com.monkeydp.daios.dms.sdk.api.InstrApi
 import com.monkeydp.daios.dms.sdk.datasource.Datasource
 import com.monkeydp.daios.dms.sdk.instruction.InstrParsingCtx
+import com.monkeydp.daios.dms.sdk.request.RequestContext
 import com.monkeydp.daios.dms.service.contract.ConnService
 import com.monkeydp.daios.dms.service.contract.InstrService
 import org.springframework.beans.factory.annotation.Autowired
@@ -22,11 +23,9 @@ class InstrServiceImpl : InstrService {
     private lateinit var connService: ConnService
     
     override fun parse(ctx: InstrParsingCtx) {
-        val ds = connService.findDatasource(ctx.cpId)
-    
+        val ds = RequestContext.datasource
         val conn = connService.findConn(ctx.cpId)
         ctx.conn = conn
-    
         val api = apiMap.getValue(ds)
         api.parse(ctx)
     }

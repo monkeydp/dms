@@ -4,7 +4,7 @@ import com.monkeydp.daios.dms.sdk.api.MenuApi
 import com.monkeydp.daios.dms.sdk.datasource.Datasource
 import com.monkeydp.daios.dms.sdk.metadata.menu.Menu
 import com.monkeydp.daios.dms.sdk.metadata.menu.MenuLoadingCtx
-import com.monkeydp.daios.dms.service.contract.ConnService
+import com.monkeydp.daios.dms.sdk.request.RequestContext
 import com.monkeydp.daios.dms.service.contract.MenuService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.context.annotation.Lazy
@@ -19,11 +19,9 @@ class MenuServiceImpl : MenuService {
     @Lazy
     @Autowired
     lateinit var apiMap: Map<Datasource, MenuApi>
-    @Autowired
-    private lateinit var connService: ConnService
     
     override fun loadMenu(ctx: MenuLoadingCtx): Menu? {
-        val ds = connService.findDatasource(ctx.cpId)
+        val ds = RequestContext.datasource
         val api = apiMap.getValue(ds)
         return api.loadMenu(ctx)
     }

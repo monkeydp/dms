@@ -1,8 +1,8 @@
 package com.monkeydp.daios.dms.sdk.metadata.node
 
 import com.fasterxml.jackson.annotation.JsonIgnore
-import com.monkeydp.daios.dms.sdk.annot.NeedDatasource
 import com.monkeydp.daios.dms.sdk.conn.Conn
+import com.monkeydp.daios.dms.sdk.conn.HasCpId
 import com.monkeydp.daios.dms.sdk.helper.IdHelper
 import com.monkeydp.daios.dms.sdk.mocker.ConnJsonMocker
 import com.monkeydp.daios.dms.sdk.mocker.NodeJsonMocker
@@ -16,13 +16,12 @@ import kotlin.properties.Delegates
  * @date 2019/10/25
  */
 @ApiModel
-@NeedDatasource
 class NodeLoadingCtx(
         @ApiModelProperty(required = true, example = ConnJsonMocker.CP_ID)
-        val cpId: Long,
+        override val cpId: Long,
         @ApiModelProperty(required = true, example = NodeJsonMocker.NODE_PATH)
         val path: NodePath
-) {
+) : HasCpId {
     var conn: Conn<*> by Delegates.notNullSingleton()
         @JsonIgnore get
     

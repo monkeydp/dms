@@ -4,7 +4,7 @@ import com.monkeydp.daios.dms.sdk.api.FormApi
 import com.monkeydp.daios.dms.sdk.datasource.Datasource
 import com.monkeydp.daios.dms.sdk.metadata.form.Form
 import com.monkeydp.daios.dms.sdk.metadata.form.FormLoadingCtx
-import com.monkeydp.daios.dms.service.contract.ConnService
+import com.monkeydp.daios.dms.sdk.request.RequestContext
 import com.monkeydp.daios.dms.service.contract.FormService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.context.annotation.Lazy
@@ -20,11 +20,9 @@ class FormServiceImpl : FormService {
     @Lazy
     @Autowired
     lateinit var apiMap: Map<Datasource, FormApi>
-    @Autowired
-    private lateinit var connService: ConnService
     
     override fun loadForm(ctx: FormLoadingCtx): Form {
-        val ds = connService.findDatasource(ctx.cpId)
+        val ds = RequestContext.datasource
         val api = apiMap.getValue(ds)
         return api.loadFrom(ctx)
     }

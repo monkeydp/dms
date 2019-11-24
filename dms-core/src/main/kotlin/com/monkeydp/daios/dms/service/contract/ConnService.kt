@@ -45,11 +45,6 @@ interface ConnService {
     fun findCp(cpId: Long): ConnProfile
     
     /**
-     * Find a datasource
-     */
-    fun findDatasource(cpId: Long): Datasource
-    
-    /**
      * Find a conn wrapper
      * @param connId if null, return user conn wrapper
      */

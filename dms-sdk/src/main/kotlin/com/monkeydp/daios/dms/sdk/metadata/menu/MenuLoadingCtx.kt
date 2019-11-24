@@ -1,6 +1,6 @@
 package com.monkeydp.daios.dms.sdk.metadata.menu
 
-import com.monkeydp.daios.dms.sdk.annot.NeedDatasource
+import com.monkeydp.daios.dms.sdk.conn.HasCpId
 import com.monkeydp.daios.dms.sdk.helper.IdHelper
 import com.monkeydp.daios.dms.sdk.metadata.menu.item.MenuPath
 import com.monkeydp.daios.dms.sdk.metadata.node.NodePath
@@ -15,12 +15,11 @@ import io.swagger.annotations.ApiModelProperty
  * @date 2019/11/1
  */
 @ApiModel
-@NeedDatasource
 data class MenuLoadingCtx(
         @ApiModelProperty(required = true, example = CP_ID)
-        val cpId: Long = IdHelper.INVALID_ID,
+        override val cpId: Long = IdHelper.INVALID_ID,
         @ApiModelProperty(required = true, example = NODE_PATH)
         val nodePath: NodePath,
         @ApiModelProperty(required = true, example = MENU_PATH)
         val menuPath: MenuPath = MenuPath()
-)
+) : HasCpId

@@ -1,9 +1,8 @@
 package com.monkeydp.daios.dms.sdk.instruction
 
 import com.fasterxml.jackson.annotation.JsonIgnore
-import com.monkeydp.daios.dms.sdk.annot.NeedDatasource
 import com.monkeydp.daios.dms.sdk.conn.Conn
-import com.monkeydp.daios.dms.sdk.helper.IdHelper
+import com.monkeydp.daios.dms.sdk.conn.HasCpId
 import com.monkeydp.daios.dms.sdk.helper.IdHelper.INVALID_ID
 import com.monkeydp.daios.dms.sdk.instruction.target.GlobalTarget.NONE
 import com.monkeydp.daios.dms.sdk.instruction.target.Target
@@ -25,10 +24,9 @@ import kotlin.properties.Delegates
  * @date 2019/11/5
  */
 @ApiModel
-@NeedDatasource
 class InstrParsingCtx(
         @ApiModelProperty(required = true, example = CP_ID)
-        val cpId: Long,
+        override val cpId: Long,
         @ApiModelProperty(required = true, example = INSTR)
         val instr: Instruction,
         @ApiModelProperty(required = true, example = NEW_TABLE_USER_INPUT)
@@ -37,7 +35,7 @@ class InstrParsingCtx(
         val nodePath: NodePath,
         @ApiModelProperty(value = "user selected target", required = true, example = SELECTED)
         val selected: Target<*>
-) {
+) : HasCpId {
     var conn: Conn<*> by Delegates.notNullSingleton()
         @JsonIgnore get
     

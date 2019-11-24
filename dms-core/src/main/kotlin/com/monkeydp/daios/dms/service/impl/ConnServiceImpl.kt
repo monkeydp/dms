@@ -84,8 +84,6 @@ internal class ConnServiceImpl : ConnService {
     
     override fun findCp(cpId: Long) = manager.getActiveCp(cpId, true) ?: cpService.findById(cpId)
     
-    override fun findDatasource(cpId: Long) = findCp(cpId).datasource
-    
     private fun getConn(cp: ConnProfile): Conn<*> {
         val bundle = registry.getBundle(cp)
         bundle.setSpecificClassLoader(cp.dsVersion)

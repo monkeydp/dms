@@ -6,6 +6,7 @@ import com.monkeydp.daios.dms.sdk.datasource.Datasource
 import com.monkeydp.daios.dms.sdk.metadata.node.ConnNode
 import com.monkeydp.daios.dms.sdk.metadata.node.Node
 import com.monkeydp.daios.dms.sdk.metadata.node.NodeLoadingCtx
+import com.monkeydp.daios.dms.sdk.request.RequestContext
 import com.monkeydp.daios.dms.service.contract.ConnService
 import com.monkeydp.daios.dms.service.contract.NodeService
 import com.monkeydp.daios.dms.session.UserSession
@@ -48,7 +49,7 @@ internal class NodeServiceImpl : NodeService {
         val conn = connService.findConn(cpId)
         ctx.conn = conn
     
-        val ds = connService.findDatasource(cpId)
+        val ds = RequestContext.datasource
         val api = apiMap.getValue(ds)
         
         return api.loadSubNodes(ctx)
