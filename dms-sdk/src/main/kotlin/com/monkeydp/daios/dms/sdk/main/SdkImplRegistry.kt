@@ -58,7 +58,7 @@ object SdkImplRegistry {
     
     
     inline fun <reified E : Enumx<out E>> findEnum(enumName: String) =
-            findEnum<E>(enumName, RequestContext.datasource)
+            findEnum<E>(enumName, RequestContext.datasource!!)
     
     inline fun <reified E : Enumx<out E>> findEnum(enumName: String, ds: Datasource): E {
         val enumKClass = getEnumKClass<E>(ds)

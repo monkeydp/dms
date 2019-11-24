@@ -4,7 +4,6 @@ import com.monkeydp.daios.dms.sdk.api.InstrApi
 import com.monkeydp.daios.dms.sdk.datasource.Datasource
 import com.monkeydp.daios.dms.sdk.instruction.InstrParsingCtx
 import com.monkeydp.daios.dms.sdk.request.RequestContext
-import com.monkeydp.daios.dms.service.contract.ConnService
 import com.monkeydp.daios.dms.service.contract.InstrService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.context.annotation.Lazy
@@ -19,13 +18,9 @@ class InstrServiceImpl : InstrService {
     @Lazy
     @Autowired
     lateinit var apiMap: Map<Datasource, InstrApi>
-    @Autowired
-    private lateinit var connService: ConnService
     
     override fun parse(ctx: InstrParsingCtx) {
-        val ds = RequestContext.datasource
-        val conn = connService.findConn(ctx.cpId)
-        ctx.conn = conn
+        val ds = RequestContext.datasource!!
         val api = apiMap.getValue(ds)
         api.parse(ctx)
     }

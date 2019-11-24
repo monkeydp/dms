@@ -4,7 +4,6 @@ import com.monkeydp.daios.dms.conn.BelongsTo
 import com.monkeydp.daios.dms.conn.BelongsTo.USER
 import com.monkeydp.daios.dms.conn.ConnWrapper
 import com.monkeydp.daios.dms.sdk.conn.ConnProfile
-import com.monkeydp.daios.dms.sdk.datasource.Datasource
 
 /**
  * @author iPotato
@@ -48,11 +47,11 @@ interface ConnService {
      * Find a conn wrapper
      * @param connId if null, return user conn wrapper
      */
-    fun findCw(cpId: Long, connId: Long? = null): ConnWrapper
+    fun findCw(cpId: Long, connId: Long? = null): ConnWrapper?
     
     /**
      * Find a conn
      * @param connId if null, return user conn
      */
-    fun findConn(cpId: Long, connId: Long? = null) = findCw(cpId, connId).conn
+    fun findConn(cpId: Long, connId: Long? = null) = findCw(cpId, connId)?.conn
 }

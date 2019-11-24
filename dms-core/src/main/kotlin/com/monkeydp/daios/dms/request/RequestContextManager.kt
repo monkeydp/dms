@@ -14,29 +14,30 @@ import kotlin.reflect.full.isSuperclassOf
  * @date 2019/11/24
  */
 @Component
-class RequestContextInitializer {
+class RequestContextManager {
+    
+    private val ctx = RequestContext
     
     @Autowired
     private lateinit var connService: ConnService
     
     fun initCtx(type: Type, data: ByteArray) {
-        initCpThreadLocal(type, data)
+        val cpId = getCpId(type, data)
+        if (cpId != null) {
+            val cp = connService.findCp(cpId)
+            val conn = connService.findConn(cpId)
+            ctx.init(cp, conn)
+        }
     }
     
-    private fun initCpThreadLocal(type: Type, data: ByteArray) {
+    private fun getCpId(type: Type, data: ByteArray): Long? {
         val kClass = (type as Class<*>).kotlin
-        if (!HasCpId::class.isSuperclassOf(kClass)) return
+        if (!HasCpId::class.isSuperclassOf(kClass)) return null
         val jsonNode = JsonUtil.toJsonNode(data)
-        val cpId = jsonNode.get(HasCpId::cpId.name).asLong()
-        val cp = connService.findCp(cpId)
-        RequestContext.cpThreadLocal.set(cp)
+        return jsonNode.get(HasCpId::cpId.name).asLong()
     }
     
     fun cleanCtx() {
-        cleanCpThreadLocal()
-    }
-    
-    private fun cleanCpThreadLocal() {
-        RequestContext.cpThreadLocal.remove()
+        ctx.clean()
     }
 }

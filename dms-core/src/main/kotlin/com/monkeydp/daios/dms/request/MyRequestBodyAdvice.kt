@@ -17,7 +17,7 @@ import java.lang.reflect.Type
 class MyRequestBodyAdvice : RequestBodyAdviceAdapter() {
     
     @Autowired
-    private lateinit var initializer: RequestContextInitializer
+    private lateinit var manager: RequestContextManager
     
     override fun supports(methodParameter: MethodParameter, targetType: Type,
                           converterType: Class<out HttpMessageConverter<*>>) = true
@@ -26,7 +26,7 @@ class MyRequestBodyAdvice : RequestBodyAdviceAdapter() {
                                 selectedConverterType: Class<out HttpMessageConverter<*>>): HttpInputMessage {
         val body = inputMessage.body as PushbackInputStream
         val data = body.readBytes()
-        initializer.initCtx(targetType, data)
+        manager.initCtx(targetType, data)
         return MyHttpInputMessage(inputMessage.headers, data.inputStream())
     }
 }

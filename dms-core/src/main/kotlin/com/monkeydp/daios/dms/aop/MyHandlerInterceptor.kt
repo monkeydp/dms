@@ -1,6 +1,6 @@
 package com.monkeydp.daios.dms.aop
 
-import com.monkeydp.daios.dms.request.RequestContextInitializer
+import com.monkeydp.daios.dms.request.RequestContextManager
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
 import org.springframework.web.servlet.HandlerInterceptor
@@ -15,11 +15,11 @@ import javax.servlet.http.HttpServletResponse
 class MyHandlerInterceptor : HandlerInterceptor {
     
     @Autowired
-    private lateinit var initializer: RequestContextInitializer
+    private lateinit var manager: RequestContextManager
     
     override fun afterCompletion(request: HttpServletRequest, response: HttpServletResponse, handler: Any,
                                  ex: Exception?) {
         super.afterCompletion(request, response, handler, ex)
-        initializer.cleanCtx()
+        manager.cleanCtx()
     }
 }

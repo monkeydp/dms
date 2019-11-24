@@ -7,7 +7,6 @@ import com.monkeydp.daios.dms.sdk.metadata.node.ConnNode
 import com.monkeydp.daios.dms.sdk.metadata.node.Node
 import com.monkeydp.daios.dms.sdk.metadata.node.NodeLoadingCtx
 import com.monkeydp.daios.dms.sdk.request.RequestContext
-import com.monkeydp.daios.dms.service.contract.ConnService
 import com.monkeydp.daios.dms.service.contract.NodeService
 import com.monkeydp.daios.dms.session.UserSession
 import org.springframework.beans.factory.annotation.Autowired
@@ -28,8 +27,6 @@ internal class NodeServiceImpl : NodeService {
     lateinit var apiMap: Map<Datasource, NodeApi>
     @Autowired
     private lateinit var cpService: ConnProfileService
-    @Autowired
-    private lateinit var connService: ConnService
     
     override fun loadConnNodes(): List<ConnNode> {
         val userId = session.userId
@@ -44,14 +41,8 @@ internal class NodeServiceImpl : NodeService {
     }
     
     override fun loadSubNodes(ctx: NodeLoadingCtx): List<Node> {
-        val cpId = ctx.cpId
-    
-        val conn = connService.findConn(cpId)
-        ctx.conn = conn
-    
-        val ds = RequestContext.datasource
+        val ds = RequestContext.datasource!!
         val api = apiMap.getValue(ds)
-        
         return api.loadSubNodes(ctx)
     }
 }

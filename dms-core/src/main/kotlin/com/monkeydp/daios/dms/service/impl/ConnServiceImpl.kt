@@ -116,12 +116,12 @@ internal class ConnServiceImpl : ConnService {
         conn.use { if (!conn.isValid()) ierror("Test conn fail, please check conn profile: $cp") }
     }
     
-    override fun findCw(cpId: Long, connId: Long?): ConnWrapper {
+    override fun findCw(cpId: Long, connId: Long?): ConnWrapper? {
         return if (connId == null) findUserCw(cpId)
         else finOtherCw(cpId, connId)
     }
     
-    private fun findUserCw(cpId: Long) = manager.getActiveUserCw(cpId)
+    private fun findUserCw(cpId: Long) = manager.getActiveUserCw(cpId, true)
     
-    private fun finOtherCw(cpId: Long, connId: Long) = manager.getActiveCw(cpId, connId)
+    private fun finOtherCw(cpId: Long, connId: Long) = manager.getActiveCw(cpId, connId, true)
 }
