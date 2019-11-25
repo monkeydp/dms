@@ -12,9 +12,12 @@ import com.monkeydp.tools.ext.ierror
  */
 class ConnWrapper(val conn: Conn<*>, private val belongsTo: BelongsTo = USER) : AutoCloseable {
     
-    // TODO auto increment id
-    val connId = IdHelper.randomId()
+    init {
+        // TODO auto increment id
+        conn.id = IdHelper.randomId()
+    }
     
+    val connId = conn.id
     val cpId = conn.cpId
     
     override fun close() {

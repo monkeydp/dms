@@ -6,6 +6,8 @@ package com.monkeydp.daios.dms.sdk.conn
  */
 interface Conn<C> : AutoCloseable {
     
+    var id: Long
+    
     /**
      * @see ConnProfile.id
      */

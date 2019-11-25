@@ -66,7 +66,7 @@ internal class ConnServiceImpl : ConnService {
     private fun openUserConn(cpId: Long): ConnWrapper {
         val activeUserCw = manager.getActiveUserCw(cpId, true)
         if (activeUserCw != null) {
-            log.debug("Conn(id = ${activeUserCw.connId}) with cpId = $cpId is active ,return it directly.")
+            log.debug("${activeUserCw.conn} is active ,return it directly.")
             return activeUserCw
         }
         return innerOpenConn(cpId)
