@@ -36,9 +36,9 @@ Following datasource would be developed as an example:
     - form
 - 🏁 Instruction Parser
 - 🏃 Query
-    - sql editor
-    - redis script editor
-    - mongodb script editor
+    - sql executor
+    - redis script executor
+    - mongodb script executor
 - More...
 
 > 🏁 Finished all in list<br/>
