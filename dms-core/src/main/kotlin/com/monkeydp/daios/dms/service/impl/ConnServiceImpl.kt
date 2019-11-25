@@ -1,7 +1,6 @@
 package com.monkeydp.daios.dms.service.impl
 
 import com.monkeydp.daios.dms.conn.BelongsTo
-import com.monkeydp.daios.dms.conn.ConnManager
 import com.monkeydp.daios.dms.conn.ConnWrapper
 import com.monkeydp.daios.dms.curd.service.contract.ConnProfileService
 import com.monkeydp.daios.dms.module.ModuleRegistry
@@ -9,6 +8,7 @@ import com.monkeydp.daios.dms.sdk.api.ConnApi
 import com.monkeydp.daios.dms.sdk.conn.Conn
 import com.monkeydp.daios.dms.sdk.conn.ConnProfile
 import com.monkeydp.daios.dms.sdk.datasource.Datasource
+import com.monkeydp.daios.dms.service.contract.ConnManager
 import com.monkeydp.daios.dms.service.contract.ConnService
 import com.monkeydp.daios.dms.session.UserSession
 import com.monkeydp.tools.ext.getLogger
@@ -43,7 +43,7 @@ internal class ConnServiceImpl : ConnService {
     override fun saveCp(cp: ConnProfile): ConnProfile {
         val saved = cpService.save(fullCp(cp))
         // TODO should be delegated to listener
-        manager.updateActiveCp(saved)
+        manager.updateActiveCp(saved, true)
         return saved
     }
     
@@ -103,7 +103,7 @@ internal class ConnServiceImpl : ConnService {
     }
     
     private fun closeOtherConn(cpId: Long, connId: Long) {
-        manager.inactivateCw(cpId, connId)
+        manager.inactivateCw(cpId, connId, true)
     }
     
     override fun testConn(cpId: Long) {

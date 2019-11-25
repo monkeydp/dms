@@ -1,18 +1,20 @@
-package com.monkeydp.daios.dms.conn
+package com.monkeydp.daios.dms.service.impl
 
+import com.monkeydp.daios.dms.conn.ConnWrapper
 import com.monkeydp.daios.dms.sdk.conn.ConnProfile
 import com.monkeydp.daios.dms.sdk.helper.IdHelper
 import com.monkeydp.daios.dms.sdk.helper.IdHelper.INVALID_ID
+import com.monkeydp.daios.dms.service.contract.ConnManager
 import com.monkeydp.tools.exception.inner.AbstractInnerException
 import com.monkeydp.tools.ext.ierror
-import org.springframework.stereotype.Component
+import org.springframework.stereotype.Service
 
 /**
  * @author iPotato
  * @date 2019/10/24
  */
-@Component
-class ConnManager {
+@Service
+class ConnManagerImpl : ConnManager {
     /**
      * @see ConnProfile.id
      */
@@ -25,7 +27,7 @@ class ConnManager {
         // TODO
     }
     
-    fun activateCp(cp: ConnProfile): ConnManager {
+    override fun activateCp(cp: ConnProfile): ConnManager {
         if (activeCpwMap.contains(cp.id)) return this
         activateCpw(cp)
         return this
@@ -36,12 +38,13 @@ class ConnManager {
         activeCpwMap.putIfAbsent(cpw.cpId, cpw)
     }
     
-    fun updateActiveCp(cp: ConnProfile) {
-        val cpw = getActiveCpw(cp.id, true) ?: return
+    override fun updateActiveCp(cp: ConnProfile, ignoreNotFound: Boolean): ConnManager {
+        val cpw = getActiveCpw(cp.id, ignoreNotFound) ?: return this
         activeCpwMap[cp.id] = cpw.copy(cp = cp)
+        return this
     }
     
-    fun activateCw(cw: ConnWrapper): ConnManager {
+    override fun activateCw(cw: ConnWrapper): ConnManager {
         val cpw = getActiveCpw(cw.cpId)
         cpw.activateCw(cw)
         return this
@@ -55,30 +58,30 @@ class ConnManager {
         return cpw
     }
     
-    fun getActiveCp(cpId: Long) = getActiveCp(cpId, false)!!
+    override fun getActiveCp(cpId: Long) = getActiveCp(cpId, false)!!
     
-    fun getActiveCp(cpId: Long, ignoreNotFound: Boolean) = getActiveCpw(cpId, ignoreNotFound)?.cp
+    override fun getActiveCp(cpId: Long, ignoreNotFound: Boolean) = getActiveCpw(cpId, ignoreNotFound)?.cp
     
-    fun getActiveCw(cpId: Long, connId: Long) = getActiveCw(cpId, connId, false)!!
+    override fun getActiveCw(cpId: Long, connId: Long) = getActiveCw(cpId, connId, false)!!
     
-    fun getActiveCw(cpId: Long, connId: Long, ignoreNotFound: Boolean) =
+    override fun getActiveCw(cpId: Long, connId: Long, ignoreNotFound: Boolean) =
             getActiveCpw(cpId, ignoreNotFound)?.getActiveCw(connId, ignoreNotFound)
     
     fun getActiveUserCw(cpId: Long) = getActiveUserCw(cpId, false)!!
     
-    fun getActiveUserCw(cpId: Long, ignoreNotFound: Boolean) =
+    override fun getActiveUserCw(cpId: Long, ignoreNotFound: Boolean) =
             getActiveCpw(cpId, ignoreNotFound)?.getActiveUserCw(ignoreNotFound)
     
-    fun inactivateCp(cpId: Long) {
-        inactivateCpw(cpId)
+    override fun inactivateCp(cpId: Long, ignoreNotFound: Boolean) {
+        inactivateCpw(cpId, ignoreNotFound)
     }
     
-    fun inactivateAllCp() {
+    override fun inactivateAllCp() {
         inactivateAllCpw()
     }
     
-    private fun inactivateCpw(cpId: Long) {
-        val activeCpw = getActiveCpw(cpId, true) ?: return
+    private fun inactivateCpw(cpId: Long, ignoreNotFound: Boolean) {
+        val activeCpw = getActiveCpw(cpId, ignoreNotFound) ?: return
         activeCpw.inactivateAllCw()
         activeCpwMap.remove(activeCpw.cpId)
     }
@@ -88,17 +91,17 @@ class ConnManager {
         activeCpwMap.clear()
     }
     
-    fun inactivateCw(cpId: Long, connId: Long) {
-        val activeCpw = getActiveCpw(cpId, true) ?: return
+    override fun inactivateCw(cpId: Long, connId: Long, ignoreNotFound: Boolean) {
+        val activeCpw = getActiveCpw(cpId, ignoreNotFound) ?: return
         activeCpw.inactivateCw(connId)
     }
     
-    fun inactivateUserCw(cpId: Long, ignoreNotFound: Boolean) {
+    override fun inactivateUserCw(cpId: Long, ignoreNotFound: Boolean) {
         val activeCpw = getActiveCpw(cpId, ignoreNotFound) ?: return
         activeCpw.inactivateUserCw(activeCpw.getActiveUserCw(ignoreNotFound))
     }
     
-    fun inactivateAllCw(cpId: Long) {
+    override fun inactivateAllCw(cpId: Long) {
         val activeCpw = getActiveCpw(cpId, true) ?: return
         activeCpw.inactivateAllCw()
     }
