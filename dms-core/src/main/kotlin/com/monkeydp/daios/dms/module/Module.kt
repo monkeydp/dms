@@ -10,7 +10,6 @@ import com.monkeydp.daios.dms.sdk.event.EventPublisher
 import com.monkeydp.daios.dms.sdk.main.SdkImpl
 import com.monkeydp.tools.ext.newInstanceX
 import com.monkeydp.tools.util.FileUtil
-import com.monkeydp.tools.util.YamlUtil
 import java.io.File
 import java.io.FileFilter
 import java.net.URL
@@ -22,11 +21,9 @@ import java.net.URLClassLoader
  */
 class Module(
         private val dir: File,
-        private val eventPublisher: EventPublisher,
-        bootFilename: String = "boot.yml"
+        private val eventPublisher: EventPublisher
 ) {
-    private val bootFile = File(dir, bootFilename)
-    val config = YamlUtil.loadAs<DmBootConfig>(bootFile)
+    val config = ModuleBootFile(dir, autoCheck = true).getBootConfig()
     
     private val bootClassname = config.classname
     private val openConfig = DmOpenConfig(dir, eventPublisher)

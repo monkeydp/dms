@@ -13,9 +13,11 @@ import java.io.FileFilter
  * @date 2019/11/27
  */
 internal object ModuleEnv {
-    private val dmRegex = "^dm-.+".toRegex()
+    
+    private const val distRelativePath = "/src/main/dist"
+    private const val distributionsRelativePath = "/build/distributions"
+    
     private val dmZipRegex = "^dm-.+.zip$".toRegex()
-    private val ignoreDmDirNames = listOf("dm-base")
     
     val gradlewPath: String
         get() {
@@ -34,43 +36,36 @@ internal object ModuleEnv {
         }
     
     val dmDirs
-        get() =
-            FileUtil.listFiles(dmParentDir,
-                    FileFilter { file ->
-                        !ignoreDmDirNames.contains(file.name) &&
-                        file.isDirectory &&
-                        file.name.matches(dmRegex)
-                    }
-            ).toList()
+        get() = FileUtil.listFiles(dmParentDir, FileFilter { isDmDir(it) }).toList()
     
     /**
-     * Module zips are not in local project
+     * Dm zips are not in local project
      */
-    val outsideModuleZips: List<File>
+    val dmZips: List<File>
         get() {
-            val moduleZips = mutableListOf<File>()
+            val dmZips = mutableListOf<File>()
             dmDirs.forEach { dmDir ->
-                val distributionsDir = File(dmDir, "/build/distributions")
-                val files = FileUtil.listFiles(distributionsDir,
-                        FileFilter { file ->
-                            file.isFile && file.name.matches(dmZipRegex)
-                        }
-                )
-                if (files.isEmpty()) ierror("Cannot find dm zip in $distributionsDir!")
-                
-                if (files.size > 1) ierror("More than one dm zip was found in $distributionsDir!")
+                val dir = getDistributionsDir(dmDir)
+                val files = FileUtil.listFiles(dir, FileFilter { isDmZip(it) })
+    
+                if (files.isEmpty()) ierror("Cannot find dm zip in $dir!")
+                if (files.size > 1) ierror("More than one dm zip was found in $dir!")
                 
                 val zip = files.get(0)
-                moduleZips.add(zip)
+                dmZips.add(zip)
             }
-            return moduleZips.toList()
+            return dmZips.toList()
         }
     
     val moduleDirs
-        get() =
-            FileUtil.listFiles(DmsConfigEnvWrapper.modulesDir,
-                    FileFilter { file ->
-                        file.isDirectory && file.name.matches(dmRegex)
-                    }
-            ).toList()
+        get() = FileUtil.listFiles(DmsConfigEnvWrapper.modulesDir, FileFilter { isModuleDir(it) }).toList()
+    
+    private fun getDistributionsDir(dmDir: File) = File(dmDir, distributionsRelativePath)
+    
+    private fun isDmZip(file: File) = file.isFile && file.name.matches(dmZipRegex)
+    
+    private fun isDmDir(dir: File) = isModuleDir(dir, distRelativePath)
+    
+    private fun isModuleDir(dir: File, bootFileRelativePath: String = "") =
+            ModuleBootFile(dir, bootFileRelativePath).isValid()
 }

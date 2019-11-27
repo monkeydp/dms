@@ -2,8 +2,8 @@ package com.monkeydp.daios.dms.module
 
 import com.monkeydp.daios.dms.config.env.DmsConfigEnvWrapper.modulesDir
 import com.monkeydp.daios.dms.module.ModuleEnv.dmDirs
+import com.monkeydp.daios.dms.module.ModuleEnv.dmZips
 import com.monkeydp.daios.dms.module.ModuleEnv.gradlewPath
-import com.monkeydp.daios.dms.module.ModuleEnv.outsideModuleZips
 import net.lingala.zip4j.ZipFile
 import org.apache.commons.exec.CommandLine
 import org.apache.commons.exec.DefaultExecutor
@@ -26,7 +26,7 @@ object ModuleHelper {
     
     private fun extractAllModules2Local() {
         emptyModulesDir()
-        outsideModuleZips.forEach { file ->
+        dmZips.forEach { file ->
             val zipFile = ZipFile(file)
             zipFile.extractAll(modulesDir.absolutePath)
         }
