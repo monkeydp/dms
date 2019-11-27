@@ -22,18 +22,18 @@ class ModuleRegistry {
     @Autowired
     private lateinit var beanFactory: ConfigurableBeanFactory
     
-    private val bundleMap = mutableMapOf<Datasource, ModuleBundle>()
+    private val moduleMap = mutableMapOf<Datasource, Module>()
     
-    fun registerModule(bundle: ModuleBundle) {
-        bundleMap[bundle.datasource] = bundle
+    fun registerModule(module: Module) {
+        moduleMap[module.datasource] = module
     }
     
-    fun getBundle(datasource: Datasource) = bundleMap.get(datasource)!!
+    fun findModule(datasource: Datasource) = moduleMap.get(datasource)!!
     
-    fun getBundle(cp: ConnProfile) = getBundle(cp.datasource)
+    fun findModule(cp: ConnProfile) = findModule(cp.datasource)
     
     private fun <V> toMap(apiPropName: String) =
-            bundleMap.map { (ds, bundle) -> ds to bundle.apis.getPropValueX<V>(apiPropName) }.toMap()
+            moduleMap.map { (ds, module) -> ds to module.apis.getPropValueX<V>(apiPropName) }.toMap()
     
     @Lazy
     @Bean
