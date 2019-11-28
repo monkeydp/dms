@@ -14,7 +14,7 @@ java.sourceCompatibility = JavaVersion.VERSION_1_8
 dependencies {
     // kotlin
     api("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.2")
-    // monkeydp
+    // tools
     api("com.monkeydp:tools:+")
     // jackson
     implementation("com.fasterxml.jackson.core:jackson-annotations:2.9.0")
