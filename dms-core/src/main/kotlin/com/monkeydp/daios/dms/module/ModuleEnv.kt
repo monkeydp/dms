@@ -2,7 +2,6 @@ package com.monkeydp.daios.dms.module
 
 import com.monkeydp.daios.dms.config.env.DmsConfigEnvWrapper
 import com.monkeydp.daios.dms.config.env.DmsConfigEnvWrapper.dmParentDir
-import com.monkeydp.tools.enumeration.Symbol.HYPHEN
 import com.monkeydp.tools.ext.ierror
 import com.monkeydp.tools.util.FileUtil
 import com.monkeydp.tools.util.SystemUtil
@@ -69,8 +68,7 @@ internal object ModuleEnv {
     
     private fun findLasted(multiVersionZips: Array<File>): File {
         var lastedZip: File = multiVersionZips.first()
-        fun File.getDmVersion() = name.split(HYPHEN)[2]
-        fun File.newerThan(another: File) = VersionUtil.newerThan(getDmVersion(), another.getDmVersion())
+        fun File.newerThan(another: File) = VersionUtil.newerThan(another, this)
         multiVersionZips.forEach { if (lastedZip.newerThan(it)) lastedZip = it }
         return lastedZip
     }
