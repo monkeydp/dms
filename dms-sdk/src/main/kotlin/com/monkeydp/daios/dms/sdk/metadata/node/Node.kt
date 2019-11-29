@@ -9,7 +9,7 @@ import java.util.*
  * @date 2019/10/25
  */
 interface Node {
-    val defUuid: UUID
+    val defId: Int
     val target: Target<*>
     val name: String
     val icon: Icon<*>
