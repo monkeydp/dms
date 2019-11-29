@@ -1,11 +1,13 @@
 package com.monkeydp.daios.dms.request
 
+import com.monkeydp.daios.dms.sdk.conn.ConnRequired
 import com.monkeydp.daios.dms.sdk.conn.HasCpId
 import com.monkeydp.daios.dms.sdk.request.RequestContext
 import com.monkeydp.daios.dms.service.contract.ConnService
 import com.monkeydp.tools.util.JsonUtil
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
+import java.lang.reflect.Method
 import java.lang.reflect.Type
 import kotlin.reflect.full.isSuperclassOf
 
@@ -21,11 +23,12 @@ class RequestContextManager {
     @Autowired
     private lateinit var connService: ConnService
     
-    fun initCtx(type: Type, data: ByteArray) {
+    fun initCtx(type: Type, data: ByteArray, method: Method) {
         val cpId = getCpId(type, data)
         if (cpId != null) {
             val cp = connService.findCp(cpId)
-            val conn = connService.findConn(cpId)
+            val connRequired = method.isAnnotationPresent(ConnRequired::class.java)
+            val conn = connService.findConn(cpId, ignoreNotFound = !connRequired)
             ctx.init(cp, conn)
         }
     }

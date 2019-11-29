@@ -1,5 +1,6 @@
 package com.monkeydp.daios.dms.controller
 
+import com.monkeydp.daios.dms.sdk.conn.ConnRequired
 import com.monkeydp.daios.dms.sdk.metadata.node.NodeLoadingCtx
 import com.monkeydp.daios.dms.service.contract.NodeService
 import io.swagger.annotations.Api
@@ -23,6 +24,7 @@ class NodeController {
     @GetMapping("load-conn-nodes")
     fun loadConnNodes() = service.loadConnNodes()
     
+    @ConnRequired
     @ApiOperation("Load sub nodes")
     @PostMapping("load-sub-nodes")
     fun loadSubNodes(@RequestBody ctx: NodeLoadingCtx) = service.loadSubNodes(ctx)

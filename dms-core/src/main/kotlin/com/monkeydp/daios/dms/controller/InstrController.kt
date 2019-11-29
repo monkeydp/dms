@@ -1,5 +1,6 @@
 package com.monkeydp.daios.dms.controller
 
+import com.monkeydp.daios.dms.sdk.conn.ConnRequired
 import com.monkeydp.daios.dms.sdk.instruction.InstrParsingCtx
 import com.monkeydp.daios.dms.service.contract.InstrService
 import io.swagger.annotations.Api
@@ -22,6 +23,7 @@ class InstrController {
     @Autowired
     private lateinit var service: InstrService
     
+    @ConnRequired
     @ApiOperation("Parse instruction")
     @PostMapping("parse-instr")
     fun parseInstr(@RequestBody ctx: InstrParsingCtx) = service.parse(ctx)

@@ -56,12 +56,11 @@ internal class ConnServiceImpl : ConnService {
         )
     }
     
-    override fun openConn(cpId: Long, belongsTo: BelongsTo): ConnWrapper {
-        return when (belongsTo) {
-            BelongsTo.USER -> openUserConn(cpId)
-            else -> openOtherConn(cpId, belongsTo)
-        }
-    }
+    override fun openConn(cpId: Long, belongsTo: BelongsTo) =
+            when (belongsTo) {
+                BelongsTo.USER -> openUserConn(cpId)
+                else -> openOtherConn(cpId, belongsTo)
+            }
     
     private fun openUserConn(cpId: Long): ConnWrapper {
         val activeUserCw = manager.getActiveUserCw(cpId, true)
@@ -93,35 +92,27 @@ internal class ConnServiceImpl : ConnService {
         return conn
     }
     
-    override fun closeConn(cpId: Long, connId: Long?) {
-        if (connId == null) closeUserConn(cpId)
-        else closeOtherConn(cpId, connId)
-    }
+    override fun closeConn(cpId: Long, connId: Long?): Unit =
+            if (connId == null) closeUserConn(cpId)
+            else closeOtherConn(cpId, connId)
     
-    private fun closeUserConn(cpId: Long) {
-        manager.inactivateUserCw(cpId, true)
-    }
+    private fun closeUserConn(cpId: Long): Unit = manager.inactivateUserCw(cpId, true)
     
-    private fun closeOtherConn(cpId: Long, connId: Long) {
-        manager.inactivateCw(cpId, connId, true)
-    }
+    private fun closeOtherConn(cpId: Long, connId: Long): Unit = manager.inactivateCw(cpId, connId, true)
     
     override fun testConn(cpId: Long) {
         val cp = findCp(cpId)
         testConn(cp)
     }
     
-    override fun testConn(cp: ConnProfile) {
-        val conn = getConn(cp)
-        conn.use { if (!conn.isValid()) ierror("Test conn fail, please check conn profile: $cp") }
-    }
+    override fun testConn(cp: ConnProfile): Unit =
+            getConn(cp).use { if (!it.isValid()) ierror("Test conn fail, please check conn profile: $cp") }
     
-    override fun findCw(cpId: Long, connId: Long?): ConnWrapper? {
-        return if (connId == null) findUserCw(cpId)
-        else finOtherCw(cpId, connId)
-    }
+    override fun findCw(cpId: Long, connId: Long?, ignoreNotFound: Boolean) =
+            if (connId == null) findUserCw(cpId, ignoreNotFound)
+            else finOtherCw(cpId, connId)
     
-    private fun findUserCw(cpId: Long) = manager.getActiveUserCw(cpId, true)
+    private fun findUserCw(cpId: Long, ignoreNotFound: Boolean) = manager.getActiveUserCw(cpId, ignoreNotFound)
     
     private fun finOtherCw(cpId: Long, connId: Long) = manager.getActiveCw(cpId, connId, true)
 }

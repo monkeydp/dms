@@ -45,13 +45,23 @@ interface ConnService {
     
     /**
      * Find a conn wrapper
+     */
+    fun findCw(cpId: Long, connId: Long? = null) = findCw(cpId, connId, false)!!
+    
+    /**
+     * Find a conn wrapper
      * @param connId if null, return user conn wrapper
      */
-    fun findCw(cpId: Long, connId: Long? = null): ConnWrapper?
+    fun findCw(cpId: Long, connId: Long? = null, ignoreNotFound: Boolean): ConnWrapper?
+    
+    /**
+     * Find a conn
+     */
+    fun findConn(cpId: Long, connId: Long? = null) = findCw(cpId, connId).conn
     
     /**
      * Find a conn
      * @param connId if null, return user conn
      */
-    fun findConn(cpId: Long, connId: Long? = null) = findCw(cpId, connId)?.conn
+    fun findConn(cpId: Long, connId: Long? = null, ignoreNotFound: Boolean) = findCw(cpId, connId, ignoreNotFound)?.conn
 }

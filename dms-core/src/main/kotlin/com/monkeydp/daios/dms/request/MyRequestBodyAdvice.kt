@@ -6,7 +6,6 @@ import org.springframework.http.HttpInputMessage
 import org.springframework.http.converter.HttpMessageConverter
 import org.springframework.web.bind.annotation.RestControllerAdvice
 import org.springframework.web.servlet.mvc.method.annotation.RequestBodyAdviceAdapter
-import java.io.PushbackInputStream
 import java.lang.reflect.Type
 
 /**
@@ -24,9 +23,9 @@ class MyRequestBodyAdvice : RequestBodyAdviceAdapter() {
     
     override fun beforeBodyRead(inputMessage: HttpInputMessage, methodParameter: MethodParameter, targetType: Type,
                                 selectedConverterType: Class<out HttpMessageConverter<*>>): HttpInputMessage {
-        val body = inputMessage.body as PushbackInputStream
+        val body = inputMessage.body
         val data = body.readBytes()
-        manager.initCtx(targetType, data)
+        manager.initCtx(targetType, data, methodParameter.method!!)
         return MyHttpInputMessage(inputMessage.headers, data.inputStream())
     }
 }
