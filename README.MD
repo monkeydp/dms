@@ -101,6 +101,7 @@ err | error
 instr | instruction
 &nbsp;|
 **# M** |
+md | menu definition
 mi | menu item
 mid | menu item definition
 msg | message

@@ -21,11 +21,14 @@ object InstrHelper {
     fun getInstrByClassname(any: Any,
                             actionReverseIndex: Int = DEFAULT_ACTION_REVERSE_INDEX,
                             targetReverseIndex: Int = DEFAULT_TARGET_REVERSE_INDEX
-    ): Instruction {
-        val action = getActionByClassname(any, actionReverseIndex)
-        val target = getTargetByClassname(any, targetReverseIndex)
-        return StdInstr(action, target)
-    }
+    ) =
+            try {
+                val action = getActionByClassname(any, actionReverseIndex)
+                val target = getTargetByClassname(any, targetReverseIndex)
+                StdInstr(action, target)
+            } catch (e: Exception) {
+                UnknownInstr
+            }
     
     fun getActionByClassname(any: Any, reverseIndex: Int = DEFAULT_ACTION_REVERSE_INDEX): Action<*> =
             getEnumByClassname(GlobalAction::class, any, reverseIndex)

@@ -8,7 +8,7 @@ import com.monkeydp.tools.ext.toUpperCamelCase
  */
 enum class GlobalTarget(fullName: String = "") : Target<GlobalTarget> {
     
-    NONE,
+    UNKNOWN_TARGET,
     
     CONN("connection"),
     DB("database"),
