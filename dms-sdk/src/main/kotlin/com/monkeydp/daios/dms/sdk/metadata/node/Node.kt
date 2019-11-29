@@ -1,7 +1,7 @@
 package com.monkeydp.daios.dms.sdk.metadata.node
 
-import com.monkeydp.daios.dms.sdk.metadata.icon.Icon
 import com.monkeydp.daios.dms.sdk.instruction.target.Target
+import com.monkeydp.daios.dms.sdk.metadata.icon.Icon
 
 /**
  * @author iPotato
@@ -11,4 +11,5 @@ interface Node {
     val target: Target<*>
     val name: String
     val icon: Icon<*>
+    val childTargets: List<Target<*>>
 }
