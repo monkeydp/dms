@@ -8,6 +8,7 @@ object NodeJsonMocker {
     const val NODE_PATH =
             """[
               {
+                "defId": 1,
                 "target": "CONN",
                 "icon": {
                   "color": "",

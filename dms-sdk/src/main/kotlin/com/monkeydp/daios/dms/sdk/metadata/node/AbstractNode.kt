@@ -9,7 +9,7 @@ import java.util.*
  * @date 2019/11/29
  */
 abstract class AbstractNode(
-        override val defUuid: UUID,
+        override val defId: Int,
         override val target: Target<*>,
         override val name: String,
         override val icon: Icon<*>,
