@@ -1,6 +1,13 @@
 import org.gradle.api.JavaVersion.VERSION_1_8
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
+buildscript {
+    dependencies {
+        classpath(files("../dms-plugin/build/libs/dms-plugin.jar"))
+    }
+}
+apply(plugin = "com.monkeydp.daios.dms.plugin")
+
 plugins {
     // spring
     id("org.springframework.boot") version "2.1.9.RELEASE"
