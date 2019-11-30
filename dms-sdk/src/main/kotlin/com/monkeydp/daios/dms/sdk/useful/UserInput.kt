@@ -4,7 +4,6 @@ import com.monkeydp.tools.ext.toJson
 import com.monkeydp.tools.ext.toPropMapX
 import com.monkeydp.tools.util.JsonUtil
 import javax.persistence.AttributeConverter
-import kotlin.reflect.KClass
 
 /**
  * Parameters entered by the user

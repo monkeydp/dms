@@ -1,7 +1,7 @@
 package com.monkeydp.daios.dms.sdk.main
 
-import com.monkeydp.daios.dms.sdk.main.SdkImplRegistry.registerClasses
 import com.monkeydp.daios.dms.sdk.datasource.Datasource
+import com.monkeydp.daios.dms.sdk.main.SdkImplRegistry.registerClasses
 
 /**
  * @author iPotato

@@ -2,7 +2,6 @@ package com.monkeydp.daios.dms.sdk.metadata.node
 
 import com.monkeydp.daios.dms.sdk.instruction.target.Target
 import com.monkeydp.daios.dms.sdk.metadata.icon.Icon
-import java.util.*
 
 /**
  * @author iPotato
