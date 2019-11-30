@@ -1,6 +1,7 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
+    idea
     // kotlin
     val kotlinVersion = "1.3.50"
     kotlin("jvm") version kotlinVersion
@@ -10,6 +11,10 @@ plugins {
 
 group = "com.monkeydp.daios.dms"
 java.sourceCompatibility = JavaVersion.VERSION_1_8
+
+val generatedDir = File(buildDir, "classes/generated")
+the<JavaPluginConvention>().sourceSets { "main"{ java.srcDir(generatedDir) } }
+idea.module.generatedSourceDirs.add(generatedDir)
 
 dependencies {
     // kotlin
@@ -24,6 +29,8 @@ dependencies {
     implementation("javax.persistence:javax.persistence-api:2.2")
     // faker
     implementation("com.github.javafaker:javafaker:1.0.1")
+    // code generator
+    implementation("com.squareup:kotlinpoet:1.4.4")
     // junit
     testImplementation("junit:junit:4.12")
 }
