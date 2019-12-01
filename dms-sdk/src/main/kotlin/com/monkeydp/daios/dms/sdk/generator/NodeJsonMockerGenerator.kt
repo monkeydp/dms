@@ -21,6 +21,6 @@ class NodeJsonMockerGenerator {
                 .build()
         
         file.writeTo(System.out)
-        file.writeTo(File(SdkDirpath.generated))
+        file.writeTo(File(SdkDirpath.kotlinGenerated))
     }
 }

@@ -11,9 +11,9 @@ plugins {
 group = "com.monkeydp.daios.dms"
 java.sourceCompatibility = JavaVersion.VERSION_1_8
 
-val generatedDir = File(buildDir, "classes/generated")
-the<JavaPluginConvention>().sourceSets { "main"{ java.srcDir(generatedDir) } }
-idea.module.generatedSourceDirs.add(generatedDir)
+val kotlinGeneratedDir = File(rootDir, "src/generated/kotlin")
+sourceSets.create("generated") { java.srcDir(kotlinGeneratedDir) }
+idea.module.generatedSourceDirs.add(kotlinGeneratedDir)
 
 dependencies {
     // kotlin

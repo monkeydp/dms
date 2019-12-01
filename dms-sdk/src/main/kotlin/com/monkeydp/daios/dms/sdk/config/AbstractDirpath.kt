@@ -8,9 +8,10 @@ import com.monkeydp.tools.ext.toStdPath
  */
 abstract class AbstractDirpath {
     val root = System.getProperty("user.dir").toStdPath()
-    val source = "$root/src"
-    val main = "$source/main"
+    val src = "$root/src"
+    val main = "$src/main"
     val build = "$root/build"
     val classes = "$build/classes"
-    val generated = "$classes/generated"
+    val generated = "$src/generated"
+    val kotlinGenerated = "$generated/kotlin"
 }
