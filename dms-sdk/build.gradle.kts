@@ -12,7 +12,7 @@ group = "com.monkeydp.daios.dms"
 java.sourceCompatibility = JavaVersion.VERSION_1_8
 
 val kotlinGeneratedDir = File(rootDir, "src/generated/kotlin")
-sourceSets.create("generated") { java.srcDir(kotlinGeneratedDir) }
+the<JavaPluginConvention>().sourceSets { "main"{ java.srcDir(kotlinGeneratedDir) } }
 idea.module.generatedSourceDirs.add(kotlinGeneratedDir)
 
 dependencies {
