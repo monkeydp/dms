@@ -18,7 +18,7 @@ object ModuleHelper {
     private fun zipAllModules() {
         val executor = DefaultExecutor()
         dmDirs.forEach { dmDir ->
-            val line = "${gradlewPath} -p $dmDir disZip"
+            val line = "${gradlewPath} -p $dmDir distZip"
             val cmdLine = CommandLine.parse(line)
             executor.execute(cmdLine)
         }
