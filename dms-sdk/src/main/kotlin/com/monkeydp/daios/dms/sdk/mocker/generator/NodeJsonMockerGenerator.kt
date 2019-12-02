@@ -1,4 +1,4 @@
-package com.monkeydp.daios.dms.sdk.generator
+package com.monkeydp.daios.dms.sdk.mocker.generator
 
 import com.monkeydp.daios.dms.sdk.config.SdkDirpath
 import com.squareup.kotlinpoet.FileSpec
