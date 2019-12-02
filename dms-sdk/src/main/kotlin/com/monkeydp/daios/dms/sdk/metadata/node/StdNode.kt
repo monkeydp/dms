@@ -11,6 +11,5 @@ class StdNode(
         defId: Int,
         target: Target<*>,
         name: String,
-        icon: Icon<*>,
-        childTargets: List<Target<*>>
-) : AbstractNode(defId, target, name, icon, childTargets)
+        icon: Icon<*>
+) : AbstractNode(defId, target, name, icon)

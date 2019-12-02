@@ -12,5 +12,4 @@ interface Node {
     val target: Target<*>
     val name: String
     val icon: Icon<*>
-    val childTargets: List<Target<*>>
 }

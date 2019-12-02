@@ -11,6 +11,5 @@ abstract class AbstractNode(
         override val defId: Int,
         override val target: Target<*>,
         override val name: String,
-        override val icon: Icon<*>,
-        override val childTargets: List<Target<*>>
+        override val icon: Icon<*>
 ) : Node

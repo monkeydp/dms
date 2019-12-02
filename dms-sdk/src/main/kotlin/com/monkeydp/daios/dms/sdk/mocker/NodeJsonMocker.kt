@@ -15,10 +15,7 @@ object NodeJsonMocker {
                   "namex": "conn icon",
                   "name": "CONN_ICON"
                 },
-                "name": "MySQL 5.7 Conn",
-                "childTargets": [
-                  "DB"
-                ]
+                "name": "MySQL 5.7 Conn"
               }
             ]"""
 }
