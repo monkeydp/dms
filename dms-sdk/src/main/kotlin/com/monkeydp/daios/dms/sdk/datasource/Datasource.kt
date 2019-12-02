@@ -9,7 +9,7 @@ import com.monkeydp.tools.ext.valueOfOrNull
  */
 enum class Datasource {
     
-    MYSQL;
+    MYSQL, MONGODB;
     
     companion object {
         fun valueOfOrNull(enumName: String) = Datasource::class.valueOfOrNull(enumName)

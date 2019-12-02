@@ -7,4 +7,8 @@ package com.monkeydp.daios.dms.sdk.datasource
 data class DsDriver(
         val id: String,
         val classname: String
-)
+) {
+    companion object {
+        fun empty() = DsDriver("", "")
+    }
+}

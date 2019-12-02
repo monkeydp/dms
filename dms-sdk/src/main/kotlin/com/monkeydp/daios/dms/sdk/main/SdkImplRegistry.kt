@@ -6,8 +6,10 @@ import com.monkeydp.daios.dms.sdk.enumx.Enumx
 import com.monkeydp.daios.dms.sdk.request.RequestContext
 import com.monkeydp.tools.ext.getFirstUpperBound
 import com.monkeydp.tools.ext.ierror
+import com.monkeydp.tools.ext.isDebugMode
 import com.monkeydp.tools.ext.notNullSingleton
 import com.monkeydp.tools.useful.Null
+import java.lang.reflect.InvocationTargetException
 import kotlin.properties.Delegates
 import kotlin.reflect.KClass
 import kotlin.reflect.full.findAnnotation
@@ -31,8 +33,13 @@ object SdkImplRegistry {
                 mutableMapOf<Pair<Datasource, KClass<*>>, KClass<*>>()
         implClasses::class.memberProperties.forEach {
             val contract = it.getFirstUpperBound()
-            val implClass = it.getter.call(implClasses) as KClass<*>
-            implClassesMap[key(contract, ds)] = implClass
+            try {
+                val implClass = it.getter.call(implClasses) as KClass<*>
+                implClassesMap[key(contract, ds)] = implClass
+            } catch (e: InvocationTargetException) {
+                if (isDebugMode()) return@forEach
+                throw e
+            }
         }
         SdkImplRegistry.implClassesMap = implClassesMap.toMap()
     }
