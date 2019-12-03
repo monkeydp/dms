@@ -34,7 +34,7 @@ internal class ConnServiceImpl : ConnService {
     private lateinit var registry: ModuleRegistry
     @Lazy
     @Autowired
-    lateinit var apiMap: Map<Datasource, ConnApi<ConnProfile>>
+    lateinit var apiMap: Map<Datasource, ConnApi>
     @Autowired
     private lateinit var cpService: ConnProfileService
     @Autowired

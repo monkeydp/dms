@@ -14,7 +14,7 @@ interface SdkImpl {
     val classes: Classes
     
     interface Apis {
-        val connApi: ConnApi<*>
+        val connApi: ConnApi
         val nodeApi: NodeApi
         val menuApi: MenuApi
         val formApi: FormApi

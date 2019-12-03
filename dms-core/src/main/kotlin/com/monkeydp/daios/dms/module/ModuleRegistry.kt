@@ -37,7 +37,7 @@ class ModuleRegistry {
     
     @Lazy
     @Bean
-    fun connApiMap(): Map<Datasource, ConnApi<ConnProfile>> = toMap(Apis::connApi.name)
+    fun connApiMap(): Map<Datasource, ConnApi> = toMap(Apis::connApi.name)
     
     @Lazy
     @Bean

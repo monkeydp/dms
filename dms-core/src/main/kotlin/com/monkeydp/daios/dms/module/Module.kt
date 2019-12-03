@@ -44,7 +44,7 @@ class Module(
     private val dsDefMap: Map<DsVersion<*>, DsDef>
     
     object Impls {
-        lateinit var connApi: ConnApi<*>
+        lateinit var connApi: ConnApi
     }
     
     init {
