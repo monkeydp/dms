@@ -5,5 +5,4 @@ package com.monkeydp.daios.dms.sdk.datasource
  */
 interface DsDef {
     var version: DsVersion<*>
-    var driver: DsDriver
 }

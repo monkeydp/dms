@@ -34,7 +34,7 @@ internal class ConnServiceImpl : ConnService {
     private lateinit var registry: ModuleRegistry
     @Lazy
     @Autowired
-    lateinit var apiMap: Map<Datasource, ConnApi>
+    lateinit var apiMap: Map<Datasource, ConnApi<ConnProfile>>
     @Autowired
     private lateinit var cpService: ConnProfileService
     @Autowired
@@ -48,12 +48,8 @@ internal class ConnServiceImpl : ConnService {
     }
     
     private fun fullCp(cp: ConnProfile): ConnProfile {
-        val module = registry.findModule(cp)
-        val driverClassname = module.getDriverClassname(cp.dsVersion)
-        return cp.copy(
-                userId = session.userId,
-                dsDriverClassname = driverClassname
-        )
+        val api = apiMap.getValue(cp.datasource)
+        return api.fullCp(cp.copy(userId = session.userId))
     }
     
     override fun openConn(cpId: Long, belongsTo: BelongsTo) =

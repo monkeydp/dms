@@ -1,7 +1,6 @@
 package com.monkeydp.daios.dms.sdk.entity
 
-import com.fasterxml.jackson.annotation.JsonIgnore
-import com.monkeydp.daios.dms.sdk.helper.IdHelper
+import com.monkeydp.daios.dms.sdk.entity.Entity.Companion.INVALID_ID
 import javax.persistence.GeneratedValue
 import javax.persistence.Id
 import javax.persistence.MappedSuperclass
@@ -14,12 +13,5 @@ import javax.persistence.MappedSuperclass
 abstract class AbstractEntity(
         @Id
         @GeneratedValue
-        open val id: Long = INVALID_ID
-) {
-    companion object {
-        const val INVALID_ID = IdHelper.INVALID_ID
-    }
-    
-    @JsonIgnore
-    open fun isValid() = IdHelper.isValid(id)
-}
+        override val id: Long = INVALID_ID
+) : Entity

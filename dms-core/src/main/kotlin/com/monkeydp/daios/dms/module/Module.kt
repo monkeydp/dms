@@ -44,7 +44,7 @@ class Module(
     private val dsDefMap: Map<DsVersion<*>, DsDef>
     
     object Impls {
-        lateinit var connApi: ConnApi
+        lateinit var connApi: ConnApi<*>
     }
     
     init {
@@ -96,7 +96,7 @@ class Module(
         return dmClass.newInstanceX(openConfig)
     }
     
-    fun getDriverClassname(dsVersion: DsVersion<*>) = dsDefMap[dsVersion]?.driver?.classname!!
+    fun findDsDef(dsVersion: DsVersion<*>) = dsDefMap.getValue(dsVersion)
     
     fun setSpecificClassLoader(dsVersion: DsVersion<*>) {
         classLoader.setSpecificClassLoader(dsVersion)

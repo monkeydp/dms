@@ -4,7 +4,7 @@ package com.monkeydp.daios.dms.sdk.conn
  * @author iPotato
  * @date 2019/10/6
  */
-interface Conn<C> : AutoCloseable {
+interface Conn<C : Any> : AutoCloseable {
     
     var id: Long
     

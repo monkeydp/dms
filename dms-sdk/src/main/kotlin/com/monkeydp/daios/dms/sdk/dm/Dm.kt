@@ -12,7 +12,7 @@ import com.monkeydp.daios.dms.sdk.main.SdkImpl
  */
 interface Dm {
     val datasource: Datasource
-    val dsDefs: List<DsDef>
+    val dsDefs: Iterable<DsDef>
     val impl: SdkImpl
     val testdata: DmTestdata
 }

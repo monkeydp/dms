@@ -1,3 +1,4 @@
+import org.gradle.api.JavaVersion.VERSION_1_8
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
@@ -9,7 +10,7 @@ plugins {
 }
 
 group = "com.monkeydp.daios.dms"
-java.sourceCompatibility = JavaVersion.VERSION_1_8
+java.sourceCompatibility = VERSION_1_8
 
 dependencies {
     // kotlin
@@ -17,11 +18,11 @@ dependencies {
     // tools
     api("com.monkeydp:tools:+")
     // jackson
-    implementation("com.fasterxml.jackson.core:jackson-annotations:2.9.0")
+    api("com.fasterxml.jackson.core:jackson-annotations:2.9.0")
     // swagger
-    implementation("io.swagger:swagger-annotations:1.5.20")
+    api("io.swagger:swagger-annotations:1.5.20")
     // persistence api
-    implementation("javax.persistence:javax.persistence-api:2.2")
+    api("javax.persistence:javax.persistence-api:2.2")
     // faker
     implementation("com.github.javafaker:javafaker:1.0.1")
     // code generator
@@ -33,6 +34,6 @@ dependencies {
 tasks.withType<KotlinCompile> {
     kotlinOptions {
         freeCompilerArgs = listOf("-Xjsr305=strict")
-        jvmTarget = "1.8"
+        jvmTarget = VERSION_1_8.toString()
     }
 }

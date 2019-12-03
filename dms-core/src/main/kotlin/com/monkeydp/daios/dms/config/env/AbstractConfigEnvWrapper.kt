@@ -1,6 +1,5 @@
 package com.monkeydp.daios.dms.config.env
 
-import com.monkeydp.daios.dms.config.DmsConfig
 import com.monkeydp.tools.ext.camelCaseFirst
 import com.monkeydp.tools.ext.notNullSingleton
 import org.springframework.core.env.ConfigurableEnvironment
@@ -8,7 +7,6 @@ import kotlin.properties.Delegates
 
 /**
  * ConfigEnvWrapper can be used before beans loaded, such as following bean
- * @see DmsConfig
  * @author iPotato
  * @date 2019/11/27
  */
