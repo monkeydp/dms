@@ -41,16 +41,13 @@ internal class ConnServiceImpl : ConnService {
     private lateinit var manager: ConnManager
     
     override fun saveCp(cp: ConnProfile): ConnProfile {
-        val saved = cpService.save(fullCp(cp))
+        val saved = cpService.save(cp.full())
         // TODO should be delegated to listener
         manager.updateActiveCp(saved, true)
         return saved
     }
     
-    private fun fullCp(cp: ConnProfile): ConnProfile {
-        val api = apiMap.getValue(cp.datasource)
-        return api.fullCp(cp.copy(userId = session.userId))
-    }
+    private fun ConnProfile.full() = copy(userId = session.userId)
     
     override fun openConn(cpId: Long, belongsTo: BelongsTo) =
             when (belongsTo) {

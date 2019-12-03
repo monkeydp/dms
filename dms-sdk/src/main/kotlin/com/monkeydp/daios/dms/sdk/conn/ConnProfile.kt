@@ -36,14 +36,6 @@ data class ConnProfile(
         @ApiModelProperty(value = "datasource version id", required = true, example = DS_VERSION_ID)
         val dsVersionId: String,
         
-        /**
-         * @see DsDriver
-         */
-        @Column(nullable = false)
-        @JsonIgnore
-        @ApiModelProperty(hidden = true)
-        val dsDriverClassname: String = "",
-        
         @Column(nullable = false, length = 1024)
         @Convert(converter = UserInput.StringConverter::class)
         @ApiModelProperty(

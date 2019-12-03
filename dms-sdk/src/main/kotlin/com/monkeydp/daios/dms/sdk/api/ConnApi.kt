@@ -11,11 +11,6 @@ import com.monkeydp.daios.dms.sdk.main.SdkApiContract
 @SdkApiContract
 interface ConnApi {
     /**
-     * Dm can add custom variable to cp
-     */
-    fun fullCp(cp: ConnProfile) = cp
-    
-    /**
      * Get a conn
      */
     fun getConn(cp: ConnProfile): Conn<*>

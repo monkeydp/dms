@@ -30,7 +30,7 @@ interface Icon<E> : Enumx<E>
     val color: String
     
     companion object {
-        val DEFAULT_COLOR = "#979BA4" // grey
+        const val DEFAULT_COLOR = "#979BA4" // grey
     }
     
     class IconDeserializer : JsonDeserializer<Icon<*>>() {
