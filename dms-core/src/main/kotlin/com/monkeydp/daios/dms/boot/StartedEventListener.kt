@@ -16,7 +16,7 @@ import org.springframework.context.ApplicationListener
 class StartedEventListener : ApplicationListener<ApplicationStartedEvent> {
     
     override fun onApplicationEvent(event: ApplicationStartedEvent) {
-        val moduleDeployer: ModuleDeployer = event.applicationContext.getBean("moduleDeployer") as ModuleDeployer
+        val moduleDeployer = event.applicationContext.getBean(ModuleDeployer::class.java)
         moduleDeployer.deployAllModules()
         DmTestdataRegistry.testDsVersion = SdkImplRegistry.findDsVersion(Datasource.valueOf(DATASOURCE), DS_VERSION_ID)
     }

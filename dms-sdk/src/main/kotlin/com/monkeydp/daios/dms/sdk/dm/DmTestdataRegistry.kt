@@ -16,7 +16,7 @@ object DmTestdataRegistry {
     /**
      * Not in db, include all test cps of every dm
      */
-    val cps = mutableListOf<ConnProfile>()
+    val cps = mutableSetOf<ConnProfile>()
     
     val savedCpMap = mutableMapOf<DsVersion<*>, ConnProfile>()
     

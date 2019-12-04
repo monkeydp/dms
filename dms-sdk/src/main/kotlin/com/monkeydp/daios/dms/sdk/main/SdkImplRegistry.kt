@@ -41,7 +41,7 @@ object SdkImplRegistry {
                 throw e
             }
         }
-        SdkImplRegistry.implClassesMap = implClassesMap.toMap()
+        this.implClassesMap = implClassesMap.toMap()
     }
     
     @Suppress("UNCHECKED_CAST")

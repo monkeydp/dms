@@ -3,8 +3,6 @@ package com.monkeydp.daios.dms.module
 import com.monkeydp.daios.dms.sdk.api.*
 import com.monkeydp.daios.dms.sdk.conn.ConnProfile
 import com.monkeydp.daios.dms.sdk.datasource.Datasource
-import com.monkeydp.daios.dms.sdk.main.SdkImpl.Apis
-import com.monkeydp.tools.ext.getPropValueX
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.beans.factory.config.ConfigurableBeanFactory
 import org.springframework.context.annotation.Bean
@@ -32,26 +30,26 @@ class ModuleRegistry {
     
     fun findModule(cp: ConnProfile) = findModule(cp.datasource)
     
-    private fun <V> toMap(apiPropName: String) =
-            moduleMap.map { (ds, module) -> ds to module.apis.getPropValueX<V>(apiPropName) }.toMap()
+    private inline fun <reified T : Any> buildImplMap() =
+            moduleMap.map { (ds, module) -> ds to module.findImpl<T>() }.toMap()
     
     @Lazy
     @Bean
-    fun connApiMap(): Map<Datasource, ConnApi> = toMap(Apis::connApi.name)
+    fun connApiMap() = buildImplMap<ConnApi>()
     
     @Lazy
     @Bean
-    fun nodeApiMap(): Map<Datasource, NodeApi> = toMap(Apis::nodeApi.name)
+    fun nodeApiMap() = buildImplMap<NodeApi>()
     
     @Lazy
     @Bean
-    fun menuApiMap(): Map<Datasource, MenuApi> = toMap(Apis::menuApi.name)
+    fun menuApiMap() = buildImplMap<MenuApi>()
     
     @Lazy
     @Bean
-    fun formApiMap(): Map<Datasource, FormApi> = toMap(Apis::formApi.name)
+    fun formApiMap() = buildImplMap<FormApi>()
     
     @Lazy
     @Bean
-    fun instrApiMap(): Map<Datasource, InstrApi> = toMap(Apis::instrApi.name)
+    fun instrApiMap() = buildImplMap<InstrApi>()
 }
