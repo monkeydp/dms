@@ -1,7 +1,7 @@
 package com.monkeydp.daios.dms.sdk.metadata.form
 
 import com.monkeydp.daios.dms.sdk.metadata.form.item.FormItem
-import com.monkeydp.daios.dms.sdk.metadata.form.item.SdkFormItem
+import com.monkeydp.daios.dms.sdk.main.SdkFormItem
 import com.monkeydp.daios.dms.sdk.metadata.form.item.StdFormItem
 import com.monkeydp.tools.ext.camelCaseSeparated
 import com.monkeydp.tools.ext.getAnnotatedProps

@@ -1,4 +1,4 @@
-package com.monkeydp.daios.dms.sdk.metadata.form.item
+package com.monkeydp.daios.dms.sdk.main
 
 import com.monkeydp.daios.dms.sdk.metadata.JsType
 import com.monkeydp.daios.dms.sdk.metadata.JsType.STRING
