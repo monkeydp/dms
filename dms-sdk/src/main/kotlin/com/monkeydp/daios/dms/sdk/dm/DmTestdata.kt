@@ -4,6 +4,4 @@ import com.monkeydp.daios.dms.sdk.conn.ConnProfile
 
 interface DmTestdata {
     val cps: Set<ConnProfile>
-    
-    fun hasCps(): Boolean
 }

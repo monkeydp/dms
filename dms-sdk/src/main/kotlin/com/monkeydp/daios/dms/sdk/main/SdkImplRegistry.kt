@@ -3,10 +3,10 @@ package com.monkeydp.daios.dms.sdk.main
 import com.monkeydp.daios.dms.sdk.datasource.Datasource
 import com.monkeydp.daios.dms.sdk.datasource.DsVersion
 import com.monkeydp.daios.dms.sdk.enumx.Enumx
+import com.monkeydp.daios.dms.sdk.exception.handler.IgnoreException
 import com.monkeydp.daios.dms.sdk.request.RequestContext
 import com.monkeydp.tools.ext.getFirstUpperBound
 import com.monkeydp.tools.ext.ierror
-import com.monkeydp.tools.ext.isDebugMode
 import com.monkeydp.tools.ext.notNullSingleton
 import com.monkeydp.tools.useful.Null
 import java.lang.reflect.InvocationTargetException
@@ -28,18 +28,14 @@ object SdkImplRegistry {
     
     fun key(contract: KClass<*>, ds: Datasource) = Pair(ds, contract)
     
-    internal fun registerClasses(implClasses: SdkImpl.Classes, ds: Datasource) {
+    @IgnoreException(InvocationTargetException::class)
+    fun registerClasses(implClasses: SdkImpl.Classes, ds: Datasource) {
         val implClassesMap =
                 mutableMapOf<Pair<Datasource, KClass<*>>, KClass<*>>()
         implClasses::class.memberProperties.forEach {
             val contract = it.getFirstUpperBound()
-            try {
-                val implClass = it.getter.call(implClasses) as KClass<*>
-                implClassesMap[key(contract, ds)] = implClass
-            } catch (e: InvocationTargetException) {
-                if (isDebugMode()) return@forEach
-                throw e
-            }
+            val implClass = it.getter.call(implClasses) as KClass<*>
+            implClassesMap[key(contract, ds)] = implClass
         }
         this.implClassesMap = implClassesMap.toMap()
     }
