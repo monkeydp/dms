@@ -37,7 +37,7 @@ class ExceptionHandler {
             if (!e.javaClass.kotlin.isSubclassOf(annot.exKClass) ||
                 devModel != annot.inDevMode
             ) throw e
-            log.debugMode(e.message!!)
+            log.debugMode(e)
             null
         }
     }
