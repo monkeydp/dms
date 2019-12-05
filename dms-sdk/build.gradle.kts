@@ -7,6 +7,7 @@ plugins {
     val kotlinVersion = "1.3.50"
     kotlin("jvm") version kotlinVersion
     kotlin("plugin.jpa") version kotlinVersion
+    id("io.freefair.aspectj.post-compile-weaving") version "4.1.5"
 }
 
 group = "com.monkeydp.daios.dms"
