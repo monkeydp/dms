@@ -23,8 +23,6 @@ import java.net.URLClassLoader
  * @date 2019/10/14
  */
 class Module(private val dmConfig: DmConfig) {
-    val config = ModuleBootFile(dmConfig.deployDir, autoCheck = true).getBootConfig()
-    private val bootClassname = config.classname
     private val deployDir = dmConfig.deployDir
     
     companion object {

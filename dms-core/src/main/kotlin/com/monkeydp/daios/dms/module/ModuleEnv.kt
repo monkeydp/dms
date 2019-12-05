@@ -2,6 +2,7 @@ package com.monkeydp.daios.dms.module
 
 import com.monkeydp.daios.dms.config.env.DmsConfigEnvWrapper
 import com.monkeydp.daios.dms.config.env.DmsConfigEnvWrapper.dmParentDir
+import com.monkeydp.tools.ext.has
 import com.monkeydp.tools.ext.ierror
 import com.monkeydp.tools.util.FileUtil
 import com.monkeydp.tools.util.SystemUtil
@@ -18,7 +19,10 @@ internal object ModuleEnv {
     private const val distRelativePath = "/src/main/dist"
     private const val distributionsRelativePath = "/build/distributions"
     
+    private val dmDirnameSet = setOf("dm-mysql")
     private val dmZipRegex = "^dm-.+.zip$".toRegex()
+    
+    private val moduleDirnameRegexSet = dmDirnameSet.map { "^${it}-.*".toRegex() }.toSet()
     
     val gradlewPath: String
         get() {
@@ -61,10 +65,9 @@ internal object ModuleEnv {
     
     private fun isDmZip(file: File) = file.isFile && file.name.matches(dmZipRegex)
     
-    private fun isDmDir(dir: File) = isModuleDir(dir, distRelativePath)
+    private fun isDmDir(dir: File) = dir.isDirectory && dmDirnameSet.contains(dir.name)
     
-    private fun isModuleDir(dir: File, bootFileRelativePath: String = "") =
-            ModuleBootFile(dir, bootFileRelativePath).isValid()
+    private fun isModuleDir(dir: File) = dir.isDirectory && moduleDirnameRegexSet.has { it.matches(dir.name) }
     
     private fun findLasted(multiVersionZips: Array<File>): File {
         var lastedZip: File = multiVersionZips.first()
