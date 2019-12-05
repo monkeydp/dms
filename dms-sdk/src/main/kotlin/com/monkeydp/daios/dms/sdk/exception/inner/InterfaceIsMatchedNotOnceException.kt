@@ -1,6 +1,6 @@
 package com.monkeydp.daios.dms.sdk.exception.inner
 
-import com.monkeydp.tools.exception.inner.AbstractInnerException
+import com.monkeydp.tools.exception.inner.InnerException
 import kotlin.reflect.KClass
 
 /**
@@ -10,7 +10,7 @@ import kotlin.reflect.KClass
 class InterfaceIsMatchedNotOnceException(
         kClass: KClass<*>,
         matchedInterfaces: Collection<KClass<*>>
-) : AbstractInnerException(
+) : InnerException(
         """ Interface is matched ${matchedInterfaces.size} times, not once!
             Class is: ${kClass.java}
             Following interfaces are matched:

@@ -5,7 +5,7 @@ import com.monkeydp.daios.dms.sdk.conn.ConnProfile
 import com.monkeydp.daios.dms.sdk.helper.IdHelper
 import com.monkeydp.daios.dms.sdk.helper.IdHelper.INVALID_ID
 import com.monkeydp.daios.dms.service.contract.ConnManager
-import com.monkeydp.tools.exception.inner.AbstractInnerException
+import com.monkeydp.tools.exception.inner.InnerException
 import com.monkeydp.tools.ext.ierror
 import org.springframework.stereotype.Service
 
@@ -190,12 +190,12 @@ class ConnManagerImpl : ConnManager {
             activeUserConnId = INVALID_ID
         }
         
-        class ActiveCwNotFoundException : AbstractInnerException {
+        class ActiveCwNotFoundException : InnerException {
             constructor(connId: Long) : super("The active conn wrapper corresponding to connId ${connId} not found")
         }
     }
     
-    class ActiveCpwNotFoundException : AbstractInnerException {
+    class ActiveCpwNotFoundException : InnerException {
         constructor(cpId: Long) : super("The active conn profile wrapper corresponding to cpId ${cpId} not found")
     }
 }
