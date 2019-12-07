@@ -1,6 +1,6 @@
 package com.monkeydp.daios.dms.config
 
-import com.monkeydp.daios.dms.sdk.config.AbstractDirpath
+import com.monkeydp.tools.useful.AbstractDirpath
 
 /**
  * @author iPotato
