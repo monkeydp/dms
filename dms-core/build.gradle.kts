@@ -10,8 +10,6 @@ plugins {
     kotlin("jvm") version kotlinVersion
     kotlin("plugin.spring") version kotlinVersion
     kotlin("plugin.allopen") version kotlinVersion
-    // aspectj
-    id("io.freefair.aspectj.post-compile-weaving") version "4.1.5"
 }
 
 group = "com.monkeydp.daios.dms"
@@ -48,9 +46,6 @@ dependencies {
     implementation("com.github.xiaoymin:swagger-bootstrap-ui:1.9.6")
     // h2db
     runtimeOnly("com.h2database:h2")
-    // aspect
-    aspect("com.monkeydp.daios.dms:dms-sdk") { setTransitive(false) }
-    testAspect("com.monkeydp.daios.dms:dms-sdk") { setTransitive(false) }
 }
 
 tasks.withType<KotlinCompile> {
