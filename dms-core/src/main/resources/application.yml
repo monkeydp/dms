@@ -24,8 +24,3 @@ logging:
     root: WARN
     com.monkeydp: DEBUG
     org.reflections.Reflections: ERROR
-dms:
-  root-dir: ${rootDir}
-  module:
-    dm-parent-dir: \${dms.root-dir}/dm
-    modules-dir: \${dms.root-dir}/ignore/modules

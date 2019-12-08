@@ -15,6 +15,7 @@ plugins {
 }
 
 group = "com.monkeydp.daios.dms"
+version = "0.0.4-SNAPSHOT"
 java.sourceCompatibility = VERSION_1_8
 
 val developmentOnly by configurations.creating
@@ -35,7 +36,7 @@ dependencies {
     developmentOnly("org.springframework.boot:spring-boot-devtools")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     // sdk
-    api(project(":dms-sdk")) {
+    api("com.monkeydp.daios.dms:dms-sdk") {
         exclude("org.springframework.boot")
     }
     // zip
@@ -48,8 +49,8 @@ dependencies {
     // h2db
     runtimeOnly("com.h2database:h2")
     // aspect
-    aspect(project(":dms-sdk")) { setTransitive(false) }
-    testAspect(project(":dms-sdk")) { setTransitive(false) }
+    aspect("com.monkeydp.daios.dms:dms-sdk") { setTransitive(false) }
+    testAspect("com.monkeydp.daios.dms:dms-sdk") { setTransitive(false) }
 }
 
 tasks.withType<KotlinCompile> {

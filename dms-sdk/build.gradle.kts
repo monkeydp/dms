@@ -11,6 +11,7 @@ plugins {
 }
 
 group = "com.monkeydp.daios.dms"
+version = "0.0.4-SNAPSHOT"
 java.sourceCompatibility = VERSION_1_8
 
 dependencies {

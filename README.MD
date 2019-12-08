@@ -51,15 +51,50 @@ Following datasource would be developed as an example:
 ```
 dms
  ├─ dm              // which dm you want to develop, add to this dir by `git clone`
- |   ├─ dm-base     // (required) git clone  https://github.com/monkeydp/dm-base
- |   ├─ dm-plugin   // (required) git clone  https://github.com/monkeydp/dm-plugin
- |   └─ dm-mysql    // (optional) git clone  https://github.com/monkeydp/dm-mysql
+ |   ├─ dm-base     // an abstract implementation of dms-sdk
+ |   ├─ dm-plugin   // help you to build dm
+ |   └─ dm-mysql    // an implementation of dms-sdk
  ├─ dms-core        // dynamic call dm impl when request comming
  ├─ dms-sdk         // dm development base on dms-sdk
- └─ tools           // git submodule update --init 
+ └─ tools           // common tools
 ```
 
 > dm-base is common implementation of dms-sdk
+
+
+## Start
+
+### Pull project
+
+```
+# pull dms
+git clone https://github.com/monkeydp/dms.git
+
+# pull submodule tools
+cd dms
+git submodule update --init
+
+# pull dm-base and dm-plugin
+cd dm
+git clone  https://github.com/monkeydp/dm-base
+git clone  https://github.com/monkeydp/dm-plugin
+
+# pull dm which you want to develop, like dm-mysql
+git clone  https://github.com/monkeydp/dm-mysql
+```
+
+### Import module
+
+Open dms with IDEA, `Project Structure → Modules → "+" → Import Module`, import **dms-core**, **dm-mysql**
+
+### Config DmsApplication
+
+`Edit Configurations → Spring Boot → DmsApplication`, set `Working directory` = `%MODULE_WORKING_DIR%`
+
+### Run DmsApplication
+
+Click `Run` Button
+
  
 ## Swagger Api
 

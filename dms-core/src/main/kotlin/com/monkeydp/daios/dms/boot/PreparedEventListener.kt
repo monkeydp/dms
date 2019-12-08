@@ -8,9 +8,7 @@ import org.springframework.context.ApplicationListener
  * @date 2019/10/8
  */
 class PreparedEventListener : ApplicationListener<ApplicationPreparedEvent> {
-    
     override fun onApplicationEvent(event: ApplicationPreparedEvent) {
-        val env = event.applicationContext.environment
-        PreparatoryWork.init(env)
+        PreparatoryWork.init()
     }
 }

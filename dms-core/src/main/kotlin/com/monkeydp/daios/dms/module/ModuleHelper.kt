@@ -1,12 +1,13 @@
 package com.monkeydp.daios.dms.module
 
-import com.monkeydp.daios.dms.config.env.DmsConfigEnvWrapper.modulesDir
+import com.monkeydp.daios.dms.config.DmsDirpath
 import com.monkeydp.daios.dms.module.ModuleEnv.dmDirs
 import com.monkeydp.daios.dms.module.ModuleEnv.dmZips
 import com.monkeydp.daios.dms.module.ModuleEnv.gradlewPath
 import net.lingala.zip4j.ZipFile
 import org.apache.commons.exec.CommandLine
 import org.apache.commons.exec.DefaultExecutor
+import java.io.File
 
 object ModuleHelper {
     
@@ -28,11 +29,12 @@ object ModuleHelper {
         emptyModulesDir()
         dmZips.forEach { file ->
             val zipFile = ZipFile(file)
-            zipFile.extractAll(modulesDir.absolutePath)
+            zipFile.extractAll(DmsDirpath.modules)
         }
     }
     
     private fun emptyModulesDir() {
+        val modulesDir = File(DmsDirpath.modules)
         if (modulesDir.exists())
             modulesDir.deleteRecursively()
         modulesDir.mkdir()

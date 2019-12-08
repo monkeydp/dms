@@ -1,6 +1,5 @@
-rootProject.name = "dms"
-include("dms-sdk", "dms-core")
-includeBuild("tools") {
+rootProject.name = "dms-sdk"
+includeBuild("../tools") {
     dependencySubstitution {
         substitute(module("com.monkeydp:tools")).with(project(":"))
     }

@@ -1,7 +1,6 @@
 package com.monkeydp.daios.dms.module
 
-import com.monkeydp.daios.dms.config.env.DmsConfigEnvWrapper
-import com.monkeydp.daios.dms.config.env.DmsConfigEnvWrapper.dmParentDir
+import com.monkeydp.daios.dms.config.DmsDirpath
 import com.monkeydp.tools.ext.has
 import com.monkeydp.tools.ext.ierror
 import com.monkeydp.tools.util.FileUtil
@@ -34,14 +33,14 @@ internal object ModuleEnv {
                     }
             
             return StringBuilder()
-                    .append(DmsConfigEnvWrapper.rootDir.absolutePath)
+                    .append(DmsDirpath.root)
                     .append("/")
                     .append(gradlewFilename)
                     .toString()
         }
     
     val dmDirs
-        get() = FileUtil.listFiles(dmParentDir, FileFilter { isDmDir(it) }).toList()
+        get() = FileUtil.listFiles(DmsDirpath.dm, FileFilter { isDmDir(it) }).toList()
     
     /**
      * Dm zips are not in local project
@@ -59,7 +58,7 @@ internal object ModuleEnv {
         }
     
     val moduleDirs
-        get() = FileUtil.listFiles(DmsConfigEnvWrapper.modulesDir, FileFilter { isModuleDir(it) }).toList()
+        get() = FileUtil.listFiles(DmsDirpath.modules, FileFilter { isModuleDir(it) }).toList()
     
     private fun getDistributionsDir(dmDir: File) = File(dmDir, distributionsRelativePath)
     
