@@ -39,8 +39,6 @@ dependencies {
     }
     // zip
     implementation("net.lingala.zip4j:zip4j:2.2.1")
-    // command line
-    implementation("org.apache.commons:commons-exec:1.3")
     // swagger
     implementation("io.springfox:springfox-swagger2:2.9.2")
     implementation("com.github.xiaoymin:swagger-bootstrap-ui:1.9.6")

@@ -12,7 +12,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer
  * @date 2019/11/24
  */
 @Configuration
-class MyWebMvcConfigurer : WebMvcConfigurer {
+class WebMvcConfig : WebMvcConfigurer {
     
     @Autowired
     private lateinit var interceptor: MyHandlerInterceptor

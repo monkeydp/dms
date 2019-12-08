@@ -1,15 +1,17 @@
 package com.monkeydp.daios.dms.module
 
 import com.monkeydp.daios.dms.config.DmsDirpath
+import com.monkeydp.daios.dms.config.kodein
 import com.monkeydp.daios.dms.module.ModuleEnv.dmDirs
 import com.monkeydp.daios.dms.module.ModuleEnv.dmZips
-import com.monkeydp.daios.dms.module.ModuleEnv.gradlewPath
+import com.monkeydp.tools.gradle.wrapper.GradleWrapperExecutor
 import net.lingala.zip4j.ZipFile
-import org.apache.commons.exec.CommandLine
-import org.apache.commons.exec.DefaultExecutor
+import org.kodein.di.generic.instance
 import java.io.File
 
 object ModuleHelper {
+    
+    private val executor: GradleWrapperExecutor by kodein.instance()
     
     fun deployAllModules2Local() {
         zipAllModules()
@@ -17,11 +19,11 @@ object ModuleHelper {
     }
     
     private fun zipAllModules() {
-        val executor = DefaultExecutor()
         dmDirs.forEach { dmDir ->
-            val line = "${gradlewPath} -p $dmDir distZip"
-            val cmdLine = CommandLine.parse(line)
-            executor.execute(cmdLine)
+            executor.gradlew {
+                +"distZip"
+                +Pair("-p", dmDir.absolutePath)
+            }
         }
     }
     
