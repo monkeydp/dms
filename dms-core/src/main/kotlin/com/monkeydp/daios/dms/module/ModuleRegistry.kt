@@ -31,7 +31,9 @@ class ModuleRegistry {
     fun findModule(cp: ConnProfile) = findModule(cp.datasource)
     
     private inline fun <reified T : Any> buildImplMap() =
-            moduleMap.map { (ds, module) -> ds to module.findImpl<T>() }.toMap()
+            moduleMap.map { (ds, module) ->
+                ds to module.findImpl<T>()
+            }.toMap()
     
     @Lazy
     @Bean
