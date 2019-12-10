@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component
  * @date 2019/11/7
  */
 @Component
-class StdEventPublisher : AbstractEventPublisher() {
+class DmsEventPublisher : AbstractEventPublisher() {
     
     @Autowired
     private lateinit var applicationContext: AbstractApplicationContext
