@@ -17,9 +17,6 @@ import org.springframework.stereotype.Component
 @Component
 class ModuleRegistry {
     
-    @Autowired
-    private lateinit var beanFactory: ConfigurableBeanFactory
-    
     private val moduleMap = mutableMapOf<Datasource, Module>()
     
     fun registerModule(module: Module) {

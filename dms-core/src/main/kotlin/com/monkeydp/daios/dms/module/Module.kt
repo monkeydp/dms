@@ -21,8 +21,8 @@ import java.net.URLClassLoader
  * @author iPotato
  * @date 2019/10/14
  */
-class Module(private val dmConfig: DmConfig) {
-    private val deployDir = dmConfig.deployDir
+class Module(private val config: DmConfig) {
+    private val deployDir = config.deployDir
     
     companion object {
         private const val classesPath = "classes"
@@ -79,7 +79,7 @@ class Module(private val dmConfig: DmConfig) {
     private fun loadDmApp(): DmApp {
         val reflections = getReflections(PackageName.dm, classLoader)
         val dmAppClass = reflections.getSubTypesOf<DmApp>().matchOne { !it.kotlin.isAbstract }
-        return dmAppClass.newInstanceX(dmConfig)
+        return dmAppClass.newInstanceX(config)
     }
     
     inline fun <reified T : Any> findImpl() = dmApp.sdkImpl.findImpl<T>()
