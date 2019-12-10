@@ -1,13 +1,10 @@
 package com.monkeydp.daios.dms.module
 
-import com.monkeydp.daios.dms.sdk.api.*
 import com.monkeydp.daios.dms.sdk.conn.ConnProfile
 import com.monkeydp.daios.dms.sdk.datasource.Datasource
-import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.beans.factory.config.ConfigurableBeanFactory
-import org.springframework.context.annotation.Bean
-import org.springframework.context.annotation.Lazy
+import com.monkeydp.tools.ext.notNullSingleton
 import org.springframework.stereotype.Component
+import kotlin.properties.Delegates
 
 
 /**
@@ -17,38 +14,13 @@ import org.springframework.stereotype.Component
 @Component
 class ModuleRegistry {
     
-    private val moduleMap = mutableMapOf<Datasource, Module>()
+    private var moduleMap: Map<Datasource, Module> by Delegates.notNullSingleton()
     
-    fun registerModule(module: Module) {
-        moduleMap[module.datasource] = module
+    fun registerAllModule(modules: List<Module>) {
+        moduleMap = modules.map { it.datasource to it }.toMap()
     }
     
-    fun findModule(datasource: Datasource) = moduleMap.get(datasource)!!
+    fun findModule(datasource: Datasource) = moduleMap.getValue(datasource)
     
     fun findModule(cp: ConnProfile) = findModule(cp.datasource)
-    
-    private inline fun <reified T : Any> buildImplMap() =
-            moduleMap.map { (ds, module) ->
-                ds to module.findImpl<T>()
-            }.toMap()
-    
-    @Lazy
-    @Bean
-    fun connApiMap() = buildImplMap<ConnApi>()
-    
-    @Lazy
-    @Bean
-    fun nodeApiMap() = buildImplMap<NodeApi>()
-    
-    @Lazy
-    @Bean
-    fun menuApiMap() = buildImplMap<MenuApi>()
-    
-    @Lazy
-    @Bean
-    fun formApiMap() = buildImplMap<FormApi>()
-    
-    @Lazy
-    @Bean
-    fun instrApiMap() = buildImplMap<InstrApi>()
 }

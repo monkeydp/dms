@@ -6,7 +6,6 @@ import com.monkeydp.daios.dms.sdk.datasource.DsVersion
 import com.monkeydp.daios.dms.sdk.dm.DmHelper
 import com.monkeydp.daios.dms.sdk.entity.AbstractEntity
 import com.monkeydp.daios.dms.sdk.entity.User
-import com.monkeydp.daios.dms.sdk.main.SdkImplRegistry
 import com.monkeydp.daios.dms.sdk.mocker.ConnJsonMocker.CP_USER_INPUT
 import com.monkeydp.daios.dms.sdk.mocker.ConnJsonMocker.DATASOURCE
 import com.monkeydp.daios.dms.sdk.mocker.ConnJsonMocker.DS_VERSION_ID
@@ -51,7 +50,7 @@ data class ConnProfile(
     val dsVersion: DsVersion<*>
         @JsonIgnore
         @Transient
-        get() = SdkImplRegistry.findDsVersion(datasource, dsVersionId)
+        get() = DmHelper.findDsVersion(datasource, dsVersionId)
     
     
     val form: NewConnForm

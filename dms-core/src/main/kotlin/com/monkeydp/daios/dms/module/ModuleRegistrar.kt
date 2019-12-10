@@ -7,6 +7,8 @@ import org.kodein.di.Kodein
 import org.kodein.di.generic.bind
 import org.kodein.di.generic.singleton
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.boot.CommandLineRunner
+import org.springframework.core.annotation.Order
 import org.springframework.stereotype.Component
 
 /**
@@ -14,23 +16,24 @@ import org.springframework.stereotype.Component
  * @date 2019/10/14
  */
 @Component
-class ModuleDeployer {
+@Order(1)
+class ModuleRegistrar : CommandLineRunner {
     
     @Autowired
     private lateinit var registry: ModuleRegistry
     @Autowired
     private lateinit var eventPublisher: EventPublisher
     
-    fun deployAllModules() {
-        moduleDirs.forEach {
+    override fun run(vararg args: String?) {
+        val modules = moduleDirs.map {
             val config = DmConfig(
                     deployDir = it,
                     kotlinModule = Kodein.Module("openKodeinModule") {
                         bind<EventPublisher>() with singleton { eventPublisher }
                     }
             )
-            val module = Module(config)
-            registry.registerModule(module)
+            Module(config)
         }
+        registry.registerAllModule(modules)
     }
 }

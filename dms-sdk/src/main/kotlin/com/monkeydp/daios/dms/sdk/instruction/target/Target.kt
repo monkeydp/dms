@@ -4,10 +4,10 @@ import com.fasterxml.jackson.core.JsonParser
 import com.fasterxml.jackson.databind.DeserializationContext
 import com.fasterxml.jackson.databind.JsonDeserializer
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize
-import com.monkeydp.tools.enumx.Enumx
+import com.monkeydp.daios.dms.sdk.dm.DmHelper
 import com.monkeydp.daios.dms.sdk.instruction.target.Target.TargetDeserializer
 import com.monkeydp.daios.dms.sdk.main.SdkEnumContract
-import com.monkeydp.daios.dms.sdk.main.SdkImplRegistry
+import com.monkeydp.tools.enumx.Enumx
 import com.monkeydp.tools.ext.toUpperCamelCase
 import io.swagger.annotations.ApiModelProperty
 
@@ -30,7 +30,7 @@ interface Target<E> : Enumx<E>
     class TargetDeserializer : JsonDeserializer<Target<*>>() {
         override fun deserialize(p: JsonParser?, ctxt: DeserializationContext?): Target<*> {
             val name = p?.getValueAsString()!!
-            return SdkImplRegistry.findEnum(name)
+            return DmHelper.findEnum(name)
         }
     }
 }

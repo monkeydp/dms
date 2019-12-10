@@ -1,7 +1,6 @@
 package com.monkeydp.daios.dms.sdk.dm
 
 import com.monkeydp.daios.dms.sdk.datasource.Datasource
-import com.monkeydp.daios.dms.sdk.main.SdkImpl
 
 /**
  * @author iPotato
@@ -9,5 +8,4 @@ import com.monkeydp.daios.dms.sdk.main.SdkImpl
  */
 interface DmApp {
     val datasource: Datasource
-    val sdkImpl: SdkImpl
 }

@@ -2,15 +2,13 @@ package com.monkeydp.daios.dms.service.impl
 
 import com.monkeydp.daios.dms.curd.service.contract.ConnProfileService
 import com.monkeydp.daios.dms.sdk.api.NodeApi
-import com.monkeydp.daios.dms.sdk.datasource.Datasource
+import com.monkeydp.daios.dms.sdk.dm.DmHelper
 import com.monkeydp.daios.dms.sdk.metadata.node.ConnNode
 import com.monkeydp.daios.dms.sdk.metadata.node.Node
 import com.monkeydp.daios.dms.sdk.metadata.node.NodeLoadingCtx
-import com.monkeydp.daios.dms.sdk.request.RequestContext
 import com.monkeydp.daios.dms.service.contract.NodeService
 import com.monkeydp.daios.dms.session.UserSession
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.context.annotation.Lazy
 import org.springframework.stereotype.Service
 
 /**
@@ -20,11 +18,10 @@ import org.springframework.stereotype.Service
 @Service
 internal class NodeServiceImpl : NodeService {
     
+    private val api get() = DmHelper.findImpl<NodeApi>()
+    
     @Autowired
     private lateinit var session: UserSession
-    @Lazy
-    @Autowired
-    lateinit var apiMap: Map<Datasource, NodeApi>
     @Autowired
     private lateinit var cpService: ConnProfileService
     
@@ -33,7 +30,7 @@ internal class NodeServiceImpl : NodeService {
         val cps = cpService.findAllByUserId(userId)
         val connNodes = mutableListOf<ConnNode>()
         cps.forEach { cp ->
-            val api = apiMap.getValue(cp.datasource)
+            val api = DmHelper.findImpl<NodeApi>(cp.datasource)
             val connNode = api.loadConnNode(cp)
             connNodes.add(connNode)
         }
@@ -41,8 +38,7 @@ internal class NodeServiceImpl : NodeService {
     }
     
     override fun loadSubNodes(ctx: NodeLoadingCtx): List<Node> {
-        val ds = RequestContext.datasource
-        val api = apiMap.getValue(ds)
+        val api = DmHelper.findImpl<NodeApi>()
         return api.loadSubNodes(ctx)
     }
 }

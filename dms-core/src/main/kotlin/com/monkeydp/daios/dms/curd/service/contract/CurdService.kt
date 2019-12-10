@@ -10,6 +10,8 @@ interface CurdService<E : AbstractEntity> {
     
     fun save(entity: E): E
     
+    fun saveAll(entities: List<E>): List<E>
+    
     fun findById(id: Long): E
     
     fun findAll(): List<E>

@@ -16,6 +16,8 @@ internal abstract class CurdServiceImpl<E : AbstractEntity, R : CurdRepo<E>> : C
     
     override fun save(entity: E): E = repo.save(entity)
     
+    override fun saveAll(entities: List<E>) = repo.saveAll(entities)
+    
     override fun findById(id: Long): E = repo.findById(id).get()
     
     override fun findAll(): List<E> = repo.findAll()

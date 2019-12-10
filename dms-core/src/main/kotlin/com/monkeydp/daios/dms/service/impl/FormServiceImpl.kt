@@ -1,13 +1,9 @@
 package com.monkeydp.daios.dms.service.impl
 
 import com.monkeydp.daios.dms.sdk.api.FormApi
-import com.monkeydp.daios.dms.sdk.datasource.Datasource
-import com.monkeydp.daios.dms.sdk.metadata.form.Form
+import com.monkeydp.daios.dms.sdk.dm.DmHelper
 import com.monkeydp.daios.dms.sdk.metadata.form.FormLoadingCtx
-import com.monkeydp.daios.dms.sdk.request.RequestContext
 import com.monkeydp.daios.dms.service.contract.FormService
-import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.context.annotation.Lazy
 import org.springframework.stereotype.Service
 
 /**
@@ -17,13 +13,7 @@ import org.springframework.stereotype.Service
 @Service
 class FormServiceImpl : FormService {
     
-    @Lazy
-    @Autowired
-    lateinit var apiMap: Map<Datasource, FormApi>
+    private val api get() = DmHelper.findImpl<FormApi>()
     
-    override fun loadForm(ctx: FormLoadingCtx): Form {
-        val ds = RequestContext.datasource
-        val api = apiMap.getValue(ds)
-        return api.loadFrom(ctx)
-    }
+    override fun loadForm(ctx: FormLoadingCtx) = api.loadFrom(ctx)
 }

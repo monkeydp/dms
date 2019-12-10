@@ -6,7 +6,7 @@ import com.monkeydp.daios.dms.sdk.datasource.DsDef
 import com.monkeydp.daios.dms.sdk.datasource.DsVersion
 import com.monkeydp.daios.dms.sdk.dm.DmApp
 import com.monkeydp.daios.dms.sdk.dm.DmConfig
-import com.monkeydp.daios.dms.sdk.main.findImpl
+import com.monkeydp.daios.dms.sdk.dm.DmHelper
 import com.monkeydp.tools.ext.getReflections
 import com.monkeydp.tools.ext.getSubTypesOf
 import com.monkeydp.tools.ext.matchOne
@@ -39,9 +39,12 @@ class Module(private val config: DmConfig) {
         classLoader = initClassLoader()
         dmApp = loadDmApp()
         datasource = dmApp.datasource
-        dsDefMap = dmApp.sdkImpl.dsDefSet.map { it.version to it }.toMap()
+        val dsDefSet = findImpl<Set<DsDef>>()
+        dsDefMap = dsDefSet.map { it.version to it }.toMap()
         classLoader.loaderMap = initSpecificClassLoaderMap()
     }
+    
+    private inline fun <reified T : Any> findImpl() = DmHelper.findImpl<T>(datasource)
     
     private fun initClassLoader(): ModuleClassLoader {
         val classesUrl = File(deployDir, classesPath).toURI().toURL()
@@ -81,8 +84,6 @@ class Module(private val config: DmConfig) {
         val dmAppClass = reflections.getSubTypesOf<DmApp>().matchOne { !it.kotlin.isAbstract }
         return dmAppClass.newInstanceX(config)
     }
-    
-    inline fun <reified T : Any> findImpl() = dmApp.sdkImpl.findImpl<T>()
     
     fun findDsDef(dsVersion: DsVersion<*>) = dsDefMap.getValue(dsVersion)
     
