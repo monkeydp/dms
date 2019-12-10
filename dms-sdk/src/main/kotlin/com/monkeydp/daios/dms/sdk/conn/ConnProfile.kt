@@ -3,6 +3,7 @@ package com.monkeydp.daios.dms.sdk.conn
 import com.fasterxml.jackson.annotation.JsonIgnore
 import com.monkeydp.daios.dms.sdk.datasource.Datasource
 import com.monkeydp.daios.dms.sdk.datasource.DsVersion
+import com.monkeydp.daios.dms.sdk.dm.DmHelper
 import com.monkeydp.daios.dms.sdk.entity.AbstractEntity
 import com.monkeydp.daios.dms.sdk.entity.User
 import com.monkeydp.daios.dms.sdk.main.SdkImplRegistry
@@ -15,6 +16,7 @@ import io.swagger.annotations.ApiModel
 import io.swagger.annotations.ApiModelProperty
 import javax.persistence.*
 import javax.persistence.EnumType.STRING
+import kotlin.reflect.KClass
 
 /**
  * @author iPotato
@@ -56,7 +58,7 @@ data class ConnProfile(
         @JsonIgnore
         @Transient
         get() {
-            val kClass = SdkImplRegistry.getImplKClass<NewConnForm>(datasource)
+            val kClass = DmHelper.findImpl<KClass<out NewConnForm>>(datasource)
             return userInput.convertTo(kClass)
         }
 }

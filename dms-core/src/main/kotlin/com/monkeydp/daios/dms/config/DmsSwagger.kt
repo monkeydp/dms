@@ -16,7 +16,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2
  */
 @Configuration
 @EnableSwagger2
-class SwaggerConfig {
+class DmsSwagger {
 
     @Bean
     internal fun dmsApis(): Docket {

@@ -1,6 +1,6 @@
 package com.monkeydp.daios.dms.sdk.datasource
 
-import com.monkeydp.daios.dms.sdk.enumx.Enumx
+import com.monkeydp.tools.enumx.Enumx
 import com.monkeydp.daios.dms.sdk.main.SdkEnumContract
 
 /**

@@ -2,7 +2,7 @@ package com.monkeydp.daios.dms.sdk.main
 
 import com.monkeydp.daios.dms.sdk.datasource.Datasource
 import com.monkeydp.daios.dms.sdk.datasource.DsVersion
-import com.monkeydp.daios.dms.sdk.enumx.Enumx
+import com.monkeydp.tools.enumx.Enumx
 import com.monkeydp.daios.dms.sdk.exception.handler.IgnoreException
 import com.monkeydp.daios.dms.sdk.request.RequestContext
 import com.monkeydp.tools.ext.getFirstUpperBound

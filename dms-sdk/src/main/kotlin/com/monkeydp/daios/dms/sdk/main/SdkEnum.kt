@@ -1,6 +1,7 @@
 package com.monkeydp.daios.dms.sdk.main
 
-import com.monkeydp.tools.useful.Null
+import com.monkeydp.tools.enumx.Enumx
+import com.monkeydp.tools.enumx.NullEnumx
 import kotlin.annotation.AnnotationTarget.CLASS
 import kotlin.reflect.KClass
 
@@ -9,4 +10,4 @@ import kotlin.reflect.KClass
  * @date 2019/11/8
  */
 @Target(CLASS)
-annotation class SdkEnum(val parent: KClass<*> = Null::class)
+annotation class SdkEnum(val parent: KClass<out Enumx<*>> = NullEnumx::class)

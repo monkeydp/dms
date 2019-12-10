@@ -6,7 +6,7 @@ import com.fasterxml.jackson.databind.DeserializationContext
 import com.fasterxml.jackson.databind.JsonDeserializer
 import com.fasterxml.jackson.databind.JsonNode
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize
-import com.monkeydp.daios.dms.sdk.enumx.Enumx
+import com.monkeydp.tools.enumx.Enumx
 import com.monkeydp.daios.dms.sdk.main.SdkEnumContract
 import com.monkeydp.daios.dms.sdk.main.SdkImplRegistry
 import com.monkeydp.daios.dms.sdk.metadata.icon.Icon.IconDeserializer

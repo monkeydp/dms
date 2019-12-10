@@ -19,7 +19,7 @@ import org.springframework.http.converter.json.Jackson2ObjectMapperBuilder
  * @date 2019/10/21
  */
 @Configuration
-class JacksonConfig {
+class DmsJackson {
     
     /**
      * Auto register module jackson-module-kotlin,
