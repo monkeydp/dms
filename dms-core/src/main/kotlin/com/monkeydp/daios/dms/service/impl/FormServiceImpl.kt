@@ -22,7 +22,7 @@ class FormServiceImpl : FormService {
     lateinit var apiMap: Map<Datasource, FormApi>
     
     override fun loadForm(ctx: FormLoadingCtx): Form {
-        val ds = RequestContext.datasource!!
+        val ds = RequestContext.datasource
         val api = apiMap.getValue(ds)
         return api.loadFrom(ctx)
     }

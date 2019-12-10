@@ -9,16 +9,19 @@ import com.monkeydp.daios.dms.sdk.conn.ConnProfile
  */
 object RequestContext {
     private val cpThreadLocal = ThreadLocal<ConnProfile?>()
-    val cp
-        get() = cpThreadLocal.get()
-    val cpId
-        get() = cp?.id
-    val datasource
-        get() = cp?.datasource
+    
+    private val cpOrNull get() = cpThreadLocal.get()
+    val cp get() = cpOrNull!!
+    
+    private val cpIdOrNull get() = cpOrNull?.id
+    val cpId get() = cpIdOrNull!!
+    
+    private val datasourceOrNull get() = cpOrNull?.datasource
+    val datasource get() = datasourceOrNull!!
     
     private val connThreadLocal = ThreadLocal<Conn<*>?>()
-    val conn
-        get() = connThreadLocal.get()
+    private val connOrNull get() = connThreadLocal.get()
+    val conn get() = connOrNull!!
     
     fun init(cp: ConnProfile? = null, conn: Conn<*>? = null) {
         setCp(cp)

@@ -20,7 +20,7 @@ class InstrServiceImpl : InstrService {
     lateinit var apiMap: Map<Datasource, InstrApi>
     
     override fun parse(ctx: InstrParsingCtx) {
-        val ds = RequestContext.datasource!!
+        val ds = RequestContext.datasource
         val api = apiMap.getValue(ds)
         api.parse(ctx)
     }

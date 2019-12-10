@@ -41,7 +41,7 @@ internal class NodeServiceImpl : NodeService {
     }
     
     override fun loadSubNodes(ctx: NodeLoadingCtx): List<Node> {
-        val ds = RequestContext.datasource!!
+        val ds = RequestContext.datasource
         val api = apiMap.getValue(ds)
         return api.loadSubNodes(ctx)
     }

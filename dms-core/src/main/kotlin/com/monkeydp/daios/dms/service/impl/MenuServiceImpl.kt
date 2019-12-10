@@ -21,7 +21,7 @@ class MenuServiceImpl : MenuService {
     lateinit var apiMap: Map<Datasource, MenuApi>
     
     override fun loadMenu(ctx: MenuLoadingCtx): Menu? {
-        val ds = RequestContext.datasource!!
+        val ds = RequestContext.datasource
         val api = apiMap.getValue(ds)
         return api.loadMenu(ctx)
     }
