@@ -1,10 +1,10 @@
 package com.monkeydp.daios.dms.sdk.dm
 
+import com.monkeydp.daios.dms.sdk.annot.SdkEnum
 import com.monkeydp.daios.dms.sdk.config.dmKodeinMap
 import com.monkeydp.daios.dms.sdk.config.getDmKodein
 import com.monkeydp.daios.dms.sdk.datasource.Datasource
 import com.monkeydp.daios.dms.sdk.datasource.DsVersion
-import com.monkeydp.daios.dms.sdk.main.SdkEnum
 import com.monkeydp.daios.dms.sdk.request.RequestContext
 import com.monkeydp.tools.enumx.Enumx
 import com.monkeydp.tools.enumx.NullEnumx
@@ -37,7 +37,7 @@ object DmHelper {
         return enum
     }
     
-    tailrec fun <E : Enumx<out E>> KClass<out E>.recurFindEnumOrNull(
+    tailrec fun <E : Enumx<out E>, K : KClass<out E>> K.recurFindEnumOrNull(
             enumName: String,
             caseSensitive: Boolean = false
     ): E? {
@@ -48,7 +48,7 @@ object DmHelper {
         if (parent == null || parent == NullEnumx::class) return null
         
         @Suppress("UNCHECKED_CAST")
-        return (parent as KClass<out E>).recurFindEnumOrNull(enumName, caseSensitive)
+        return (parent as K).recurFindEnumOrNull(enumName, caseSensitive)
     }
     
     inline fun <reified T : Any> findImpl(
