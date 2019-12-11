@@ -16,14 +16,12 @@ import org.springframework.stereotype.Service
  * @date 2019/10/28
  */
 @Service
-internal class NodeServiceImpl : NodeService {
+internal class NodeServiceImpl @Autowired constructor(
+        private val session: UserSession,
+        private val cpService: ConnProfileService
+) : NodeService {
     
-    private val api get() = DmHelper.findImpl<NodeApi>()
-    
-    @Autowired
-    private lateinit var session: UserSession
-    @Autowired
-    private lateinit var cpService: ConnProfileService
+    private val api: NodeApi get() = DmHelper.findImpl()
     
     override fun loadConnNodes(): List<ConnNode> {
         val userId = session.userId

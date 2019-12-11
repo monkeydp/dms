@@ -19,11 +19,9 @@ import org.springframework.web.bind.annotation.RestController
 @Api(tags = ["Connection"])
 @RestController
 @RequestMapping("conn")
-class ConnController {
-    
-    @Autowired
-    private lateinit var service: ConnService
-    
+class ConnController @Autowired constructor(
+        private val service: ConnService
+) {
     @ApiOperation("Save connection profile")
     @PostMapping("save-cp")
     fun saveCp(@RequestBody cp: ConnProfile) = service.saveCp(cp)

@@ -13,7 +13,7 @@ import org.springframework.stereotype.Service
 @Service
 class MenuServiceImpl : MenuService {
     
-    private val api get() = DmHelper.findImpl<MenuApi>()
+    private val api: MenuApi get() = DmHelper.findImpl()
     
     override fun loadMenu(ctx: MenuLoadingCtx) = api.loadMenu(ctx)
 }

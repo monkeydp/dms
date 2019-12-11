@@ -17,11 +17,9 @@ import org.springframework.web.bind.annotation.RestController
 @Api(tags = ["Menu"])
 @RestController
 @RequestMapping("menu")
-class MenuController {
-    
-    @Autowired
-    private lateinit var service: MenuService
-    
+class MenuController @Autowired constructor(
+        private val service: MenuService
+) {
     @ApiOperation("Load menu")
     @PostMapping("load-menu")
     fun loadMenu(@RequestBody ctx: MenuLoadingCtx) = service.loadMenu(ctx)?.items ?: emptyList()

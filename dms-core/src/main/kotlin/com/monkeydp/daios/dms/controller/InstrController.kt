@@ -18,11 +18,9 @@ import org.springframework.web.bind.annotation.RestController
 @Api(tags = ["Instruction"])
 @RestController
 @RequestMapping("instr")
-class InstrController {
-    
-    @Autowired
-    private lateinit var service: InstrService
-    
+class InstrController @Autowired constructor(
+        private val service: InstrService
+) {
     @ConnRequired
     @ApiOperation("Parse instruction")
     @PostMapping("parse-instr")

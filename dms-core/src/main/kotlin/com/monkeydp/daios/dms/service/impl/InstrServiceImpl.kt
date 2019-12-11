@@ -13,7 +13,7 @@ import org.springframework.stereotype.Service
 @Service
 class InstrServiceImpl : InstrService {
     
-    private val api get() = DmHelper.findImpl<InstrApi>()
+    private val api: InstrApi get() = DmHelper.findImpl()
     
     override fun parse(ctx: InstrParsingCtx) = api.parse(ctx)
 }

@@ -13,7 +13,7 @@ import org.springframework.stereotype.Service
 @Service
 class FormServiceImpl : FormService {
     
-    private val api get() = DmHelper.findImpl<FormApi>()
+    private val api: FormApi get() = DmHelper.findImpl()
     
     override fun loadForm(ctx: FormLoadingCtx) = api.loadFrom(ctx)
 }

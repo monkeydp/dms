@@ -15,11 +15,9 @@ import org.springframework.web.bind.annotation.*
 @Api(tags = ["Node"])
 @RestController
 @RequestMapping("node")
-class NodeController {
-    
-    @Autowired
-    private lateinit var service: NodeService
-    
+class NodeController @Autowired constructor(
+        private val service: NodeService
+) {
     @ApiOperation("Load connection nodes")
     @GetMapping("load-conn-nodes")
     fun loadConnNodes() = service.loadConnNodes()

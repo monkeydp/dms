@@ -21,22 +21,18 @@ import org.springframework.stereotype.Service
  * @date 2019/10/18
  */
 @Service
-internal class ConnServiceImpl : ConnService {
+internal class ConnServiceImpl @Autowired constructor(
+        private val session: UserSession,
+        private val registry: ModuleRegistry,
+        private val cpService: ConnProfileService,
+        private val manager: ConnManager
+) : ConnService {
     
     companion object {
         private val log = getLogger()
     }
     
-    private val api get() = DmHelper.findImpl<ConnApi>()
-    
-    @Autowired
-    private lateinit var session: UserSession
-    @Autowired
-    private lateinit var registry: ModuleRegistry
-    @Autowired
-    private lateinit var cpService: ConnProfileService
-    @Autowired
-    private lateinit var manager: ConnManager
+    private val api: ConnApi get() = DmHelper.findImpl()
     
     override fun saveCp(cp: ConnProfile): ConnProfile {
         val saved = cpService.save(cp.full())

@@ -17,11 +17,9 @@ import org.springframework.web.bind.annotation.RestController
 @Api(tags = ["Form"])
 @RestController
 @RequestMapping("form")
-class FormController {
-    
-    @Autowired
-    private lateinit var service: FormService
-    
+class FormController @Autowired constructor(
+        private val service: FormService
+) {
     @ApiOperation("Load form")
     @PostMapping("load-form")
     fun loadForm(@RequestBody ctx: FormLoadingCtx) = service.loadForm(ctx).items
