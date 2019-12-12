@@ -25,7 +25,7 @@ class MyRequestBodyAdvice : RequestBodyAdviceAdapter() {
                                 selectedConverterType: Class<out HttpMessageConverter<*>>): HttpInputMessage {
         val body = inputMessage.body
         val data = body.readBytes()
-        manager.initCtx(targetType, data, methodParameter.method!!)
+        manager.initCtx(targetType, data, methodParameter)
         return MyHttpInputMessage(inputMessage.headers, data.inputStream())
     }
 }

@@ -23,16 +23,11 @@ object RequestContext {
     private val connOrNull get() = connThreadLocal.get()
     val conn get() = connOrNull!!
     
-    fun init(cp: ConnProfile? = null, conn: Conn<*>? = null) {
-        setCp(cp)
-        setConn(conn)
-    }
-    
-    private fun setCp(cp: ConnProfile?) {
+    fun setCp(cp: ConnProfile?) {
         cpThreadLocal.set(cp)
     }
     
-    private fun setConn(conn: Conn<*>?) {
+    fun setConn(conn: Conn<*>?) {
         connThreadLocal.set(conn)
     }
     

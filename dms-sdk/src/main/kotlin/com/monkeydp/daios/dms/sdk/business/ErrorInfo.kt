@@ -8,10 +8,5 @@ enum class ErrorInfo(
         override val code: String,
         override val message: String
 ) : BusinessInfo<ErrorInfo> {
-    
     ERR("-1", "错误");
-    
-    companion object {
-        val instance = this
-    }
 }

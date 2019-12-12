@@ -2,7 +2,7 @@ package com.monkeydp.daios.dms.event
 
 import com.monkeydp.daios.dms.sdk.event.AbstractEventPublisher
 import com.monkeydp.daios.dms.sdk.event.Event
-import com.monkeydp.tools.ext.getLogger
+import com.monkeydp.tools.logger.getLogger
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.context.support.AbstractApplicationContext
 import org.springframework.stereotype.Component

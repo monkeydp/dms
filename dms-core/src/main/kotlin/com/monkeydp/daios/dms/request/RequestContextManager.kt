@@ -6,8 +6,8 @@ import com.monkeydp.daios.dms.sdk.request.RequestContext
 import com.monkeydp.daios.dms.service.contract.ConnService
 import com.monkeydp.tools.util.JsonUtil
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.core.MethodParameter
 import org.springframework.stereotype.Component
-import java.lang.reflect.Method
 import java.lang.reflect.Type
 import kotlin.reflect.full.isSuperclassOf
 
@@ -23,21 +23,28 @@ class RequestContextManager {
     @Autowired
     private lateinit var connService: ConnService
     
-    fun initCtx(type: Type, data: ByteArray, method: Method) {
-        val cpId = getCpId(type, data)
+    fun initCtx(type: Type, data: ByteArray, methodParameter: MethodParameter) {
+        val cpId = getCpId(type, methodParameter.parameterName, data)
         if (cpId != null) {
             val cp = connService.findCp(cpId)
-            val connRequired = method.isAnnotationPresent(ConnRequired::class.java)
+            ctx.setCp(cp)
+            val connRequired = methodParameter.method!!.isAnnotationPresent(ConnRequired::class.java)
             val conn = connService.findConn(cpId, ignoreNotFound = !connRequired)
-            ctx.init(cp, conn)
+            ctx.setConn(conn)
         }
     }
     
-    private fun getCpId(type: Type, data: ByteArray): Long? {
+    private fun getCpId(type: Type, name: String?, data: ByteArray): Long? {
+        
         val kClass = (type as Class<*>).kotlin
+        val cpIdName = HasCpId::cpId.name
+        
+        if (kClass.isSuperclassOf(Long::class) && name == cpIdName)
+            return JsonUtil.toJsonNode(data).longValue()
+        
         if (!HasCpId::class.isSuperclassOf(kClass)) return null
         val jsonNode = JsonUtil.toJsonNode(data)
-        return jsonNode.get(HasCpId::cpId.name).asLong()
+        return jsonNode.get(cpIdName).asLong()
     }
     
     fun cleanCtx() {

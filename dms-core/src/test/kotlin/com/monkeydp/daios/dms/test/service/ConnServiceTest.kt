@@ -15,7 +15,7 @@ class ConnServiceTest : AbstractServiceTest() {
     @Autowired
     private lateinit var service: ConnService
     
-    private val cp = ModuleTestdata.cp
+    private val cp get() =  ModuleTestdata.cp
     
     @Test
     public fun saveCpTest() {

@@ -7,10 +7,10 @@ import com.monkeydp.daios.dms.sdk.datasource.DsVersion
 import com.monkeydp.daios.dms.sdk.dm.DmApp
 import com.monkeydp.daios.dms.sdk.dm.DmConfig
 import com.monkeydp.daios.dms.sdk.dm.DmHelper
-import com.monkeydp.tools.ext.getReflections
-import com.monkeydp.tools.ext.getSubTypesOf
 import com.monkeydp.tools.ext.matchOne
 import com.monkeydp.tools.ext.newInstanceX
+import com.monkeydp.tools.reflections.getSubTypesOf
+import com.monkeydp.tools.reflections.reflections
 import com.monkeydp.tools.util.FileUtil
 import java.io.File
 import java.io.FileFilter
@@ -80,7 +80,7 @@ class Module(private val config: DmConfig) {
     }
     
     private fun loadDmApp(): DmApp {
-        val reflections = getReflections(PackageName.dm, classLoader)
+        val reflections = reflections(PackageName.dm, classLoader)
         val dmAppClass = reflections.getSubTypesOf<DmApp>().matchOne { !it.kotlin.isAbstract }
         return dmAppClass.newInstanceX(config)
     }

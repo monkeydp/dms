@@ -1,4 +1,4 @@
-package com.monkeydp.daios.dms.sdk.main
+package com.monkeydp.daios.dms.sdk.annot
 
 import com.monkeydp.daios.dms.sdk.metadata.JsType
 import com.monkeydp.daios.dms.sdk.metadata.JsType.STRING
