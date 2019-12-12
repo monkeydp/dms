@@ -1,7 +1,7 @@
 package com.monkeydp.daios.dms.sdk.useful
 
-import com.monkeydp.tools.ext.toJson
-import com.monkeydp.tools.ext.toPropMapX
+import com.monkeydp.tools.ext.kotlin.toJson
+import com.monkeydp.tools.ext.kotlin.toPropMapX
 import com.monkeydp.tools.util.JsonUtil
 import javax.persistence.AttributeConverter
 

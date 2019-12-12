@@ -10,7 +10,7 @@ import com.monkeydp.daios.dms.sdk.mocker.ConnJsonMocker.CP_USER_INPUT
 import com.monkeydp.daios.dms.sdk.mocker.ConnJsonMocker.DATASOURCE
 import com.monkeydp.daios.dms.sdk.mocker.ConnJsonMocker.DS_VERSION_ID
 import com.monkeydp.daios.dms.sdk.useful.UserInput
-import com.monkeydp.tools.ext.convertTo
+import com.monkeydp.tools.ext.kotlin.convertTo
 import io.swagger.annotations.ApiModel
 import io.swagger.annotations.ApiModelProperty
 import javax.persistence.*

@@ -1,6 +1,6 @@
 package com.monkeydp.daios.dms.sdk.event
 
-import com.monkeydp.tools.logger.getLogger
+import com.monkeydp.tools.ext.logger.getLogger
 
 /**
  * @author iPotato

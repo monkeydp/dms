@@ -1,8 +1,8 @@
 package com.monkeydp.daios.dms.module
 
 import com.monkeydp.daios.dms.config.DmsDirpath
-import com.monkeydp.tools.ext.has
-import com.monkeydp.tools.ext.ierror
+import com.monkeydp.tools.ext.kotlin.has
+import com.monkeydp.tools.ext.main.ierror
 import com.monkeydp.tools.util.FileUtil
 import com.monkeydp.tools.util.SystemUtil
 import com.monkeydp.tools.util.VersionUtil

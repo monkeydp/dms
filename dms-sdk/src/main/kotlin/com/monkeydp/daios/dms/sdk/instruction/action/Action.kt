@@ -7,7 +7,7 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize
 import com.monkeydp.daios.dms.sdk.dm.DmHelper
 import com.monkeydp.daios.dms.sdk.instruction.action.Action.ActionDeserializer
 import com.monkeydp.tools.enumx.Enumx
-import com.monkeydp.tools.ext.toUpperCamelCase
+import com.monkeydp.tools.ext.kotlin.toUpperCamelCase
 import io.swagger.annotations.ApiModelProperty
 
 /**

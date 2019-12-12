@@ -6,7 +6,7 @@ import com.monkeydp.daios.dms.sdk.helper.IdHelper
 import com.monkeydp.daios.dms.sdk.helper.IdHelper.INVALID_ID
 import com.monkeydp.daios.dms.service.contract.ConnManager
 import com.monkeydp.tools.exception.inner.InnerException
-import com.monkeydp.tools.ext.ierror
+import com.monkeydp.tools.ext.main.ierror
 import org.springframework.stereotype.Service
 
 /**

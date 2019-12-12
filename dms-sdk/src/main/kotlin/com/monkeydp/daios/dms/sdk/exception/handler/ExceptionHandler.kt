@@ -2,7 +2,7 @@ package com.monkeydp.daios.dms.sdk.exception.handler
 
 import com.monkeydp.tools.config.debugMode
 import com.monkeydp.tools.config.devModel
-import com.monkeydp.tools.logger.getLogger
+import com.monkeydp.tools.ext.logger.getLogger
 import org.aspectj.lang.ProceedingJoinPoint
 import org.aspectj.lang.annotation.Around
 import org.aspectj.lang.annotation.Aspect

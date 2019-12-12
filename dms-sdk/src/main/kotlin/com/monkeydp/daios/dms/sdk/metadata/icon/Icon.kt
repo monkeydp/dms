@@ -9,7 +9,7 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize
 import com.monkeydp.daios.dms.sdk.dm.DmHelper
 import com.monkeydp.daios.dms.sdk.metadata.icon.Icon.IconDeserializer
 import com.monkeydp.tools.enumx.Enumx
-import com.monkeydp.tools.ext.toPropMap
+import com.monkeydp.tools.ext.kotlin.toPropMap
 
 
 /**

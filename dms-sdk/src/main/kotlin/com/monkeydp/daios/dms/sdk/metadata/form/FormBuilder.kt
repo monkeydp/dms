@@ -3,8 +3,8 @@ package com.monkeydp.daios.dms.sdk.metadata.form
 import com.monkeydp.daios.dms.sdk.annot.SdkFormItem
 import com.monkeydp.daios.dms.sdk.metadata.form.item.FormItem
 import com.monkeydp.daios.dms.sdk.metadata.form.item.StdFormItem
-import com.monkeydp.tools.ext.camelCaseSeparated
-import com.monkeydp.tools.ext.getAnnotatedProps
+import com.monkeydp.tools.ext.kotlin.camelCaseSeparated
+import com.monkeydp.tools.ext.kotlin.getAnnotatedProps
 import kotlin.reflect.KClass
 import kotlin.reflect.full.findAnnotation
 

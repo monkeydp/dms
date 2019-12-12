@@ -2,7 +2,7 @@ package com.monkeydp.daios.dms.module
 
 import com.monkeydp.daios.dms.sdk.conn.ConnProfile
 import com.monkeydp.daios.dms.sdk.datasource.Datasource
-import com.monkeydp.tools.ext.notNullSingleton
+import com.monkeydp.tools.ext.kotlin.notNullSingleton
 import org.springframework.stereotype.Component
 import kotlin.properties.Delegates
 

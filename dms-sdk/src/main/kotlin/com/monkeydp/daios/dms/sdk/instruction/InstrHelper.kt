@@ -4,9 +4,9 @@ import com.monkeydp.daios.dms.sdk.instruction.action.Action
 import com.monkeydp.daios.dms.sdk.instruction.action.GlobalAction
 import com.monkeydp.daios.dms.sdk.instruction.target.GlobalTarget
 import com.monkeydp.daios.dms.sdk.instruction.target.Target
-import com.monkeydp.tools.ext.camelCase2List
-import com.monkeydp.tools.ext.lastOf
-import com.monkeydp.tools.ext.valueOf
+import com.monkeydp.tools.ext.kotlin.camelCase2List
+import com.monkeydp.tools.ext.kotlin.lastOf
+import com.monkeydp.tools.ext.kotlin.valueOf
 import kotlin.reflect.KClass
 
 /**

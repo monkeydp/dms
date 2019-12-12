@@ -1,6 +1,6 @@
 package com.monkeydp.daios.dms.sdk.instruction.target
 
-import com.monkeydp.tools.ext.toUpperCamelCase
+import com.monkeydp.tools.ext.kotlin.toUpperCamelCase
 
 /**
  * @author iPotato

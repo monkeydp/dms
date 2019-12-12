@@ -1,7 +1,7 @@
 package com.monkeydp.daios.dms.sdk.dm
 
 import com.monkeydp.daios.dms.sdk.event.EventPublisher
-import com.monkeydp.tools.ext.mockFile
+import com.monkeydp.tools.ext.java.mockFile
 import org.kodein.di.Kodein
 import org.kodein.di.generic.bind
 import org.kodein.di.generic.singleton

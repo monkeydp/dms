@@ -1,7 +1,7 @@
 package com.monkeydp.daios.dms.sdk.datasource
 
-import com.monkeydp.tools.ext.ierror
-import com.monkeydp.tools.ext.valueOfOrNull
+import com.monkeydp.tools.ext.main.ierror
+import com.monkeydp.tools.ext.kotlin.valueOfOrNull
 
 /**
  * @author iPotato

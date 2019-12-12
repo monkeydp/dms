@@ -1,6 +1,6 @@
 package com.monkeydp.daios.dms.sdk.annot
 
-import com.monkeydp.tools.kodein.KodeinComponent
+import com.monkeydp.tools.ext.kodein.KodeinComponent
 import kotlin.annotation.AnnotationTarget.CLASS
 
 /**

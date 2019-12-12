@@ -1,7 +1,7 @@
 package com.monkeydp.daios.dms.sdk.ext
 
 import com.monkeydp.daios.dms.sdk.datasource.Datasource
-import com.monkeydp.tools.ext.camelCaseFirst
+import com.monkeydp.tools.ext.kotlin.camelCaseFirst
 
 /**
  * @author iPotato
