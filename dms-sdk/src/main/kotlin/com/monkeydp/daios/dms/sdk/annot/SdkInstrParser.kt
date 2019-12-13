@@ -5,6 +5,7 @@ import com.monkeydp.daios.dms.sdk.instruction.InstrParser
 import com.monkeydp.daios.dms.sdk.instruction.Instruction
 import com.monkeydp.tools.ext.kodein.component.AbstractKodeinMapGenerator
 import com.monkeydp.tools.ext.kodein.component.KodeinComponent
+import com.monkeydp.tools.ext.kodein.component.KodeinComponent.RegisterItem.MAP
 import kotlin.reflect.KClass
 import kotlin.reflect.full.findAnnotation
 
@@ -12,7 +13,7 @@ import kotlin.reflect.full.findAnnotation
  * @author iPotato
  * @date 2019/11/1
  */
-@KodeinComponent<InstrParser>(mapGeneratorKClass = SdkInstrParser.MapGenerator::class)
+@KodeinComponent<InstrParser>(registerItems = [MAP], mapGeneratorKClass = SdkInstrParser.MapGenerator::class)
 @Target(AnnotationTarget.CLASS)
 annotation class SdkInstrParser(val instrKClass: KClass<out Instruction> = Nothing::class) {
     object MapGenerator : AbstractKodeinMapGenerator<Instruction, InstrParser>() {
