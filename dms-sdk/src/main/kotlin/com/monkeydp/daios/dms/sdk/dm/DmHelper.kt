@@ -7,7 +7,6 @@ import com.monkeydp.daios.dms.sdk.datasource.Datasource
 import com.monkeydp.daios.dms.sdk.datasource.DsVersion
 import com.monkeydp.daios.dms.sdk.request.RequestContext
 import com.monkeydp.tools.enumx.Enumx
-import com.monkeydp.tools.ext.kodein.KodeinTag
 import com.monkeydp.tools.ext.kotlin.enumSet
 import com.monkeydp.tools.ext.kotlin.matchOne
 import com.monkeydp.tools.ext.kotlin.transformEnumName
@@ -57,14 +56,14 @@ object DmHelper {
     
     inline fun <reified T : Any> findImpl(
             datasource: Datasource = defaultDs,
-            tag: KodeinTag? = null
+            tag: Any? = null
     ): T {
         val dmKodein = getDmKodein(datasource)
         val instance: T by dmKodein.instance(tag)
         return instance
     }
     
-    inline fun <reified T : Any> finalAllImpls(tag: KodeinTag? = null): List<T> =
+    inline fun <reified T : Any> finalAllImpls(tag: Any? = null): List<T> =
             dmKodeinMap.keys.map { findImpl<T>(it, tag) }.toList()
     
     fun findDsVersion(datasource: Datasource, dsVersionId: String): DsVersion<*> {

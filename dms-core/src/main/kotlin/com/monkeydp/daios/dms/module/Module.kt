@@ -1,5 +1,6 @@
 package com.monkeydp.daios.dms.module
 
+import com.monkeydp.daios.dms.sdk.annot.SdkDsDef
 import com.monkeydp.daios.dms.sdk.config.PackageName
 import com.monkeydp.daios.dms.sdk.datasource.Datasource
 import com.monkeydp.daios.dms.sdk.datasource.DsDef
@@ -39,12 +40,12 @@ class Module(private val config: DmConfig) {
         classLoader = initClassLoader()
         dmApp = loadDmApp()
         datasource = dmApp.datasource
-        val dsDefSet = findImpl<Set<DsDef>>()
+        val dsDefSet = findImpl<Set<DsDef>>(SdkDsDef::class)
         dsDefMap = dsDefSet.map { it.version to it }.toMap()
         classLoader.loaderMap = initSpecificClassLoaderMap()
     }
     
-    private inline fun <reified T : Any> findImpl() = DmHelper.findImpl<T>(datasource)
+    private inline fun <reified T : Any> findImpl(tag: Any? = null) = DmHelper.findImpl<T>(datasource, tag)
     
     private fun initClassLoader(): ModuleClassLoader {
         val classesUrl = File(deployDir, classesPath).toURI().toURL()

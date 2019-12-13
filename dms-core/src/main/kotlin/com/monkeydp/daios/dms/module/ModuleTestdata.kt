@@ -5,7 +5,7 @@ import com.monkeydp.daios.dms.sdk.datasource.Datasource
 import com.monkeydp.daios.dms.sdk.dm.DmHelper
 import com.monkeydp.daios.dms.sdk.mocker.ConnJsonMocker.DATASOURCE
 import com.monkeydp.daios.dms.sdk.mocker.ConnJsonMocker.DS_VERSION_ID
-import com.monkeydp.tools.ext.kodein.KodeinTag.TEST
+import com.monkeydp.tools.source.SourceSet.TEST
 import com.monkeydp.tools.ext.kotlin.matchOne
 import com.monkeydp.tools.ext.kotlin.notNullSingleton
 import kotlin.properties.Delegates
