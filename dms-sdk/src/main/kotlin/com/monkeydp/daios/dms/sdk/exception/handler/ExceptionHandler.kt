@@ -34,7 +34,7 @@ class ExceptionHandler {
         return try {
             joinPoint.proceed(joinPoint.args);
         } catch (e: Throwable) {
-            if (!e.javaClass.kotlin.isSubclassOf(annot.exKClass) ||
+            if (!e::class.isSubclassOf(annot.exKClass) ||
                 devModel != annot.inDevMode
             ) throw e
             log.debugMode(e)
