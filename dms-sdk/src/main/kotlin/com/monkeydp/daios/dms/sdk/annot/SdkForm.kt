@@ -5,7 +5,6 @@ import com.monkeydp.tools.ext.java.singletonX
 import com.monkeydp.tools.ext.kodein.component.AbstractKodeinMapGenerator
 import com.monkeydp.tools.ext.kodein.component.KodeinComponent
 import com.monkeydp.tools.ext.kodein.component.KodeinComponent.Type
-import com.monkeydp.tools.ext.kodein.component.KodeinMapGenerator
 import kotlin.annotation.AnnotationTarget.CLASS
 import kotlin.reflect.KClass
 import kotlin.reflect.full.findAnnotation
