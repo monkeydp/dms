@@ -12,7 +12,7 @@ abstract class AbstractInstrEvent(
         notifyUi: Boolean = true,
         instr: Instruction? = null
 ) : InstrEvent, AbstractEvent(source, notifyUi) {
-    override val instr: Instruction = instr ?: InstrHelper.getInstrByClassname(this)
+    override val instr: Instruction = instr ?: InstrHelper.getInstr(this)
     
     override fun toString() = "[EVENT] ${instr.toString()}"
 }

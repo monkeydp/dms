@@ -8,8 +8,6 @@ import com.monkeydp.tools.ext.kotlin.toUpperCamelCase
  */
 enum class GlobalTarget(fullName: String = "") : Target<GlobalTarget> {
     
-    UNKNOWN_TARGET,
-    
     CONN("connection"),
     DB("database"),
     TABLE,

@@ -2,7 +2,6 @@ package com.monkeydp.daios.dms.sdk.instruction
 
 import com.monkeydp.daios.dms.sdk.conn.HasCpId
 import com.monkeydp.daios.dms.sdk.helper.IdHelper.INVALID_ID
-import com.monkeydp.daios.dms.sdk.instruction.target.GlobalTarget.UNKNOWN_TARGET
 import com.monkeydp.daios.dms.sdk.instruction.target.Target
 import com.monkeydp.daios.dms.sdk.metadata.node.NodePath
 import com.monkeydp.daios.dms.sdk.mocker.ConnJsonMocker.CP_ID
@@ -29,14 +28,14 @@ class InstrParsingCtx(
         val userInput: UserInput = UserInput(),
         @ApiModelProperty(required = true, example = NODE_PATH)
         val nodePath: NodePath,
-        @ApiModelProperty(value = "user selected target", required = true, example = SELECTED)
-        val selected: Target<*>
+        @ApiModelProperty(value = "user selected target", example = SELECTED)
+        val selected: Target<*>?
 ) : HasCpId {
     @TestOnly
     constructor(
             instr: Instruction,
             userInput: UserInput = UserInput(),
             nodePath: NodePath,
-            selected: Target<*> = UNKNOWN_TARGET
+            selected: Target<*>? = null
     ) : this(INVALID_ID, instr, userInput, nodePath, selected)
 }

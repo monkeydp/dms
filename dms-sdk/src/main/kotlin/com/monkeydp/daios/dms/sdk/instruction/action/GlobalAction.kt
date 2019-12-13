@@ -7,7 +7,6 @@ import com.monkeydp.tools.ext.kotlin.toUpperCamelCase
  * @date 2019/10/25
  */
 enum class GlobalAction(fullName: String = "") : Action<GlobalAction> {
-    UNKNOWN_ACTION,
     NEW, EDIT, DELETE, OPEN, CLOSE, MANAGE, SHOW
     ;
     
