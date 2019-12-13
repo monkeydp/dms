@@ -10,4 +10,4 @@ import kotlin.annotation.AnnotationTarget.FIELD
  */
 @KodeinComponent<Any>(registerItems = [SET])
 @Target(FIELD)
-annotation class SdkDsDef
+annotation class SdkTestCp
