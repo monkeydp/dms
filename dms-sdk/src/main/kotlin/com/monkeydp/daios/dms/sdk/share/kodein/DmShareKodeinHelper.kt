@@ -1,11 +1,9 @@
-package com.monkeydp.daios.dms.sdk.dm
+package com.monkeydp.daios.dms.sdk.share.kodein
 
 import com.monkeydp.daios.dms.sdk.annot.SdkEnum
-import com.monkeydp.daios.dms.sdk.config.kodein.dmShareKodeinMap
-import com.monkeydp.daios.dms.sdk.config.kodein.getDmShareKodein
 import com.monkeydp.daios.dms.sdk.datasource.Datasource
 import com.monkeydp.daios.dms.sdk.datasource.DsVersion
-import com.monkeydp.daios.dms.sdk.request.RequestContext
+import com.monkeydp.daios.dms.sdk.share.request.RequestContext
 import com.monkeydp.tools.enumx.Enumx
 import com.monkeydp.tools.ext.kotlin.enumSet
 import com.monkeydp.tools.ext.kotlin.matchOne
@@ -20,7 +18,7 @@ import kotlin.reflect.full.findAnnotation
  * @author iPotato
  * @date 2019/12/10
  */
-object DmHelper {
+object DmShareKodeinHelper {
     
     val defaultDs get() = RequestContext.datasource
     
@@ -32,7 +30,8 @@ object DmHelper {
             caseSensitive: Boolean = false,
             datasource: Datasource = defaultDs
     ): E {
-        val enumKClass: K = findImpl(datasource)
+        val enumKClass: K =
+                findImpl(datasource)
         
         val enumNameX = transformEnumName(enumName, caseSensitive)
         var enum = enumKClass.recurFindEnumOrNull(enumNameX)
@@ -58,8 +57,8 @@ object DmHelper {
             datasource: Datasource = defaultDs,
             tag: Any? = null
     ): T {
-        val dmKodein = getDmShareKodein(datasource)
-        val instance: T by dmKodein.instance(tag)
+        val dmShareKodein = getDmShareKodein(datasource)
+        val instance: T by dmShareKodein.instance(tag)
         return instance
     }
     
@@ -67,7 +66,8 @@ object DmHelper {
             dmShareKodeinMap.keys.map { findImpl<T>(it, tag) }.toList()
     
     fun findDsVersion(datasource: Datasource, dsVersionId: String): DsVersion<*> {
-        val enumKClass = findImpl<KClass<out DsVersion<*>>>(datasource)
+        val enumKClass =
+                findImpl<KClass<out DsVersion<*>>>(datasource)
         return enumKClass.enumSet().matchOne { it.id == dsVersionId }
     }
 }

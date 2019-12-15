@@ -2,7 +2,7 @@ package com.monkeydp.daios.dms.request
 
 import com.monkeydp.daios.dms.sdk.conn.ConnRequired
 import com.monkeydp.daios.dms.sdk.conn.HasCpId
-import com.monkeydp.daios.dms.sdk.request.RequestContext
+import com.monkeydp.daios.dms.sdk.share.request.RequestContext
 import com.monkeydp.daios.dms.service.contract.ConnService
 import com.monkeydp.tools.util.JsonUtil
 import org.springframework.beans.factory.annotation.Autowired

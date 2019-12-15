@@ -1,7 +1,7 @@
 package com.monkeydp.daios.dms.service.impl
 
 import com.monkeydp.daios.dms.sdk.api.FormApi
-import com.monkeydp.daios.dms.sdk.dm.DmHelper
+import com.monkeydp.daios.dms.sdk.share.kodein.DmShareKodeinHelper
 import com.monkeydp.daios.dms.sdk.metadata.form.FormLoadingCtx
 import com.monkeydp.daios.dms.service.contract.FormService
 import org.springframework.stereotype.Service
@@ -13,7 +13,7 @@ import org.springframework.stereotype.Service
 @Service
 class FormServiceImpl : FormService {
     
-    private val api: FormApi get() = DmHelper.findImpl()
+    private val api: FormApi get() = DmShareKodeinHelper.findImpl()
     
     override fun loadForm(ctx: FormLoadingCtx) = api.loadFrom(ctx)
 }

@@ -1,4 +1,4 @@
-package com.monkeydp.daios.dms.sdk.config.kodein
+package com.monkeydp.daios.dms.sdk.share.kodein
 
 import com.monkeydp.daios.dms.sdk.datasource.Datasource
 import com.monkeydp.daios.dms.sdk.ext.getDatasourceByClassname

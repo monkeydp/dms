@@ -1,7 +1,7 @@
 package com.monkeydp.daios.dms.test.service
 
 import com.monkeydp.daios.dms.module.ModuleTestdata
-import com.monkeydp.daios.dms.sdk.request.RequestContext
+import com.monkeydp.daios.dms.sdk.share.request.RequestContext
 import com.monkeydp.daios.dms.test.AbstractTest
 import org.junit.Before
 

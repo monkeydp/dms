@@ -7,7 +7,7 @@ import com.monkeydp.daios.dms.module.ModuleRegistry
 import com.monkeydp.daios.dms.sdk.api.ConnApi
 import com.monkeydp.daios.dms.sdk.conn.Conn
 import com.monkeydp.daios.dms.sdk.conn.ConnProfile
-import com.monkeydp.daios.dms.sdk.dm.DmHelper
+import com.monkeydp.daios.dms.sdk.share.kodein.DmShareKodeinHelper
 import com.monkeydp.daios.dms.service.contract.ConnManager
 import com.monkeydp.daios.dms.service.contract.ConnService
 import com.monkeydp.daios.dms.session.UserSession
@@ -32,7 +32,7 @@ internal class ConnServiceImpl @Autowired constructor(
         private val log = getLogger()
     }
     
-    private val api: ConnApi get() = DmHelper.findImpl()
+    private val api: ConnApi get() = DmShareKodeinHelper.findImpl()
     
     override fun saveCp(cp: ConnProfile): ConnProfile {
         val saved = cpService.save(cp.full())
@@ -73,7 +73,7 @@ internal class ConnServiceImpl @Autowired constructor(
     private fun getConn(cp: ConnProfile): Conn<*> {
         val module = registry.findModule(cp)
         module.setSpecificClassLoader(cp.dsVersion)
-        val api = DmHelper.findImpl<ConnApi>(cp.datasource)
+        val api = DmShareKodeinHelper.findImpl<ConnApi>(cp.datasource)
         val conn = api.getConn(cp)
         module.removeSpecificClassLoader()
         return conn

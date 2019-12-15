@@ -3,7 +3,7 @@ package com.monkeydp.daios.dms.sdk.conn
 import com.fasterxml.jackson.annotation.JsonIgnore
 import com.monkeydp.daios.dms.sdk.datasource.Datasource
 import com.monkeydp.daios.dms.sdk.datasource.DsVersion
-import com.monkeydp.daios.dms.sdk.dm.DmHelper
+import com.monkeydp.daios.dms.sdk.share.kodein.DmShareKodeinHelper
 import com.monkeydp.daios.dms.sdk.entity.AbstractEntity
 import com.monkeydp.daios.dms.sdk.entity.User
 import com.monkeydp.daios.dms.sdk.mocker.ConnJsonMocker.CP_USER_INPUT
@@ -50,14 +50,14 @@ data class ConnProfile(
     val dsVersion: DsVersion<*>
         @JsonIgnore
         @Transient
-        get() = DmHelper.findDsVersion(datasource, dsVersionId)
+        get() = DmShareKodeinHelper.findDsVersion(datasource, dsVersionId)
     
     
     val form: NewConnForm
         @JsonIgnore
         @Transient
         get() {
-            val kClass = DmHelper.findImpl<KClass<out NewConnForm>>(datasource)
+            val kClass = DmShareKodeinHelper.findImpl<KClass<out NewConnForm>>(datasource)
             return userInput.convertTo(kClass)
         }
 }

@@ -1,4 +1,4 @@
-package com.monkeydp.daios.dms.sdk.config.kodein
+package com.monkeydp.daios.dms.sdk.share.kodein
 
 import com.monkeydp.daios.dms.sdk.event.EventPublisher
 import com.monkeydp.tools.ext.kotlin.notNullSingleton

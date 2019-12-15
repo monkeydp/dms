@@ -1,4 +1,4 @@
-package com.monkeydp.daios.dms.sdk.request
+package com.monkeydp.daios.dms.sdk.share.request
 
 import com.monkeydp.daios.dms.sdk.conn.Conn
 import com.monkeydp.daios.dms.sdk.conn.ConnProfile
