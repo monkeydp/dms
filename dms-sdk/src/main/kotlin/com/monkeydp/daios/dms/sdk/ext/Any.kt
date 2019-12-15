@@ -11,4 +11,5 @@ fun Any.getDsNameByClassname() = javaClass.simpleName.camelCaseFirst()
 
 fun Any.getDatasourceByClassname() = Datasource.valueOf(getDsNameByClassname().toUpperCase())
 
-fun Any.getDmKodein() = com.monkeydp.daios.dms.sdk.config.getDmKodein(getDatasourceByClassname())
+fun Any.getDmKodein() =
+        com.monkeydp.daios.dms.sdk.config.kodein.getDmShareKodein(getDatasourceByClassname())

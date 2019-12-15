@@ -1,29 +1,27 @@
 package com.monkeydp.daios.dms.module
 
+import com.monkeydp.daios.dms.sdk.annot.SdkDmApp
 import com.monkeydp.daios.dms.sdk.annot.SdkDsDef
 import com.monkeydp.daios.dms.sdk.config.PackageName
 import com.monkeydp.daios.dms.sdk.datasource.Datasource
 import com.monkeydp.daios.dms.sdk.datasource.DsDef
 import com.monkeydp.daios.dms.sdk.datasource.DsVersion
-import com.monkeydp.daios.dms.sdk.dm.DmApp
-import com.monkeydp.daios.dms.sdk.dm.DmConfig
 import com.monkeydp.daios.dms.sdk.dm.DmHelper
-import com.monkeydp.tools.ext.java.newInstanceX
 import com.monkeydp.tools.ext.kotlin.matchOne
-import com.monkeydp.tools.ext.reflections.getSubTypesOf
+import com.monkeydp.tools.ext.reflections.getAnnotatedSingletons
 import com.monkeydp.tools.ext.reflections.reflections
 import com.monkeydp.tools.util.FileUtil
 import java.io.File
 import java.io.FileFilter
 import java.net.URL
 import java.net.URLClassLoader
+import kotlin.reflect.full.findAnnotation
 
 /**
  * @author iPotato
  * @date 2019/10/14
  */
-class Module(private val config: DmConfig) {
-    private val deployDir = config.deployDir
+class Module(private val deployDir: File) {
     
     companion object {
         private const val classesPath = "classes"
@@ -32,14 +30,14 @@ class Module(private val config: DmConfig) {
     }
     
     private val classLoader: ModuleClassLoader
-    val dmApp: DmApp
+    private val sdkDmApp: SdkDmApp
     val datasource: Datasource
     private val dsDefMap: Map<DsVersion<*>, DsDef>
     
     init {
         classLoader = initClassLoader()
-        dmApp = loadDmApp()
-        datasource = dmApp.datasource
+        sdkDmApp = loadSdkDmApp()
+        datasource = sdkDmApp.datasource
         val dsDefSet = findImpl<Set<DsDef>>(SdkDsDef::class)
         dsDefMap = dsDefSet.map { it.version to it }.toMap()
         classLoader.loaderMap = initSpecificClassLoaderMap()
@@ -80,11 +78,12 @@ class Module(private val config: DmConfig) {
         return jars.map { it.toURI().toURL() }.toTypedArray()
     }
     
-    private fun loadDmApp(): DmApp {
-        val reflections = reflections(PackageName.dm, classLoader)
-        val dmAppClass = reflections.getSubTypesOf<DmApp>().matchOne { !it.kotlin.isAbstract }
-        return dmAppClass.newInstanceX(config)
-    }
+    private fun loadSdkDmApp() =
+            reflections(PackageName.dm, classLoader).run {
+                getAnnotatedSingletons(SdkDmApp::class).matchOne { true }.run {
+                    this.javaClass.kotlin.findAnnotation<SdkDmApp>()!!
+                }
+            }
     
     fun findDsDef(dsVersion: DsVersion<*>) = dsDefMap.getValue(dsVersion)
     

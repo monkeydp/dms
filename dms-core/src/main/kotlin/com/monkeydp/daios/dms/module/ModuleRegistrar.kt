@@ -1,7 +1,7 @@
 package com.monkeydp.daios.dms.module
 
 import com.monkeydp.daios.dms.module.ModuleEnv.moduleDirs
-import com.monkeydp.daios.dms.sdk.dm.DmConfig
+import com.monkeydp.daios.dms.sdk.config.kodein.dmsShareKodeinModule
 import com.monkeydp.daios.dms.sdk.event.EventPublisher
 import org.kodein.di.Kodein
 import org.kodein.di.generic.bind
@@ -25,15 +25,10 @@ class ModuleRegistrar : CommandLineRunner {
     private lateinit var eventPublisher: EventPublisher
     
     override fun run(vararg args: String?) {
-        val modules = moduleDirs.map {
-            val config = DmConfig(
-                    deployDir = it,
-                    kotlinModule = Kodein.Module("openKodeinModule") {
-                        bind<EventPublisher>() with singleton { eventPublisher }
-                    }
-            )
-            Module(config)
+        dmsShareKodeinModule = Kodein.Module("dmsShareKodeinModule") {
+            bind<EventPublisher>() with singleton { eventPublisher }
         }
+        val modules = moduleDirs.map { Module(it) }
         registry.registerAllModule(modules)
     }
 }

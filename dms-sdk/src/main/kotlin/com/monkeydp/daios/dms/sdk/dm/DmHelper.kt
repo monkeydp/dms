@@ -1,8 +1,8 @@
 package com.monkeydp.daios.dms.sdk.dm
 
 import com.monkeydp.daios.dms.sdk.annot.SdkEnum
-import com.monkeydp.daios.dms.sdk.config.dmKodeinMap
-import com.monkeydp.daios.dms.sdk.config.getDmKodein
+import com.monkeydp.daios.dms.sdk.config.kodein.dmShareKodeinMap
+import com.monkeydp.daios.dms.sdk.config.kodein.getDmShareKodein
 import com.monkeydp.daios.dms.sdk.datasource.Datasource
 import com.monkeydp.daios.dms.sdk.datasource.DsVersion
 import com.monkeydp.daios.dms.sdk.request.RequestContext
@@ -58,13 +58,13 @@ object DmHelper {
             datasource: Datasource = defaultDs,
             tag: Any? = null
     ): T {
-        val dmKodein = getDmKodein(datasource)
+        val dmKodein = getDmShareKodein(datasource)
         val instance: T by dmKodein.instance(tag)
         return instance
     }
     
     inline fun <reified T : Any> finalAllImpls(tag: Any? = null): List<T> =
-            dmKodeinMap.keys.map { findImpl<T>(it, tag) }.toList()
+            dmShareKodeinMap.keys.map { findImpl<T>(it, tag) }.toList()
     
     fun findDsVersion(datasource: Datasource, dsVersionId: String): DsVersion<*> {
         val enumKClass = findImpl<KClass<out DsVersion<*>>>(datasource)
