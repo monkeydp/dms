@@ -3,6 +3,7 @@ package com.monkeydp.daios.dms.request
 import com.monkeydp.daios.dms.config.kodein
 import com.monkeydp.daios.dms.sdk.conn.ConnRequired
 import com.monkeydp.daios.dms.sdk.conn.HasCpId
+import com.monkeydp.daios.dms.sdk.share.conn.connContext
 import com.monkeydp.daios.dms.sdk.share.request.RequestContext
 import com.monkeydp.daios.dms.service.contract.ConnService
 import com.monkeydp.tools.util.JsonUtil
@@ -28,11 +29,13 @@ class RequestContextManager {
     fun initCtx(type: Type, data: ByteArray, methodParameter: MethodParameter) {
         val cpId = getCpId(type, methodParameter.parameterName, data)
         if (cpId == null) return
-        ctx.setRequestAttributes {
-            cp = connService.findCp(cpId)
-            if (methodParameter.method!!.isAnnotationPresent(ConnRequired::class.java))
-                conn = connService.findConn(cpId)
-        }
+        ctx.setRequestAttributes(
+                connContext {
+                    cp = connService.findCp(cpId)
+                    if (methodParameter.method!!.isAnnotationPresent(ConnRequired::class.java))
+                        conn = connService.findConn(cpId)
+                }
+        )
     }
     
     private fun getCpId(type: Type, name: String?, data: ByteArray): Long? {

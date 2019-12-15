@@ -1,15 +1,30 @@
 package com.monkeydp.daios.dms.sdk.share.request
 
-import com.monkeydp.daios.dms.sdk.conn.Conn
-import com.monkeydp.daios.dms.sdk.conn.ConnProfile
-import com.monkeydp.tools.ext.kotlin.notNullSingleton
-import kotlin.properties.Delegates
+import com.monkeydp.tools.ext.kotlin.toPropMap
 
 /**
  * @author iPotato
  * @date 2019/12/15
  */
+
 internal abstract class AbstractRequestAttributes : RequestAttributes {
-    override var cp: ConnProfile by Delegates.notNullSingleton()
-    override var conn: Conn<*> by Delegates.notNullSingleton()
+    
+    private val _attrs = mutableMapOf<String, Any?>()
+    override val attrs get() = _attrs.toMap()
+    
+    constructor(any: Any? = null) {
+        if (any == null) return
+        setAttributes(any.toPropMap({ it.name }))
+    }
+    
+    @Suppress("UNCHECKED_CAST")
+    override fun <T : Any> getAttribute(name: String) = _attrs.getValue(name) as T
+    
+    override fun setAttribute(name: String, value: Any?) {
+        _attrs[name] = value
+    }
+    
+    override fun setAttributes(map: Map<String, Any?>) {
+        _attrs.putAll(map)
+    }
 }

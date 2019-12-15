@@ -1,9 +1,10 @@
 package com.monkeydp.daios.dms.sdk.share.kodein
 
 import com.monkeydp.daios.dms.sdk.event.EventPublisher
-import com.monkeydp.daios.dms.sdk.share.request.MyRequestContext
-import com.monkeydp.daios.dms.sdk.share.request.RequestAttributes
+import com.monkeydp.daios.dms.sdk.share.conn.ConnContext
+import com.monkeydp.daios.dms.sdk.share.conn.connContext
 import com.monkeydp.daios.dms.sdk.share.request.RequestContext
+import com.monkeydp.daios.dms.sdk.share.request.requestContext
 import com.monkeydp.tools.ext.kotlin.notNullSingleton
 import org.kodein.di.Kodein
 import org.kodein.di.generic.bind
@@ -22,9 +23,9 @@ private val mockDmsKodeinModule = Kodein.Module("mockDmsKodeinModule") {
 var dmsKodeinModule: Kodein.Module by Delegates.notNullSingleton(mockDmsKodeinModule)
 
 val sdkKodeinModule = Kodein.Module("sdkKodeinModule") {
-    MyRequestContext.also {
+    requestContext.also {
         bind<RequestContext>() with singleton { it }
-        bind<RequestAttributes>() with provider { it.requestAttributes }
+        bind<ConnContext>() with provider { connContext(it.requestAttributes.attrs) }
     }
 }
 

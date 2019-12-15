@@ -1,16 +1,14 @@
 package com.monkeydp.daios.dms.sdk.share.request
 
-import com.monkeydp.daios.dms.sdk.conn.Conn
-import com.monkeydp.daios.dms.sdk.conn.ConnProfile
-import com.monkeydp.tools.ext.kotlin.notNullSingleton
-import kotlin.properties.Delegates
-
 /**
  * @author iPotato
  * @date 2019/12/15
  */
 interface RequestAttributes {
-    var cp: ConnProfile
-    val datasource get() = cp.datasource
-    var conn: Conn<*>
+    val attrs: Map<String, Any?>
+    fun <T : Any> getAttribute(name: String): T
+    fun setAttribute(name: String, value: Any?)
+    fun setAttributes(map: Map<String, Any?>)
 }
+
+fun requestAttributes(any: Any? = null): RequestAttributes = StdRequestAttributes(any)

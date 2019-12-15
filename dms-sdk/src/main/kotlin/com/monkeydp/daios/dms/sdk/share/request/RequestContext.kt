@@ -7,6 +7,8 @@ package com.monkeydp.daios.dms.sdk.share.request
 interface RequestContext {
     val requestAttributes: RequestAttributes
     fun setRequestAttributes(attributes: RequestAttributes)
-    fun setRequestAttributes(init: RequestAttributes.() -> Unit)
+    fun setRequestAttributes(any: Any)
     fun resetRequestAttributes()
 }
+
+internal val requestContext = StdRequestContext
