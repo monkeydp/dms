@@ -30,8 +30,7 @@ object DmKodeinHelper {
             caseSensitive: Boolean = false,
             datasource: Datasource = defaultDs
     ): E {
-        val enumKClass: K =
-                findImpl(datasource)
+        val enumKClass: K = findImpl(datasource)
         
         val enumNameX = transformEnumName(enumName, caseSensitive)
         var enum = enumKClass.recurFindEnumOrNull(enumNameX)
