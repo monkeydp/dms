@@ -2,7 +2,7 @@ package com.monkeydp.daios.dms.service.impl
 
 import com.monkeydp.daios.dms.curd.service.contract.ConnProfileService
 import com.monkeydp.daios.dms.sdk.api.NodeApi
-import com.monkeydp.daios.dms.sdk.share.kodein.DmShareKodeinHelper
+import com.monkeydp.daios.dms.sdk.share.kodein.DmKodeinHelper
 import com.monkeydp.daios.dms.sdk.metadata.node.ConnNode
 import com.monkeydp.daios.dms.sdk.metadata.node.Node
 import com.monkeydp.daios.dms.sdk.metadata.node.NodeLoadingCtx
@@ -21,14 +21,14 @@ internal class NodeServiceImpl @Autowired constructor(
         private val cpService: ConnProfileService
 ) : NodeService {
     
-    private val api: NodeApi get() = DmShareKodeinHelper.findImpl()
+    private val api: NodeApi get() = DmKodeinHelper.findImpl()
     
     override fun loadConnNodes(): List<ConnNode> {
         val userId = session.userId
         val cps = cpService.findAllByUserId(userId)
         val connNodes = mutableListOf<ConnNode>()
         cps.forEach { cp ->
-            val api = DmShareKodeinHelper.findImpl<NodeApi>(cp.datasource)
+            val api = DmKodeinHelper.findImpl<NodeApi>(cp.datasource)
             val connNode = api.loadConnNode(cp)
             connNodes.add(connNode)
         }
@@ -36,7 +36,7 @@ internal class NodeServiceImpl @Autowired constructor(
     }
     
     override fun loadSubNodes(ctx: NodeLoadingCtx): List<Node> {
-        val api = DmShareKodeinHelper.findImpl<NodeApi>()
+        val api = DmKodeinHelper.findImpl<NodeApi>()
         return api.loadSubNodes(ctx)
     }
 }

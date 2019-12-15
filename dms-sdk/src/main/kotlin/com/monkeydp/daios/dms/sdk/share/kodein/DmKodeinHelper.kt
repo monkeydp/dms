@@ -3,7 +3,7 @@ package com.monkeydp.daios.dms.sdk.share.kodein
 import com.monkeydp.daios.dms.sdk.annot.SdkEnum
 import com.monkeydp.daios.dms.sdk.datasource.Datasource
 import com.monkeydp.daios.dms.sdk.datasource.DsVersion
-import com.monkeydp.daios.dms.sdk.share.request.RequestContext
+import com.monkeydp.daios.dms.sdk.share.request.MyRequestContext
 import com.monkeydp.tools.enumx.Enumx
 import com.monkeydp.tools.ext.kotlin.enumSet
 import com.monkeydp.tools.ext.kotlin.matchOne
@@ -18,9 +18,9 @@ import kotlin.reflect.full.findAnnotation
  * @author iPotato
  * @date 2019/12/10
  */
-object DmShareKodeinHelper {
+object DmKodeinHelper {
     
-    val defaultDs get() = RequestContext.datasource
+    val defaultDs get() = MyRequestContext.requestAttributes.datasource
     
     /**
      * @param E enum contract
@@ -57,13 +57,13 @@ object DmShareKodeinHelper {
             datasource: Datasource = defaultDs,
             tag: Any? = null
     ): T {
-        val dmShareKodein = getDmShareKodein(datasource)
-        val instance: T by dmShareKodein.instance(tag)
+        val dmKodein = getDmKodein(datasource)
+        val instance: T by dmKodein.instance(tag)
         return instance
     }
     
     inline fun <reified T : Any> finalAllImpls(tag: Any? = null): List<T> =
-            dmShareKodeinMap.keys.map { findImpl<T>(it, tag) }.toList()
+            dmKodeinMap.keys.map { findImpl<T>(it, tag) }.toList()
     
     fun findDsVersion(datasource: Datasource, dsVersionId: String): DsVersion<*> {
         val enumKClass =

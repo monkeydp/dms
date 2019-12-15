@@ -2,7 +2,7 @@ package com.monkeydp.daios.dms.request
 
 import com.monkeydp.daios.dms.sdk.conn.ConnRequired
 import com.monkeydp.daios.dms.sdk.conn.HasCpId
-import com.monkeydp.daios.dms.sdk.share.request.RequestContext
+import com.monkeydp.daios.dms.sdk.share.request.MyRequestContext
 import com.monkeydp.daios.dms.service.contract.ConnService
 import com.monkeydp.tools.util.JsonUtil
 import org.springframework.beans.factory.annotation.Autowired
@@ -18,19 +18,18 @@ import kotlin.reflect.full.isSuperclassOf
 @Component
 class RequestContextManager {
     
-    private val ctx = RequestContext
+    private val ctx = MyRequestContext
     
     @Autowired
     private lateinit var connService: ConnService
     
     fun initCtx(type: Type, data: ByteArray, methodParameter: MethodParameter) {
         val cpId = getCpId(type, methodParameter.parameterName, data)
-        if (cpId != null) {
-            val cp = connService.findCp(cpId)
-            ctx.setCp(cp)
-            val connRequired = methodParameter.method!!.isAnnotationPresent(ConnRequired::class.java)
-            val conn = connService.findConn(cpId, ignoreNotFound = !connRequired)
-            ctx.setConn(conn)
+        if (cpId == null) return
+        ctx.setRequestAttributes {
+            cp = connService.findCp(cpId)
+            if (methodParameter.method!!.isAnnotationPresent(ConnRequired::class.java))
+                conn = connService.findConn(cpId)
         }
     }
     
@@ -47,7 +46,7 @@ class RequestContextManager {
         return jsonNode.get(cpIdName).asLong()
     }
     
-    fun cleanCtx() {
-        ctx.clean()
+    fun resetCtx() {
+        ctx.resetRequestAttributes()
     }
 }

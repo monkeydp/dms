@@ -20,6 +20,6 @@ class MyHandlerInterceptor : HandlerInterceptor {
     override fun afterCompletion(request: HttpServletRequest, response: HttpServletResponse, handler: Any,
                                  ex: Exception?) {
         super.afterCompletion(request, response, handler, ex)
-        manager.cleanCtx()
+        manager.resetCtx()
     }
 }

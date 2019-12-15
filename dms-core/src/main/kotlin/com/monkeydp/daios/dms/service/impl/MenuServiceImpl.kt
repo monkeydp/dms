@@ -1,7 +1,7 @@
 package com.monkeydp.daios.dms.service.impl
 
 import com.monkeydp.daios.dms.sdk.api.MenuApi
-import com.monkeydp.daios.dms.sdk.share.kodein.DmShareKodeinHelper
+import com.monkeydp.daios.dms.sdk.share.kodein.DmKodeinHelper
 import com.monkeydp.daios.dms.sdk.metadata.menu.MenuLoadingCtx
 import com.monkeydp.daios.dms.service.contract.MenuService
 import org.springframework.stereotype.Service
@@ -13,7 +13,7 @@ import org.springframework.stereotype.Service
 @Service
 class MenuServiceImpl : MenuService {
     
-    private val api: MenuApi get() = DmShareKodeinHelper.findImpl()
+    private val api: MenuApi get() = DmKodeinHelper.findImpl()
     
     override fun loadMenu(ctx: MenuLoadingCtx) = api.loadMenu(ctx)
 }

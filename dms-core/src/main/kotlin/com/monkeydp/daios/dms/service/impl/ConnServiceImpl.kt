@@ -7,7 +7,7 @@ import com.monkeydp.daios.dms.module.ModuleRegistry
 import com.monkeydp.daios.dms.sdk.api.ConnApi
 import com.monkeydp.daios.dms.sdk.conn.Conn
 import com.monkeydp.daios.dms.sdk.conn.ConnProfile
-import com.monkeydp.daios.dms.sdk.share.kodein.DmShareKodeinHelper
+import com.monkeydp.daios.dms.sdk.share.kodein.DmKodeinHelper
 import com.monkeydp.daios.dms.service.contract.ConnManager
 import com.monkeydp.daios.dms.service.contract.ConnService
 import com.monkeydp.daios.dms.session.UserSession
@@ -32,7 +32,7 @@ internal class ConnServiceImpl @Autowired constructor(
         private val log = getLogger()
     }
     
-    private val api: ConnApi get() = DmShareKodeinHelper.findImpl()
+    private val api: ConnApi get() = DmKodeinHelper.findImpl()
     
     override fun saveCp(cp: ConnProfile): ConnProfile {
         val saved = cpService.save(cp.full())
@@ -73,7 +73,7 @@ internal class ConnServiceImpl @Autowired constructor(
     private fun getConn(cp: ConnProfile): Conn<*> {
         val module = registry.findModule(cp)
         module.setSpecificClassLoader(cp.dsVersion)
-        val api = DmShareKodeinHelper.findImpl<ConnApi>(cp.datasource)
+        val api = DmKodeinHelper.findImpl<ConnApi>(cp.datasource)
         val conn = api.getConn(cp)
         module.removeSpecificClassLoader()
         return conn
@@ -95,11 +95,11 @@ internal class ConnServiceImpl @Autowired constructor(
     override fun testConn(cp: ConnProfile): Unit =
             getConn(cp).use { if (!it.isValid()) ierror("Test conn fail, please check conn profile: $cp") }
     
-    override fun findCw(cpId: Long, connId: Long?, ignoreNotFound: Boolean) =
-            if (connId == null) findUserCw(cpId, ignoreNotFound)
+    override fun findCwOrNull(cpId: Long, connId: Long?, ignoreNotFound: Boolean) =
+            if (connId == null) findUserCwOrNull(cpId, ignoreNotFound)
             else finOtherCw(cpId, connId)
     
-    private fun findUserCw(cpId: Long, ignoreNotFound: Boolean) = manager.getActiveUserCw(cpId, ignoreNotFound)
+    private fun findUserCwOrNull(cpId: Long, ignoreNotFound: Boolean) = manager.getActiveUserCw(cpId, ignoreNotFound)
     
     private fun finOtherCw(cpId: Long, connId: Long) = manager.getActiveCw(cpId, connId, true)
 }

@@ -11,8 +11,8 @@ import kotlin.properties.Delegates
  * @author iPotato
  * @date 2019/12/15
  */
-private val mockDmsShareKodeinModule = Kodein.Module("mockDmsShareKodeinModule") {
+private val mockDmsKodeinModule = Kodein.Module("mockDmsKodeinModule") {
     bind<EventPublisher>() with singleton { EventPublisher.mock() }
 }
 
-var dmsShareKodeinModule: Kodein.Module by Delegates.notNullSingleton(mockDmsShareKodeinModule)
+var dmsKodeinModule: Kodein.Module by Delegates.notNullSingleton(mockDmsKodeinModule)
