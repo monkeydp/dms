@@ -1,9 +1,10 @@
 package com.monkeydp.daios.dms.sdk.share.kodein
 
 import com.monkeydp.daios.dms.sdk.annot.SdkEnum
+import com.monkeydp.daios.dms.sdk.config.kodein
 import com.monkeydp.daios.dms.sdk.datasource.Datasource
 import com.monkeydp.daios.dms.sdk.datasource.DsVersion
-import com.monkeydp.daios.dms.sdk.share.request.MyRequestContext
+import com.monkeydp.daios.dms.sdk.share.request.RequestAttributes
 import com.monkeydp.tools.enumx.Enumx
 import com.monkeydp.tools.ext.kotlin.enumSet
 import com.monkeydp.tools.ext.kotlin.matchOne
@@ -11,6 +12,7 @@ import com.monkeydp.tools.ext.kotlin.transformEnumName
 import com.monkeydp.tools.ext.main.ierror
 import com.monkeydp.tools.ext.main.valueOfOrNullX
 import org.kodein.di.generic.instance
+import org.kodein.di.generic.provider
 import kotlin.reflect.KClass
 import kotlin.reflect.full.findAnnotation
 
@@ -20,7 +22,8 @@ import kotlin.reflect.full.findAnnotation
  */
 object DmKodeinHelper {
     
-    val defaultDs get() = MyRequestContext.requestAttributes.datasource
+    val requestAttributes: () -> RequestAttributes by kodein.provider()
+    val defaultDs get() = requestAttributes().datasource
     
     /**
      * @param E enum contract

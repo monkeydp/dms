@@ -1,10 +1,12 @@
 package com.monkeydp.daios.dms.request
 
+import com.monkeydp.daios.dms.config.kodein
 import com.monkeydp.daios.dms.sdk.conn.ConnRequired
 import com.monkeydp.daios.dms.sdk.conn.HasCpId
-import com.monkeydp.daios.dms.sdk.share.request.MyRequestContext
+import com.monkeydp.daios.dms.sdk.share.request.RequestContext
 import com.monkeydp.daios.dms.service.contract.ConnService
 import com.monkeydp.tools.util.JsonUtil
+import org.kodein.di.generic.instance
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.core.MethodParameter
 import org.springframework.stereotype.Component
@@ -18,7 +20,7 @@ import kotlin.reflect.full.isSuperclassOf
 @Component
 class RequestContextManager {
     
-    private val ctx = MyRequestContext
+    private val ctx: RequestContext by kodein.instance()
     
     @Autowired
     private lateinit var connService: ConnService
