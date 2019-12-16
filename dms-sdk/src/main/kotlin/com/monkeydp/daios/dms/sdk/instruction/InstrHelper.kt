@@ -21,18 +21,20 @@ object InstrHelper {
     /**
      * Get instruction by the given class name
      */
-    fun getInstr(any: Any,
-                 actionReverseIndex: Int = DEFAULT_ACTION_REVERSE_INDEX,
-                 targetReverseIndex: Int = DEFAULT_TARGET_REVERSE_INDEX
+    fun getInstr(
+            any: Any,
+            actionReverseIndex: Int = DEFAULT_ACTION_REVERSE_INDEX,
+            targetReverseIndex: Int = DEFAULT_TARGET_REVERSE_INDEX
     ): Instruction {
         val action = getAction(any, actionReverseIndex)
         val target = getTarget(any, targetReverseIndex)
         return StdInstr(action, target)
     }
     
-    fun getInstrOrNull(any: Any,
-                       actionReverseIndex: Int = DEFAULT_ACTION_REVERSE_INDEX,
-                       targetReverseIndex: Int = DEFAULT_TARGET_REVERSE_INDEX
+    fun getInstrOrNull(
+            any: Any,
+            actionReverseIndex: Int = DEFAULT_ACTION_REVERSE_INDEX,
+            targetReverseIndex: Int = DEFAULT_TARGET_REVERSE_INDEX
     ): Instruction? {
         val action = getActionOrNull(any, actionReverseIndex)
         val target = getTargetOrNull(any, targetReverseIndex)
@@ -43,20 +45,28 @@ object InstrHelper {
     /**
      * Get action by the given class name
      */
-    fun getAction(any: Any, reverseIndex: Int = DEFAULT_ACTION_REVERSE_INDEX): Action<*> =
-            getEnum(GlobalAction::class, any, reverseIndex)
+    fun getAction(
+            any: Any,
+            reverseIndex: Int = DEFAULT_ACTION_REVERSE_INDEX
+    ): Action<*> = getEnum(GlobalAction::class, any, reverseIndex)
     
-    fun getActionOrNull(any: Any, reverseIndex: Int = DEFAULT_ACTION_REVERSE_INDEX): Action<*>? =
-            getEnumOrNull(GlobalAction::class, any, reverseIndex)
+    fun getActionOrNull(
+            any: Any,
+            reverseIndex: Int = DEFAULT_ACTION_REVERSE_INDEX
+    ): Action<*>? = getEnumOrNull(GlobalAction::class, any, reverseIndex)
     
     /**
      * Get target by the given class name
      */
-    fun getTarget(any: Any, reverseIndex: Int = DEFAULT_TARGET_REVERSE_INDEX): Target<*> =
-            getEnum(GlobalTarget::class, any, reverseIndex)
+    fun getTarget(
+            any: Any,
+            reverseIndex: Int = DEFAULT_TARGET_REVERSE_INDEX
+    ): Target<*> = getEnum(GlobalTarget::class, any, reverseIndex)
     
-    fun getTargetOrNull(any: Any, reverseIndex: Int = DEFAULT_TARGET_REVERSE_INDEX): Target<*>? =
-            getEnumOrNull(GlobalTarget::class, any, reverseIndex)
+    fun getTargetOrNull(
+            any: Any,
+            reverseIndex: Int = DEFAULT_TARGET_REVERSE_INDEX
+    ): Target<*>? = getEnumOrNull(GlobalTarget::class, any, reverseIndex)
     
     private inline fun <reified E : Enum<E>> getEnum(enumClass: KClass<E>, any: Any, reverseIndex: Int): E {
         val enumName = getEnumName(any.classX, reverseIndex)

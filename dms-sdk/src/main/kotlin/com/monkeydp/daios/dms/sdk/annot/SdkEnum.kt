@@ -1,6 +1,5 @@
 package com.monkeydp.daios.dms.sdk.annot
 
-import com.monkeydp.tools.enumx.Enumx
 import com.monkeydp.tools.ext.kodein.component.KodeinComponent
 import com.monkeydp.tools.ext.kodein.component.KodeinComponent.Type
 import kotlin.annotation.AnnotationTarget.CLASS
@@ -12,4 +11,4 @@ import kotlin.reflect.KClass
  */
 @KodeinComponent<KClass<*>>(Type.K_CLASS)
 @Target(CLASS)
-annotation class SdkEnum(val parent: KClass<out Enumx<*>> = Nothing::class)
+annotation class SdkEnum
