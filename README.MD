@@ -115,6 +115,7 @@ abstr | abstract
 annot | annotation
 &nbsp;|
 **# C** |
+comp | component
 conn | connection
 ctx | context
 cp | connection profile

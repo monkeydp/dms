@@ -1,6 +1,8 @@
 package com.monkeydp.daios.dms.sdk.share.kodein
 
 import com.monkeydp.daios.dms.sdk.event.EventPublisher
+import com.monkeydp.daios.dms.sdk.instruction.action.Action
+import com.monkeydp.daios.dms.sdk.instruction.action.GlobalAction
 import com.monkeydp.daios.dms.sdk.share.conn.ConnContext
 import com.monkeydp.daios.dms.sdk.share.conn.connContext
 import com.monkeydp.daios.dms.sdk.share.request.RequestContext
@@ -11,6 +13,7 @@ import org.kodein.di.generic.bind
 import org.kodein.di.generic.provider
 import org.kodein.di.generic.singleton
 import kotlin.properties.Delegates
+import kotlin.reflect.KClass
 
 /**
  * @author iPotato
@@ -27,6 +30,7 @@ val sdkKodeinModule = Kodein.Module("sdkKodeinModule") {
         bind<RequestContext>() with singleton { it }
         bind<ConnContext>() with provider { connContext(it.requestAttributes.attrs) }
     }
+    bind<KClass<out Action<*>>>() with singleton { GlobalAction::class }
 }
 
 val kodeinModules get() = arrayOf(dmsKodeinModule, sdkKodeinModule)

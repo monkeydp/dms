@@ -35,6 +35,7 @@ dependencies {
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     // sdk
     api("com.monkeydp.daios.dms:dms-sdk") {
+        exclude("org.springframework")
         exclude("org.springframework.boot")
     }
     // zip
