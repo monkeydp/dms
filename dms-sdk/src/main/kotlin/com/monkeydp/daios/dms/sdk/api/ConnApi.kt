@@ -7,7 +7,7 @@ import com.monkeydp.daios.dms.sdk.conn.ConnProfile
  * @author iPotato
  * @date 2019/10/6
  */
-interface ConnApi {
+interface ConnApi : Api {
     /**
      * Get a conn
      */

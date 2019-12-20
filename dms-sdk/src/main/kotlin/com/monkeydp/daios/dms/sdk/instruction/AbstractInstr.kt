@@ -9,8 +9,8 @@ import com.monkeydp.daios.dms.sdk.instruction.target.Target
  */
 abstract class AbstractInstr : Instruction {
     
-    override val action: Action<*> by lazy { InstrHelper.getAction(this, 1) }
-    override val target: Target<*> by lazy { InstrHelper.getTarget(this, 0) }
+    override val action: Action<*> by lazy { InstrHelper.getActionByClassname(this, 1) }
+    override val target: Target<*> by lazy { InstrHelper.getTargetByClassname(this, 0) }
     
     override fun equals(other: Any?) =
             other is Instruction &&

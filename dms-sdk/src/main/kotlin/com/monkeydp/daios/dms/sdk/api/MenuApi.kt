@@ -7,6 +7,6 @@ import com.monkeydp.daios.dms.sdk.metadata.menu.MenuLoadingCtx
  * @author iPotato
  * @date 2019/10/25
  */
-interface MenuApi {
+interface MenuApi : Api {
     fun loadMenu(ctx: MenuLoadingCtx): Menu?
 }

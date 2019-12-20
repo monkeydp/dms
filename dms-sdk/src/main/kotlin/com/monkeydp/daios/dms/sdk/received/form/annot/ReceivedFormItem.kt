@@ -1,4 +1,4 @@
-package com.monkeydp.daios.dms.sdk.annot
+package com.monkeydp.daios.dms.sdk.received.form.annot
 
 import com.monkeydp.daios.dms.sdk.metadata.JsType
 import com.monkeydp.daios.dms.sdk.metadata.JsType.STRING
@@ -11,7 +11,7 @@ import kotlin.annotation.AnnotationTarget.PROPERTY
  * @date 2019/11/8
  */
 @Target(PROPERTY)
-annotation class SdkFormItem(
+annotation class ReceivedFormItem(
         /**
          * If empty, the prop name is used
          * Camelcase prop name would be separated by space, capitalize every word

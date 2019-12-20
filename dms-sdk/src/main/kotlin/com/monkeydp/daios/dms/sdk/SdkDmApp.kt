@@ -1,4 +1,4 @@
-package com.monkeydp.daios.dms.sdk.annot
+package com.monkeydp.daios.dms.sdk
 
 import com.monkeydp.daios.dms.sdk.datasource.Datasource
 import kotlin.annotation.AnnotationTarget.CLASS

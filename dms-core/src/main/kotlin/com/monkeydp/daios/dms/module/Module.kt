@@ -1,12 +1,12 @@
 package com.monkeydp.daios.dms.module
 
-import com.monkeydp.daios.dms.sdk.annot.SdkDmApp
-import com.monkeydp.daios.dms.sdk.annot.SdkDsDef
+import com.monkeydp.daios.dms.sdk.SdkDmApp
 import com.monkeydp.daios.dms.sdk.config.PackageName
 import com.monkeydp.daios.dms.sdk.datasource.Datasource
 import com.monkeydp.daios.dms.sdk.datasource.DsDef
 import com.monkeydp.daios.dms.sdk.datasource.DsVersion
 import com.monkeydp.daios.dms.sdk.share.kodein.DmKodeinHelper
+import com.monkeydp.tools.ext.kotlin.findAnnot
 import com.monkeydp.tools.ext.kotlin.matchOne
 import com.monkeydp.tools.ext.reflections.getAnnotatedSingletons
 import com.monkeydp.tools.ext.reflections.reflections
@@ -15,7 +15,6 @@ import java.io.File
 import java.io.FileFilter
 import java.net.URL
 import java.net.URLClassLoader
-import kotlin.reflect.full.findAnnotation
 
 /**
  * @author iPotato
@@ -38,8 +37,8 @@ class Module(private val deployDir: File) {
         classLoader = initClassLoader()
         sdkDmApp = loadSdkDmApp()
         datasource = sdkDmApp.datasource
-        val dsDefSet = findImpl<Set<DsDef>>(SdkDsDef::class)
-        dsDefMap = dsDefSet.map { it.version to it }.toMap()
+        val dsDefs = findImpl<Iterable<DsDef>>()
+        dsDefMap = dsDefs.map { it.version to it }.toMap()
         classLoader.loaderMap = initSpecificClassLoaderMap()
     }
     
@@ -81,7 +80,7 @@ class Module(private val deployDir: File) {
     private fun loadSdkDmApp() =
             reflections(PackageName.dm, classLoader).run {
                 getAnnotatedSingletons(SdkDmApp::class).matchOne { true }.run {
-                    this.javaClass.kotlin.findAnnotation<SdkDmApp>()!!
+                    this.javaClass.kotlin.findAnnot<SdkDmApp>()
                 }
             }
     

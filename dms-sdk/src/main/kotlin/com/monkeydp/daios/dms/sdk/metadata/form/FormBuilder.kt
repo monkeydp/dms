@@ -1,12 +1,13 @@
 package com.monkeydp.daios.dms.sdk.metadata.form
 
-import com.monkeydp.daios.dms.sdk.annot.SdkFormItem
 import com.monkeydp.daios.dms.sdk.metadata.form.item.FormItem
 import com.monkeydp.daios.dms.sdk.metadata.form.item.StdFormItem
+import com.monkeydp.daios.dms.sdk.received.form.ReceivedForm
+import com.monkeydp.daios.dms.sdk.received.form.annot.ReceivedFormItem
 import com.monkeydp.tools.ext.kotlin.camelCaseSeparated
+import com.monkeydp.tools.ext.kotlin.findAnnot
 import com.monkeydp.tools.ext.kotlin.getAnnotatedProps
 import kotlin.reflect.KClass
-import kotlin.reflect.full.findAnnotation
 
 /**
  * @author iPotato
@@ -14,11 +15,11 @@ import kotlin.reflect.full.findAnnotation
  */
 object FormBuilder {
     
-    fun buildForm(clazz: KClass<*>): Form {
-        val props = clazz.getAnnotatedProps<SdkFormItem>()
+    fun buildForm(kClass: KClass<out ReceivedForm>): Form {
+        val props = kClass.getAnnotatedProps<ReceivedFormItem>()
         val items = mutableListOf<FormItem>()
         props.forEach {
-            val annot = it.findAnnotation<SdkFormItem>()!!
+            val annot = it.findAnnot<ReceivedFormItem>()
             val propName = it.name
             val item = StdFormItem(
                     label = if (annot.label.isNotEmpty()) annot.label else propName.camelCaseSeparated(true),

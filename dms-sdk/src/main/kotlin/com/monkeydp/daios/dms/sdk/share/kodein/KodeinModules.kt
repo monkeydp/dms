@@ -3,6 +3,10 @@ package com.monkeydp.daios.dms.sdk.share.kodein
 import com.monkeydp.daios.dms.sdk.event.EventPublisher
 import com.monkeydp.daios.dms.sdk.instruction.action.Action
 import com.monkeydp.daios.dms.sdk.instruction.action.GlobalAction
+import com.monkeydp.daios.dms.sdk.instruction.target.GlobalTarget
+import com.monkeydp.daios.dms.sdk.instruction.target.Target
+import com.monkeydp.daios.dms.sdk.metadata.icon.GlobalIcon
+import com.monkeydp.daios.dms.sdk.metadata.icon.Icon
 import com.monkeydp.daios.dms.sdk.share.conn.ConnContext
 import com.monkeydp.daios.dms.sdk.share.conn.connContext
 import com.monkeydp.daios.dms.sdk.share.request.RequestContext
@@ -31,6 +35,8 @@ val sdkKodeinModule = Kodein.Module("sdkKodeinModule") {
         bind<ConnContext>() with provider { connContext(it.requestAttributes.attrs) }
     }
     bind<KClass<out Action<*>>>() with singleton { GlobalAction::class }
+    bind<KClass<out Target<*>>>() with singleton { GlobalTarget::class }
+    bind<KClass<out Icon<*>>>() with singleton { GlobalIcon::class }
 }
 
 val kodeinModules get() = arrayOf(dmsKodeinModule, sdkKodeinModule)

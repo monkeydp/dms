@@ -6,6 +6,6 @@ import com.monkeydp.daios.dms.sdk.instruction.InstrParsingCtx
  * @author iPotato
  * @date 2019/11/5
  */
-interface InstrApi {
+interface InstrApi : Api {
     fun parse(ctx: InstrParsingCtx)
 }
