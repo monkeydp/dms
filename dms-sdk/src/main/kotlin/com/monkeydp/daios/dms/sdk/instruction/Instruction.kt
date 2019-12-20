@@ -13,3 +13,8 @@ interface Instruction {
     val action: Action<*>
     val target: Target<*>
 }
+
+fun instruction(
+        action: Action<*>,
+        target: Target<*>
+): Instruction = StdInstr(action, target)

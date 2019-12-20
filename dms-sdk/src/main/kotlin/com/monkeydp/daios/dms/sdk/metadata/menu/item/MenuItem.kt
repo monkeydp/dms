@@ -14,3 +14,11 @@ interface MenuItem {
     val hasSubmenu: Boolean
     var status: MenuItemStatus
 }
+
+fun menuItem(
+        instr: Instruction,
+        name: String,
+        icon: Icon<*>,
+        hasSubmenu: Boolean,
+        status: MenuItemStatus = MenuItemStatus.ENABLED
+): MenuItem = StdMi(instr, name, icon, hasSubmenu, status)

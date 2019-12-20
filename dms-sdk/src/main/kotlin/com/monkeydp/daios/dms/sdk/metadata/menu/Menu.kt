@@ -9,3 +9,5 @@ import com.monkeydp.daios.dms.sdk.metadata.menu.item.MenuItem
 interface Menu {
     val items: List<MenuItem>
 }
+
+fun menu(items: List<MenuItem>): Menu = StdMenu(items)

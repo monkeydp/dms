@@ -41,3 +41,14 @@ interface FormItem {
      */
     val disabled: Boolean
 }
+
+fun formItem(
+        label: String,
+        name: String,
+        desc: String,
+        jsType: JsType,
+        component: UiComponent,
+        required: Boolean,
+        hidden: Boolean,
+        disabled: Boolean
+): FormItem = StdFormItem(label, name, desc, jsType, component, required, hidden, disabled)

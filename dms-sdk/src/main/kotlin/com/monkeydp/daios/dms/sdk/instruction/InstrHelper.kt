@@ -22,9 +22,10 @@ object InstrHelper {
             actionReverseIndex: Int = DEFAULT_ACTION_REVERSE_INDEX,
             targetReverseIndex: Int = DEFAULT_TARGET_REVERSE_INDEX
     ): Instruction {
-        val action = getActionByClassname(any, actionReverseIndex)
-        val target = getTargetByClassname(any, targetReverseIndex)
-        return StdInstr(action, target)
+        return instruction(
+                action = getActionByClassname(any, actionReverseIndex),
+                target = getTargetByClassname(any, targetReverseIndex)
+        )
     }
     
     fun getInstrOrNull(
@@ -35,7 +36,7 @@ object InstrHelper {
         val action = getActionOrNullByClassname(any, actionReverseIndex)
         val target = getTargetOrNullByClassname(any, targetReverseIndex)
         if (action == null || target == null) return null
-        return StdInstr(action, target)
+        return instruction(action, target)
     }
     
     fun getActionByClassname(

@@ -8,10 +8,10 @@ import com.monkeydp.daios.dms.sdk.metadata.menu.item.MenuItemStatus.ENABLED
  * @author iPotato
  * @date 2019/11/4
  */
-data class StdMi(
-        override val instr: Instruction,
-        override val name: String,
-        override val icon: Icon<*>,
-        override val hasSubmenu: Boolean,
-        override var status: MenuItemStatus = ENABLED
-) : MenuItem
+class StdMi(
+        instr: Instruction,
+        name: String,
+        icon: Icon<*>,
+        hasSubmenu: Boolean,
+        status: MenuItemStatus = ENABLED
+) : AbstractMi(instr, name, icon, hasSubmenu, status)

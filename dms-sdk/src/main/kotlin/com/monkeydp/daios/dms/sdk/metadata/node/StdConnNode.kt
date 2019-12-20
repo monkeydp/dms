@@ -6,15 +6,11 @@ import com.monkeydp.daios.dms.sdk.metadata.icon.Icon
 
 /**
  * @author iPotato
- * @date 2019/10/27
+ * @date 2019/10/25
  */
-interface ConnNode : Node {
-    val cp: ConnProfile
-}
-
-fun connNode(
+internal class StdConnNode(
         cp: ConnProfile,
         defId: Int,
         target: Target<*>,
         icon: Icon<*>
-): ConnNode = StdConnNode(cp, defId, target, icon)
+) : AbstractConnNode(cp, defId, target, icon)

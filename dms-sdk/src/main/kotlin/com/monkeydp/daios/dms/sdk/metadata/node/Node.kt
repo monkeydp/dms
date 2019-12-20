@@ -13,3 +13,10 @@ interface Node {
     val name: String
     val icon: Icon<*>
 }
+
+fun node(
+        defId: Int,
+        target: Target<*>,
+        name: String,
+        icon: Icon<*>
+): Node = StdNode(defId, target, name, icon)
