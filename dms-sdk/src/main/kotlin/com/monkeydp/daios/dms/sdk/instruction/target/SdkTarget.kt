@@ -18,7 +18,7 @@ import kotlin.reflect.KClass
 annotation class SdkTarget {
     object KodeinBuilderConfig : AbstractKodeinBuilderConfig<KodeinKClassComp>() {
         override fun Kodein.Builder.configOne(comp: KodeinKClassComp) {
-            bind<KClass<out Target<*>>>(overrides = true) with singletonX { comp.annotatedKClass }
+            bind<KClass<out Target<*>>>() with singletonX { comp.annotatedKClass }
         }
     }
 }

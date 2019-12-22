@@ -1,23 +1,18 @@
 package com.monkeydp.daios.dms.sdk.share.kodein
 
+import com.monkeydp.daios.dms.sdk.config.SdkKodeinRepo
 import com.monkeydp.daios.dms.sdk.event.EventPublisher
-import com.monkeydp.daios.dms.sdk.instruction.action.Action
-import com.monkeydp.daios.dms.sdk.instruction.action.GlobalAction
-import com.monkeydp.daios.dms.sdk.instruction.target.GlobalTarget
-import com.monkeydp.daios.dms.sdk.instruction.target.Target
-import com.monkeydp.daios.dms.sdk.metadata.icon.GlobalIcon
-import com.monkeydp.daios.dms.sdk.metadata.icon.Icon
 import com.monkeydp.daios.dms.sdk.share.conn.ConnContext
 import com.monkeydp.daios.dms.sdk.share.conn.connContext
 import com.monkeydp.daios.dms.sdk.share.request.RequestContext
 import com.monkeydp.daios.dms.sdk.share.request.requestContext
+import com.monkeydp.tools.ext.kodein.KodeinHelper.bindComps
 import com.monkeydp.tools.ext.kotlin.notNullSingleton
 import org.kodein.di.Kodein
 import org.kodein.di.generic.bind
 import org.kodein.di.generic.provider
 import org.kodein.di.generic.singleton
 import kotlin.properties.Delegates
-import kotlin.reflect.KClass
 
 /**
  * @author iPotato
@@ -34,9 +29,7 @@ val sdkKodeinModule = Kodein.Module("sdkKodeinModule") {
         bind<RequestContext>() with singleton { it }
         bind<ConnContext>() with provider { connContext(it.requestAttributes.attrs) }
     }
-    bind<KClass<out Action<*>>>() with singleton { GlobalAction::class }
-    bind<KClass<out Target<*>>>() with singleton { GlobalTarget::class }
-    bind<KClass<out Icon<*>>>() with singleton { GlobalIcon::class }
+    bindComps(SdkKodeinRepo.comps)
 }
 
-val kodeinModules get() = arrayOf(dmsKodeinModule, sdkKodeinModule)
+val kodeinModules get() = arrayOf(sdkKodeinModule, dmsKodeinModule)

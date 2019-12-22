@@ -148,6 +148,9 @@ nd | node definition
 **# P** |
 prop | property
 &nbsp;|
+**# R** |
+repo | repository
+&nbsp;|
 **# S** |
 std | standard
 struct | structure

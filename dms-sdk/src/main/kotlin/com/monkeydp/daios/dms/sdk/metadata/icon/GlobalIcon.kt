@@ -4,6 +4,7 @@ package com.monkeydp.daios.dms.sdk.metadata.icon
  * @author iPotato
  * @date 2019/10/27
  */
+@SdkIcon
 enum class GlobalIcon(
         override val namex: String,
         override val color: String

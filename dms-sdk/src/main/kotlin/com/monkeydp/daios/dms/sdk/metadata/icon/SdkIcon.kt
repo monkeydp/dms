@@ -18,7 +18,7 @@ import kotlin.reflect.KClass
 annotation class SdkIcon {
     object KodeinBuilderConfig : AbstractKodeinBuilderConfig<KodeinKClassComp>() {
         override fun Kodein.Builder.configOne(comp: KodeinKClassComp) {
-            bind<KClass<out Icon<*>>>(overrides = true) with singletonX { comp.annotatedKClass }
+            bind<KClass<out Icon<*>>>() with singletonX { comp.annotatedKClass }
         }
     }
 }

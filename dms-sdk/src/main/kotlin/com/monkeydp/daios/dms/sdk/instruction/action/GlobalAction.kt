@@ -6,6 +6,7 @@ import com.monkeydp.tools.ext.kotlin.toUpperCamelCase
  * @author iPotato
  * @date 2019/10/25
  */
+@SdkAction
 enum class GlobalAction(fullName: String = "") : Action<GlobalAction> {
     NEW, EDIT, DELETE, OPEN, CLOSE, MANAGE, SHOW
     ;

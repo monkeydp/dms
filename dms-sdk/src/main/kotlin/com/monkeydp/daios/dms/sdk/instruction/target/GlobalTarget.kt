@@ -6,6 +6,7 @@ import com.monkeydp.tools.ext.kotlin.toUpperCamelCase
  * @author iPotato
  * @date 2019/10/25
  */
+@SdkTarget
 enum class GlobalTarget(fullName: String = "") : Target<GlobalTarget> {
     
     CONN("connection"),
