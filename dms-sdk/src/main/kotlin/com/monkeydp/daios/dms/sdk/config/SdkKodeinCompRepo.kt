@@ -1,12 +1,12 @@
 package com.monkeydp.daios.dms.sdk.config
 
-import com.monkeydp.tools.ext.kodein.component.abstr.AbstractKodeinRepo
+import com.monkeydp.tools.ext.kodein.component.abstr.AbstractKodeinCompRepo
 
 /**
  * @author iPotato
  * @date 2019/12/22
  */
-internal object SdkKodeinRepo : AbstractKodeinRepo() {
+internal object SdkKodeinCompRepo : AbstractKodeinCompRepo() {
     override val annotReflections = reflections(
             packageNames = listOf(PackageName.sdk)
     )

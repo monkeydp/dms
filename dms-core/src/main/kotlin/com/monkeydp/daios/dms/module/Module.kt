@@ -5,7 +5,8 @@ import com.monkeydp.daios.dms.sdk.config.PackageName
 import com.monkeydp.daios.dms.sdk.datasource.Datasource
 import com.monkeydp.daios.dms.sdk.datasource.DsDef
 import com.monkeydp.daios.dms.sdk.datasource.DsVersion
-import com.monkeydp.daios.dms.sdk.share.kodein.DmKodeinHelper
+import com.monkeydp.daios.dms.sdk.share.kodein.dmKodeinRepo
+import com.monkeydp.daios.dms.sdk.share.kodein.findImpl
 import com.monkeydp.tools.ext.kotlin.findAnnot
 import com.monkeydp.tools.ext.kotlin.matchOne
 import com.monkeydp.tools.ext.reflections.getAnnotatedSingletons
@@ -42,7 +43,8 @@ class Module(private val deployDir: File) {
         classLoader.loaderMap = initSpecificClassLoaderMap()
     }
     
-    private inline fun <reified T : Any> findImpl(tag: Any? = null) = DmKodeinHelper.findImpl<T>(datasource, tag)
+    private inline fun <reified T : Any> findImpl(tag: Any? = null) =
+            dmKodeinRepo.findImpl<T>(datasource, tag)
     
     private fun initClassLoader(): ModuleClassLoader {
         val classesUrl = File(deployDir, classesPath).toURI().toURL()

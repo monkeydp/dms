@@ -3,8 +3,6 @@ package com.monkeydp.daios.dms.sdk.metadata.node
 import com.monkeydp.daios.dms.sdk.conn.ConnProfile
 import com.monkeydp.daios.dms.sdk.instruction.target.Target
 import com.monkeydp.daios.dms.sdk.metadata.icon.Icon
-import com.monkeydp.tools.ext.kotlin.notNullSingleton
-import kotlin.properties.Delegates
 
 /**
  * @author iPotato

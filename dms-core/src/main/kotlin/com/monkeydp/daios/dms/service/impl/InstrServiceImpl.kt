@@ -2,7 +2,8 @@ package com.monkeydp.daios.dms.service.impl
 
 import com.monkeydp.daios.dms.sdk.api.InstrApi
 import com.monkeydp.daios.dms.sdk.instruction.InstrParsingCtx
-import com.monkeydp.daios.dms.sdk.share.kodein.DmKodeinHelper
+import com.monkeydp.daios.dms.sdk.share.kodein.dmKodeinRepo
+import com.monkeydp.daios.dms.sdk.share.kodein.findImpl
 import com.monkeydp.daios.dms.service.contract.InstrService
 import org.springframework.stereotype.Service
 
@@ -13,7 +14,7 @@ import org.springframework.stereotype.Service
 @Service
 class InstrServiceImpl : InstrService {
     
-    private val api: InstrApi get() = DmKodeinHelper.findImpl()
+    private val api: InstrApi get() = dmKodeinRepo.findImpl()
     
     override fun parse(ctx: InstrParsingCtx) = api.parse(ctx)
 }

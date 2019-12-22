@@ -5,7 +5,8 @@ import com.fasterxml.jackson.databind.DeserializationContext
 import com.fasterxml.jackson.databind.JsonDeserializer
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize
 import com.monkeydp.daios.dms.sdk.instruction.target.Target.TargetDeserializer
-import com.monkeydp.daios.dms.sdk.share.kodein.DmKodeinHelper
+import com.monkeydp.daios.dms.sdk.share.kodein.dmKodeinRepo
+import com.monkeydp.daios.dms.sdk.share.kodein.findEnum
 import com.monkeydp.tools.enumx.Enumx
 import com.monkeydp.tools.ext.kotlin.toUpperCamelCase
 import io.swagger.annotations.ApiModelProperty
@@ -28,7 +29,7 @@ interface Target<E> : Enumx<E>
     class TargetDeserializer : JsonDeserializer<Target<*>>() {
         override fun deserialize(p: JsonParser?, ctxt: DeserializationContext?): Target<*> {
             val name = p?.getValueAsString()!!
-            return DmKodeinHelper.findEnum(name)
+            return dmKodeinRepo.findEnum(enumName = name)
         }
     }
 }

@@ -8,7 +8,8 @@ import com.monkeydp.daios.dms.sdk.entity.User
 import com.monkeydp.daios.dms.sdk.mocker.ConnJsonMocker.CP_USER_INPUT
 import com.monkeydp.daios.dms.sdk.mocker.ConnJsonMocker.DATASOURCE
 import com.monkeydp.daios.dms.sdk.mocker.ConnJsonMocker.DS_VERSION_ID
-import com.monkeydp.daios.dms.sdk.share.kodein.DmKodeinHelper
+import com.monkeydp.daios.dms.sdk.share.kodein.dmKodeinRepo
+import com.monkeydp.daios.dms.sdk.share.kodein.findImpl
 import com.monkeydp.daios.dms.sdk.useful.UserInput
 import com.monkeydp.tools.ext.kotlin.convertTo
 import io.swagger.annotations.ApiModel
@@ -50,14 +51,14 @@ data class ConnProfile(
     val dsVersion: DsVersion<*>
         @JsonIgnore
         @Transient
-        get() = DmKodeinHelper.findDsVersion(datasource, dsVersionId)
+        get() = dmKodeinRepo.findDsVersion(datasource, dsVersionId)
     
     
     val form: NewConnForm
         @JsonIgnore
         @Transient
         get() {
-            val kClass = DmKodeinHelper.findImpl<KClass<out NewConnForm>>(datasource)
+            val kClass: KClass<out NewConnForm> = dmKodeinRepo.findImpl(datasource)
             return userInput.convertTo(kClass)
         }
 }

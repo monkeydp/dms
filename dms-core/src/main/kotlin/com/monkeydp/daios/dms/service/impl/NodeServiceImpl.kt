@@ -5,7 +5,8 @@ import com.monkeydp.daios.dms.sdk.api.NodeApi
 import com.monkeydp.daios.dms.sdk.metadata.node.ConnNode
 import com.monkeydp.daios.dms.sdk.metadata.node.Node
 import com.monkeydp.daios.dms.sdk.metadata.node.NodeLoadingCtx
-import com.monkeydp.daios.dms.sdk.share.kodein.DmKodeinHelper
+import com.monkeydp.daios.dms.sdk.share.kodein.dmKodeinRepo
+import com.monkeydp.daios.dms.sdk.share.kodein.findImpl
 import com.monkeydp.daios.dms.service.contract.NodeService
 import com.monkeydp.daios.dms.session.UserSession
 import org.springframework.beans.factory.annotation.Autowired
@@ -21,22 +22,19 @@ internal class NodeServiceImpl @Autowired constructor(
         private val cpService: ConnProfileService
 ) : NodeService {
     
-    private val api: NodeApi get() = DmKodeinHelper.findImpl()
+    private val api: NodeApi get() = dmKodeinRepo.findImpl()
     
     override fun loadConnNodes(): List<ConnNode> {
         val userId = session.userId
         val cps = cpService.findAllByUserId(userId)
         val connNodes = mutableListOf<ConnNode>()
         cps.forEach { cp ->
-            val api = DmKodeinHelper.findImpl<NodeApi>(cp.datasource)
+            val api: NodeApi = dmKodeinRepo.findImpl(cp.datasource)
             val connNode = api.loadConnNode(cp)
             connNodes.add(connNode)
         }
         return connNodes.toList()
     }
     
-    override fun loadSubNodes(ctx: NodeLoadingCtx): List<Node> {
-        val api = DmKodeinHelper.findImpl<NodeApi>()
-        return api.loadSubNodes(ctx)
-    }
+    override fun loadSubNodes(ctx: NodeLoadingCtx): List<Node> = api.loadSubNodes(ctx)
 }

@@ -1,6 +1,6 @@
 package com.monkeydp.daios.dms.sdk.share.kodein
 
-import com.monkeydp.daios.dms.sdk.config.SdkKodeinRepo
+import com.monkeydp.daios.dms.sdk.config.SdkKodeinCompRepo
 import com.monkeydp.daios.dms.sdk.event.EventPublisher
 import com.monkeydp.daios.dms.sdk.share.conn.ConnContext
 import com.monkeydp.daios.dms.sdk.share.conn.connContext
@@ -29,7 +29,7 @@ val sdkKodeinModule = Kodein.Module("sdkKodeinModule") {
         bind<RequestContext>() with singleton { it }
         bind<ConnContext>() with provider { connContext(it.requestAttributes.attrs) }
     }
-    bindComps(SdkKodeinRepo.comps)
+    bindComps(SdkKodeinCompRepo.comps)
 }
 
 val kodeinModules get() = arrayOf(sdkKodeinModule, dmsKodeinModule)

@@ -1,7 +1,6 @@
 package com.monkeydp.daios.dms.sdk.ext
 
 import com.monkeydp.daios.dms.sdk.datasource.Datasource
-import com.monkeydp.daios.dms.sdk.share.kodein.getDmKodein
 import com.monkeydp.tools.ext.kotlin.camelCaseFirst
 
 /**
@@ -11,6 +10,3 @@ import com.monkeydp.tools.ext.kotlin.camelCaseFirst
 fun Any.getDsNameByClassname() = javaClass.simpleName.camelCaseFirst()
 
 fun Any.getDatasourceByClassname() = Datasource.valueOf(getDsNameByClassname().toUpperCase())
-
-fun Any.getDmKodein() =
-        getDmKodein(getDatasourceByClassname())

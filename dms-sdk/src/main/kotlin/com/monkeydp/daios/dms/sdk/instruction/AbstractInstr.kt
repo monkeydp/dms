@@ -2,8 +2,6 @@ package com.monkeydp.daios.dms.sdk.instruction
 
 import com.monkeydp.daios.dms.sdk.instruction.action.Action
 import com.monkeydp.daios.dms.sdk.instruction.target.Target
-import com.monkeydp.tools.ext.kotlin.notNullSingleton
-import kotlin.properties.Delegates
 
 /**
  * @author iPotato
