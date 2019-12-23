@@ -2,7 +2,7 @@ package com.monkeydp.daios.dms.test.service
 
 import com.monkeydp.daios.dms.config.kodein
 import com.monkeydp.daios.dms.module.ModuleTestdata
-import com.monkeydp.daios.dms.sdk.share.conn.connContext
+import com.monkeydp.daios.dms.sdk.share.conn.ConnContext
 import com.monkeydp.daios.dms.sdk.share.request.RequestContext
 import com.monkeydp.daios.dms.test.AbstractTest
 import org.junit.Before
@@ -19,7 +19,7 @@ abstract class AbstractServiceTest : AbstractTest() {
     @Before
     fun before() {
         ctx.setRequestAttributes(
-                connContext {
+                ConnContext {
                     cp = ModuleTestdata.cp
                 }
         )

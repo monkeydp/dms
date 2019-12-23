@@ -9,6 +9,28 @@ interface RequestContext {
     fun setRequestAttributes(attributes: RequestAttributes)
     fun setRequestAttributes(any: Any)
     fun resetRequestAttributes()
+    
+    companion object {
+        final val SINGLETON: RequestContext = StdRequestContext
+    }
 }
 
-internal val requestContext = StdRequestContext
+internal abstract class AbstractRequestContext : RequestContext {
+    
+    private val requestAttributesHolder = ThreadLocal<RequestAttributes>()
+    override val requestAttributes get() = requestAttributesHolder.get()!!
+    
+    override fun setRequestAttributes(attributes: RequestAttributes) {
+        requestAttributesHolder.set(attributes)
+    }
+    
+    override fun setRequestAttributes(any: Any) {
+        setRequestAttributes(RequestAttributes(any))
+    }
+    
+    override fun resetRequestAttributes() {
+        requestAttributesHolder.remove()
+    }
+}
+
+private object StdRequestContext : AbstractRequestContext()

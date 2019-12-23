@@ -4,6 +4,8 @@ import com.monkeydp.daios.dms.sdk.conn.Conn
 import com.monkeydp.daios.dms.sdk.conn.ConnProfile
 import com.monkeydp.tools.ext.kotlin.copyPropValuesFrom
 import com.monkeydp.tools.ext.kotlin.initInstance
+import com.monkeydp.tools.ext.kotlin.notNullSingleton
+import kotlin.properties.Delegates
 
 /**
  * @author iPotato
@@ -13,10 +15,16 @@ interface ConnContext {
     var cp: ConnProfile
     val datasource get() = cp.datasource
     var conn: Conn<*>
+    
+    companion object {
+        operator fun invoke(init: (ConnContext.() -> Unit)? = null): ConnContext = initInstance<StdConnContext>(init)
+        operator fun invoke(map: Map<String, Any?>): ConnContext = this().apply { copyPropValuesFrom(map) }
+    }
 }
 
-fun connContext(): ConnContext = StdConnContext()
+abstract class AbstractConnContext : ConnContext {
+    override var cp: ConnProfile by Delegates.notNullSingleton()
+    override var conn: Conn<*> by Delegates.notNullSingleton()
+}
 
-fun connContext(init: ConnContext.() -> Unit): ConnContext = initInstance<StdConnContext>(init)
-
-fun connContext(map: Map<String, Any?>): ConnContext = connContext().apply { copyPropValuesFrom(map) }
+private class StdConnContext : AbstractConnContext()
