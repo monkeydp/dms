@@ -2,8 +2,8 @@ package com.monkeydp.daios.dms.sdk.api.annot
 
 import com.monkeydp.daios.dms.sdk.api.NodeApi
 import com.monkeydp.tools.ext.kodein.component.KodeinComponent
-import com.monkeydp.tools.ext.kodein.component.abstr.AbstractKodeinBuilderConfig
-import com.monkeydp.tools.ext.kodein.component.contract.KodeinKClassComp
+import com.monkeydp.tools.ext.kodein.component.AbstractKodeinBuilderConfig
+import com.monkeydp.tools.ext.kodein.component.KodeinKClassComp
 import com.monkeydp.tools.ext.kodein.singletonX
 import com.monkeydp.tools.ext.kotlin.singletonX
 import org.kodein.di.Kodein

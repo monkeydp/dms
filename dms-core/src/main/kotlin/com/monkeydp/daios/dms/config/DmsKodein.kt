@@ -2,7 +2,6 @@ package com.monkeydp.daios.dms.config
 
 import com.monkeydp.daios.dms.sdk.share.kodein.sdkKodeinModule
 import com.monkeydp.tools.gradle.wrapper.GradleWrapperExecutor
-import com.monkeydp.tools.gradle.wrapper.gradleWrapperExecutor
 import org.kodein.di.Kodein
 import org.kodein.di.generic.bind
 import org.kodein.di.generic.singleton
@@ -13,5 +12,5 @@ import org.kodein.di.generic.singleton
  */
 internal val kodein = Kodein {
     import(sdkKodeinModule)
-    bind<GradleWrapperExecutor>() with singleton { gradleWrapperExecutor(rootDirpath = DmsDirpath.root) }
+    bind<GradleWrapperExecutor>() with singleton { GradleWrapperExecutor(rootDirpath = DmsDirpath.root) }
 }

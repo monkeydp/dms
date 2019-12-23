@@ -1,8 +1,8 @@
 package com.monkeydp.daios.dms.sdk.instruction.target
 
 import com.monkeydp.tools.ext.kodein.component.KodeinComponent
-import com.monkeydp.tools.ext.kodein.component.abstr.AbstractKodeinBuilderConfig
-import com.monkeydp.tools.ext.kodein.component.contract.KodeinKClassComp
+import com.monkeydp.tools.ext.kodein.component.AbstractKodeinBuilderConfig
+import com.monkeydp.tools.ext.kodein.component.KodeinKClassComp
 import com.monkeydp.tools.ext.kodein.singletonX
 import org.kodein.di.Kodein
 import org.kodein.di.generic.bind

@@ -1,6 +1,6 @@
 package com.monkeydp.daios.dms.sdk.config
 
-import com.monkeydp.tools.ext.kodein.component.abstr.AbstractKodeinCompRepo
+import com.monkeydp.tools.ext.kodein.component.AbstractKodeinCompRepo
 
 /**
  * @author iPotato

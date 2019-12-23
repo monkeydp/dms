@@ -1,7 +1,5 @@
 package com.monkeydp.daios.dms.sdk.metadata.form
 
-import com.monkeydp.daios.dms.sdk.metadata.form.item.FormItem
-import com.monkeydp.daios.dms.sdk.metadata.form.item.formItem
 import com.monkeydp.daios.dms.sdk.received.form.ReceivedForm
 import com.monkeydp.daios.dms.sdk.received.form.annot.ReceivedFormItem
 import com.monkeydp.tools.ext.kotlin.camelCaseSeparated
@@ -21,7 +19,7 @@ object FormBuilder {
         props.forEach {
             val annot = it.findAnnot<ReceivedFormItem>()
             val propName = it.name
-            val item = formItem(
+            val item = FormItem(
                     label = if (annot.label.isNotEmpty()) annot.label else propName.camelCaseSeparated(true),
                     name = if (annot.name.isNotEmpty()) annot.name else propName,
                     desc = annot.desc,
@@ -33,6 +31,6 @@ object FormBuilder {
             )
             items.add(item)
         }
-        return form(items.toList())
+        return Form(items.toList())
     }
 }

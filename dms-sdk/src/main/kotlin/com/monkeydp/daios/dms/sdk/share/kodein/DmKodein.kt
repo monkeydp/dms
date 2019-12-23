@@ -1,7 +1,7 @@
 package com.monkeydp.daios.dms.sdk.share.kodein
 
 import com.monkeydp.tools.ext.kodein.KodeinHelper.bindComps
-import com.monkeydp.tools.ext.kodein.component.contract.KodeinCompRepo
+import com.monkeydp.tools.ext.kodein.component.KodeinCompRepo
 import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
 
