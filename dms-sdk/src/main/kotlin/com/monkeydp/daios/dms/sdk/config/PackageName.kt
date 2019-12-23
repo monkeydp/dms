@@ -9,6 +9,7 @@ object PackageName {
     const val daios = "$monkeydp.daios"
     const val dms = "$daios.dms"
     const val sdk = "$dms.sdk"
+    
     const val dm = "$daios.dm"
-    const val dmBase = "$dm.base"
+    const val base = "$dm.base"
 }
