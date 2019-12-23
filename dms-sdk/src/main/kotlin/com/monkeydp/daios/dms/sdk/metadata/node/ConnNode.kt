@@ -16,8 +16,9 @@ interface ConnNode : Node {
                 cp: ConnProfile,
                 defId: Int,
                 target: Target<*>,
-                icon: Icon<*>
-        ): ConnNode = StdConnNode(cp, defId, target, icon)
+                icon: Icon<*>,
+                hasMenu: Boolean
+        ): ConnNode = StdConnNode(cp, defId, target, icon, hasMenu)
     }
 }
 
@@ -25,12 +26,14 @@ abstract class AbstractConnNode(
         override val cp: ConnProfile,
         defId: Int,
         target: Target<*>,
-        icon: Icon<*>
-) : ConnNode, AbstractNode(defId, target, cp.form.connName, icon)
+        icon: Icon<*>,
+        hasMenu: Boolean
+) : ConnNode, AbstractNode(defId, target, cp.form.connName, icon, hasMenu)
 
 private class StdConnNode(
         cp: ConnProfile,
         defId: Int,
         target: Target<*>,
-        icon: Icon<*>
-) : AbstractConnNode(cp, defId, target, icon)
+        icon: Icon<*>,
+        hasMenu: Boolean
+) : AbstractConnNode(cp, defId, target, icon, hasMenu)

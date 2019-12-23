@@ -7,19 +7,20 @@ package com.monkeydp.daios.dms.sdk.mocker
 object MenuJsonMocker {
     const val MENU_PATH =
             """[
-                  {
-                    "instr": {
-                      "target": "GROUP",
-                      "action": "MANAGE"
-                    },
-                    "name": "Manage Group",
-                    "icon": {
-                      "color": "",
-                      "namex": "empty_icon",
-                      "name": "EMPTY_ICON"
-                    },
-                    "hasSubmenu": true,
-                    "status": "ENABLED"
-                  }
-             ]"""
+              {
+                "defId": 4,
+                "instr": {
+                  "target": "GROUP",
+                  "action": "MANAGE"
+                },
+                "name": "Manage Group",
+                "icon": {
+                  "color": "",
+                  "namex": "empty icon",
+                  "name": "EMPTY_ICON"
+                },
+                "hasMenu": true,
+                "status": "ENABLED"
+              }
+            ]"""
 }

@@ -22,5 +22,5 @@ class MenuController @Autowired constructor(
 ) {
     @ApiOperation("Load menu")
     @PostMapping("load-menu")
-    fun loadMenu(@RequestBody ctx: MenuLoadingCtx) = service.loadMenu(ctx)?.items ?: emptyList()
+    fun loadMenu(@RequestBody ctx: MenuLoadingCtx) = service.loadMenu(ctx).items
 }

@@ -8,5 +8,5 @@ import com.monkeydp.daios.dms.sdk.metadata.menu.MenuLoadingCtx
  * @date 2019/11/1
  */
 interface MenuService {
-    fun loadMenu(ctx: MenuLoadingCtx): Menu?
+    fun loadMenu(ctx: MenuLoadingCtx): Menu
 }
