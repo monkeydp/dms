@@ -2,7 +2,7 @@ package com.monkeydp.daios.dms.module
 
 import com.monkeydp.daios.dms.sdk.conn.ConnProfile
 import com.monkeydp.daios.dms.sdk.datasource.Datasource
-import com.monkeydp.tools.ext.kotlin.notNullSingleton
+import com.monkeydp.tools.ext.kotlin.singleton
 import org.springframework.stereotype.Component
 import kotlin.properties.Delegates
 
@@ -14,7 +14,7 @@ import kotlin.properties.Delegates
 @Component
 class ModuleRegistry {
     
-    private var moduleMap: Map<Datasource, Module> by Delegates.notNullSingleton()
+    private var moduleMap: Map<Datasource, Module> by Delegates.singleton()
     
     fun registerAllModule(modules: List<Module>) {
         moduleMap = modules.map { it.datasource to it }.toMap()

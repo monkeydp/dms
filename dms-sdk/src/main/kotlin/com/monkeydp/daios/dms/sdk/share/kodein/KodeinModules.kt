@@ -5,7 +5,7 @@ import com.monkeydp.daios.dms.sdk.event.EventPublisher
 import com.monkeydp.daios.dms.sdk.share.conn.ConnContext
 import com.monkeydp.daios.dms.sdk.share.request.RequestContext
 import com.monkeydp.tools.ext.kodein.KodeinHelper.bindComps
-import com.monkeydp.tools.ext.kotlin.notNullSingleton
+import com.monkeydp.tools.ext.kotlin.singleton
 import org.kodein.di.Kodein
 import org.kodein.di.generic.bind
 import org.kodein.di.generic.provider
@@ -20,7 +20,7 @@ private val mockDmsKodeinModule = Kodein.Module("mockDmsKodeinModule") {
     bind<EventPublisher>() with singleton { EventPublisher.mock() }
 }
 
-var dmsKodeinModule: Kodein.Module by Delegates.notNullSingleton(mockDmsKodeinModule)
+var dmsKodeinModule: Kodein.Module by Delegates.singleton(mockDmsKodeinModule)
 
 val sdkKodeinModule = Kodein.Module("sdkKodeinModule") {
     RequestContext.SINGLETON.also {
