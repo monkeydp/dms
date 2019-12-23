@@ -1,10 +1,10 @@
 package com.monkeydp.daios.dms.module
 
-import com.monkeydp.daios.dms.sdk.SdkDmApp
 import com.monkeydp.daios.dms.sdk.config.PackageName
 import com.monkeydp.daios.dms.sdk.datasource.Datasource
 import com.monkeydp.daios.dms.sdk.datasource.DsDef
 import com.monkeydp.daios.dms.sdk.datasource.DsVersion
+import com.monkeydp.daios.dms.sdk.dm.SdkDmApp
 import com.monkeydp.daios.dms.sdk.share.kodein.dmKodeinRepo
 import com.monkeydp.daios.dms.sdk.share.kodein.findImpl
 import com.monkeydp.tools.ext.kotlin.findAnnot
