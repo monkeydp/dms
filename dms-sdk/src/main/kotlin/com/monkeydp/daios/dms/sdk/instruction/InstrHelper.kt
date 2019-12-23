@@ -28,7 +28,7 @@ object InstrHelper {
         )
     }
     
-    fun getInstrOrNull(
+    fun getInstrOrNullByClassname(
             any: Any,
             actionReverseIndex: Int = DEFAULT_ACTION_REVERSE_INDEX,
             targetReverseIndex: Int = DEFAULT_TARGET_REVERSE_INDEX

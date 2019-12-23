@@ -10,11 +10,27 @@ import com.monkeydp.daios.dms.sdk.metadata.icon.Icon
  */
 interface ConnNode : Node {
     val cp: ConnProfile
+    
+    companion object {
+        operator fun invoke(
+                cp: ConnProfile,
+                defId: Int,
+                target: Target<*>,
+                icon: Icon<*>
+        ): ConnNode = StdConnNode(cp, defId, target, icon)
+    }
 }
 
-fun connNode(
+abstract class AbstractConnNode(
+        override val cp: ConnProfile,
+        defId: Int,
+        target: Target<*>,
+        icon: Icon<*>
+) : ConnNode, AbstractNode(defId, target, cp.form.connName, icon)
+
+private class StdConnNode(
         cp: ConnProfile,
         defId: Int,
         target: Target<*>,
         icon: Icon<*>
-): ConnNode = StdConnNode(cp, defId, target, icon)
+) : AbstractConnNode(cp, defId, target, icon)

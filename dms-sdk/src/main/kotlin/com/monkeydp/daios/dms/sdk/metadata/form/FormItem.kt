@@ -51,8 +51,7 @@ interface FormItem {
                 required: Boolean,
                 hidden: Boolean,
                 disabled: Boolean
-        ): FormItem =
-                StdFormItem(label, name, desc, jsType, component, required, hidden, disabled)
+        ): FormItem = StdFormItem(label, name, desc, jsType, component, required, hidden, disabled)
     }
 }
 

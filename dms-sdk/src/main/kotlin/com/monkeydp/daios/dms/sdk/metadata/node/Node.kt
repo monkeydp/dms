@@ -12,11 +12,27 @@ interface Node {
     val target: Target<*>
     val name: String
     val icon: Icon<*>
+    
+    companion object {
+        operator fun invoke(
+                defId: Int,
+                target: Target<*>,
+                name: String,
+                icon: Icon<*>
+        ): Node = StdNode(defId, target, name, icon)
+    }
 }
 
-fun node(
+abstract class AbstractNode(
+        override val defId: Int,
+        override val target: Target<*>,
+        override val name: String,
+        override val icon: Icon<*>
+) : Node
+
+class StdNode(
         defId: Int,
         target: Target<*>,
         name: String,
         icon: Icon<*>
-): Node = StdNode(defId, target, name, icon)
+) : AbstractNode(defId, target, name, icon)

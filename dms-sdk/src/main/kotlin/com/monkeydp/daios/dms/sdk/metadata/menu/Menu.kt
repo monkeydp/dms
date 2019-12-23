@@ -8,6 +8,12 @@ import com.monkeydp.daios.dms.sdk.metadata.menu.item.MenuItem
  */
 interface Menu {
     val items: List<MenuItem>
+    
+    companion object {
+        operator fun invoke(items: List<MenuItem>): Menu = StdMenu(items)
+    }
 }
 
-fun menu(items: List<MenuItem>): Menu = StdMenu(items)
+abstract class AbstractMenu(override val items: List<MenuItem> = emptyList()) : Menu
+
+private class StdMenu(items: List<MenuItem> = emptyList()) : AbstractMenu(items)
