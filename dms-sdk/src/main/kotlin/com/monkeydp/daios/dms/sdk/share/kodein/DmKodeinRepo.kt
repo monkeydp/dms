@@ -11,7 +11,6 @@ import com.monkeydp.tools.ext.kotlin.matchOne
 import com.monkeydp.tools.ext.kotlin.transformEnumName
 import com.monkeydp.tools.ext.main.ierror
 import org.kodein.di.generic.instance
-import org.kodein.di.generic.provider
 import kotlin.reflect.KClass
 
 /**
@@ -36,8 +35,8 @@ interface DmKodeinRepo {
 
 private abstract class AbstractDmKodeinRepo : DmKodeinRepo {
     
-    private val connContext: () -> ConnContext by kodein.provider()
-    override val defaultDs get() = connContext().datasource
+    private val connContext: ConnContext by kodein.instance()
+    override val defaultDs get() = connContext.datasource
     
     private val _dmKodeinMap = mutableMapOf<Datasource, DmKodein>()
     override val dmKodeinMap get() = _dmKodeinMap.toMap()

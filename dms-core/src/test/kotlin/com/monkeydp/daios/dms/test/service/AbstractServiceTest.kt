@@ -1,12 +1,10 @@
 package com.monkeydp.daios.dms.test.service
 
-import com.monkeydp.daios.dms.config.kodein
 import com.monkeydp.daios.dms.module.ModuleTestdata
 import com.monkeydp.daios.dms.sdk.share.conn.ConnContext
-import com.monkeydp.daios.dms.sdk.share.request.RequestContext
+import com.monkeydp.daios.dms.sdk.share.request.RequestContextHolder
 import com.monkeydp.daios.dms.test.AbstractTest
 import org.junit.Before
-import org.kodein.di.generic.instance
 
 /**
  * @author iPotato
@@ -14,11 +12,9 @@ import org.kodein.di.generic.instance
  */
 abstract class AbstractServiceTest : AbstractTest() {
     
-    val ctx: RequestContext by kodein.instance()
-    
     @Before
     fun before() {
-        ctx.setRequestAttributes(
+        RequestContextHolder.setRequestAttributes(
                 ConnContext {
                     cp = ModuleTestdata.cp
                 }

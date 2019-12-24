@@ -1,21 +1,27 @@
 package com.monkeydp.daios.dms.module
 
+import com.monkeydp.daios.dms.config.kodein
 import com.monkeydp.daios.dms.sdk.config.PackageName
 import com.monkeydp.daios.dms.sdk.datasource.Datasource
 import com.monkeydp.daios.dms.sdk.datasource.DsDef
 import com.monkeydp.daios.dms.sdk.datasource.DsVersion
 import com.monkeydp.daios.dms.sdk.dm.SdkDmApp
+import com.monkeydp.daios.dms.sdk.helper.ScopeHelper
+import com.monkeydp.daios.dms.sdk.share.conn.ConnContext
 import com.monkeydp.daios.dms.sdk.share.kodein.dmKodeinRepo
 import com.monkeydp.daios.dms.sdk.share.kodein.findImpl
 import com.monkeydp.tools.ext.kotlin.findAnnot
 import com.monkeydp.tools.ext.kotlin.matchOne
+import com.monkeydp.tools.ext.kotlin.singleton
 import com.monkeydp.tools.ext.reflections.getAnnotatedSingletons
 import com.monkeydp.tools.ext.reflections.reflections
 import com.monkeydp.tools.util.FileUtil
+import org.kodein.di.generic.instance
 import java.io.File
 import java.io.FileFilter
 import java.net.URL
 import java.net.URLClassLoader
+import kotlin.properties.Delegates
 
 /**
  * @author iPotato
@@ -29,18 +35,18 @@ class Module(private val deployDir: File) {
         private const val specificLibsPath = "libs/specific"
     }
     
-    private val classLoader: ModuleClassLoader
+    private val moduleClassLoader: ModuleClassLoader
     private val sdkDmApp: SdkDmApp
     val datasource: Datasource
     private val dsDefMap: Map<DsVersion<*>, DsDef>
     
     init {
-        classLoader = initClassLoader()
+        moduleClassLoader = initClassLoader()
         sdkDmApp = loadSdkDmApp()
         datasource = sdkDmApp.datasource
         val dsDefs = findImpl<Iterable<DsDef>>()
         dsDefMap = dsDefs.map { it.version to it }.toMap()
-        classLoader.loaderMap = initSpecificClassLoaderMap()
+        moduleClassLoader.specClassloaderMap = initSpecificClassLoaderMap()
     }
     
     private inline fun <reified T : Any> findImpl(tag: Any? = null) =
@@ -65,7 +71,7 @@ class Module(private val deployDir: File) {
         val map = mutableMapOf<DsVersion<*>, SpecificClassLoader>()
         dsDefMap.forEach { (dsVersion, _) ->
             val specificLibsUrls = specificLibsUrls(dsVersion)
-            val loader = SpecificClassLoader(specificLibsUrls, classLoader)
+            val loader = SpecificClassLoader(specificLibsUrls, moduleClassLoader)
             map[dsVersion] = loader
         }
         return map
@@ -80,7 +86,7 @@ class Module(private val deployDir: File) {
     }
     
     private fun loadSdkDmApp() =
-            reflections(PackageName.dm, classLoader).run {
+            reflections(PackageName.dm, moduleClassLoader).run {
                 getAnnotatedSingletons(SdkDmApp::class).matchOne { true }.run {
                     this.javaClass.kotlin.findAnnot<SdkDmApp>()
                 }
@@ -88,33 +94,26 @@ class Module(private val deployDir: File) {
     
     fun findDsDef(dsVersion: DsVersion<*>) = dsDefMap.getValue(dsVersion)
     
-    fun setSpecificClassLoader(dsVersion: DsVersion<*>) = classLoader.setSpecificClassLoader(dsVersion)
-    
-    fun removeSpecificClassLoader() = classLoader.removeSpecificClassLoader()
-    
     private class ModuleClassLoader(urls: Array<URL>, parent: ClassLoader) : URLClassLoader(urls, parent) {
         
-        lateinit var loaderMap: Map<DsVersion<*>, SpecificClassLoader>
-        /**
-         * Remember to remove the class loader after you set it,
-         * otherwise it may cause a memory leak problem
-         */
-        private val sclThreadLocal = ThreadLocal<SpecificClassLoader?>()
+        var specClassloaderMap: Map<DsVersion<*>, SpecificClassLoader> by Delegates.singleton(emptyMap())
         
-        override fun loadClass(name: String): Class<*>? {
-            return try {
-                super.loadClass(name)
-            } catch (e: ClassNotFoundException) {
-                val loader = sclThreadLocal.get()
-                loader?.loadClass(name)
-            }
-        }
+        private val specClassLoaderOrNull
+            get() =
+                when {
+                    ScopeHelper.inRequestScope -> {
+                        val connContext: ConnContext by kodein.instance()
+                        specClassloaderMap[connContext.cp.dsVersion]
+                    }
+                    else -> null
+                }
         
-        fun setSpecificClassLoader(dsVersion: DsVersion<*>): Unit = sclThreadLocal.set(loaderMap[dsVersion])
-        
-        fun removeSpecificClassLoader() {
-            sclThreadLocal.remove()
-        }
+        override fun loadClass(name: String): Class<*>? =
+                try {
+                    super.loadClass(name)
+                } catch (e: ClassNotFoundException) {
+                    specClassLoaderOrNull?.loadClass(name)
+                }
     }
     
     private class SpecificClassLoader(urls: Array<URL>, parent: ModuleClassLoader) : URLClassLoader(urls, parent)

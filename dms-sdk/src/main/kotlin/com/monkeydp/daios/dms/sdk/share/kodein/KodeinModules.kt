@@ -3,13 +3,13 @@ package com.monkeydp.daios.dms.sdk.share.kodein
 import com.monkeydp.daios.dms.sdk.config.SdkKodeinCompRepo
 import com.monkeydp.daios.dms.sdk.event.EventPublisher
 import com.monkeydp.daios.dms.sdk.share.conn.ConnContext
-import com.monkeydp.daios.dms.sdk.share.request.RequestContext
+import com.monkeydp.daios.dms.sdk.share.request.RequestContextHolder
 import com.monkeydp.tools.ext.kodein.KodeinHelper.bindComps
 import com.monkeydp.tools.ext.kotlin.singleton
 import org.kodein.di.Kodein
 import org.kodein.di.generic.bind
-import org.kodein.di.generic.provider
 import org.kodein.di.generic.singleton
+import org.kodein.di.threadLocal
 import kotlin.properties.Delegates
 
 /**
@@ -23,9 +23,8 @@ private val mockDmsKodeinModule = Kodein.Module("mockDmsKodeinModule") {
 var dmsKodeinModule: Kodein.Module by Delegates.singleton(mockDmsKodeinModule)
 
 val sdkKodeinModule = Kodein.Module("sdkKodeinModule") {
-    RequestContext.SINGLETON.also {
-        bind<RequestContext>() with singleton { it }
-        bind<ConnContext>() with provider { ConnContext(it.requestAttributes.attrs) }
+    bind<ConnContext>() with singleton(ref = threadLocal) {
+        ConnContext(RequestContextHolder.requestAttributes.attrs)
     }
     bindComps(SdkKodeinCompRepo.comps)
 }

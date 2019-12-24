@@ -4,7 +4,7 @@ import com.monkeydp.daios.dms.config.kodein
 import com.monkeydp.daios.dms.sdk.conn.ConnRequired
 import com.monkeydp.daios.dms.sdk.conn.HasCpId
 import com.monkeydp.daios.dms.sdk.share.conn.ConnContext
-import com.monkeydp.daios.dms.sdk.share.request.RequestContext
+import com.monkeydp.daios.dms.sdk.share.request.RequestContextHolder
 import com.monkeydp.daios.dms.service.contract.ConnService
 import com.monkeydp.tools.util.JsonUtil
 import org.kodein.di.generic.instance
@@ -19,17 +19,15 @@ import kotlin.reflect.full.isSuperclassOf
  * @date 2019/11/24
  */
 @Component
-class RequestContextManager {
-    
-    private val ctx: RequestContext by kodein.instance()
+class RequestContextHolderManager {
     
     @Autowired
     private lateinit var connService: ConnService
     
-    fun initCtx(type: Type, data: ByteArray, methodParameter: MethodParameter) {
+    fun initHolder(type: Type, data: ByteArray, methodParameter: MethodParameter) {
         val cpId = getCpId(type, methodParameter.parameterName, data)
         if (cpId == null) return
-        ctx.setRequestAttributes(
+        RequestContextHolder.setRequestAttributes(
                 ConnContext {
                     cp = connService.findCp(cpId)
                     if (methodParameter.method!!.isAnnotationPresent(ConnRequired::class.java))
@@ -51,7 +49,7 @@ class RequestContextManager {
         return jsonNode.get(cpIdName).asLong()
     }
     
-    fun resetCtx() {
-        ctx.resetRequestAttributes()
+    fun resetHolder() {
+        RequestContextHolder.resetRequestAttributes()
     }
 }

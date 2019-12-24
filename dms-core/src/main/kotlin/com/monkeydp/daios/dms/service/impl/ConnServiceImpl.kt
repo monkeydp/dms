@@ -72,12 +72,8 @@ internal class ConnServiceImpl @Autowired constructor(
     override fun findCp(cpId: Long) = manager.getActiveCp(cpId, true) ?: cpService.findById(cpId)
     
     private fun getConn(cp: ConnProfile): Conn<*> {
-        val module = registry.findModule(cp)
-        module.setSpecificClassLoader(cp.dsVersion)
         val api: ConnApi = dmKodeinRepo.findImpl(cp.datasource)
-        val conn = api.getConn(cp)
-        module.removeSpecificClassLoader()
-        return conn
+        return api.getConn(cp)
     }
     
     override fun closeConn(cpId: Long, connId: Long?): Unit =
