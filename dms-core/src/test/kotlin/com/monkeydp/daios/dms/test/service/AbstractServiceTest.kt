@@ -4,20 +4,20 @@ import com.monkeydp.daios.dms.module.ModuleTestdata
 import com.monkeydp.daios.dms.sdk.share.conn.ConnContext
 import com.monkeydp.daios.dms.sdk.share.request.RequestContextHolder
 import com.monkeydp.daios.dms.test.AbstractTest
-import org.junit.Before
+import org.junit.jupiter.api.BeforeAll
+import org.junit.jupiter.api.TestInstance
 
 /**
  * @author iPotato
  * @date 2019/10/28
  */
+@TestInstance(TestInstance.Lifecycle.PER_CLASS)
 abstract class AbstractServiceTest : AbstractTest() {
     
-    @Before
-    fun before() {
+    @BeforeAll
+    fun beforeAll() {
         RequestContextHolder.setRequestAttributes(
-                ConnContext {
-                    cp = ModuleTestdata.cp
-                }
+                ConnContext(ModuleTestdata.cp)
         )
     }
 }

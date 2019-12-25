@@ -1,7 +1,7 @@
 package com.monkeydp.daios.dms.test
 
-import org.junit.Test
-import org.springframework.web.context.request.RequestContextHolder
+import org.junit.jupiter.api.Test
+
 
 /**
  * @author iPotato
@@ -10,6 +10,6 @@ import org.springframework.web.context.request.RequestContextHolder
 class MainTest {
     @Test
     fun test() {
-        RequestContextHolder.getRequestAttributes()
+    
     }
 }

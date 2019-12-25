@@ -2,8 +2,9 @@ package com.monkeydp.daios.dms.test.service
 
 import com.monkeydp.daios.dms.module.ModuleTestdata
 import com.monkeydp.daios.dms.service.contract.ConnService
-import org.junit.Assert
-import org.junit.Test
+import org.junit.jupiter.api.Assertions.assertFalse
+import org.junit.jupiter.api.Assertions.assertTrue
+import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 
 /**
@@ -20,7 +21,7 @@ class ConnServiceTest : AbstractServiceTest() {
     @Test
     public fun saveCpTest() {
         val cp = service.saveCp(cp)
-        Assert.assertTrue(cp.isValid())
+        assertTrue(cp.isValid())
     }
     
     /**
@@ -33,12 +34,12 @@ class ConnServiceTest : AbstractServiceTest() {
         val cw = service.openConn(cp.id)
         val conn = cw.conn
         
-        Assert.assertTrue(conn.isValid())
-        Assert.assertFalse(conn.isClosed())
+        assertTrue(conn.isValid())
+        assertFalse(conn.isClosed())
         
         service.closeConn(cp.id)
-        Assert.assertFalse(conn.isValid())
-        Assert.assertTrue(conn.isClosed())
+        assertFalse(conn.isValid())
+        assertTrue(conn.isClosed())
     }
     
     @Test

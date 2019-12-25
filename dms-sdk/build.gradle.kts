@@ -30,7 +30,7 @@ dependencies {
     // code generator
     implementation("com.squareup:kotlinpoet:1.4.4")
     // junit
-    testImplementation("junit:junit:4.12")
+    testImplementation(kotlin("test-junit5"))
 }
 
 tasks.withType<KotlinCompile> {

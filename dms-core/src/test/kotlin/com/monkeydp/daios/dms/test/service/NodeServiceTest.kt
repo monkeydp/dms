@@ -1,8 +1,8 @@
 package com.monkeydp.daios.dms.test.service
 
 import com.monkeydp.daios.dms.service.contract.NodeService
-import org.junit.Assert
-import org.junit.Test
+import org.junit.jupiter.api.Assertions.assertTrue
+import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 
 /**
@@ -17,6 +17,6 @@ class NodeServiceTest : AbstractServiceTest() {
     @Test
     fun loadConnNodesTest() {
         val connNodes = service.loadConnNodes()
-        Assert.assertTrue(connNodes.isNotEmpty())
+        assertTrue(connNodes.isNotEmpty())
     }
 }

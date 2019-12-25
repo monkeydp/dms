@@ -32,7 +32,11 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-web")
     implementation("org.springframework.boot:spring-boot-starter-data-jpa")
     developmentOnly("org.springframework.boot:spring-boot-devtools")
-    testImplementation("org.springframework.boot:spring-boot-starter-test")
+    // test
+    testImplementation("org.springframework.boot:spring-boot-starter-test"){
+        exclude("junit", "junit")
+    }
+    testImplementation(kotlin("test-junit5"))
     // sdk
     api("com.monkeydp.daios.dms:dms-sdk") {
         exclude("org.springframework")

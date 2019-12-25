@@ -1,7 +1,7 @@
 package com.monkeydp.daios.dms.test.service
 
 import com.monkeydp.daios.dms.service.contract.MenuService
-import org.junit.Test
+import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 
 /**
