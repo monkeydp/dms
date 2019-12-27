@@ -31,6 +31,7 @@ dependencies {
     implementation("com.squareup:kotlinpoet:1.4.4")
     // junit
     testImplementation(kotlin("test-junit5"))
+    testImplementation("org.junit.jupiter:junit-jupiter-api:5.3.2")
 }
 
 tasks.withType<KotlinCompile> {
