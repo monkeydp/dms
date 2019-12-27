@@ -1,7 +1,7 @@
 package com.monkeydp.daios.dms.sdk.conn
 
-import com.monkeydp.tools.ext.kodein.component.KodeinComponent
 import com.monkeydp.tools.ext.kodein.component.AbstractKodeinBuilderConfig
+import com.monkeydp.tools.ext.kodein.component.KodeinComponent
 import com.monkeydp.tools.ext.kodein.component.KodeinFieldComp
 import com.monkeydp.tools.ext.kodein.singletonX
 import com.monkeydp.tools.useful.SourceSet

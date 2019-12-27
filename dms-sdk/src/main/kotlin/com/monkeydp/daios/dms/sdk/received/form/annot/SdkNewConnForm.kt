@@ -3,8 +3,8 @@ package com.monkeydp.daios.dms.sdk.received.form.annot
 import com.monkeydp.daios.dms.sdk.conn.NewConnForm
 import com.monkeydp.daios.dms.sdk.instruction.Instruction
 import com.monkeydp.daios.dms.sdk.received.form.ReceivedForm
-import com.monkeydp.tools.ext.kodein.component.KodeinComponent
 import com.monkeydp.tools.ext.kodein.component.AbstractKodeinBuilderConfig
+import com.monkeydp.tools.ext.kodein.component.KodeinComponent
 import com.monkeydp.tools.ext.kodein.component.KodeinKClassComp
 import com.monkeydp.tools.ext.kodein.singletonX
 import com.monkeydp.tools.ext.kotlin.singletonX

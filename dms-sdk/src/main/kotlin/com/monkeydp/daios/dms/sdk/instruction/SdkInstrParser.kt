@@ -1,7 +1,7 @@
 package com.monkeydp.daios.dms.sdk.instruction
 
-import com.monkeydp.tools.ext.kodein.component.KodeinComponent
 import com.monkeydp.tools.ext.kodein.component.AbstractKodeinBuilderConfig
+import com.monkeydp.tools.ext.kodein.component.KodeinComponent
 import com.monkeydp.tools.ext.kodein.component.KodeinKClassComp
 import com.monkeydp.tools.ext.kodein.singletonX
 import com.monkeydp.tools.ext.kotlin.singletonX
