@@ -24,17 +24,13 @@ internal class NodeServiceImpl @Autowired constructor(
     
     private val api: NodeApi get() = dmKodeinRepo.findImpl()
     
-    override fun loadConnNodes(): List<ConnNode> {
-        val userId = session.userId
-        val cps = cpService.findAllByUserId(userId)
-        val connNodes = mutableListOf<ConnNode>()
-        cps.forEach { cp ->
-            val api: NodeApi = dmKodeinRepo.findImpl(cp.datasource)
-            val connNode = api.loadConnNode(cp)
-            connNodes.add(connNode)
-        }
-        return connNodes.toList()
-    }
+    override fun loadConnNodes(): List<ConnNode> =
+            cpService.findAllByUserId(session.userId).run {
+                groupBy { it.datasource }.map {
+                    val api: NodeApi = dmKodeinRepo.findImpl(it.key)
+                    api.loadConnNodes(it.value)
+                }.flatten()
+            }
     
     override fun loadSubNodes(ctx: NodeLoadingCtx): List<Node> = api.loadSubNodes(ctx)
 }

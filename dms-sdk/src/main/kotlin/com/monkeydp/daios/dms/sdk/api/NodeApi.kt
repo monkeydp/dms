@@ -10,6 +10,6 @@ import com.monkeydp.daios.dms.sdk.metadata.node.NodeLoadingCtx
  * @date 2019/10/25
  */
 interface NodeApi : Api {
-    fun loadConnNode(cp: ConnProfile): ConnNode
+    fun loadConnNodes(cps: Iterable<ConnProfile>): List<ConnNode>
     fun loadSubNodes(ctx: NodeLoadingCtx): List<Node>
 }
