@@ -12,7 +12,8 @@ enum class Datasource {
     MYSQL, MONGODB;
     
     companion object {
-        fun valueOfOrNull(enumName: String) = Datasource::class.valueOfOrNull(enumName)
+        fun valueOfOrNull(enumName: String?, caseSensitive: Boolean = false) =
+                Datasource::class.valueOfOrNull(enumName, caseSensitive)
     }
     
     private val asPrefix = "${name}_"

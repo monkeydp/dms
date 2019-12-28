@@ -2,6 +2,7 @@ package com.monkeydp.daios.dms.sdk.share.kodein
 
 import com.monkeydp.daios.dms.sdk.config.kodein
 import com.monkeydp.daios.dms.sdk.datasource.Datasource
+import com.monkeydp.daios.dms.sdk.datasource.DefaultDatasource
 import com.monkeydp.daios.dms.sdk.datasource.DsVersion
 import com.monkeydp.daios.dms.sdk.share.conn.ConnContext
 import com.monkeydp.tools.enumx.Enumx
@@ -24,7 +25,7 @@ interface DmKodeinRepo {
         operator fun invoke(): DmKodeinRepo = DmKodeinRepoImpl()
     }
     
-    val defaultDs: Datasource
+    val defaultDs: Datasource get() = DefaultDatasource.get()
     
     val dmKodeinMap: Map<Datasource, DmKodein>
     fun putDmKodein(datasource: Datasource, dmKodein: DmKodein)
@@ -36,7 +37,6 @@ interface DmKodeinRepo {
 private abstract class AbstractDmKodeinRepo : DmKodeinRepo {
     
     private val connContext: ConnContext by kodein.instance()
-    override val defaultDs get() = connContext.datasource
     
     private val _dmKodeinMap = mutableMapOf<Datasource, DmKodein>()
     override val dmKodeinMap get() = _dmKodeinMap.toMap()
