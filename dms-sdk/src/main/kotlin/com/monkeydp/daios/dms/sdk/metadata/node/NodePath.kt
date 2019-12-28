@@ -1,5 +1,7 @@
 package com.monkeydp.daios.dms.sdk.metadata.node
 
+import com.monkeydp.daios.dms.sdk.share.kodein.dmKodeinRepo
+import com.monkeydp.daios.dms.sdk.share.kodein.findImpl
 import kotlin.reflect.full.createInstance
 
 /**
@@ -13,7 +15,7 @@ open class NodePath : ArrayList<Node>() {
             path.addAll(nodes)
             return path
         }
-    
+        
         fun of(oldPath: NodePath, vararg nodes: Node): NodePath {
             val path = NodePath()
             path.addAll(oldPath)
@@ -27,4 +29,8 @@ open class NodePath : ArrayList<Node>() {
         path.addAll(this)
         return path
     }
+    
+    private val ndStruct: NodeDefStruct get() = dmKodeinRepo.findImpl()
+    
+    fun getLastNodeDef(): NodeDef = ndStruct.find(last().defId)
 }

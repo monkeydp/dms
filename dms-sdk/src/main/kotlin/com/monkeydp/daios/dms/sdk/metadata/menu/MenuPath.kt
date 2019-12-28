@@ -1,4 +1,4 @@
-package com.monkeydp.daios.dms.sdk.metadata.menu.item
+package com.monkeydp.daios.dms.sdk.metadata.menu
 
 import java.util.concurrent.CopyOnWriteArrayList
 

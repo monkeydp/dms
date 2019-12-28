@@ -4,7 +4,7 @@ import com.monkeydp.daios.dms.curd.service.contract.ConnProfileService
 import com.monkeydp.daios.dms.sdk.api.NodeApi
 import com.monkeydp.daios.dms.sdk.metadata.node.ConnNode
 import com.monkeydp.daios.dms.sdk.metadata.node.Node
-import com.monkeydp.daios.dms.sdk.metadata.node.NodeLoadingCtx
+import com.monkeydp.daios.dms.sdk.metadata.node.NodePath
 import com.monkeydp.daios.dms.sdk.share.kodein.dmKodeinRepo
 import com.monkeydp.daios.dms.sdk.share.kodein.findImpl
 import com.monkeydp.daios.dms.service.contract.NodeService
@@ -32,5 +32,5 @@ internal class NodeServiceImpl @Autowired constructor(
                 }.flatten()
             }
     
-    override fun loadSubNodes(ctx: NodeLoadingCtx): List<Node> = api.loadSubNodes(ctx)
+    override fun loadSubNodes(path: NodePath): List<Node> = api.loadSubNodes(path)
 }

@@ -2,7 +2,6 @@ package com.monkeydp.daios.dms.sdk.metadata.menu
 
 import com.monkeydp.daios.dms.sdk.conn.HasCpId
 import com.monkeydp.daios.dms.sdk.helper.IdHelper
-import com.monkeydp.daios.dms.sdk.metadata.menu.item.MenuPath
 import com.monkeydp.daios.dms.sdk.metadata.node.NodePath
 import com.monkeydp.daios.dms.sdk.mocker.ConnJsonMocker.CP_ID
 import com.monkeydp.daios.dms.sdk.mocker.MenuJsonMocker.MENU_PATH

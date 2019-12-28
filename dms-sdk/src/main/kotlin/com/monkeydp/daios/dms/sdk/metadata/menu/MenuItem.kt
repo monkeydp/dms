@@ -1,4 +1,4 @@
-package com.monkeydp.daios.dms.sdk.metadata.menu.item
+package com.monkeydp.daios.dms.sdk.metadata.menu
 
 import com.monkeydp.daios.dms.sdk.instruction.Instruction
 import com.monkeydp.daios.dms.sdk.metadata.icon.Icon
@@ -26,7 +26,8 @@ interface MenuItem {
                 icon: Icon<*>,
                 hasMenu: Boolean,
                 status: MenuItemStatus = MenuItemStatus.ENABLED
-        ): MenuItem = StdMi(defId, instr, name, icon, hasMenu, status)
+        ): MenuItem =
+                StdMi(defId, instr, name, icon, hasMenu, status)
     }
 }
 

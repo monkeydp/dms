@@ -25,5 +25,5 @@ class NodeController @Autowired constructor(
     @ConnRequired
     @ApiOperation("Load sub nodes")
     @PostMapping("load-sub-nodes")
-    fun loadSubNodes(@RequestBody ctx: NodeLoadingCtx) = service.loadSubNodes(ctx)
+    fun loadSubNodes(@RequestBody ctx: NodeLoadingCtx) = service.loadSubNodes(ctx.path)
 }
