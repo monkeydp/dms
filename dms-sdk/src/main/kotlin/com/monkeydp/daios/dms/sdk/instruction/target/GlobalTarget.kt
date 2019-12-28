@@ -11,6 +11,7 @@ enum class GlobalTarget(fullName: String = "") : Target<GlobalTarget> {
     
     CONN("connection"),
     DB("database"),
+    COLL("collection"),
     TABLE,
     VIEW,
     
