@@ -18,7 +18,7 @@ interface MenuDefStruct {
     fun find(id: Int): MenuDef
 }
 
-abstract class AbstractMenuDefStruct(override val struct: List<MenuDef>) : MenuDefStruct {
+abstract class AbstractMdStruct(override val struct: List<MenuDef>) : MenuDefStruct {
     
     override val flattenDefs get() = struct.map { recurFlatten(it) }.flatten()
     
