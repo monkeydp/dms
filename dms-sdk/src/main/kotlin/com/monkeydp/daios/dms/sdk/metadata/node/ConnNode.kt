@@ -17,8 +17,8 @@ interface ConnNode : Node {
                 defId: Int,
                 target: Target<*>,
                 icon: Icon<*>,
-                hasMenu: Boolean
-        ): ConnNode = StdConnNode(cp, defId, target, icon, hasMenu)
+                menuDefId: Int?
+        ): ConnNode = StdConnNode(cp, defId, target, icon, menuDefId)
     }
 }
 
@@ -27,13 +27,13 @@ abstract class AbstractConnNode(
         defId: Int,
         target: Target<*>,
         icon: Icon<*>,
-        hasMenu: Boolean
-) : ConnNode, AbstractNode(defId, target, cp.form.connName, icon, hasMenu)
+        menuDefId: Int?
+) : ConnNode, AbstractNode(defId, target, cp.form.connName, icon, menuDefId)
 
 private class StdConnNode(
         cp: ConnProfile,
         defId: Int,
         target: Target<*>,
         icon: Icon<*>,
-        hasMenu: Boolean
-) : AbstractConnNode(cp, defId, target, icon, hasMenu)
+        menuDefId: Int?
+) : AbstractConnNode(cp, defId, target, icon, menuDefId)

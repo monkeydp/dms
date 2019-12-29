@@ -1,13 +1,11 @@
 package com.monkeydp.daios.dms.sdk.metadata.menu
 
 import com.monkeydp.daios.dms.sdk.conn.HasCpId
-import com.monkeydp.daios.dms.sdk.helper.IdHelper
-import com.monkeydp.daios.dms.sdk.metadata.node.NodePath
+import com.monkeydp.daios.dms.sdk.helper.IdHelper.INVALID_ID
 import com.monkeydp.daios.dms.sdk.mocker.ConnJsonMocker.CP_ID
-import com.monkeydp.daios.dms.sdk.mocker.MenuJsonMocker.MENU_PATH
-import com.monkeydp.daios.dms.sdk.mocker.NodeJsonMocker.NODE_PATH
 import io.swagger.annotations.ApiModel
 import io.swagger.annotations.ApiModelProperty
+import org.jetbrains.annotations.TestOnly
 
 /**
  * @author iPotato
@@ -16,9 +14,12 @@ import io.swagger.annotations.ApiModelProperty
 @ApiModel
 data class MenuLoadingCtx(
         @ApiModelProperty(required = true, example = CP_ID)
-        override val cpId: Long = IdHelper.INVALID_ID,
-        @ApiModelProperty(required = true, example = NODE_PATH)
-        val nodePath: NodePath,
-        @ApiModelProperty(required = true, example = MENU_PATH)
-        val menuPath: MenuPath = MenuPath()
-) : HasCpId
+        override val cpId: Long,
+        @ApiModelProperty(required = true, example = "1")
+        val menuDefId: Int
+) : HasCpId {
+    @TestOnly
+    constructor(
+            menuDefId: Int
+    ) : this(INVALID_ID, menuDefId)
+}

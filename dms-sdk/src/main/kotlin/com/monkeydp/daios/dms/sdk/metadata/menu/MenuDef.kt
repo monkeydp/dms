@@ -2,6 +2,7 @@ package com.monkeydp.daios.dms.sdk.metadata.menu
 
 import com.monkeydp.daios.dms.sdk.instruction.Instruction
 import com.monkeydp.tools.ext.kotlin.initInstance
+import java.util.concurrent.atomic.AtomicInteger
 
 /**
  * @author iPotato
@@ -9,6 +10,7 @@ import com.monkeydp.tools.ext.kotlin.initInstance
  */
 interface MenuDef {
     
+    val id: Int
     val items: List<MenuItemDef>
     
     operator fun MenuItemDef.unaryPlus()
@@ -21,6 +23,12 @@ interface MenuDef {
 }
 
 abstract class AbstractMenuDef : MenuDef {
+    
+    companion object {
+        private val idGenerator = AtomicInteger()
+    }
+    
+    override val id = idGenerator.incrementAndGet()
     
     private val _items = mutableListOf<MenuItemDef>()
     override val items get() = _items.toList()

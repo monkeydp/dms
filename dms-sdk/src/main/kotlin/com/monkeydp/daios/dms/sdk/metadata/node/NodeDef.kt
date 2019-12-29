@@ -1,10 +1,10 @@
 package com.monkeydp.daios.dms.sdk.metadata.node
 
-import com.monkeydp.daios.dms.sdk.metadata.menu.MenuDef
 import com.monkeydp.daios.dms.sdk.instruction.target.GlobalTarget
 import com.monkeydp.daios.dms.sdk.instruction.target.Target
 import com.monkeydp.daios.dms.sdk.metadata.icon.GlobalIcon
 import com.monkeydp.daios.dms.sdk.metadata.icon.Icon
+import com.monkeydp.daios.dms.sdk.metadata.menu.MenuDef
 import com.monkeydp.tools.ext.kotlin.*
 import java.util.concurrent.atomic.AtomicInteger
 import kotlin.properties.Delegates
@@ -71,7 +71,7 @@ abstract class AbstractNd : NodeDef {
                     target = target,
                     name = name ?: this.name,
                     icon = icon,
-                    hasMenu = menuDef != null
+                    menuDefId = menuDef?.id
             )
     
     protected open fun defaultTarget() = GlobalTarget::class.valueOfOrNull(targetName)

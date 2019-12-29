@@ -15,7 +15,8 @@ interface Node {
     val name: String
     val icon: Icon<*>
     
-    val hasMenu: Boolean
+    val menuDefId: Int?
+    val hasMenu: Boolean get() = menuDefId != null
     
     companion object {
         operator fun invoke(
@@ -25,8 +26,8 @@ interface Node {
                 name: String,
                 icon: Icon<*>,
                 
-                hasMenu: Boolean
-        ): Node = StdNode(defId, target, name, icon, hasMenu)
+                menuDefId: Int?
+        ): Node = StdNode(defId, target, name, icon, menuDefId)
     }
 }
 
@@ -36,8 +37,8 @@ abstract class AbstractNode(
         override val target: Target<*>,
         override val name: String,
         override val icon: Icon<*>,
-
-        override val hasMenu: Boolean
+        
+        override val menuDefId: Int?
 ) : Node
 
 class StdNode(
@@ -46,6 +47,6 @@ class StdNode(
         target: Target<*>,
         name: String,
         icon: Icon<*>,
-
-        hasMenu: Boolean
-) : AbstractNode(defId, target, name, icon, hasMenu)
+        
+        menuDefId: Int?
+) : AbstractNode(defId, target, name, icon, menuDefId)

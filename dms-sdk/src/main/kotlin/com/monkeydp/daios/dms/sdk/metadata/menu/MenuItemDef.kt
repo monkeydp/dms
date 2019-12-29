@@ -4,7 +4,6 @@ import com.monkeydp.daios.dms.sdk.instruction.InstrHelper
 import com.monkeydp.daios.dms.sdk.instruction.Instruction
 import com.monkeydp.daios.dms.sdk.metadata.icon.GlobalIcon.EMPTY_ICON
 import com.monkeydp.daios.dms.sdk.metadata.icon.Icon
-import java.util.concurrent.atomic.AtomicInteger
 
 /**
  * @author iPotato
@@ -12,13 +11,12 @@ import java.util.concurrent.atomic.AtomicInteger
  */
 interface MenuItemDef {
     
-    val id: Int
-    
     val instr: Instruction
     val name: String
     val icon: Icon<*>
     
     val menuDef: MenuDef?
+    val hasMenuDef: Boolean get() = menuDef != null
     
     fun create(): MenuItem
     
@@ -40,23 +38,16 @@ abstract class AbstractMid(
         override val menuDef: MenuDef? = null
 ) : MenuItemDef {
     
-    companion object {
-        private val idGenerator = AtomicInteger()
-    }
-    
-    override val id = idGenerator.incrementAndGet()
-    
     override val instr = instr ?: InstrHelper.getInstrByClassname(this)
     override val name = name ?: instr?.toString() ?: this.instr.toString()
     override val icon: Icon<*> = icon ?: EMPTY_ICON
     
     override fun create() =
             MenuItem(
-                    defId = id,
                     instr = instr,
                     name = name,
                     icon = icon,
-                    hasMenu = menuDef != null
+                    menuDefId = menuDef?.id
             )
     
     override fun toString() = name
