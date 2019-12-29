@@ -22,5 +22,5 @@ class FormController @Autowired constructor(
 ) {
     @ApiOperation("Load form")
     @PostMapping("load-form")
-    fun loadForm(@RequestBody ctx: FormLoadingCtx) = service.loadForm(ctx).items
+    fun loadForm(@RequestBody ctx: FormLoadingCtx) = service.loadForm(ctx.instr).items
 }
