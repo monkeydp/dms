@@ -1,6 +1,5 @@
 package com.monkeydp.daios.dms.sdk.config
 
-import com.monkeydp.daios.dms.sdk.share.kodein.sdkKodeinModule
 import org.kodein.di.Kodein
 
 /**

@@ -8,8 +8,8 @@ import com.monkeydp.daios.dms.sdk.datasource.DsVersion
 import com.monkeydp.daios.dms.sdk.dm.SdkDmApp
 import com.monkeydp.daios.dms.sdk.helper.ScopeHelper
 import com.monkeydp.daios.dms.sdk.share.conn.ConnContext
-import com.monkeydp.daios.dms.sdk.share.kodein.dmKodeinRepo
-import com.monkeydp.daios.dms.sdk.share.kodein.findImpl
+import com.monkeydp.daios.dms.sdk.dm.dmKodeinRepo
+import com.monkeydp.daios.dms.sdk.dm.findImpl
 import com.monkeydp.tools.ext.kotlin.findAnnot
 import com.monkeydp.tools.ext.kotlin.matchOne
 import com.monkeydp.tools.ext.kotlin.singleton

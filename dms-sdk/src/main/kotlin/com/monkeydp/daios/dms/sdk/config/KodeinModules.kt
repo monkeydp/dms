@@ -1,6 +1,5 @@
-package com.monkeydp.daios.dms.sdk.share.kodein
+package com.monkeydp.daios.dms.sdk.config
 
-import com.monkeydp.daios.dms.sdk.config.SdkKodeinCompRepo
 import com.monkeydp.daios.dms.sdk.event.EventPublisher
 import com.monkeydp.daios.dms.sdk.share.conn.ConnContext
 import com.monkeydp.daios.dms.sdk.share.request.RequestContextHolder

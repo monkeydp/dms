@@ -1,6 +1,6 @@
 package com.monkeydp.daios.dms.config
 
-import com.monkeydp.daios.dms.sdk.share.kodein.sdkKodeinModule
+import com.monkeydp.daios.dms.sdk.config.sdkKodeinModule
 import com.monkeydp.tools.gradle.wrapper.GradleWrapperExecutor
 import org.kodein.di.Kodein
 import org.kodein.di.generic.bind

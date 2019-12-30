@@ -5,8 +5,8 @@ import com.monkeydp.daios.dms.sdk.api.NodeApi
 import com.monkeydp.daios.dms.sdk.ui.node.ConnNode
 import com.monkeydp.daios.dms.sdk.ui.node.Node
 import com.monkeydp.daios.dms.sdk.ui.node.NodePath
-import com.monkeydp.daios.dms.sdk.share.kodein.dmKodeinRepo
-import com.monkeydp.daios.dms.sdk.share.kodein.findImpl
+import com.monkeydp.daios.dms.sdk.dm.dmKodeinRepo
+import com.monkeydp.daios.dms.sdk.dm.findImpl
 import com.monkeydp.daios.dms.service.contract.NodeService
 import com.monkeydp.daios.dms.session.UserSession
 import org.springframework.beans.factory.annotation.Autowired

@@ -1,4 +1,4 @@
-package com.monkeydp.daios.dms.sdk.share.kodein
+package com.monkeydp.daios.dms.sdk.dm
 
 import com.monkeydp.daios.dms.sdk.config.kodein
 import com.monkeydp.daios.dms.sdk.datasource.Datasource
@@ -22,7 +22,8 @@ val dmKodeinRepo = DmKodeinRepo()
 
 interface DmKodeinRepo {
     companion object {
-        operator fun invoke(): DmKodeinRepo = DmKodeinRepoImpl()
+        operator fun invoke(): DmKodeinRepo =
+                DmKodeinRepoImpl()
     }
     
     val defaultDs: Datasource get() = DefaultDatasource.get()

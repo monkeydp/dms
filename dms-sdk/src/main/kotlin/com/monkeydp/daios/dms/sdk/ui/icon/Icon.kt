@@ -7,8 +7,8 @@ import com.fasterxml.jackson.databind.JsonDeserializer
 import com.fasterxml.jackson.databind.JsonNode
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize
 import com.monkeydp.daios.dms.sdk.ui.icon.Icon.IconDeserializer
-import com.monkeydp.daios.dms.sdk.share.kodein.dmKodeinRepo
-import com.monkeydp.daios.dms.sdk.share.kodein.findEnum
+import com.monkeydp.daios.dms.sdk.dm.dmKodeinRepo
+import com.monkeydp.daios.dms.sdk.dm.findEnum
 import com.monkeydp.tools.enumx.Enumx
 import com.monkeydp.tools.ext.kotlin.toPropMap
 

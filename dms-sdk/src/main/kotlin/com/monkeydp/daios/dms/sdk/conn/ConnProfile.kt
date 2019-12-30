@@ -8,8 +8,8 @@ import com.monkeydp.daios.dms.sdk.entity.User
 import com.monkeydp.daios.dms.sdk.mocker.ConnJsonMocker.CP_USER_INPUT
 import com.monkeydp.daios.dms.sdk.mocker.ConnJsonMocker.DATASOURCE
 import com.monkeydp.daios.dms.sdk.mocker.ConnJsonMocker.DS_VERSION_ID
-import com.monkeydp.daios.dms.sdk.share.kodein.dmKodeinRepo
-import com.monkeydp.daios.dms.sdk.share.kodein.findImpl
+import com.monkeydp.daios.dms.sdk.dm.dmKodeinRepo
+import com.monkeydp.daios.dms.sdk.dm.findImpl
 import com.monkeydp.daios.dms.sdk.useful.UserInput
 import com.monkeydp.tools.ext.kotlin.convertTo
 import io.swagger.annotations.ApiModel

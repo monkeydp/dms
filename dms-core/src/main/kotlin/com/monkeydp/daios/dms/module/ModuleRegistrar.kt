@@ -2,7 +2,7 @@ package com.monkeydp.daios.dms.module
 
 import com.monkeydp.daios.dms.module.ModuleEnv.moduleDirs
 import com.monkeydp.daios.dms.sdk.event.EventPublisher
-import com.monkeydp.daios.dms.sdk.share.kodein.dmsKodeinModule
+import com.monkeydp.daios.dms.sdk.config.dmsKodeinModule
 import org.kodein.di.Kodein
 import org.kodein.di.generic.bind
 import org.kodein.di.generic.singleton

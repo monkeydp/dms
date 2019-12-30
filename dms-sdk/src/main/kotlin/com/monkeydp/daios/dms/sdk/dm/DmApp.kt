@@ -1,7 +1,5 @@
 package com.monkeydp.daios.dms.sdk.dm
 
-import com.monkeydp.daios.dms.sdk.share.kodein.DmKodein
-import com.monkeydp.daios.dms.sdk.share.kodein.dmKodeinRepo
 import com.monkeydp.tools.ext.kotlin.findAnnot
 
 /**

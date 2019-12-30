@@ -1,7 +1,7 @@
 package com.monkeydp.daios.dms.sdk.ui.node
 
-import com.monkeydp.daios.dms.sdk.share.kodein.dmKodeinRepo
-import com.monkeydp.daios.dms.sdk.share.kodein.findImpl
+import com.monkeydp.daios.dms.sdk.dm.dmKodeinRepo
+import com.monkeydp.daios.dms.sdk.dm.findImpl
 import kotlin.reflect.full.createInstance
 
 /**

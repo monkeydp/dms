@@ -7,8 +7,8 @@ import com.monkeydp.daios.dms.module.ModuleRegistry
 import com.monkeydp.daios.dms.sdk.api.ConnApi
 import com.monkeydp.daios.dms.sdk.conn.Conn
 import com.monkeydp.daios.dms.sdk.conn.ConnProfile
-import com.monkeydp.daios.dms.sdk.share.kodein.dmKodeinRepo
-import com.monkeydp.daios.dms.sdk.share.kodein.findImpl
+import com.monkeydp.daios.dms.sdk.dm.dmKodeinRepo
+import com.monkeydp.daios.dms.sdk.dm.findImpl
 import com.monkeydp.daios.dms.service.contract.ConnManager
 import com.monkeydp.daios.dms.service.contract.ConnService
 import com.monkeydp.daios.dms.session.UserSession

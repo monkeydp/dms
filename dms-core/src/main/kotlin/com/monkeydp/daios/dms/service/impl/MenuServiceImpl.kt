@@ -1,8 +1,8 @@
 package com.monkeydp.daios.dms.service.impl
 
 import com.monkeydp.daios.dms.sdk.api.MenuApi
-import com.monkeydp.daios.dms.sdk.share.kodein.dmKodeinRepo
-import com.monkeydp.daios.dms.sdk.share.kodein.findImpl
+import com.monkeydp.daios.dms.sdk.dm.dmKodeinRepo
+import com.monkeydp.daios.dms.sdk.dm.findImpl
 import com.monkeydp.daios.dms.service.contract.MenuService
 import org.springframework.stereotype.Service
 
