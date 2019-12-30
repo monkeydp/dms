@@ -10,10 +10,9 @@ import javax.servlet.http.HttpSession
  * @date 2019/10/28
  */
 @Component
-class UserSession {
-    @Autowired
-    private lateinit var session: HttpSession
-    
+class UserSession @Autowired constructor(
+        private val session: HttpSession
+) {
     val userId: Long get() = user.id
     
     /**
