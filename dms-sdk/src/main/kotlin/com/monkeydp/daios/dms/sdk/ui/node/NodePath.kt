@@ -1,4 +1,4 @@
-package com.monkeydp.daios.dms.sdk.metadata.node
+package com.monkeydp.daios.dms.sdk.ui.node
 
 import com.monkeydp.daios.dms.sdk.share.kodein.dmKodeinRepo
 import com.monkeydp.daios.dms.sdk.share.kodein.findImpl

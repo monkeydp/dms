@@ -1,4 +1,4 @@
-package com.monkeydp.daios.dms.sdk.metadata.node
+package com.monkeydp.daios.dms.sdk.ui.node
 
 /**
  * @author iPotato

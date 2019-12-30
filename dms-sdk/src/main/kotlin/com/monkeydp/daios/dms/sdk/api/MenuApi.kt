@@ -1,6 +1,6 @@
 package com.monkeydp.daios.dms.sdk.api
 
-import com.monkeydp.daios.dms.sdk.metadata.menu.Menu
+import com.monkeydp.daios.dms.sdk.ui.menu.Menu
 
 /**
  * @author iPotato

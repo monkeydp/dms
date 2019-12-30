@@ -1,6 +1,6 @@
 package com.monkeydp.daios.dms.controller
 
-import com.monkeydp.daios.dms.sdk.metadata.menu.MenuLoadingCtx
+import com.monkeydp.daios.dms.sdk.ui.menu.MenuLoadingCtx
 import com.monkeydp.daios.dms.service.contract.MenuService
 import io.swagger.annotations.Api
 import io.swagger.annotations.ApiOperation

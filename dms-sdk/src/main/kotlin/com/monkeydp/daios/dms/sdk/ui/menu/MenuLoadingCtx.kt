@@ -1,4 +1,4 @@
-package com.monkeydp.daios.dms.sdk.metadata.menu
+package com.monkeydp.daios.dms.sdk.ui.menu
 
 import com.monkeydp.daios.dms.sdk.conn.HasCpId
 import com.monkeydp.daios.dms.sdk.helper.IdHelper.INVALID_ID

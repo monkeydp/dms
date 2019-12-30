@@ -1,4 +1,4 @@
-package com.monkeydp.daios.dms.sdk.metadata.icon
+package com.monkeydp.daios.dms.sdk.ui.icon
 
 import com.fasterxml.jackson.annotation.JsonValue
 import com.fasterxml.jackson.core.JsonParser
@@ -6,7 +6,7 @@ import com.fasterxml.jackson.databind.DeserializationContext
 import com.fasterxml.jackson.databind.JsonDeserializer
 import com.fasterxml.jackson.databind.JsonNode
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize
-import com.monkeydp.daios.dms.sdk.metadata.icon.Icon.IconDeserializer
+import com.monkeydp.daios.dms.sdk.ui.icon.Icon.IconDeserializer
 import com.monkeydp.daios.dms.sdk.share.kodein.dmKodeinRepo
 import com.monkeydp.daios.dms.sdk.share.kodein.findEnum
 import com.monkeydp.tools.enumx.Enumx

@@ -1,6 +1,6 @@
 package com.monkeydp.daios.dms.controller
 
-import com.monkeydp.daios.dms.sdk.metadata.form.FormLoadingCtx
+import com.monkeydp.daios.dms.sdk.ui.form.FormLoadingCtx
 import com.monkeydp.daios.dms.service.contract.FormService
 import io.swagger.annotations.Api
 import io.swagger.annotations.ApiOperation

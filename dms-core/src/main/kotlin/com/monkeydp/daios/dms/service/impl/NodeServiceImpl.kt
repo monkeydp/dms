@@ -2,9 +2,9 @@ package com.monkeydp.daios.dms.service.impl
 
 import com.monkeydp.daios.dms.curd.service.contract.ConnProfileService
 import com.monkeydp.daios.dms.sdk.api.NodeApi
-import com.monkeydp.daios.dms.sdk.metadata.node.ConnNode
-import com.monkeydp.daios.dms.sdk.metadata.node.Node
-import com.monkeydp.daios.dms.sdk.metadata.node.NodePath
+import com.monkeydp.daios.dms.sdk.ui.node.ConnNode
+import com.monkeydp.daios.dms.sdk.ui.node.Node
+import com.monkeydp.daios.dms.sdk.ui.node.NodePath
 import com.monkeydp.daios.dms.sdk.share.kodein.dmKodeinRepo
 import com.monkeydp.daios.dms.sdk.share.kodein.findImpl
 import com.monkeydp.daios.dms.service.contract.NodeService

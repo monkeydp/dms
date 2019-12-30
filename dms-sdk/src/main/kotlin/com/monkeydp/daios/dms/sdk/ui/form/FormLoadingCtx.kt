@@ -1,4 +1,4 @@
-package com.monkeydp.daios.dms.sdk.metadata.form
+package com.monkeydp.daios.dms.sdk.ui.form
 
 import com.monkeydp.daios.dms.sdk.conn.HasCpId
 import com.monkeydp.daios.dms.sdk.helper.IdHelper

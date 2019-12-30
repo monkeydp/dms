@@ -3,7 +3,7 @@ package com.monkeydp.daios.dms.sdk.instruction
 import com.monkeydp.daios.dms.sdk.conn.HasCpId
 import com.monkeydp.daios.dms.sdk.helper.IdHelper.INVALID_ID
 import com.monkeydp.daios.dms.sdk.instruction.target.Target
-import com.monkeydp.daios.dms.sdk.metadata.node.NodePath
+import com.monkeydp.daios.dms.sdk.ui.node.NodePath
 import com.monkeydp.daios.dms.sdk.mocker.ConnJsonMocker.CP_ID
 import com.monkeydp.daios.dms.sdk.mocker.InstrJsonMocker.INSTR
 import com.monkeydp.daios.dms.sdk.mocker.InstrJsonMocker.NEW_TABLE_USER_INPUT

@@ -5,10 +5,10 @@ import com.fasterxml.jackson.databind.module.SimpleAbstractTypeResolver
 import com.fasterxml.jackson.databind.module.SimpleModule
 import com.monkeydp.daios.dms.sdk.instruction.Instruction
 import com.monkeydp.daios.dms.sdk.instruction.StdInstr
-import com.monkeydp.daios.dms.sdk.metadata.menu.MenuItem
-import com.monkeydp.daios.dms.sdk.metadata.menu.StdMi
-import com.monkeydp.daios.dms.sdk.metadata.node.Node
-import com.monkeydp.daios.dms.sdk.metadata.node.StdNode
+import com.monkeydp.daios.dms.sdk.ui.menu.MenuItem
+import com.monkeydp.daios.dms.sdk.ui.menu.StdMi
+import com.monkeydp.daios.dms.sdk.ui.node.Node
+import com.monkeydp.daios.dms.sdk.ui.node.StdNode
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.context.annotation.Configuration
 import org.springframework.http.converter.json.Jackson2ObjectMapperBuilder

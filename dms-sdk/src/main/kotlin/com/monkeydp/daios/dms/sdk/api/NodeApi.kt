@@ -1,9 +1,9 @@
 package com.monkeydp.daios.dms.sdk.api
 
 import com.monkeydp.daios.dms.sdk.conn.ConnProfile
-import com.monkeydp.daios.dms.sdk.metadata.node.ConnNode
-import com.monkeydp.daios.dms.sdk.metadata.node.Node
-import com.monkeydp.daios.dms.sdk.metadata.node.NodePath
+import com.monkeydp.daios.dms.sdk.ui.node.ConnNode
+import com.monkeydp.daios.dms.sdk.ui.node.Node
+import com.monkeydp.daios.dms.sdk.ui.node.NodePath
 
 /**
  * @author iPotato

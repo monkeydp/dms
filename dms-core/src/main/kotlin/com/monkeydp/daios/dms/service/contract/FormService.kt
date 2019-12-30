@@ -1,7 +1,7 @@
 package com.monkeydp.daios.dms.service.contract
 
 import com.monkeydp.daios.dms.sdk.instruction.Instruction
-import com.monkeydp.daios.dms.sdk.metadata.form.Form
+import com.monkeydp.daios.dms.sdk.ui.form.Form
 
 /**
  * @author iPotato

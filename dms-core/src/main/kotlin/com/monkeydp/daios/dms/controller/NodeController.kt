@@ -1,7 +1,7 @@
 package com.monkeydp.daios.dms.controller
 
 import com.monkeydp.daios.dms.sdk.conn.ConnRequired
-import com.monkeydp.daios.dms.sdk.metadata.node.NodeLoadingCtx
+import com.monkeydp.daios.dms.sdk.ui.node.NodeLoadingCtx
 import com.monkeydp.daios.dms.service.contract.NodeService
 import io.swagger.annotations.Api
 import io.swagger.annotations.ApiOperation

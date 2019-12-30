@@ -1,7 +1,7 @@
-package com.monkeydp.daios.dms.sdk.metadata.form
+package com.monkeydp.daios.dms.sdk.ui.form
 
-import com.monkeydp.daios.dms.sdk.metadata.JsType
-import com.monkeydp.daios.dms.sdk.metadata.UiCompType
+import com.monkeydp.daios.dms.sdk.ui.JsType
+import com.monkeydp.daios.dms.sdk.ui.UiCompType
 
 /**
  * @author iPotato

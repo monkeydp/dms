@@ -1,4 +1,4 @@
-package com.monkeydp.daios.dms.sdk.metadata
+package com.monkeydp.daios.dms.sdk.ui
 
 /**
  * Javascript Type

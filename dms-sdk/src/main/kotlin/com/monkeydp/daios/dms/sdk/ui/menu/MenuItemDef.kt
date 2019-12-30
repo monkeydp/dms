@@ -1,9 +1,9 @@
-package com.monkeydp.daios.dms.sdk.metadata.menu
+package com.monkeydp.daios.dms.sdk.ui.menu
 
 import com.monkeydp.daios.dms.sdk.instruction.InstrHelper
 import com.monkeydp.daios.dms.sdk.instruction.Instruction
-import com.monkeydp.daios.dms.sdk.metadata.icon.GlobalIcon.EMPTY_ICON
-import com.monkeydp.daios.dms.sdk.metadata.icon.Icon
+import com.monkeydp.daios.dms.sdk.ui.icon.GlobalIcon.EMPTY_ICON
+import com.monkeydp.daios.dms.sdk.ui.icon.Icon
 
 /**
  * @author iPotato

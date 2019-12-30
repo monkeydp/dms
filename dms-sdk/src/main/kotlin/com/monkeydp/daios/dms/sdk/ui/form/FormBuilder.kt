@@ -1,4 +1,4 @@
-package com.monkeydp.daios.dms.sdk.metadata.form
+package com.monkeydp.daios.dms.sdk.ui.form
 
 import com.monkeydp.daios.dms.sdk.received.form.ReceivedForm
 import com.monkeydp.daios.dms.sdk.received.form.annot.ReceivedFormItem

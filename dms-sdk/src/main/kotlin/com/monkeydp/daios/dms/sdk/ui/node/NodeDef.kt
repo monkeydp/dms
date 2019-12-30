@@ -1,10 +1,10 @@
-package com.monkeydp.daios.dms.sdk.metadata.node
+package com.monkeydp.daios.dms.sdk.ui.node
 
 import com.monkeydp.daios.dms.sdk.instruction.target.GlobalTarget
 import com.monkeydp.daios.dms.sdk.instruction.target.Target
-import com.monkeydp.daios.dms.sdk.metadata.icon.GlobalIcon
-import com.monkeydp.daios.dms.sdk.metadata.icon.Icon
-import com.monkeydp.daios.dms.sdk.metadata.menu.MenuDef
+import com.monkeydp.daios.dms.sdk.ui.icon.GlobalIcon
+import com.monkeydp.daios.dms.sdk.ui.icon.Icon
+import com.monkeydp.daios.dms.sdk.ui.menu.MenuDef
 import com.monkeydp.tools.ext.kotlin.*
 import java.util.concurrent.atomic.AtomicInteger
 import kotlin.properties.Delegates

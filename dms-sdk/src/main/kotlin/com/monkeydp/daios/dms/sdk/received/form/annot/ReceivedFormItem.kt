@@ -1,9 +1,9 @@
 package com.monkeydp.daios.dms.sdk.received.form.annot
 
-import com.monkeydp.daios.dms.sdk.metadata.JsType
-import com.monkeydp.daios.dms.sdk.metadata.JsType.STRING
-import com.monkeydp.daios.dms.sdk.metadata.UiCompType
-import com.monkeydp.daios.dms.sdk.metadata.UiCompType.INPUT
+import com.monkeydp.daios.dms.sdk.ui.JsType
+import com.monkeydp.daios.dms.sdk.ui.JsType.STRING
+import com.monkeydp.daios.dms.sdk.ui.UiCompType
+import com.monkeydp.daios.dms.sdk.ui.UiCompType.INPUT
 import kotlin.annotation.AnnotationTarget.PROPERTY
 
 /**

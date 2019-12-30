@@ -1,4 +1,4 @@
-package com.monkeydp.daios.dms.sdk.metadata.menu
+package com.monkeydp.daios.dms.sdk.ui.node
 
 import com.monkeydp.tools.ext.kodein.component.AbstractKodeinBuilderConfig
 import com.monkeydp.tools.ext.kodein.component.KodeinComponent
@@ -14,11 +14,11 @@ import kotlin.annotation.AnnotationTarget.CLASS
  * @date 2019/12/19
  */
 @Target(CLASS)
-@KodeinComponent(SdkMdStruct.KodeinBuilderConfig::class)
-annotation class SdkMdStruct {
+@KodeinComponent(SdkNdStruct.KodeinBuilderConfig::class)
+annotation class SdkNdStruct {
     object KodeinBuilderConfig : AbstractKodeinBuilderConfig<KodeinKClassComp>() {
         override fun Kodein.Builder.configOne(comp: KodeinKClassComp) {
-            bind<MenuDefStruct>() with singletonX { comp.annotatedKClass.singletonX() }
+            bind<NodeDefStruct>() with singletonX { comp.annotatedKClass.singletonX() }
         }
     }
 }

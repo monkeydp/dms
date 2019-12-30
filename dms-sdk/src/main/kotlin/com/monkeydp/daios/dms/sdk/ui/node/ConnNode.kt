@@ -1,8 +1,8 @@
-package com.monkeydp.daios.dms.sdk.metadata.node
+package com.monkeydp.daios.dms.sdk.ui.node
 
 import com.monkeydp.daios.dms.sdk.conn.ConnProfile
 import com.monkeydp.daios.dms.sdk.instruction.target.Target
-import com.monkeydp.daios.dms.sdk.metadata.icon.Icon
+import com.monkeydp.daios.dms.sdk.ui.icon.Icon
 
 /**
  * @author iPotato
