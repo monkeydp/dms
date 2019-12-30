@@ -1,7 +1,7 @@
 package com.monkeydp.daios.dms.sdk.metadata.form
 
 import com.monkeydp.daios.dms.sdk.metadata.JsType
-import com.monkeydp.daios.dms.sdk.metadata.UiComponent
+import com.monkeydp.daios.dms.sdk.metadata.UiCompType
 
 /**
  * @author iPotato
@@ -24,7 +24,7 @@ interface FormItem {
     
     val jsType: JsType
     
-    val component: UiComponent
+    val compType: UiCompType
     
     /**
      * If true, model is required
@@ -47,11 +47,11 @@ interface FormItem {
                 name: String,
                 desc: String,
                 jsType: JsType,
-                component: UiComponent,
+                compType: UiCompType,
                 required: Boolean,
                 hidden: Boolean,
                 disabled: Boolean
-        ): FormItem = StdFormItem(label, name, desc, jsType, component, required, hidden, disabled)
+        ): FormItem = StdFormItem(label, name, desc, jsType, compType, required, hidden, disabled)
     }
 }
 
@@ -61,7 +61,7 @@ abstract class AbstractFormItem(
         
         override val desc: String,
         override val jsType: JsType,
-        override val component: UiComponent,
+        override val compType: UiCompType,
         
         override val required: Boolean,
         override val hidden: Boolean,
@@ -73,8 +73,8 @@ private class StdFormItem(
         name: String,
         desc: String,
         jsType: JsType,
-        component: UiComponent,
+        compType: UiCompType,
         required: Boolean,
         hidden: Boolean,
         disabled: Boolean
-) : AbstractFormItem(label, name, desc, jsType, component, required, hidden, disabled)
+) : AbstractFormItem(label, name, desc, jsType, compType, required, hidden, disabled)

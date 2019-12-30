@@ -2,8 +2,8 @@ package com.monkeydp.daios.dms.sdk.received.form.annot
 
 import com.monkeydp.daios.dms.sdk.metadata.JsType
 import com.monkeydp.daios.dms.sdk.metadata.JsType.STRING
-import com.monkeydp.daios.dms.sdk.metadata.UiComponent
-import com.monkeydp.daios.dms.sdk.metadata.UiComponent.INPUT
+import com.monkeydp.daios.dms.sdk.metadata.UiCompType
+import com.monkeydp.daios.dms.sdk.metadata.UiCompType.INPUT
 import kotlin.annotation.AnnotationTarget.PROPERTY
 
 /**
@@ -23,7 +23,7 @@ annotation class ReceivedFormItem(
         val name: String = "",
         val desc: String = "",
         val jsType: JsType = STRING,
-        val component: UiComponent = INPUT,
+        val compType: UiCompType = INPUT,
         val dataSpEl: String = "",
         val required: Boolean = false,
         val hidden: Boolean = false,

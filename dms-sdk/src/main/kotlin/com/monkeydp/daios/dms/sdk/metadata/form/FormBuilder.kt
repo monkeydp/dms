@@ -24,7 +24,7 @@ object FormBuilder {
                     name = if (annot.name.isNotEmpty()) annot.name else propName,
                     desc = annot.desc,
                     jsType = annot.jsType,
-                    component = annot.component,
+                    compType = annot.compType,
                     required = annot.required,
                     hidden = annot.hidden,
                     disabled = annot.disabled

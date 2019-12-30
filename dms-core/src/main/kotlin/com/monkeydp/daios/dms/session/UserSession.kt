@@ -14,14 +14,12 @@ class UserSession {
     @Autowired
     private lateinit var session: HttpSession
     
-    val userId: Long
-        get() = user.id
+    val userId: Long get() = user.id
     
     /**
      * TODO
      */
-    val user: User
-        get() = User.mockUser
+    val user: User get() = User.mockUser
     
     @Suppress("UNCHECKED_CAST")
     private fun <T> getAttribute(key: Key) = session.getAttribute(key.name) as T
