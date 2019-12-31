@@ -1,8 +1,5 @@
 package com.monkeydp.daios.dms.sdk.ui.context
 
-import com.monkeydp.tools.ext.kotlin.singletonOrNull
-import kotlin.properties.Delegates
-
 /**
  * @author iPotato
  * @date 2019/12/30
@@ -38,6 +35,6 @@ interface UiContextRepoBuilder {
 }
 
 private class StdUiContextRepoBuilder : UiContextRepoBuilder {
-    override var connContext: UiConnContext? by Delegates.singletonOrNull()
-    override var nodeContext: UiNodeContext? by Delegates.singletonOrNull()
+    override var connContext: UiConnContext? = null
+    override var nodeContext: UiNodeContext? = null
 }
