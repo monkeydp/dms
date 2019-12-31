@@ -1,5 +1,6 @@
 package com.monkeydp.daios.dms.service.impl
 
+import com.monkeydp.daios.dms.component.UserSession
 import com.monkeydp.daios.dms.conn.BelongsTo
 import com.monkeydp.daios.dms.conn.ConnWrapper
 import com.monkeydp.daios.dms.curd.service.contract.ConnProfileService
@@ -11,7 +12,6 @@ import com.monkeydp.daios.dms.sdk.dm.dmKodeinRepo
 import com.monkeydp.daios.dms.sdk.dm.findImpl
 import com.monkeydp.daios.dms.service.contract.ConnManager
 import com.monkeydp.daios.dms.service.contract.ConnService
-import com.monkeydp.daios.dms.session.UserSession
 import com.monkeydp.tools.ext.logger.getLogger
 import com.monkeydp.tools.ext.main.ierror
 import org.springframework.beans.factory.annotation.Autowired
@@ -38,7 +38,7 @@ internal class ConnServiceImpl @Autowired constructor(
     override fun saveCp(cp: ConnProfile): ConnProfile {
         val saved = cpService.save(cp.full())
         // TODO should be delegated to listener
-        manager.updateActiveCp(saved, true)
+        manager.updateActiveCp(saved)
         return saved
     }
     
@@ -51,7 +51,7 @@ internal class ConnServiceImpl @Autowired constructor(
             }
     
     private fun openUserConn(cpId: Long): ConnWrapper {
-        val activeUserCw = manager.getActiveUserCw(cpId, true)
+        val activeUserCw = manager.getActiveUserCwOrNull(cpId)
         if (activeUserCw != null) {
             log.debug("${activeUserCw.conn} is active ,return it directly.")
             return activeUserCw
@@ -65,11 +65,14 @@ internal class ConnServiceImpl @Autowired constructor(
         val cp = findCp(cpId)
         val conn = getConn(cp)
         val cw = ConnWrapper(conn, belongsTo)
-        manager.activateCp(cp).activateCw(cw)
+        manager.run {
+            activateCp(cp)
+            activateCw(cw)
+        }
         return cw
     }
     
-    override fun findCp(cpId: Long) = manager.getActiveCp(cpId, true) ?: cpService.findById(cpId)
+    override fun findCp(cpId: Long) = manager.getActiveCpOrNull(cpId) ?: cpService.findById(cpId)
     
     private fun getConn(cp: ConnProfile): Conn<*> {
         val api: ConnApi = dmKodeinRepo.findImpl(cp.datasource)
@@ -80,9 +83,9 @@ internal class ConnServiceImpl @Autowired constructor(
             if (connId == null) closeUserConn(cpId)
             else closeOtherConn(cpId, connId)
     
-    private fun closeUserConn(cpId: Long): Unit = manager.inactivateUserCw(cpId, true)
+    private fun closeUserConn(cpId: Long): Unit = manager.inactivateUserCw(cpId)
     
-    private fun closeOtherConn(cpId: Long, connId: Long): Unit = manager.inactivateCw(cpId, connId, true)
+    private fun closeOtherConn(cpId: Long, connId: Long): Unit = manager.inactivateCw(cpId, connId)
     
     override fun testConn(cpId: Long) {
         val cp = findCp(cpId)
@@ -92,11 +95,13 @@ internal class ConnServiceImpl @Autowired constructor(
     override fun testConn(cp: ConnProfile): Unit =
             getConn(cp).use { if (!it.isValid()) ierror("Test conn fail, please check conn profile: $cp") }
     
-    override fun findCwOrNull(cpId: Long, connId: Long?, ignoreNotFound: Boolean) =
-            if (connId == null) findUserCwOrNull(cpId, ignoreNotFound)
-            else finOtherCw(cpId, connId)
+    override fun findActiveCw(cpId: Long, connId: Long?): ConnWrapper =
+            if (connId == null) manager.getActiveUserCw(cpId)
+            else manager.getActiveCw(cpId, connId)
     
-    private fun findUserCwOrNull(cpId: Long, ignoreNotFound: Boolean) = manager.getActiveUserCw(cpId, ignoreNotFound)
+    override fun findActiveCwOrNull(cpId: Long, connId: Long?) =
+            if (connId == null) manager.getActiveUserCwOrNull(cpId)
+            else manager.getActiveCwOrNull(cpId, connId)
     
-    private fun finOtherCw(cpId: Long, connId: Long) = manager.getActiveCw(cpId, connId, true)
+    private fun findUserCwOrNull(cpId: Long) = manager.getActiveUserCwOrNull(cpId)
 }

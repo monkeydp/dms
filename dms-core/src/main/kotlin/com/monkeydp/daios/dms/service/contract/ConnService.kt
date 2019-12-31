@@ -39,29 +39,31 @@ interface ConnService {
     
     /**
      * Find a conn profile
-     * @see ConnManger from conn manager first, then is db
      */
     fun findCp(cpId: Long): ConnProfile
     
     /**
-     * Find a conn wrapper
+     * Find active conn wrapper
      */
-    fun findCw(cpId: Long, connId: Long? = null) = findCwOrNull(cpId, connId, false)!!
+    fun findActiveCw(cpId: Long, connId: Long? = null): ConnWrapper
     
     /**
-     * Find a conn wrapper
+     * Find active conn wrapper
      * @param connId if null, return user conn wrapper
      */
-    fun findCwOrNull(cpId: Long, connId: Long? = null, ignoreNotFound: Boolean): ConnWrapper?
+    fun findActiveCwOrNull(cpId: Long, connId: Long? = null): ConnWrapper?
     
     /**
-     * Find a conn
+     * Find active conn
      */
-    fun findConn(cpId: Long, connId: Long? = null) = findCw(cpId, connId).conn
+    fun findActiveConn(cpId: Long, connId: Long? = null) = findActiveCw(cpId, connId).conn
     
     /**
-     * Find a conn
+     * Find active conn
      * @param connId if null, return user conn
      */
-    fun findConnOrNull(cpId: Long, connId: Long? = null, ignoreNotFound: Boolean) = findCwOrNull(cpId, connId, ignoreNotFound)?.conn
+    fun findActiveConnOrNull(
+            cpId: Long,
+            connId: Long? = null
+    ) = findActiveCwOrNull(cpId, connId)?.conn
 }

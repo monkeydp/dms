@@ -1,7 +1,6 @@
 package com.monkeydp.daios.dms.sdk.ui.menu
 
 import com.monkeydp.daios.dms.sdk.instruction.Instruction
-import com.monkeydp.tools.ext.kotlin.initInstance
 import java.util.concurrent.atomic.AtomicInteger
 
 /**
@@ -18,7 +17,8 @@ interface MenuDef {
     fun create(): Menu
     
     companion object {
-        operator fun invoke(init: MenuDef.() -> Unit): MenuDef = initInstance<StdMenuDef>(init)
+        operator fun invoke(init: MenuDef.() -> Unit): MenuDef =
+                StdMenuDef().apply(init)
     }
 }
 

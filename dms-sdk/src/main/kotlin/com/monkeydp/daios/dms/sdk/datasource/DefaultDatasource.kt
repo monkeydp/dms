@@ -2,10 +2,10 @@ package com.monkeydp.daios.dms.sdk.datasource
 
 import com.monkeydp.daios.dms.sdk.config.PackageName
 import com.monkeydp.daios.dms.sdk.config.kodein
-import com.monkeydp.daios.dms.sdk.helper.ScopeHelper
-import com.monkeydp.daios.dms.sdk.share.conn.ConnContext
+import com.monkeydp.daios.dms.sdk.context.ConnContext
+import com.monkeydp.daios.dms.sdk.context.ContextRepoHolder
 import com.monkeydp.tools.enumeration.Symbol.DOT
-import org.kodein.di.generic.instance
+import com.monkeydp.tools.ext.kodein.findImpl
 
 /**
  * @author iPotato
@@ -13,11 +13,11 @@ import org.kodein.di.generic.instance
  */
 object DefaultDatasource {
     
-    private val connContext: ConnContext by kodein.instance()
+    private val connContext: ConnContext get() = kodein.findImpl()
     
     fun get(): Datasource =
             when {
-                ScopeHelper.inRequestScope -> connContext.datasource
+                ContextRepoHolder.hasContextRepo() -> connContext.datasource
                 else -> {
                     Thread.currentThread().stackTrace
                             .first { dsOrNull(it.className) != null }

@@ -3,12 +3,12 @@ package com.monkeydp.daios.dms.sdk.instruction
 import com.monkeydp.daios.dms.sdk.conn.HasCpId
 import com.monkeydp.daios.dms.sdk.helper.IdHelper.INVALID_ID
 import com.monkeydp.daios.dms.sdk.instruction.target.Target
-import com.monkeydp.daios.dms.sdk.ui.node.NodePath
 import com.monkeydp.daios.dms.sdk.mocker.ConnJsonMocker.CP_ID
 import com.monkeydp.daios.dms.sdk.mocker.InstrJsonMocker.INSTR
 import com.monkeydp.daios.dms.sdk.mocker.InstrJsonMocker.NEW_TABLE_USER_INPUT
 import com.monkeydp.daios.dms.sdk.mocker.InstrJsonMocker.SELECTED
 import com.monkeydp.daios.dms.sdk.mocker.NodeJsonMocker.NODE_PATH
+import com.monkeydp.daios.dms.sdk.ui.node.NodePath
 import com.monkeydp.daios.dms.sdk.useful.UserInput
 import io.swagger.annotations.ApiModel
 import io.swagger.annotations.ApiModelProperty

@@ -7,5 +7,5 @@ import org.kodein.di.Kodein
  * @date 2019/12/15
  */
 internal val kodein = Kodein {
-    import(sdkKodeinModule)
+    importAll(*KodeinModuleRepo.modules())
 }

@@ -1,12 +1,13 @@
 package com.monkeydp.daios.dms.sdk.dm
 
 import com.monkeydp.daios.dms.sdk.config.kodein
+import com.monkeydp.daios.dms.sdk.context.ConnContext
 import com.monkeydp.daios.dms.sdk.datasource.Datasource
 import com.monkeydp.daios.dms.sdk.datasource.DefaultDatasource
 import com.monkeydp.daios.dms.sdk.datasource.DsVersion
-import com.monkeydp.daios.dms.sdk.share.conn.ConnContext
 import com.monkeydp.tools.enumx.Enumx
 import com.monkeydp.tools.enumx.recurFindEnumOrNull
+import com.monkeydp.tools.ext.kodein.findImpl
 import com.monkeydp.tools.ext.kotlin.enumSet
 import com.monkeydp.tools.ext.kotlin.matchOne
 import com.monkeydp.tools.ext.kotlin.transformEnumName
@@ -37,7 +38,7 @@ interface DmKodeinRepo {
 
 private abstract class AbstractDmKodeinRepo : DmKodeinRepo {
     
-    private val connContext: ConnContext by kodein.instance()
+    private val connContext: ConnContext get() = kodein.findImpl()
     
     private val _dmKodeinMap = mutableMapOf<Datasource, DmKodein>()
     override val dmKodeinMap get() = _dmKodeinMap.toMap()

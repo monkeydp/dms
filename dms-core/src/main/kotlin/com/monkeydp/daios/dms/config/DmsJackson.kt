@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.module.SimpleAbstractTypeResolver
 import com.fasterxml.jackson.databind.module.SimpleModule
 import com.monkeydp.daios.dms.sdk.instruction.Instruction
 import com.monkeydp.daios.dms.sdk.instruction.StdInstr
+import com.monkeydp.daios.dms.sdk.ui.context.*
 import com.monkeydp.daios.dms.sdk.ui.menu.MenuItem
 import com.monkeydp.daios.dms.sdk.ui.menu.StdMi
 import com.monkeydp.daios.dms.sdk.ui.node.Node
@@ -36,6 +37,9 @@ class DmsJackson {
                         .addMapping(Node::class.java, StdNode::class.java)
                         .addMapping(MenuItem::class.java, StdMi::class.java)
                         .addMapping(Instruction::class.java, StdInstr::class.java)
+                        .addMapping(UiContextRepo::class.java, StdUiContextRepo::class.java)
+                        .addMapping(UiConnContext::class.java, StdUiConnContext::class.java)
+                        .addMapping(UiNodeContext::class.java, StdUiNodeContext::class.java)
                 context.addAbstractTypeResolver(nodeResolver)
             }
         })

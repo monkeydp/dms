@@ -27,10 +27,9 @@ class ConnManagerImpl : ConnManager {
         // TODO
     }
     
-    override fun activateCp(cp: ConnProfile): ConnManager {
-        if (activeCpwMap.contains(cp.id)) return this
+    override fun activateCp(cp: ConnProfile) {
+        if (activeCpwMap.contains(cp.id)) return
         activateCpw(cp)
-        return this
     }
     
     private fun activateCpw(cp: ConnProfile) {
@@ -38,10 +37,10 @@ class ConnManagerImpl : ConnManager {
         activeCpwMap.putIfAbsent(cpw.cpId, cpw)
     }
     
-    override fun updateActiveCp(cp: ConnProfile, ignoreNotFound: Boolean): ConnManager {
-        val cpw = getActiveCpw(cp.id, ignoreNotFound) ?: return this
-        activeCpwMap[cp.id] = cpw.copy(cp = cp)
-        return this
+    override fun updateActiveCp(cp: ConnProfile) {
+        (getActiveCpwOrNull(cp.id) ?: return).run {
+            activeCpwMap[cp.id] = copy(cp = cp)
+        }
     }
     
     override fun activateCw(cw: ConnWrapper): ConnManager {
@@ -50,40 +49,40 @@ class ConnManagerImpl : ConnManager {
         return this
     }
     
-    private fun getActiveCpw(cpId: Long) = getActiveCpw(cpId, false)!!
+    private fun getActiveCpw(cpId: Long): ConnProfileWrapper =
+            activeCpwMap[cpId] ?: throw ActiveCpwNotFoundException(cpId)
     
-    private fun getActiveCpw(cpId: Long, ignoreNotFound: Boolean): ConnProfileWrapper? {
-        val cpw = activeCpwMap[cpId]
-        if (cpw == null && !ignoreNotFound) throw ActiveCpwNotFoundException(cpId)
-        return cpw
-    }
+    private fun getActiveCpwOrNull(cpId: Long): ConnProfileWrapper? =
+            activeCpwMap[cpId]
     
-    override fun getActiveCp(cpId: Long) = getActiveCp(cpId, false)!!
+    override fun getActiveCp(cpId: Long) = getActiveCpw(cpId).cp
     
-    override fun getActiveCp(cpId: Long, ignoreNotFound: Boolean) = getActiveCpw(cpId, ignoreNotFound)?.cp
+    override fun getActiveCpOrNull(cpId: Long) = getActiveCpwOrNull(cpId)?.cp
     
-    override fun getActiveCw(cpId: Long, connId: Long) = getActiveCw(cpId, connId, false)!!
+    override fun getActiveCw(cpId: Long, connId: Long) = getActiveCwOrNull(cpId, connId)!!
     
-    override fun getActiveCw(cpId: Long, connId: Long, ignoreNotFound: Boolean) =
-            getActiveCpw(cpId, ignoreNotFound)?.getActiveCw(connId, ignoreNotFound)
+    override fun getActiveCwOrNull(cpId: Long, connId: Long) =
+            getActiveCpwOrNull(cpId)?.getActiveCw(connId)
     
-    fun getActiveUserCw(cpId: Long) = getActiveUserCw(cpId, false)!!
+    override fun getActiveUserCw(cpId: Long) =
+            getActiveCpw(cpId).getActiveUserCw()
     
-    override fun getActiveUserCw(cpId: Long, ignoreNotFound: Boolean) =
-            getActiveCpw(cpId, ignoreNotFound)?.getActiveUserCw(ignoreNotFound)
+    override fun getActiveUserCwOrNull(cpId: Long) =
+            getActiveCpwOrNull(cpId)?.getActiveUserCwOrNull()
     
-    override fun inactivateCp(cpId: Long, ignoreNotFound: Boolean) {
-        inactivateCpw(cpId, ignoreNotFound)
+    override fun inactivateCp(cpId: Long) {
+        inactivateCpw(cpId)
     }
     
     override fun inactivateAllCp() {
         inactivateAllCpw()
     }
     
-    private fun inactivateCpw(cpId: Long, ignoreNotFound: Boolean) {
-        val activeCpw = getActiveCpw(cpId, ignoreNotFound) ?: return
-        activeCpw.inactivateAllCw()
-        activeCpwMap.remove(activeCpw.cpId)
+    private fun inactivateCpw(cpId: Long) {
+        (getActiveCpwOrNull(cpId) ?: return).run {
+            inactivateAllCw()
+            activeCpwMap.remove(cpId)
+        }
     }
     
     private fun inactivateAllCpw() {
@@ -91,19 +90,18 @@ class ConnManagerImpl : ConnManager {
         activeCpwMap.clear()
     }
     
-    override fun inactivateCw(cpId: Long, connId: Long, ignoreNotFound: Boolean) {
-        val activeCpw = getActiveCpw(cpId, ignoreNotFound) ?: return
-        activeCpw.inactivateCw(connId)
+    override fun inactivateCw(cpId: Long, connId: Long) {
+        (getActiveCpwOrNull(cpId) ?: return).inactivateCw(connId)
     }
     
-    override fun inactivateUserCw(cpId: Long, ignoreNotFound: Boolean) {
-        val activeCpw = getActiveCpw(cpId, ignoreNotFound) ?: return
-        activeCpw.inactivateUserCw(activeCpw.getActiveUserCw(ignoreNotFound))
+    override fun inactivateUserCw(cpId: Long) {
+        (getActiveCpwOrNull(cpId) ?: return).run {
+            inactivateUserCw(getActiveUserCwOrNull())
+        }
     }
     
     override fun inactivateAllCw(cpId: Long) {
-        val activeCpw = getActiveCpw(cpId, true) ?: return
-        activeCpw.inactivateAllCw()
+        (getActiveCpwOrNull(cpId) ?: return).inactivateAllCw()
     }
     
     private data class ConnProfileWrapper(
@@ -115,7 +113,7 @@ class ConnManagerImpl : ConnManager {
             private var activeUserConnId: Long = INVALID_ID
     ) {
         val cpId: Long = cp.id
-    
+        
         private fun hasActiveUserConn() = IdHelper.isValid(activeUserConnId)
         
         fun activateCw(cw: ConnWrapper) {
@@ -136,26 +134,21 @@ class ConnManagerImpl : ConnManager {
             activeCwMap.putIfAbsent(cw.connId, cw)
         }
         
-        fun getActiveCw(connId: Long) = getActiveCw(connId, false)!!
+        fun getActiveCw(connId: Long) =
+                activeCwMap[connId] ?: throw ActiveCwNotFoundException(connId)
         
-        fun getActiveCw(connId: Long, ignoreNotFound: Boolean): ConnWrapper? {
-            val cw = activeCwMap[connId]
-            if (cw == null && !ignoreNotFound) throw ActiveCwNotFoundException(connId)
-            return cw
-        }
+        fun getActiveCwOrNull(connId: Long): ConnWrapper? =
+                activeCwMap[connId]
         
-        fun getActiveUserCw() = getActiveUserCw(false)!!
         
-        fun getActiveUserCw(ignoreNotFound: Boolean): ConnWrapper? {
-            return if (!hasActiveUserConn()) {
-                if (!ignoreNotFound) ierror("Active user conn is not exist!")
-                null
-            } else getActiveCw(activeUserConnId, ignoreNotFound)
-        }
+        fun getActiveUserCw(): ConnWrapper =
+                activeCwMap[activeUserConnId] ?: throw ActiveConnNotFound(cpId, activeUserConnId)
+        
+        fun getActiveUserCwOrNull(): ConnWrapper? =
+                activeCwMap[activeUserConnId]
         
         fun inactivateCw(connId: Long) {
-            var activeCw = getActiveCw(connId, true) ?: return
-            inactivateCw(activeCw)
+            (getActiveCwOrNull(connId) ?: return).apply(::inactivateCw)
         }
         
         fun inactivateCw(cw: ConnWrapper) {
@@ -191,7 +184,11 @@ class ConnManagerImpl : ConnManager {
         }
         
         class ActiveCwNotFoundException : InnerException {
-            constructor(connId: Long) : super("The active conn wrapper corresponding to connId ${connId} not found")
+            constructor(connId: Long) : super("The active ConnWrapper(connId = ${connId}) not found")
+        }
+        
+        class ActiveConnNotFound : InnerException {
+            constructor(cpId: Long, connId: Long) : super("Active Conn(cpId = $cpId, id = $connId) not found!")
         }
     }
     

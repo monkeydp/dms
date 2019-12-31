@@ -1,9 +1,9 @@
 package com.monkeydp.daios.dms.controller
 
-import com.monkeydp.daios.dms.sdk.ui.menu.MenuLoadingCtx
 import com.monkeydp.daios.dms.service.contract.MenuService
 import io.swagger.annotations.Api
 import io.swagger.annotations.ApiOperation
+import io.swagger.annotations.ApiParam
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
@@ -22,5 +22,9 @@ class MenuController @Autowired constructor(
 ) {
     @ApiOperation("Load menu")
     @PostMapping("load-menu")
-    fun loadMenu(@RequestBody ctx: MenuLoadingCtx) = service.loadMenu(ctx.menuDefId).items
+    fun loadMenu(
+            @RequestBody
+            @ApiParam(required = true, example = "1")
+            menuDefId: Int
+    ) = service.loadMenu(menuDefId).items
 }

@@ -1,7 +1,7 @@
 package com.monkeydp.daios.dms.controller
 
-import com.monkeydp.daios.dms.sdk.instruction.InstrParsingCtx
-import com.monkeydp.daios.dms.service.contract.InstrService
+import com.monkeydp.daios.dms.sdk.ui.context.UiContextRepo
+import com.monkeydp.daios.dms.service.ContextService
 import io.swagger.annotations.Api
 import io.swagger.annotations.ApiOperation
 import org.springframework.beans.factory.annotation.Autowired
@@ -12,15 +12,15 @@ import org.springframework.web.bind.annotation.RestController
 
 /**
  * @author iPotato
- * @date 2019/10/28
+ * @date 2019/12/30
  */
-@Api(tags = ["Instruction"])
+@Api(tags = ["Context"])
 @RestController
-@RequestMapping("instr")
-class InstrController @Autowired constructor(
-        private val service: InstrService
+@RequestMapping("context")
+class ContextController @Autowired constructor(
+        private val service: ContextService
 ) {
-    @ApiOperation("Parse instruction")
-    @PostMapping("parse-instr")
-    fun parseInstr(@RequestBody ctx: InstrParsingCtx) = service.parse(ctx)
+    @ApiOperation("Save context repository")
+    @PostMapping("save-repo")
+    fun saveRepo(@RequestBody repo: UiContextRepo) = service.saveRepo(repo)
 }

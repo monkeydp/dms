@@ -1,12 +1,13 @@
 package com.monkeydp.daios.dms.controller
 
-import com.monkeydp.daios.dms.sdk.conn.ConnRequired
-import com.monkeydp.daios.dms.sdk.ui.node.NodeLoadingCtx
 import com.monkeydp.daios.dms.service.contract.NodeService
 import io.swagger.annotations.Api
 import io.swagger.annotations.ApiOperation
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.web.bind.annotation.*
+import org.springframework.web.bind.annotation.GetMapping
+import org.springframework.web.bind.annotation.PostMapping
+import org.springframework.web.bind.annotation.RequestMapping
+import org.springframework.web.bind.annotation.RestController
 
 /**
  * @author iPotato
@@ -22,8 +23,7 @@ class NodeController @Autowired constructor(
     @GetMapping("load-conn-nodes")
     fun loadConnNodes() = service.loadConnNodes()
     
-    @ConnRequired
     @ApiOperation("Load sub nodes")
     @PostMapping("load-sub-nodes")
-    fun loadSubNodes(@RequestBody ctx: NodeLoadingCtx) = service.loadSubNodes(ctx.path)
+    fun loadSubNodes() = service.loadSubNodes()
 }

@@ -12,10 +12,9 @@ import org.springframework.stereotype.Component
  * @date 2019/11/7
  */
 @Component
-class DmsEventPublisher : AbstractEventPublisher() {
-    
-    @Autowired
-    private lateinit var applicationContext: AbstractApplicationContext
+class DmsEventPublisher @Autowired constructor(
+        private val applicationContext: AbstractApplicationContext
+) : AbstractEventPublisher() {
     
     companion object {
         val log = getLogger()

@@ -1,9 +1,11 @@
 package com.monkeydp.daios.dms.controller
 
-import com.monkeydp.daios.dms.sdk.ui.form.FormLoadingCtx
+import com.monkeydp.daios.dms.sdk.instruction.Instruction
+import com.monkeydp.daios.dms.sdk.mocker.InstrJsonMocker
 import com.monkeydp.daios.dms.service.contract.FormService
 import io.swagger.annotations.Api
 import io.swagger.annotations.ApiOperation
+import io.swagger.annotations.ApiParam
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
@@ -22,5 +24,9 @@ class FormController @Autowired constructor(
 ) {
     @ApiOperation("Load form")
     @PostMapping("load-form")
-    fun loadForm(@RequestBody ctx: FormLoadingCtx) = service.loadForm(ctx.instr).items
+    fun loadForm(
+            @RequestBody
+            @ApiParam(required = true, example = InstrJsonMocker.INSTR)
+            instr: Instruction
+    ) = service.loadForm(instr).items
 }

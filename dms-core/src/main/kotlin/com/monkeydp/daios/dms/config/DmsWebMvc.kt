@@ -1,6 +1,6 @@
 package com.monkeydp.daios.dms.config
 
-import com.monkeydp.daios.dms.aop.MyHandlerInterceptor
+import com.monkeydp.daios.dms.component.MyHandlerInterceptor
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.context.annotation.Configuration
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry

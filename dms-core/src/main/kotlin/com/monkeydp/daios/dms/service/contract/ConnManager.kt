@@ -8,18 +8,19 @@ import com.monkeydp.daios.dms.sdk.conn.ConnProfile
  * @date 2019/11/25
  */
 interface ConnManager {
-    fun activateCp(cp: ConnProfile): ConnManager
-    fun inactivateCp(cpId: Long, ignoreNotFound: Boolean = false)
+    fun activateCp(cp: ConnProfile)
+    fun inactivateCp(cpId: Long)
     fun inactivateAllCp()
-    fun updateActiveCp(cp: ConnProfile, ignoreNotFound: Boolean = false): ConnManager
+    fun updateActiveCp(cp: ConnProfile)
     fun getActiveCp(cpId: Long): ConnProfile
-    fun getActiveCp(cpId: Long, ignoreNotFound: Boolean): ConnProfile?
+    fun getActiveCpOrNull(cpId: Long): ConnProfile?
     
     fun activateCw(cw: ConnWrapper): ConnManager
-    fun inactivateCw(cpId: Long, connId: Long, ignoreNotFound: Boolean = false)
-    fun inactivateUserCw(cpId: Long, ignoreNotFound: Boolean = false)
+    fun inactivateCw(cpId: Long, connId: Long)
+    fun inactivateUserCw(cpId: Long)
     fun inactivateAllCw(cpId: Long)
     fun getActiveCw(cpId: Long, connId: Long): ConnWrapper
-    fun getActiveCw(cpId: Long, connId: Long, ignoreNotFound: Boolean): ConnWrapper?
-    fun getActiveUserCw(cpId: Long, ignoreNotFound: Boolean): ConnWrapper?
+    fun getActiveCwOrNull(cpId: Long, connId: Long): ConnWrapper?
+    fun getActiveUserCw(cpId: Long): ConnWrapper
+    fun getActiveUserCwOrNull(cpId: Long): ConnWrapper?
 }

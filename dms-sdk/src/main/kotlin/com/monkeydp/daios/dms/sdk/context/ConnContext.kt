@@ -1,4 +1,4 @@
-package com.monkeydp.daios.dms.sdk.share.conn
+package com.monkeydp.daios.dms.sdk.context
 
 import com.monkeydp.daios.dms.sdk.conn.Conn
 import com.monkeydp.daios.dms.sdk.conn.ConnProfile
@@ -9,7 +9,8 @@ import kotlin.properties.Delegates
  * @author iPotato
  * @date 2019/12/16
  */
-interface ConnContext {
+interface ConnContext : Context {
+    
     val cp: ConnProfile
     val datasource get() = cp.datasource
     var conn: Conn<*>

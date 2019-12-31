@@ -39,7 +39,9 @@ abstract class AbstractNode(
         override val icon: Icon<*>,
         
         override val menuDefId: Int?
-) : Node
+) : Node {
+    override fun toString() = "(target = $target, name = $name)"
+}
 
 class StdNode(
         defId: Int,

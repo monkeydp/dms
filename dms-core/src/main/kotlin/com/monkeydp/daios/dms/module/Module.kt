@@ -2,12 +2,12 @@ package com.monkeydp.daios.dms.module
 
 import com.monkeydp.daios.dms.config.kodein
 import com.monkeydp.daios.dms.sdk.config.PackageName
+import com.monkeydp.daios.dms.sdk.context.ConnContext
+import com.monkeydp.daios.dms.sdk.context.ContextRepoHolder
 import com.monkeydp.daios.dms.sdk.datasource.Datasource
 import com.monkeydp.daios.dms.sdk.datasource.DsDef
 import com.monkeydp.daios.dms.sdk.datasource.DsVersion
 import com.monkeydp.daios.dms.sdk.dm.SdkDmApp
-import com.monkeydp.daios.dms.sdk.helper.ScopeHelper
-import com.monkeydp.daios.dms.sdk.share.conn.ConnContext
 import com.monkeydp.daios.dms.sdk.dm.dmKodeinRepo
 import com.monkeydp.daios.dms.sdk.dm.findImpl
 import com.monkeydp.tools.ext.kotlin.findAnnot
@@ -101,7 +101,7 @@ class Module(private val deployDir: File) {
         private val specClassLoaderOrNull
             get() =
                 when {
-                    ScopeHelper.inRequestScope -> {
+                    ContextRepoHolder.hasContextRepo() -> {
                         val connContext: ConnContext by kodein.instance()
                         specClassloaderMap[connContext.cp.dsVersion]
                     }

@@ -1,14 +1,13 @@
 package com.monkeydp.daios.dms.service.impl
 
+import com.monkeydp.daios.dms.component.UserSession
 import com.monkeydp.daios.dms.curd.service.contract.ConnProfileService
 import com.monkeydp.daios.dms.sdk.api.NodeApi
-import com.monkeydp.daios.dms.sdk.ui.node.ConnNode
-import com.monkeydp.daios.dms.sdk.ui.node.Node
-import com.monkeydp.daios.dms.sdk.ui.node.NodePath
 import com.monkeydp.daios.dms.sdk.dm.dmKodeinRepo
 import com.monkeydp.daios.dms.sdk.dm.findImpl
+import com.monkeydp.daios.dms.sdk.ui.node.ConnNode
+import com.monkeydp.daios.dms.sdk.ui.node.Node
 import com.monkeydp.daios.dms.service.contract.NodeService
-import com.monkeydp.daios.dms.session.UserSession
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 
@@ -32,5 +31,5 @@ internal class NodeServiceImpl @Autowired constructor(
                 }.flatten()
             }
     
-    override fun loadSubNodes(path: NodePath): List<Node> = api.loadSubNodes(path)
+    override fun loadSubNodes(): List<Node> = api.loadSubNodes()
 }

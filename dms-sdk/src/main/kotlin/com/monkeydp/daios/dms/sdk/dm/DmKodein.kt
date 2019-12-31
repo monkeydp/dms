@@ -1,6 +1,6 @@
 package com.monkeydp.daios.dms.sdk.dm
 
-import com.monkeydp.daios.dms.sdk.config.kodeinModules
+import com.monkeydp.daios.dms.sdk.config.KodeinModuleRepo
 import com.monkeydp.tools.ext.kodein.KodeinHelper.bindComps
 import com.monkeydp.tools.ext.kodein.component.KodeinCompRepo
 import org.kodein.di.Kodein
@@ -17,7 +17,7 @@ interface DmKodein : KodeinAware {
         
         operator fun invoke(repo: KodeinCompRepo): DmKodein =
                 this(true) {
-                    importAll(*kodeinModules)
+                    importAll(*KodeinModuleRepo.modules())
                     bindComps(repo.comps)
                 }
     }

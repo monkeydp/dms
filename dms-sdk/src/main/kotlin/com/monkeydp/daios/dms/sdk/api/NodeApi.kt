@@ -3,7 +3,6 @@ package com.monkeydp.daios.dms.sdk.api
 import com.monkeydp.daios.dms.sdk.conn.ConnProfile
 import com.monkeydp.daios.dms.sdk.ui.node.ConnNode
 import com.monkeydp.daios.dms.sdk.ui.node.Node
-import com.monkeydp.daios.dms.sdk.ui.node.NodePath
 
 /**
  * @author iPotato
@@ -11,5 +10,5 @@ import com.monkeydp.daios.dms.sdk.ui.node.NodePath
  */
 interface NodeApi : Api {
     fun loadConnNodes(cps: Iterable<ConnProfile>): List<ConnNode>
-    fun loadSubNodes(path: NodePath): List<Node>
+    fun loadSubNodes(): List<Node>
 }
