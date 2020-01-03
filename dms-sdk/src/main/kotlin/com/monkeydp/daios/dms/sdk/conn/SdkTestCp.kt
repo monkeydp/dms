@@ -3,10 +3,10 @@ package com.monkeydp.daios.dms.sdk.conn
 import com.monkeydp.tools.ext.kodein.component.AbstractKodeinBuilderConfig
 import com.monkeydp.tools.ext.kodein.component.KodeinComponent
 import com.monkeydp.tools.ext.kodein.component.KodeinFieldComp
-import com.monkeydp.tools.ext.kodein.singletonX
 import com.monkeydp.tools.useful.SourceSet
 import org.kodein.di.Kodein
 import org.kodein.di.generic.bind
+import org.kodein.di.generic.singleton
 import kotlin.annotation.AnnotationTarget.FIELD
 
 /**
@@ -18,7 +18,8 @@ import kotlin.annotation.AnnotationTarget.FIELD
 annotation class SdkTestCp {
     object KodeinBuilderConfig : AbstractKodeinBuilderConfig<KodeinFieldComp>() {
         override fun Kodein.Builder.config(comps: Collection<KodeinFieldComp>) {
-            bind<List<ConnProfile>>(SourceSet.TEST) with singletonX { comps.map { it.value } }
+            val cps = comps.map { it.value as ConnProfile }
+            bind<List<ConnProfile>>(SourceSet.TEST) with singleton { cps.sortedBy { it.dsVersionId } }
         }
     }
 }
