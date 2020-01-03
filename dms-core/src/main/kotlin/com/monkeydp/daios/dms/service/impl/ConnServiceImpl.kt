@@ -81,11 +81,11 @@ internal class ConnServiceImpl @Autowired constructor(
     
     override fun closeConn(cpId: Long, connId: Long?): Unit =
             if (connId == null) closeUserConn(cpId)
-            else closeOtherConn(cpId, connId)
+            else closeConn(cpId, connId)
     
     private fun closeUserConn(cpId: Long): Unit = manager.inactivateUserCw(cpId)
     
-    private fun closeOtherConn(cpId: Long, connId: Long): Unit = manager.inactivateCw(cpId, connId)
+    private fun closeConn(cpId: Long, connId: Long): Unit = manager.inactivateCw(cpId, connId)
     
     override fun testConn(cpId: Long) {
         val cp = findCp(cpId)

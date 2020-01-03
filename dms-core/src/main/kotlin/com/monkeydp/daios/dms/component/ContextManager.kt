@@ -18,22 +18,23 @@ class ContextManager @Autowired constructor(
         private val session: UserSession,
         private val connService: ConnService
 ) {
-    private val repo: UiContextRepo? get() = session.getAttributeOrNull()
+    private val uiContextRepo: UiContextRepo? get() = session.getAttributeOrNull()
     private val contextRepo
-        get() = ContextRepo {
-            connContext =
-                    repo?.connContext?.cpId?.let { cpId ->
+        get() = uiContextRepo?.run {
+            ContextRepo(
+                    connContext = connContext.cpId.let { cpId ->
                         ConnContext(connService.findCp(cpId)) {
                             connService.findActiveConnOrNull(cpId)?.also { conn ->
                                 this.conn = conn
                             }
                         }
-                    }
-            nodeContext = repo?.nodeContext?.path?.run { NodeContext(this) }
+                    },
+                    nodeContext = nodeContext?.path?.run { NodeContext(this) }
+            )
         }
     
     fun initContextHolder() {
-        ContextRepoHolder.setContextRepo(contextRepo)
+        contextRepo?.apply(ContextRepoHolder::setContextRepo)
     }
     
     fun resetContextHolder() {

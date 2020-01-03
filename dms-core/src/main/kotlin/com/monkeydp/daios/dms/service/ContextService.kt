@@ -3,7 +3,6 @@ package com.monkeydp.daios.dms.service
 import com.monkeydp.daios.dms.component.UserSession
 import com.monkeydp.daios.dms.component.UserSession.Key.UI_CONTEXT_REPO
 import com.monkeydp.daios.dms.sdk.ui.context.UiContextRepo
-import com.monkeydp.daios.dms.sdk.ui.context.UiContextRepoBuilder
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 
@@ -13,8 +12,6 @@ import org.springframework.stereotype.Service
  */
 interface ContextService {
     fun saveRepo(repo: UiContextRepo)
-    fun saveRepo(repoBuilderInit: UiContextRepoBuilder.() -> Unit) =
-            saveRepo(UiContextRepo(repoBuilderInit))
 }
 
 @Service

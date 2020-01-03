@@ -21,8 +21,6 @@ abstract class AbstractServiceTest : AbstractTest() {
     
     @BeforeAll
     fun beforeAll() {
-        ContextRepoHolder.setContextRepo {
-            connContext = ConnContext(cp)
-        }
+        ContextRepoHolder.setContextRepo(ConnContext(cp))
     }
 }

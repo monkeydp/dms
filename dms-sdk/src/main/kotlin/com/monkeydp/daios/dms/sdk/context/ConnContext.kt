@@ -31,12 +31,8 @@ interface ConnContext : Context {
     }
 }
 
-abstract class AbstractConnContext(
+class StdConnContext(
         override val cp: ConnProfile
 ) : ConnContext {
     override var conn: Conn<*> by Delegates.singleton()
 }
-
-private class StdConnContext(
-        cp: ConnProfile
-) : AbstractConnContext(cp)

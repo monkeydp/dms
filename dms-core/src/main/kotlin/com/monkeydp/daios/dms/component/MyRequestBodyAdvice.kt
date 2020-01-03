@@ -51,9 +51,7 @@ class MyRequestBodyAdvice @Autowired constructor(
         val cpId = JsonUtil.toJsonNode(data)
                 .get(UiContextRepo::connContext.name)
                 .get(UiConnContext::cpId.name).longValue()
-        contextService.saveRepo {
-            connContext = UiConnContext(cpId)
-        }
+        contextService.saveRepo(UiContextRepo(UiConnContext(cpId)))
         manager.initContextHolder()
     }
 }
