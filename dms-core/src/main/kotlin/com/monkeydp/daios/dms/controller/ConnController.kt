@@ -4,7 +4,7 @@ import com.monkeydp.daios.dms.config.kodein
 import com.monkeydp.daios.dms.sdk.conn.ConnProfile
 import com.monkeydp.daios.dms.sdk.context.ConnContext
 import com.monkeydp.daios.dms.service.contract.ConnService
-import com.monkeydp.tools.ext.kodein.findImpl
+import com.monkeydp.tools.ext.kodein.providerX
 import io.swagger.annotations.Api
 import io.swagger.annotations.ApiOperation
 import org.springframework.beans.factory.annotation.Autowired
@@ -23,7 +23,7 @@ import org.springframework.web.bind.annotation.RestController
 class ConnController @Autowired constructor(
         private val service: ConnService
 ) {
-    private val connContext: ConnContext get() = kodein.findImpl()
+    private val connContext: ConnContext get() = kodein.providerX()
     
     @ApiOperation("Save connection profile")
     @PostMapping("save-cp")

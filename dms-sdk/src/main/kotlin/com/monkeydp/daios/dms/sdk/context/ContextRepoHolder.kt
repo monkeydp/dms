@@ -3,6 +3,7 @@ package com.monkeydp.daios.dms.sdk.context
 import com.monkeydp.tools.ext.main.ierror
 import org.kodein.di.Kodein
 import org.kodein.di.generic.bind
+import org.kodein.di.generic.provider
 import org.kodein.di.generic.singleton
 import org.kodein.di.threadLocal
 
@@ -29,7 +30,7 @@ object ContextRepoHolder {
     }
     
     fun Kodein.Builder.bindAllContexts() {
-        bind<ConnContext>() with singleton(ref = threadLocal) { contextRepo.connContext }
-        bind<NodeContext>() with singleton(ref = threadLocal) { contextRepo.nodeContext!! }
+        bind<ConnContext>() with provider { contextRepo.connContext }
+        bind<NodeContext>() with provider { contextRepo.nodeContext!! }
     }
 }

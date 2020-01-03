@@ -5,7 +5,7 @@ import com.monkeydp.daios.dms.sdk.config.kodein
 import com.monkeydp.daios.dms.sdk.context.ConnContext
 import com.monkeydp.daios.dms.sdk.context.ContextRepoHolder
 import com.monkeydp.tools.enumeration.Symbol.DOT
-import com.monkeydp.tools.ext.kodein.findImpl
+import com.monkeydp.tools.ext.kodein.providerX
 
 /**
  * @author iPotato
@@ -13,7 +13,7 @@ import com.monkeydp.tools.ext.kodein.findImpl
  */
 object DefaultDatasource {
     
-    private val connContext: ConnContext get() = kodein.findImpl()
+    private val connContext: ConnContext get() = kodein.providerX()
     
     fun get(): Datasource =
             when {
