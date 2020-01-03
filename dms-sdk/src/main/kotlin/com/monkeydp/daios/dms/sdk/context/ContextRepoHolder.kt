@@ -4,8 +4,6 @@ import com.monkeydp.tools.ext.main.ierror
 import org.kodein.di.Kodein
 import org.kodein.di.generic.bind
 import org.kodein.di.generic.provider
-import org.kodein.di.generic.singleton
-import org.kodein.di.threadLocal
 
 /**
  * @author iPotato
@@ -32,5 +30,6 @@ object ContextRepoHolder {
     fun Kodein.Builder.bindAllContexts() {
         bind<ConnContext>() with provider { contextRepo.connContext }
         bind<NodeContext>() with provider { contextRepo.nodeContext!! }
+        bind<SelectedContext>() with provider { contextRepo.selectedContext!! }
     }
 }

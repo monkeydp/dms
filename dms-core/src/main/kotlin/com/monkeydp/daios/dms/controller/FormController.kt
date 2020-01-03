@@ -26,7 +26,7 @@ class FormController @Autowired constructor(
     @PostMapping("load-form")
     fun loadForm(
             @RequestBody
-            @ApiParam(required = true, example = InstrJsonMocker.INSTR)
+            @ApiParam(required = true, example = InstrJsonMocker.NEW_TABLE_INSTR)
             instr: Instruction
     ) = service.loadForm(instr).items
 }

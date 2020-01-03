@@ -5,5 +5,5 @@ package com.monkeydp.daios.dms.sdk.instruction
  * @date 2019/11/5
  */
 interface InstrParser {
-    fun parse(ctx: InstrParsingCtx)
+    fun parse(params: InstrParsingParams)
 }

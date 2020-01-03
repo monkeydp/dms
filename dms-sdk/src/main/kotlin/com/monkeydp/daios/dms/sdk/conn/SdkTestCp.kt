@@ -18,7 +18,7 @@ import kotlin.annotation.AnnotationTarget.FIELD
 annotation class SdkTestCp {
     object KodeinBuilderConfig : AbstractKodeinBuilderConfig<KodeinFieldComp>() {
         override fun Kodein.Builder.config(comps: Collection<KodeinFieldComp>) {
-            bind<Iterable<ConnProfile>>(SourceSet.TEST) with singletonX { comps.map { it.value } }
+            bind<List<ConnProfile>>(SourceSet.TEST) with singletonX { comps.map { it.value } }
         }
     }
 }

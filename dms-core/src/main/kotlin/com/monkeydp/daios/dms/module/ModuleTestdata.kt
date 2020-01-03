@@ -17,7 +17,7 @@ import kotlin.properties.Delegates
  */
 object ModuleTestdata {
     private val dsVersion get() = dmKodeinRepo.findDsVersion(Datasource.valueOf(DATASOURCE), DS_VERSION_ID)
-    val cps: Iterable<ConnProfile> get() = dmKodeinRepo.findFlatAllImpls(SourceSet.TEST)
+    val cps: List<ConnProfile> get() = dmKodeinRepo.findFlatAllImpls(SourceSet.TEST)
     var savedCps: List<ConnProfile> by Delegates.singleton()
     val cp get() = savedCps.matchOne { it.dsVersion == dsVersion }
 }
