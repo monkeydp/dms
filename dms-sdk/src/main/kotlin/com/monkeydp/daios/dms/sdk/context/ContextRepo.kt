@@ -6,5 +6,6 @@ package com.monkeydp.daios.dms.sdk.context
  */
 data class ContextRepo(
         val connContext: ConnContext,
-        val nodeContext: NodeContext? = null
+        val nodeContext: NodeContext? = null,
+        val selectedContext: SelectedContext? = null
 )

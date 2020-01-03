@@ -3,7 +3,6 @@ package com.monkeydp.daios.dms.component
 import com.monkeydp.daios.dms.sdk.context.ConnContext
 import com.monkeydp.daios.dms.sdk.context.ContextRepo
 import com.monkeydp.daios.dms.sdk.context.ContextRepoHolder
-import com.monkeydp.daios.dms.sdk.context.NodeContext
 import com.monkeydp.daios.dms.sdk.ui.context.UiContextRepo
 import com.monkeydp.daios.dms.service.contract.ConnService
 import org.springframework.beans.factory.annotation.Autowired
@@ -23,13 +22,13 @@ class ContextManager @Autowired constructor(
         get() = uiContextRepo?.run {
             ContextRepo(
                     connContext = connContext.cpId.let { cpId ->
-                        ConnContext(connService.findCp(cpId)) {
-                            connService.findActiveConnOrNull(cpId)?.also { conn ->
-                                this.conn = conn
-                            }
-                        }
+                        ConnContext(
+                                cp = connService.findCp(cpId),
+                                conn = connService.findActiveConnOrNull(cpId)
+                        )
                     },
-                    nodeContext = nodeContext?.path?.run { NodeContext(this) }
+                    nodeContext = nodeContext,
+                    selectedContext = selectedContext
             )
         }
     
