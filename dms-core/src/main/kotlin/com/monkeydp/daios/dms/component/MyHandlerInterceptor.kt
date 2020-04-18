@@ -1,5 +1,6 @@
 package com.monkeydp.daios.dms.component
 
+import com.monkeydp.daios.dms.sdk.helper.WebHelper
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
 import org.springframework.web.servlet.HandlerInterceptor
@@ -16,6 +17,7 @@ class MyHandlerInterceptor @Autowired constructor(
 ) : HandlerInterceptor {
     
     override fun preHandle(request: HttpServletRequest, response: HttpServletResponse, handler: Any): Boolean {
+        WebHelper.setRequestScope()
         manager.initContextHolder()
         return super.preHandle(request, response, handler)
     }
@@ -28,5 +30,6 @@ class MyHandlerInterceptor @Autowired constructor(
     ) {
         super.afterCompletion(request, response, handler, ex)
         manager.resetContextHolder()
+        WebHelper.resetRequestScope()
     }
 }

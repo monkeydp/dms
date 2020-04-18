@@ -4,7 +4,9 @@ import com.monkeydp.daios.dms.sdk.config.PackageName
 import com.monkeydp.daios.dms.sdk.config.kodein
 import com.monkeydp.daios.dms.sdk.context.ConnContext
 import com.monkeydp.daios.dms.sdk.context.ContextRepoHolder
+import com.monkeydp.daios.dms.sdk.helper.WebHelper
 import com.monkeydp.tools.enumeration.Symbol.DOT
+import com.monkeydp.tools.exception.inner.InnerException
 import com.monkeydp.tools.ext.kodein.providerX
 
 /**
@@ -18,6 +20,7 @@ object DefaultDatasource {
     fun get(): Datasource =
             when {
                 ContextRepoHolder.hasContextRepo() -> connContext.datasource
+                WebHelper.inRequestScope -> throw  ConnContextNotExistException()
                 else -> {
                     Thread.currentThread().stackTrace
                             .first { dsOrNull(it.className) != null }
@@ -31,4 +34,6 @@ object DefaultDatasource {
     private fun dsNameOrNull(className: String): String? =
             if (!className.startsWith(PackageName.dm)) null
             else className.removePrefix("${PackageName.dm}.").split(DOT).firstOrNull()
+    
+    private class ConnContextNotExistException : InnerException("Please init connection context first!")
 }
