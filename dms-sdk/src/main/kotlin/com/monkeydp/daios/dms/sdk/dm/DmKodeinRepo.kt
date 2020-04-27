@@ -9,7 +9,6 @@ import com.monkeydp.tools.enumx.Enumx
 import com.monkeydp.tools.enumx.recurFindEnumOrNull
 import com.monkeydp.tools.ext.kodein.providerX
 import com.monkeydp.tools.ext.kotlin.enumSet
-import com.monkeydp.tools.ext.kotlin.matchOne
 import com.monkeydp.tools.ext.kotlin.transformEnumName
 import com.monkeydp.tools.ext.main.ierror
 import org.kodein.di.generic.instance
@@ -26,31 +25,31 @@ interface DmKodeinRepo {
         operator fun invoke(): DmKodeinRepo =
                 DmKodeinRepoImpl()
     }
-    
+
     val defaultDs: Datasource get() = DefaultDatasource.get()
-    
+
     val dmKodeinMap: Map<Datasource, DmKodein>
     fun putDmKodein(datasource: Datasource, dmKodein: DmKodein)
     fun getDmKodein(datasource: Datasource): DmKodein
-    
+
     fun findDsVersion(datasource: Datasource, dsVersionId: String): DsVersion<*>
 }
 
 private abstract class AbstractDmKodeinRepo : DmKodeinRepo {
-    
+
     private val connContext: ConnContext get() = kodein.providerX()
-    
+
     private val _dmKodeinMap = mutableMapOf<Datasource, DmKodein>()
     override val dmKodeinMap get() = _dmKodeinMap.toMap()
-    
+
     override fun putDmKodein(datasource: Datasource, dmKodein: DmKodein) {
         _dmKodeinMap[datasource] = dmKodein
     }
-    
+
     override fun getDmKodein(datasource: Datasource) = _dmKodeinMap.getValue(datasource)
-    
+
     override fun findDsVersion(datasource: Datasource, dsVersionId: String): DsVersion<*> =
-            findImpl<KClass<out DsVersion<*>>>(datasource).enumSet().matchOne { it.id == dsVersionId }
+            findImpl<KClass<out DsVersion<*>>>(datasource).enumSet().single() { it.id == dsVersionId }
 }
 
 private class DmKodeinRepoImpl : AbstractDmKodeinRepo()
