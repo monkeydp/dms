@@ -5,7 +5,7 @@ import com.monkeydp.daios.dms.sdk.config.kodein
 import com.monkeydp.daios.dms.sdk.context.ConnContext
 import com.monkeydp.daios.dms.sdk.context.ContextRepoHolder
 import com.monkeydp.daios.dms.sdk.helper.WebHelper
-import com.monkeydp.tools.enumeration.Symbol.DOT
+import com.monkeydp.tools.constant.Symbol.DOT
 import com.monkeydp.tools.exception.inner.InnerException
 import com.monkeydp.tools.ext.kodein.providerX
 
