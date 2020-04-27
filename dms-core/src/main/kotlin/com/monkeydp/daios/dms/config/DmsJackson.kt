@@ -9,6 +9,9 @@ import com.monkeydp.daios.dms.sdk.ui.menu.MenuItem
 import com.monkeydp.daios.dms.sdk.ui.menu.StdMi
 import com.monkeydp.daios.dms.sdk.ui.node.Node
 import com.monkeydp.daios.dms.sdk.ui.node.StdNode
+import com.monkeydp.tools.config.ToolsKodeinModules
+import org.kodein.di.generic.bind
+import org.kodein.di.generic.singleton
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.context.annotation.Configuration
 import org.springframework.http.converter.json.Jackson2ObjectMapperBuilder
@@ -20,14 +23,14 @@ import org.springframework.http.converter.json.Jackson2ObjectMapperBuilder
  */
 @Configuration
 class DmsJackson {
-    
+
     /**
      * Auto register module jackson-module-kotlin,
      * it's the module that adds support for serialization/deserialization of Kotlin classes and data classes.
      */
     @Autowired
     fun objectMapper(builder: Jackson2ObjectMapperBuilder) = builder.build<ObjectMapper>()
-    
+
     @Autowired
     fun configureObjectMapper(objectMapper: ObjectMapper) {
         objectMapper.registerModule(object : SimpleModule("CustomModule") {
@@ -39,5 +42,8 @@ class DmsJackson {
                 context.addAbstractTypeResolver(nodeResolver)
             }
         })
+        ToolsKodeinModules.addModule("jacksonModule") {
+            bind<ObjectMapper>(overrides = true) with singleton { objectMapper }
+        }
     }
 }
