@@ -4,7 +4,7 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 plugins {
     idea
     // kotlin
-    val kotlinVersion = "1.3.50"
+    val kotlinVersion = "1.3.72"
     kotlin("jvm") version kotlinVersion
     kotlin("plugin.jpa") version kotlinVersion
     id("io.freefair.aspectj.post-compile-weaving") version "4.1.5"
