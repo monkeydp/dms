@@ -18,7 +18,7 @@ dependencies {
     // kotlin
     api("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.2")
     // tools
-    api("com.monkeydp:tools")
+    api("com.monkeydp:tools:1.0.+")
     // jackson
     api("com.fasterxml.jackson.core:jackson-annotations:2.9.0")
     // swagger
